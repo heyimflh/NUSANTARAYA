@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter, Montserrat } from "next/font/google";
 import { AppProvider } from "@/context/app-context";
-import { Navbar } from "@/components/layout/navbar";
-import { BottomNav } from "@/components/layout/bottom-nav";
-import { FloatingRANI } from "@/components/layout/floating-rani";
-import { Footer } from "@/components/layout/footer";
 import "./globals.css";
 
 /**
@@ -74,22 +70,10 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col antialiased">
         <AppProvider>
-          {/* Desktop/Tablet Navbar */}
-          <Navbar />
-
           {/* Main Content */}
           <main className="flex-1 pb-safe max-md:pb-20">
             {children}
           </main>
-
-          {/* Footer */}
-          <Footer />
-
-          {/* Mobile Bottom Navigation */}
-          <BottomNav />
-
-          {/* Floating RANI AI Guide */}
-          <FloatingRANI />
         </AppProvider>
       </body>
     </html>
