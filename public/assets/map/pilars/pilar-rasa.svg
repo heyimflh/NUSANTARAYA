@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" fill="none">
+  <!-- NUSANTARAYA · Pilar R — Rasa (candi bentar rapat + mangkuk + uap + rempah) -->
+  <rect x="80" y="80" width="864" height="864" rx="124" ry="124" fill="#102852"/>
+  <rect x="106" y="106" width="812" height="812" rx="102" ry="102" fill="#f8f4ea"/>
+  <rect x="132" y="132" width="760" height="760" rx="84" ry="84" fill="none" stroke="#e4c646" stroke-width="5"/>
+  <rect x="168" y="690" width="688" height="16" rx="5" ry="5" fill="#102852"/>
+  <g transform="translate(58,0)">
+    <path d="M150 700 L150 664 L168 664 L168 612 L184 612 L184 560 L198 560 L198 508 L210 508 L210 456 L222 456 L222 412 L236 412 L236 388 L300 388 L300 700 Z" fill="#102852"/>
+    <path d="M250 388 L268 356 L286 388 Z" fill="#102852"/>
+    <circle cx="268" cy="352" r="6" fill="#e4c646"/>
+    <rect x="156" y="656" width="140" height="5" rx="2" ry="2" fill="#e4c646"/>
+    <rect x="174" y="604" width="122" height="5" rx="2" ry="2" fill="#e4c646"/>
+    <rect x="190" y="552" width="106" height="5" rx="2" ry="2" fill="#e4c646"/>
+    <rect x="204" y="500" width="92" height="5" rx="2" ry="2" fill="#e4c646"/>
+    <rect x="216" y="448" width="80" height="5" rx="2" ry="2" fill="#e4c646"/>
+    <rect x="228" y="404" width="68" height="5" rx="2" ry="2" fill="#e4c646"/>
+    <rect x="156" y="672" width="140" height="5" rx="2" ry="2" fill="#e4c646"/>
+  </g>
+  <g transform="translate(1024,0) scale(-1,1)">
+    <g transform="translate(58,0)">
+      <path d="M150 700 L150 664 L168 664 L168 612 L184 612 L184 560 L198 560 L198 508 L210 508 L210 456 L222 456 L222 412 L236 412 L236 388 L300 388 L300 700 Z" fill="#102852"/>
+      <path d="M250 388 L268 356 L286 388 Z" fill="#102852"/>
+      <circle cx="268" cy="352" r="6" fill="#e4c646"/>
+      <rect x="156" y="656" width="140" height="5" rx="2" ry="2" fill="#e4c646"/>
+      <rect x="174" y="604" width="122" height="5" rx="2" ry="2" fill="#e4c646"/>
+      <rect x="190" y="552" width="106" height="5" rx="2" ry="2" fill="#e4c646"/>
+      <rect x="204" y="500" width="92" height="5" rx="2" ry="2" fill="#e4c646"/>
+      <rect x="216" y="448" width="80" height="5" rx="2" ry="2" fill="#e4c646"/>
+      <rect x="228" y="404" width="68" height="5" rx="2" ry="2" fill="#e4c646"/>
+      <rect x="156" y="672" width="140" height="5" rx="2" ry="2" fill="#e4c646"/>
+    </g>
+  </g>
+  <path d="M 512 548 C 494 512 528 488 512 452 C 496 416 528 392 512 360" fill="none" stroke="#e4c646" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M 468 556 C 454 524 480 504 468 472 C 458 446 480 426 468 400" fill="none" stroke="#e4c646" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M 556 556 C 570 524 544 504 556 472 C 566 446 544 426 556 400" fill="none" stroke="#e4c646" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M 396 636 C 422 618 426 586 396 566 C 366 586 370 618 396 636 Z" fill="#e4c646"/>
+  <path d="M 396 630 L 396 572" fill="none" stroke="#102852" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M 396 636 L 390 654" fill="none" stroke="#102852" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M 628 636 C 602 618 598 586 628 566 C 658 586 654 618 628 636 Z" fill="#e4c646"/>
+  <path d="M 628 630 L 628 572" fill="none" stroke="#102852" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M 628 636 L 634 654" fill="none" stroke="#102852" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M 398 560 C 408 650 456 688 512 688 C 568 688 616 650 626 560 Z" fill="#102852"/>
+  <ellipse cx="512" cy="560" rx="114" ry="20" fill="#e4c646" stroke="#102852" stroke-width="4"/>
+  <path d="M 430 606 Q 512 622 594 606" fill="none" stroke="#e4c646" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M 470 688 L 554 688 L 544 704 L 480 704 Z" fill="#102852"/>
+</svg>

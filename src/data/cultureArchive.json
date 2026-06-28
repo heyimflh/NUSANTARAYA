@@ -1,0 +1,20 @@
+[
+  {
+    "id": "tari-saman",
+    "nama": "Tari Saman",
+    "kategori": "Tarian",
+    "provinsi": "aceh",
+    "deskripsi": "Tarian tradisional dari Suku Gayo yang sangat mengandalkan kecepatan, kekompakan, dan ritme gerakan tubuh serta tepukan tangan. Diakui UNESCO sebagai warisan budaya.",
+    "maknaSimbol": "Mencerminkan pendidikan, keagamaan, sopan santun, kepahlawanan, kekompakan, dan kebersamaan.",
+    "konteksSejarah": "Dikembangkan oleh Syekh Saman pada abad ke-14.",
+    "statusSaatIni": "Dilestarikan dan sering dipertunjukkan dalam acara resmi dan festival internasional."
+  },
+  {
+    "id": "rumah-gadang",
+    "nama": "Rumah Gadang",
+    "kategori": "Rumah Adat",
+    "provinsi": "sumatera-barat",
+    "deskripsi": "Rumah adat Minangkabau dengan atap khas berbentuk seperti tanduk kerbau (gonjong).",
+    "maknaSimbol": "Atap gonjong melambangkan harapan yang menjulang ke atas, sementara bentuk keseluruhannya tahan gempa mencerminkan harmoni dengan alam."
+  }
+]

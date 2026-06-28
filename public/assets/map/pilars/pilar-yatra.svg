@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" fill="none">
+  <!-- NUSANTARAYA · Pilar Y — Yatra (candi bentar rapat + kompas mata angin) -->
+  <rect x="80" y="80" width="864" height="864" rx="124" ry="124" fill="#102852"/>
+  <rect x="106" y="106" width="812" height="812" rx="102" ry="102" fill="#f8f4ea"/>
+  <rect x="132" y="132" width="760" height="760" rx="84" ry="84" fill="none" stroke="#e4c646" stroke-width="5"/>
+  <rect x="168" y="690" width="688" height="16" rx="5" ry="5" fill="#102852"/>
+  <g transform="translate(46,0)">
+    <path d="M150 700 L150 664 L168 664 L168 612 L184 612 L184 560 L198 560 L198 508 L210 508 L210 456 L222 456 L222 412 L236 412 L236 388 L300 388 L300 700 Z" fill="#102852"/>
+    <path d="M250 388 L268 356 L286 388 Z" fill="#102852"/>
+    <circle cx="268" cy="352" r="6" fill="#e4c646"/>
+    <rect x="156" y="656" width="140" height="5" rx="2" ry="2" fill="#e4c646"/>
+    <rect x="174" y="604" width="122" height="5" rx="2" ry="2" fill="#e4c646"/>
+    <rect x="190" y="552" width="106" height="5" rx="2" ry="2" fill="#e4c646"/>
+    <rect x="204" y="500" width="92" height="5" rx="2" ry="2" fill="#e4c646"/>
+    <rect x="216" y="448" width="80" height="5" rx="2" ry="2" fill="#e4c646"/>
+    <rect x="228" y="404" width="68" height="5" rx="2" ry="2" fill="#e4c646"/>
+    <rect x="156" y="672" width="140" height="5" rx="2" ry="2" fill="#e4c646"/>
+  </g>
+  <g transform="translate(1024,0) scale(-1,1)">
+    <g transform="translate(46,0)">
+      <path d="M150 700 L150 664 L168 664 L168 612 L184 612 L184 560 L198 560 L198 508 L210 508 L210 456 L222 456 L222 412 L236 412 L236 388 L300 388 L300 700 Z" fill="#102852"/>
+      <path d="M250 388 L268 356 L286 388 Z" fill="#102852"/>
+      <circle cx="268" cy="352" r="6" fill="#e4c646"/>
+      <rect x="156" y="656" width="140" height="5" rx="2" ry="2" fill="#e4c646"/>
+      <rect x="174" y="604" width="122" height="5" rx="2" ry="2" fill="#e4c646"/>
+      <rect x="190" y="552" width="106" height="5" rx="2" ry="2" fill="#e4c646"/>
+      <rect x="204" y="500" width="92" height="5" rx="2" ry="2" fill="#e4c646"/>
+      <rect x="216" y="448" width="80" height="5" rx="2" ry="2" fill="#e4c646"/>
+      <rect x="228" y="404" width="68" height="5" rx="2" ry="2" fill="#e4c646"/>
+      <rect x="156" y="672" width="140" height="5" rx="2" ry="2" fill="#e4c646"/>
+    </g>
+  </g>
+  <circle cx="512" cy="462" r="152" fill="#102852"/>
+  <circle cx="512" cy="462" r="136" fill="#f8f4ea"/>
+  <circle cx="512" cy="462" r="143" fill="none" stroke="#e4c646" stroke-width="4"/>
+  <line x1="512.0" y1="338.0" x2="512.0" y2="319.0" stroke="#e4c646" stroke-width="5" stroke-linecap="round"/>
+  <line x1="562.1" y1="341.0" x2="566.7" y2="329.9" stroke="#102852" stroke-width="3" stroke-linecap="round"/>
+  <line x1="604.6" y1="369.4" x2="613.1" y2="360.9" stroke="#102852" stroke-width="3" stroke-linecap="round"/>
+  <line x1="633.0" y1="411.9" x2="644.1" y2="407.3" stroke="#102852" stroke-width="3" stroke-linecap="round"/>
+  <line x1="636.0" y1="462.0" x2="655.0" y2="462.0" stroke="#e4c646" stroke-width="5" stroke-linecap="round"/>
+  <line x1="633.0" y1="512.1" x2="644.1" y2="516.7" stroke="#102852" stroke-width="3" stroke-linecap="round"/>
+  <line x1="604.6" y1="554.6" x2="613.1" y2="563.1" stroke="#102852" stroke-width="3" stroke-linecap="round"/>
+  <line x1="562.1" y1="583.0" x2="566.7" y2="594.1" stroke="#102852" stroke-width="3" stroke-linecap="round"/>
+  <line x1="512.0" y1="586.0" x2="512.0" y2="605.0" stroke="#e4c646" stroke-width="5" stroke-linecap="round"/>
+  <line x1="461.9" y1="583.0" x2="457.3" y2="594.1" stroke="#102852" stroke-width="3" stroke-linecap="round"/>
+  <line x1="419.4" y1="554.6" x2="410.9" y2="563.1" stroke="#102852" stroke-width="3" stroke-linecap="round"/>
+  <line x1="391.0" y1="512.1" x2="379.9" y2="516.7" stroke="#102852" stroke-width="3" stroke-linecap="round"/>
+  <line x1="388.0" y1="462.0" x2="369.0" y2="462.0" stroke="#e4c646" stroke-width="5" stroke-linecap="round"/>
+  <line x1="391.0" y1="411.9" x2="379.9" y2="407.3" stroke="#102852" stroke-width="3" stroke-linecap="round"/>
+  <line x1="419.4" y1="369.4" x2="410.9" y2="360.9" stroke="#102852" stroke-width="3" stroke-linecap="round"/>
+  <line x1="461.9" y1="341.0" x2="457.3" y2="329.9" stroke="#102852" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 571.4 402.6 L 538.0 462.0 L 571.4 521.4 L 512.0 488.0 L 452.6 521.4 L 486.0 462.0 L 452.6 402.6 L 512.0 436.0 Z" fill="#102852"/>
+  <path d="M 512.0 342.0 L 533.2 440.8 L 632.0 462.0 L 533.2 483.2 L 512.0 582.0 L 490.8 483.2 L 392.0 462.0 L 490.8 440.8 Z" fill="#e4c646" stroke="#102852" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M 512.0 334.0 L 522.0 354.0 L 512.0 366.0 L 502.0 354.0 Z" fill="#e4c646" stroke="#102852" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="512" cy="462" r="18" fill="#102852"/>
+  <circle cx="512" cy="462" r="7" fill="#e4c646"/>
+</svg>

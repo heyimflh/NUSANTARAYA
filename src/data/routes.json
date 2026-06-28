@@ -1,0 +1,17 @@
+[
+  {
+    "id": "rute-jawa-klasik",
+    "judul": "Jawa Klasik & Warisan",
+    "durasi": 7,
+    "wilayah": ["Jawa"],
+    "deskripsi": "Perjalanan melintasi jantung kebudayaan Jawa, dari ibu kota hingga kota-kota kerajaan kuno.",
+    "provinsiIds": ["dki-jakarta", "jawa-barat", "jawa-tengah", "di-yogyakarta"],
+    "jadwal": [
+      { "hari": 1, "aktivitas": ["Eksplorasi Kota Tua Jakarta", "Monas"] },
+      { "hari": 3, "aktivitas": ["Kereta ke Bandung", "Jalan Braga", "Kuliner Sunda"] },
+      { "hari": 5, "aktivitas": ["Candi Borobudur", "Prambanan"] },
+      { "hari": 7, "aktivitas": ["Keraton Yogyakarta", "Batik Workshop"] }
+    ],
+    "tipeWisata": ["Budaya", "Sejarah", "Kereta Api"]
+  }
+]

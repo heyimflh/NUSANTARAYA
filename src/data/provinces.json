@@ -1,0 +1,157 @@
+[
+  {
+    "id": "di-yogyakarta",
+    "kodeProv": "34",
+    "nama": "DI Yogyakarta",
+    "ibukota": "Yogyakarta",
+    "wilayah": "Jawa",
+    "tier": "deep",
+    "tagline": "Kota Budaya dan Pelajar",
+    "ikonBudaya": ["Candi Prambanan", "Keraton Yogyakarta", "Tugu Jogja"],
+    "koordinat": [-7.7956, 110.3695],
+    "ringkasan": "Daerah Istimewa Yogyakarta adalah salah satu wilayah dengan warisan budaya paling kaya di Indonesia, tempat tradisi keraton bersanding harmonis dengan denyut kehidupan modern dan semangat pendidikan.",
+    "bahasa": ["Jawa"],
+    "aksara": ["Aksara Jawa"],
+    "heroImage": "/assets/placeholder-jogja.jpg",
+    "sejarah": [
+      {
+        "tahun": "1755",
+        "judul": "Perjanjian Giyanti",
+        "deskripsi": "Berdirinya Kasultanan Ngayogyakarta Hadiningrat di bawah Sri Sultan Hamengkubuwono I.",
+        "era": "kerajaan"
+      },
+      {
+        "tahun": "1946",
+        "judul": "Ibukota Republik",
+        "deskripsi": "Yogyakarta menjadi ibukota sementara Republik Indonesia pada masa revolusi kemerdekaan.",
+        "era": "kemerdekaan"
+      }
+    ],
+    "budaya": [
+      {
+        "nama": "Wayang Kulit",
+        "kategori": "Senjata",
+        "deskripsi": "Seni pertunjukan bayangan yang sarat akan filosofi kehidupan dan nilai moral.",
+        "maknaFilosofis": "Bayangan sebagai refleksi kehidupan manusia."
+      },
+      {
+        "nama": "Keris",
+        "kategori": "Senjata",
+        "deskripsi": "Senjata tradisional yang diakui UNESCO sebagai warisan budaya tak benda.",
+        "maknaFilosofis": "Simbol kehormatan, ketangguhan, dan spiritualitas."
+      }
+    ],
+    "bahasaDetail": {
+      "bahasa": "Jawa",
+      "kosakata": [
+        { "kata": "Sugeng Rawuh", "arti": "Selamat Datang" },
+        { "kata": "Matur Nuwun", "arti": "Terima Kasih" }
+      ],
+      "aksara": "Aksara Jawa",
+      "ctaAksaraLab": true
+    },
+    "kuliner": [
+      {
+        "nama": "Gudeg",
+        "rasa": ["manis", "gurih", "tradisional"],
+        "cerita": "Olahan nangka muda yang dimasak berjam-jam dengan gula aren dan santan, mencerminkan kesabaran masyarakat Jawa.",
+        "kategori": "makanan utama"
+      },
+      {
+        "nama": "Kopi Joss",
+        "rasa": ["manis", "tradisional"],
+        "cerita": "Kopi seduh yang dicelup arang membara, ciptaan tak sengaja yang kini jadi ikon angkringan Jogja.",
+        "kategori": "minuman"
+      }
+    ],
+    "destinasi": [
+      {
+        "nama": "Keraton Yogyakarta",
+        "kategori": "Budaya",
+        "koordinat": [-7.8052, 110.3642],
+        "deskripsi": "Pusat kebudayaan Jawa dan kediaman resmi Sri Sultan."
+      },
+      {
+        "nama": "Candi Prambanan",
+        "kategori": "Sejarah",
+        "koordinat": [-7.7520, 110.4915],
+        "deskripsi": "Kompleks candi Hindu terbesar di Indonesia dari abad ke-9."
+      }
+    ],
+    "potensiModern": [
+      "Pusat Industri Kreatif & Startup Digital",
+      "Pengembangan Smart City berbasis budaya",
+      "Sumbu Filosofis sebagai UNESCO World Heritage"
+    ],
+    "stories": [
+      {
+        "judul": "Aku, Gudeg",
+        "sudutPandang": "Aku, Gudeg",
+        "isi": "Aku terlahir dari kesabaran. Nangka muda yang direbus semalaman dalam periuk tanah liat, bersama daun jati yang memberiku warna kemerahan. Aku adalah saksi bisu setiap malam di Jogja."
+      }
+    ],
+    "itinerary": [
+      {
+        "durasi": 2,
+        "judul": "Jogja Klasik 48 Jam",
+        "jadwal": [
+          { "hari": 1, "aktivitas": ["Keraton", "Taman Sari", "Malioboro"] },
+          { "hari": 2, "aktivitas": ["Prambanan", "Kotagede", "Alun-Alun Kidul"] }
+        ]
+      }
+    ],
+    "quiz": {
+      "provinsiId": "di-yogyakarta",
+      "pertanyaan": [
+        {
+          "pertanyaan": "Apa nama perjanjian yang membagi Kesultanan Mataram dan melahirkan Yogyakarta?",
+          "pilihan": ["Perjanjian Salatiga", "Perjanjian Giyanti", "Perjanjian Renville"],
+          "jawabanBenar": 1
+        }
+      ]
+    },
+    "provinsiTerkait": [
+      { "id": "jawa-tengah", "alasan": "Serumpun budaya Jawa Mataraman" }
+    ],
+    "soundscape": "/assets/audio/jogja-gamelan.mp3",
+    "sumber": ["Dinas Kebudayaan DIY", "BPS DIY"]
+  },
+  {
+    "id": "dki-jakarta",
+    "kodeProv": "31",
+    "nama": "DKI Jakarta",
+    "ibukota": "Jakarta",
+    "wilayah": "Jawa",
+    "tier": "basic",
+    "tagline": "Kota Kolaborasi",
+    "ikonBudaya": ["Monas", "Ondel-ondel"],
+    "koordinat": [-6.2088, 106.8456],
+    "ringkasan": "Daerah Khusus Ibukota Jakarta adalah pusat pemerintahan dan ekonomi Indonesia dengan sejarah panjang sejak era Sunda Kelapa.",
+    "bahasa": ["Betawi", "Indonesia"],
+    "sejarah": [],
+    "budaya": [],
+    "kuliner": [],
+    "destinasi": [],
+    "potensiModern": [],
+    "sumber": []
+  },
+  {
+    "id": "aceh",
+    "kodeProv": "11",
+    "nama": "Aceh",
+    "ibukota": "Banda Aceh",
+    "wilayah": "Sumatera",
+    "tier": "basic",
+    "tagline": "Serambi Mekkah",
+    "ikonBudaya": ["Masjid Raya Baiturrahman"],
+    "koordinat": [4.6951, 96.7494],
+    "ringkasan": "Aceh adalah provinsi paling barat di Indonesia yang memiliki otonomi khusus dan kaya akan sejarah kejayaan maritim dan perlawanan terhadap kolonial.",
+    "bahasa": ["Aceh"],
+    "sejarah": [],
+    "budaya": [],
+    "kuliner": [],
+    "destinasi": [],
+    "potensiModern": [],
+    "sumber": []
+  }
+]

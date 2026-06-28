@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Pin sejarah Nusantara">
+  <defs>
+    <linearGradient id="pinBody" x1="0.18" y1="0.04" x2="0.82" y2="0.96">
+      <stop offset="0" stop-color="#FFB23E"/>
+      <stop offset="0.38" stop-color="#ED8A1C"/>
+      <stop offset="0.72" stop-color="#A8530D"/>
+      <stop offset="1" stop-color="#5C2C06"/>
+    </linearGradient>
+    <linearGradient id="pinRim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFD27A"/>
+      <stop offset="1" stop-color="#7A3D09"/>
+    </linearGradient>
+    <radialGradient id="navy" cx="0.42" cy="0.36" r="0.85">
+      <stop offset="0" stop-color="#21285C"/>
+      <stop offset="0.6" stop-color="#161A47"/>
+      <stop offset="1" stop-color="#0C0E2E"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE9A8"/>
+      <stop offset="1" stop-color="#C9962F"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#FFE7A6"/>
+      <stop offset="0.42" stop-color="#FFC94D"/>
+      <stop offset="0.8" stop-color="#F0A52B"/>
+      <stop offset="1" stop-color="#C97E1A"/>
+    </linearGradient>
+    <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="shadow" x="-40%" y="-25%" width="180%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#3D1A04" flood-opacity="0.38"/>
+    </filter>
+    <clipPath id="medali"><circle cx="256" cy="200" r="122"/></clipPath>
+  </defs>
+
+  <g filter="url(#shadow)">
+    <path fill="url(#pinRim)" d="M256 492 C198 360 92 300 92 200 A164 164 0 1 1 420 200 C420 300 314 360 256 492 Z"/>
+    <path fill="url(#pinBody)" d="M256 484 C200 358 100 300 100 200 A156 156 0 1 1 412 200 C412 300 312 358 256 484 Z"/>
+  </g>
+  <path fill="url(#gloss)" d="M168 96 C210 64 302 64 344 96 C300 84 212 84 168 96 Z" opacity="0.8"/>
+  <ellipse cx="206" cy="150" rx="40" ry="86" fill="#FFFFFF" opacity="0.10" transform="rotate(-26 206 150)"/>
+
+  <circle cx="256" cy="200" r="122" fill="url(#navy)"/>
+  <g clip-path="url(#medali)">
+    <g transform="translate(106.4468 53.4468) scale(0.46809)" fill="url(#gold)" fill-rule="evenodd" stroke="#B5791B" stroke-width="0.4">
+      <path d="M 448 374 L 448 384 L 449 385 L 514 385 L 519 380 L 518 376 L 515 373 L 449 373 Z M 120 378 L 121 382 L 125 385 L 190 385 L 191 384 L 191 374 L 190 373 L 124 373 Z M 475 285 L 472 288 L 470 302 L 464 307 L 463 313 L 456 319 L 452 327 L 449 350 L 445 357 L 444 364 L 447 366 L 509 366 L 512 363 L 510 360 L 509 355 L 506 352 L 505 342 L 504 341 L 504 333 L 502 325 L 500 321 L 492 313 L 490 306 L 485 303 L 483 288 L 480 285 Z M 159 285 L 156 288 L 154 303 L 149 306 L 147 314 L 138 323 L 135 334 L 133 352 L 131 354 L 127 364 L 129 366 L 193 366 L 195 364 L 194 356 L 191 353 L 187 327 L 182 318 L 176 313 L 175 307 L 170 303 L 167 288 L 164 285 Z M 310 120 L 305 125 L 302 133 L 300 152 L 296 171 L 296 177 L 294 179 L 284 179 L 280 182 L 273 211 L 270 214 L 259 220 L 252 227 L 242 244 L 237 262 L 233 298 L 232 299 L 232 305 L 231 306 L 228 327 L 224 332 L 219 334 L 214 340 L 212 347 L 213 355 L 203 364 L 200 370 L 199 390 L 197 392 L 169 392 L 164 396 L 164 420 L 162 422 L 149 422 L 146 425 L 146 449 L 144 451 L 132 451 L 129 453 L 128 455 L 128 478 L 126 480 L 113 480 L 108 484 L 108 518 L 113 522 L 526 522 L 531 518 L 531 484 L 528 481 L 525 480 L 513 480 L 511 478 L 511 455 L 507 451 L 495 451 L 493 449 L 493 425 L 490 422 L 477 422 L 475 420 L 475 397 L 474 395 L 470 392 L 442 392 L 440 390 L 440 373 L 436 364 L 426 355 L 427 347 L 424 338 L 420 334 L 415 332 L 412 329 L 408 311 L 407 298 L 406 297 L 403 267 L 397 244 L 387 227 L 380 220 L 366 211 L 359 182 L 355 179 L 346 179 L 343 176 L 337 133 L 334 125 L 328 119 L 322 117 L 317 117 Z M 119 494 L 121 492 L 518 492 L 520 494 L 520 508 L 518 510 L 121 510 L 119 508 Z M 319 416 L 325 419 L 330 424 L 330 428 L 328 431 L 329 437 L 331 439 L 340 439 L 342 441 L 342 478 L 340 480 L 327 480 L 325 478 L 325 455 L 322 452 L 317 452 L 314 455 L 314 478 L 312 480 L 299 480 L 297 478 L 297 441 L 299 439 L 308 439 L 310 437 L 311 430 L 309 427 L 309 424 Z M 139 465 L 141 463 L 273 463 L 274 462 L 274 452 L 273 451 L 159 451 L 157 449 L 157 436 L 159 434 L 273 434 L 274 429 L 277 424 L 276 422 L 178 422 L 176 420 L 176 406 L 178 404 L 296 404 L 310 394 L 310 392 L 213 392 L 211 390 L 211 375 L 212 372 L 219 366 L 421 366 L 428 374 L 428 390 L 426 392 L 330 392 L 330 394 L 343 404 L 461 404 L 463 406 L 463 420 L 461 422 L 363 422 L 362 424 L 364 426 L 366 434 L 480 434 L 482 436 L 482 449 L 480 451 L 366 451 L 365 452 L 365 462 L 366 463 L 498 463 L 500 465 L 500 478 L 498 480 L 356 480 L 354 478 L 354 431 L 351 428 L 344 428 L 342 426 L 342 421 L 339 415 L 329 408 L 323 402 L 320 401 L 316 402 L 299 417 L 297 422 L 297 426 L 295 428 L 288 428 L 285 431 L 285 478 L 283 480 L 141 480 L 139 478 Z M 224 347 L 229 342 L 410 342 L 414 345 L 415 350 L 410 354 L 229 354 L 225 351 Z M 378 307 L 382 307 L 387 312 L 387 321 L 382 326 L 376 325 L 373 321 L 373 312 Z M 348 307 L 352 307 L 357 313 L 357 320 L 352 326 L 346 325 L 343 321 L 343 312 Z M 318 307 L 322 307 L 326 311 L 327 314 L 326 322 L 321 326 L 318 326 L 313 322 L 313 311 Z M 287 307 L 293 308 L 296 312 L 296 322 L 291 326 L 286 325 L 282 320 L 282 313 Z M 257 307 L 263 308 L 266 312 L 266 321 L 261 326 L 257 326 L 252 321 L 252 313 Z M 362 279 L 369 280 L 372 285 L 372 292 L 366 298 L 362 297 L 358 293 L 358 283 Z M 332 279 L 337 279 L 341 283 L 342 286 L 341 294 L 338 297 L 335 298 L 332 297 L 328 293 L 328 283 Z M 302 279 L 307 279 L 311 283 L 311 294 L 308 297 L 305 298 L 301 297 L 298 294 L 298 283 Z M 272 279 L 277 279 L 281 283 L 281 293 L 275 298 L 271 297 L 268 294 L 267 291 L 268 283 Z M 347 251 L 353 251 L 357 256 L 357 264 L 352 269 L 347 269 L 343 265 L 343 255 Z M 316 251 L 323 251 L 326 254 L 327 262 L 326 265 L 322 269 L 317 269 L 313 265 L 313 255 Z M 286 251 L 292 251 L 296 255 L 296 265 L 292 269 L 287 269 L 283 266 L 282 257 L 283 254 Z M 286 205 L 289 193 L 291 191 L 348 191 L 350 193 L 353 206 L 350 208 L 334 205 L 305 205 L 304 206 L 296 206 L 288 208 Z M 318 129 L 321 129 L 325 133 L 327 150 L 330 163 L 330 169 L 331 170 L 331 178 L 330 179 L 309 179 L 308 178 L 308 171 L 310 164 L 314 134 Z"/>
+    </g>
+  </g>
+  <circle cx="256" cy="200" r="118" fill="none" stroke="url(#ring)" stroke-width="5"/>
+  <circle cx="256" cy="200" r="109" fill="none" stroke="#FFD879" stroke-width="1.4" opacity="0.5"/>
+</svg>
