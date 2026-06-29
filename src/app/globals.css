@@ -228,3 +228,26 @@ h4 { font-size: clamp(1.1rem, 2vw, 1.375rem); }
     padding-bottom: calc(env(safe-area-inset-bottom) + 4rem);
   }
 }
+
+/* ─── Hero Safe Area Padding (Mobile/Tablet) ─────────────────────────────── */
+.hero-safe-padding {
+  padding-top: calc(env(safe-area-inset-top, 0px) + 1.25rem);
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 1.25rem);
+}
+
+@media (min-width: 1024px) {
+  .hero-safe-padding {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+}
+
+/* ─── Hide Scrollbar Utility ─────────────────────────────────────────────── */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
