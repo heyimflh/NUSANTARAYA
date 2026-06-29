@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter, Montserrat } from "next/font/google";
+import { Playfair_Display, Inter, Montserrat, Outfit, Pacifico, Philosopher } from "next/font/google";
 import { AppProvider } from "@/context/app-context";
 import "./globals.css";
 
@@ -28,7 +28,28 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
   display: "swap",
-  weight: ["700", "800", "900"],
+  weight: ["100", "200", "300", "400", "500", "700", "800", "900"],
+});
+
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["100", "200", "300", "400", "500", "600"],
+});
+
+const pacifico = Pacifico({
+  variable: "--font-pacifico",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400"],
+});
+
+const philosopher = Philosopher({
+  variable: "--font-philosopher",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -66,7 +87,7 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${playfair.variable} ${inter.variable} ${montserrat.variable} h-full`}
+      className={`${playfair.variable} ${inter.variable} ${montserrat.variable} ${outfit.variable} ${pacifico.variable} ${philosopher.variable} h-full`}
     >
       <body className="min-h-full flex flex-col antialiased">
         <AppProvider>
