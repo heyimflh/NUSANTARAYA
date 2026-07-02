@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <!-- Mlinjon / Tenun Diamonds -->
+    <g id="diamond">
+      <polygon points="0,-12 12,0 0,12 -12,0" fill="none" stroke="#D8B56D" stroke-width="1.5" opacity="0.9"/>
+      <polygon points="0,-6 6,0 0,6 -6,0" fill="none" stroke="#F2E6C9" stroke-width="1" opacity="0.8"/>
+      <circle cx="0" cy="0" r="1.5" fill="#4DA7A0" opacity="0.9"/>
+    </g>
+    
+    <!-- Modern Kawung Base -->
+    <g id="kawung">
+      <!-- Outer bounding circle representing harmony -->
+      <circle cx="0" cy="0" r="60" fill="none" stroke="#D8B56D" stroke-width="1" opacity="0.5"/>
+      <circle cx="0" cy="0" r="45" fill="none" stroke="#F2E6C9" stroke-width="0.75" opacity="0.4" stroke-dasharray="4 4"/>
+      
+      <!-- Petals (The 4 directions) -->
+      <path d="M 0 0 Q 35 -30 0 -60 Q -35 -30 0 0 Z" fill="none" stroke="#D8B56D" stroke-width="1" opacity="0.8"/>
+      <path d="M 0 0 Q 35 30 0 60 Q -35 30 0 0 Z" fill="none" stroke="#D8B56D" stroke-width="1" opacity="0.8"/>
+      <path d="M 0 0 Q 30 -35 60 0 Q 30 35 0 0 Z" fill="none" stroke="#D8B56D" stroke-width="1" opacity="0.8"/>
+      <path d="M 0 0 Q -30 -35 -60 0 Q -30 35 0 0 Z" fill="none" stroke="#D8B56D" stroke-width="1" opacity="0.8"/>
+      
+      <!-- Inner tech accents -->
+      <circle cx="0" cy="0" r="8" fill="none" stroke="#4DA7A0" stroke-width="1" opacity="0.9"/>
+      <circle cx="0" cy="0" r="3" fill="#D8B56D" opacity="1"/>
+      
+      <circle cx="0" cy="-45" r="2.5" fill="#4DA7A0" opacity="0.8"/>
+      <circle cx="0" cy="45" r="2.5" fill="#4DA7A0" opacity="0.8"/>
+      <circle cx="45" cy="0" r="2.5" fill="#4DA7A0" opacity="0.8"/>
+      <circle cx="-45" cy="0" r="2.5" fill="#4DA7A0" opacity="0.8"/>
+    </g>
+
+    <!-- Tenun Border Accent -->
+    <g id="border-accent">
+      <polygon points="0,-24 12,0 0,24 -12,0" fill="none" stroke="#D8B56D" stroke-width="1" opacity="0.8"/>
+      <polygon points="0,-16 8,0 0,16 -8,0" fill="none" stroke="#F2E6C9" stroke-width="1" opacity="0.7"/>
+      <circle cx="0" cy="0" r="1.5" fill="#4DA7A0" opacity="0.9"/>
+      <line x1="-20" y1="0" x2="-12" y2="0" stroke="#D8B56D" stroke-width="1" opacity="0.7"/>
+      <line x1="12" y1="0" x2="20" y2="0" stroke="#D8B56D" stroke-width="1" opacity="0.7"/>
+      <line x1="0" y1="-32" x2="0" y2="-24" stroke="#D8B56D" stroke-width="1" opacity="0.7"/>
+      <line x1="0" y1="24" x2="0" y2="32" stroke="#D8B56D" stroke-width="1" opacity="0.7"/>
+    </g>
+  </defs>
+
+  <!-- Subtle Center Map Compass / Anchor -->
+  <g opacity="0.15" transform="translate(720, 450)">
+    <!-- Outer Rings -->
+    <circle cx="0" cy="0" r="350" fill="none" stroke="#D8B56D" stroke-width="1" stroke-dasharray="2 12" />
+    <circle cx="0" cy="0" r="320" fill="none" stroke="#F2E6C9" stroke-width="0.5" />
+    <circle cx="0" cy="0" r="240" fill="none" stroke="#D8B56D" stroke-width="1" stroke-dasharray="20 10 5 10" />
+    <circle cx="0" cy="0" r="150" fill="none" stroke="#4DA7A0" stroke-width="0.5" stroke-dasharray="4 8" opacity="0.6"/>
+    
+    <!-- Crosshairs (Map feel) -->
+    <line x1="-380" y1="0" x2="-260" y2="0" stroke="#D8B56D" stroke-width="0.5" />
+    <line x1="260" y1="0" x2="380" y2="0" stroke="#D8B56D" stroke-width="0.5" />
+    <line x1="0" y1="-380" x2="0" y2="-260" stroke="#D8B56D" stroke-width="0.5" />
+    <line x1="0" y1="260" x2="0" y2="380" stroke="#D8B56D" stroke-width="0.5" />
+    
+    <!-- Center Node -->
+    <circle cx="0" cy="0" r="80" fill="none" stroke="#D8B56D" stroke-width="0.5" stroke-dasharray="4 4" />
+    <circle cx="0" cy="0" r="20" fill="none" stroke="#4DA7A0" stroke-width="1" opacity="0.7"/>
+    <circle cx="0" cy="0" r="4" fill="#D8B56D" />
+    
+    <!-- 8-point compass star base (subtle) -->
+    <path d="M 0 -60 L 6 -15 L 60 0 L 6 15 L 0 60 L -6 15 L -60 0 L -6 -15 Z" fill="none" stroke="#F2E6C9" stroke-width="0.5" opacity="0.8"/>
+    <path d="M 0 -30 L 20 -20 L 30 0 L 20 20 L 0 30 L -20 20 L -30 0 L -20 -20 Z" fill="none" stroke="#D8B56D" stroke-width="0.5" opacity="0.9"/>
+  </g>
+
+  <!-- Top Left Section (Parang Flow + Kawung Nodes) -->
+  <g opacity="0.6">
+    <path d="M -50 400 C 150 400, 250 200, 350 100 C 450 0, 550 -50, 650 -50" stroke="#D8B56D" fill="none" stroke-width="1.5" opacity="0.9"/>
+    <path d="M -50 420 C 160 420, 260 220, 360 120 C 460 20, 560 -30, 660 -30" stroke="#F2E6C9" fill="none" stroke-width="1" opacity="0.8"/>
+    <path d="M -50 440 C 170 440, 270 240, 370 140 C 470 40, 570 -10, 670 -10" stroke="#D8B56D" fill="none" stroke-width="0.75" opacity="0.7"/>
+    <path d="M -50 460 C 180 460, 280 260, 380 160 C 480 60, 580 10, 680 10" stroke="#4DA7A0" fill="none" stroke-width="0.5" stroke-dasharray="6 4" opacity="0.8"/>
+    <path d="M -50 480 C 190 480, 290 280, 390 180 C 490 80, 590 30, 690 30" stroke="#D8B56D" fill="none" stroke-width="1" opacity="0.6"/>
+    
+    <use href="#kawung" transform="translate(150, 400) scale(0.8)" />
+    <use href="#kawung" transform="translate(350, 100) scale(0.6)" />
+    <use href="#diamond" transform="translate(250, 200)" />
+    <use href="#diamond" transform="translate(260, 220)" />
+    <use href="#diamond" transform="translate(450, 0)" />
+  </g>
+
+  <!-- Bottom Right Section (Parang Flow + Kawung Nodes) -->
+  <g opacity="0.5">
+    <path d="M 1490 500 C 1290 500, 1190 700, 1090 800 C 990 900, 890 950, 790 950" stroke="#D8B56D" fill="none" stroke-width="1.5" opacity="0.9"/>
+    <path d="M 1490 480 C 1280 480, 1180 680, 1080 780 C 980 880, 880 930, 780 930" stroke="#F2E6C9" fill="none" stroke-width="1" opacity="0.8"/>
+    <path d="M 1490 460 C 1270 460, 1170 660, 1070 760 C 970 860, 870 910, 770 910" stroke="#D8B56D" fill="none" stroke-width="0.75" opacity="0.7"/>
+    <path d="M 1490 440 C 1260 440, 1160 640, 1060 740 C 960 840, 860 890, 760 890" stroke="#4DA7A0" fill="none" stroke-width="0.5" stroke-dasharray="6 4" opacity="0.8"/>
+    
+    <use href="#kawung" transform="translate(1290, 500) scale(0.8)" />
+    <use href="#kawung" transform="translate(1090, 800) scale(0.6)" />
+    <use href="#diamond" transform="translate(1190, 700)" />
+    <use href="#diamond" transform="translate(1180, 680)" />
+    <use href="#diamond" transform="translate(990, 900)" />
+  </g>
+
+  <!-- Top Right Section (Inward Flow) -->
+  <g opacity="0.4">
+    <path d="M 1490 100 C 1290 150, 1190 50, 990 -50" stroke="#D8B56D" fill="none" stroke-width="1.25" opacity="0.8"/>
+    <path d="M 1490 120 C 1280 170, 1180 70, 980 -50" stroke="#F2E6C9" fill="none" stroke-width="0.75" opacity="0.7"/>
+    <path d="M 1490 140 C 1270 190, 1170 90, 970 -50" stroke="#4DA7A0" fill="none" stroke-width="0.5" stroke-dasharray="4 4" opacity="0.8"/>
+    
+    <use href="#kawung" transform="translate(1290, 150) scale(0.5)" />
+    <use href="#diamond" transform="translate(1190, 50)" />
+    <use href="#diamond" transform="translate(1390, 125)" />
+  </g>
+
+  <!-- Bottom Left Section (Inward Flow) -->
+  <g opacity="0.4">
+    <path d="M -50 800 C 150 750, 250 850, 450 950" stroke="#D8B56D" fill="none" stroke-width="1.25" opacity="0.8"/>
+    <path d="M -50 780 C 160 730, 260 830, 460 950" stroke="#F2E6C9" fill="none" stroke-width="0.75" opacity="0.7"/>
+    <path d="M -50 760 C 170 710, 270 810, 470 950" stroke="#4DA7A0" fill="none" stroke-width="0.5" stroke-dasharray="4 4" opacity="0.8"/>
+    
+    <use href="#kawung" transform="translate(150, 750) scale(0.5)" />
+    <use href="#diamond" transform="translate(250, 850)" />
+    <use href="#diamond" transform="translate(50, 775)" />
+  </g>
+
+  <!-- Left Border (Tenun / Songket Geometric pattern) -->
+  <g opacity="0.5">
+    <path d="M 40 100 L 40 800" stroke="#D8B56D" stroke-width="1" stroke-dasharray="10 5 2 5" opacity="0.7"/>
+    <path d="M 50 150 L 50 750" stroke="#F2E6C9" stroke-width="0.5" opacity="0.6"/>
+    <use href="#border-accent" transform="translate(45, 250)" />
+    <use href="#border-accent" transform="translate(45, 450)" scale="1.2" />
+    <use href="#border-accent" transform="translate(45, 650)" />
+  </g>
+
+  <!-- Right Border -->
+  <g opacity="0.5">
+    <path d="M 1400 100 L 1400 800" stroke="#D8B56D" stroke-width="1" stroke-dasharray="10 5 2 5" opacity="0.7"/>
+    <path d="M 1390 150 L 1390 750" stroke="#F2E6C9" stroke-width="0.5" opacity="0.6"/>
+    <use href="#border-accent" transform="translate(1395, 250)" />
+    <use href="#border-accent" transform="translate(1395, 450)" scale="1.2" />
+    <use href="#border-accent" transform="translate(1395, 650)" />
+  </g>
+
+  <!-- Floating Particles / Stardust (Cinematic modern feel) -->
+  <g opacity="0.7">
+    <circle cx="200" cy="150" r="1.5" fill="#D8B56D" />
+    <circle cx="300" cy="350" r="1" fill="#F2E6C9" />
+    <circle cx="500" cy="200" r="2" fill="#4DA7A0" opacity="0.8"/>
+    <circle cx="800" cy="150" r="1" fill="#D8B56D" />
+    <circle cx="1100" cy="300" r="1.5" fill="#F2E6C9" />
+    <circle cx="1300" cy="200" r="1" fill="#D8B56D" />
+    <circle cx="150" cy="600" r="2" fill="#4DA7A0" opacity="0.8"/>
+    <circle cx="400" cy="700" r="1" fill="#D8B56D" />
+    <circle cx="700" cy="800" r="1.5" fill="#F2E6C9" />
+    <circle cx="950" cy="650" r="1" fill="#D8B56D" />
+    <circle cx="1250" cy="850" r="2" fill="#4DA7A0" opacity="0.8"/>
+    <circle cx="1350" cy="550" r="1" fill="#F2E6C9" />
+  </g>
+</svg>

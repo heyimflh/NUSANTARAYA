@@ -88,8 +88,9 @@ export default function RootLayout({
     <html
       lang="id"
       className={`${playfair.variable} ${inter.variable} ${montserrat.variable} ${outfit.variable} ${pacifico.variable} ${philosopher.variable} h-full`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col antialiased">
+      <body className="min-h-full flex flex-col antialiased" suppressHydrationWarning>
         <AppProvider>
           {/* Main Content */}
           <main className="flex-1 pb-safe max-md:pb-20">

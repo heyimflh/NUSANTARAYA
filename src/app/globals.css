@@ -251,3 +251,33 @@ h4 { font-size: clamp(1.1rem, 2vw, 1.375rem); }
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* ─── Custom Shape Divider ─────────────────────────────────────────────── */
+.custom-shape-divider-top-1782978684 {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-top-1782978684 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 145px;
+}
+
+.custom-shape-divider-top-1782978684 .shape-fill {
+    fill: #F8F4EA;
+}
+
+/** For mobile devices **/
+@media (max-width: 767px) {
+    .custom-shape-divider-top-1782978684 svg {
+        width: calc(100% + 1.3px);
+        height: 45px;
+    }
+}
