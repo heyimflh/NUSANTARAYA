@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 interface FeaturedRoutePlannerCardProps {
   feature: {
@@ -35,13 +36,20 @@ export default function FeaturedRoutePlannerCard({ feature }: FeaturedRoutePlann
       <div className="relative z-10 flex flex-col p-10 md:p-14 lg:w-1/2 justify-center">
         {/* Eyebrow & Icon */}
         <div className="flex items-center gap-4 mb-8">
-          <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-white shadow-sm border border-gray-100 overflow-hidden shrink-0">
+          <motion.div
+            whileHover={{ 
+              rotate: [0, -10, 10, -5, 0],
+              scale: 1.15,
+              transition: { duration: 0.6, type: "spring", bounce: 0.5 }
+            }}
+            className="cursor-pointer"
+          >
             <img 
               src={feature.icon} 
               alt="" 
-              className="w-8 h-8 transition-transform duration-500 group-hover:scale-110" 
+              className="w-8 h-8" 
             />
-          </div>
+          </motion.div>
           <span className="text-[13px] font-bold tracking-[0.15em] uppercase text-gray-400">
             {feature.eyebrow}
           </span>
@@ -87,20 +95,21 @@ export default function FeaturedRoutePlannerCard({ feature }: FeaturedRoutePlann
       </div>
 
       {/* Image / Mockup Area */}
-      <div className="relative z-10 lg:w-1/2 p-8 md:p-12 lg:p-14 flex items-center justify-center bg-gray-50 border-l border-black/[0.02]">
+      <div className="relative z-10 lg:w-1/2 p-10 md:p-14 lg:p-16 flex items-center justify-center bg-gray-50 border-l border-black/[0.02] overflow-hidden">
         {/* Subtle Glow Behind Image */}
         <div 
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 rounded-full blur-[80px] opacity-[0.08] pointer-events-none transition-opacity duration-500 group-hover:opacity-[0.15]"
           style={{ backgroundColor: feature.color }}
         />
         
-        {/* The Frame */}
-        <div className="relative w-full aspect-[16/9] md:aspect-[4/3] lg:aspect-[16/10] rounded-2xl overflow-hidden shadow-[0_20px_50px_rgb(0,0,0,0.12)] border border-black/[0.05] bg-white transform transition-all duration-700 group-hover:scale-[1.03] group-hover:-rotate-1 group-hover:shadow-[0_30px_60px_rgb(0,0,0,0.15)]">
+        {/* The Frame (Uncropped) */}
+        <div className="relative w-full rounded-2xl overflow-hidden shadow-[0_20px_50px_rgb(0,0,0,0.12)] border border-black/[0.05] bg-white transform transition-all duration-700 group-hover:scale-[1.03] group-hover:-rotate-1 group-hover:shadow-[0_30px_60px_rgb(0,0,0,0.15)]">
           <Image
             src={feature.image}
             alt={`Preview antarmuka ${feature.title}`}
-            fill
-            className="object-cover object-top"
+            width={1200}
+            height={800}
+            className="w-full h-auto object-contain block"
             sizes="(max-width: 1024px) 100vw, 50vw"
           />
         </div>
