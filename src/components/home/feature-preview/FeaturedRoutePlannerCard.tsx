@@ -40,7 +40,7 @@ export default function FeaturedRoutePlannerCard({ feature }: FeaturedRoutePlann
             whileHover={{ 
               rotate: [0, -10, 10, -5, 0],
               scale: 1.15,
-              transition: { duration: 0.6, type: "spring", bounce: 0.5 }
+              transition: { duration: 0.6, ease: "easeInOut" }
             }}
             className="cursor-pointer"
           >

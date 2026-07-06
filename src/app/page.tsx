@@ -2,6 +2,7 @@ import Hero from '@/components/Hero';
 import PreviewNusaMap from '@/components/PreviewNusaMap/PreviewNusaMap';
 import { SevenPillarsSection } from '@/components/home/seven-pillars';
 import { FeaturePreviewSection } from '@/components/home/feature-preview';
+import { PastToFutureSection } from '@/components/home/past-to-future';
 
 export default function HomePage() {
   return (
@@ -18,6 +19,7 @@ export default function HomePage() {
       <PreviewNusaMap />
       <SevenPillarsSection />
       <FeaturePreviewSection />
+      <PastToFutureSection />
     </div>
   );
 }
