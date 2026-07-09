@@ -123,7 +123,10 @@ export default function Hero() {
           {['Beranda', 'Eksplorasi', 'Rute', 'Kuliner', 'Tentang'].map((item, idx) => (
             <Link 
               key={item} 
-              href="#" 
+              href={
+                idx === 0 ? "/" :
+                idx === 1 ? "/explore" : "#"
+              } 
               className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 idx === 0 
                   ? (isScrolled ? 'bg-[#C9A84C] text-white shadow-md' : 'bg-white text-black')
@@ -558,7 +561,10 @@ export default function Hero() {
                       transition={{ duration: 0.5, delay: 0.1 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                     >
                       <Link
-                        href="#"
+                        href={
+                          i === 0 ? "/" :
+                          i === 1 ? "/explore" : "#"
+                        }
                         onClick={() => setIsMenuOpen(false)}
                         className="group flex items-center gap-4 text-[#2D2419] hover:text-[#C9A84C] transition-colors"
                       >
