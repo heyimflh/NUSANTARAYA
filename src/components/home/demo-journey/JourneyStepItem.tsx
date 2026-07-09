@@ -42,37 +42,35 @@ export function JourneyStepItem({
       {/* Number */}
       <span
         className={cn(
-          "shrink-0 font-serif text-2xl font-bold transition-colors duration-500 relative z-20 w-8 text-center",
-          isActive ? "text-primary mt-1" : "text-muted-foreground/60 mt-0"
+          "shrink-0 font-serif text-2xl md:text-3xl font-bold transition-colors duration-500 relative z-20 text-center leading-none mt-1",
+          isActive ? "text-primary" : "text-muted-foreground/60"
         )}
       >
         {step.number}
       </span>
 
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full pt-1">
         {/* Title */}
-        <div className="flex items-center h-8">
-          <h3
-            className={cn(
-              "font-sans font-semibold tracking-tight transition-colors duration-500",
-              isActive ? "text-lg text-foreground" : "text-base text-foreground group-hover:text-foreground"
-            )}
-          >
-            {step.title}
-          </h3>
-        </div>
+        <h3
+          className={cn(
+            "font-serif font-bold tracking-tight transition-colors duration-500 leading-none mb-3",
+            isActive ? "text-xl text-foreground" : "text-lg text-foreground/70 group-hover:text-foreground"
+          )}
+        >
+          {step.title}
+        </h3>
 
         {/* Accordion Description */}
         <AnimatePresence initial={false}>
           {isActive && (
             <motion.div
-              initial={{ height: 0, opacity: 0, marginTop: 0 }}
-              animate={{ height: "auto", opacity: 1, marginTop: 8 }}
-              exit={{ height: 0, opacity: 0, marginTop: 0 }}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               className="overflow-hidden"
             >
-              <p className="text-[15px] leading-relaxed text-muted-foreground pl-[44px] pb-1">
+              <p className="text-sm md:text-[15px] leading-[1.7] text-muted-foreground pb-2 pr-2">
                 {step.description}
               </p>
             </motion.div>

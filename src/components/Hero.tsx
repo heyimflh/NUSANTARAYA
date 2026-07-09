@@ -518,44 +518,98 @@ export default function Hero() {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            animate={{ opacity: 1, backdropFilter: "blur(16px)" }}
-            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 flex flex-col justify-center items-center bg-black/80 lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 z-[100000] flex flex-col bg-[#F8F4EA] bg-[url('/assets/background-primary-mobile.png')] bg-cover bg-center bg-no-repeat lg:hidden overflow-hidden"
           >
-            {/* Close Button */}
-            <button
-              className="absolute top-6 right-6 p-3 text-white bg-white/10 rounded-full active:scale-95 transition-all"
-              onClick={() => setIsMenuOpen(false)}
-              aria-label="Tutup Menu"
-            >
-              <X size={24} />
-            </button>
+            {/* Glassmorphism overlay to ensure text readability over the map */}
+            <div className="absolute inset-0 bg-white/40 backdrop-blur-[2px] pointer-events-none" />
+
+            {/* Header: Logo and Close Button */}
+            <div className="flex items-center justify-between px-4 sm:px-6 py-5 sm:py-6 relative z-10 border-b border-[#2D2419]/10">
+              <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                <img 
+                  src="/assets/branding/NUSANTARAYA_logo-full.png" 
+                  alt="Nusantaraya" 
+                  className="h-8 sm:h-9 w-auto object-contain drop-shadow-sm" 
+                />
+              </Link>
+              <button
+                className="p-2 text-[#2D2419] bg-[#2D2419]/5 hover:bg-[#2D2419]/10 border border-[#2D2419]/10 rounded-full active:scale-95 transition-all"
+                onClick={() => setIsMenuOpen(false)}
+                aria-label="Tutup Menu"
+              >
+                <X size={20} />
+              </button>
+            </div>
 
             {/* Menu Links */}
-            <div className="flex flex-col items-center gap-8">
-              {["Beranda", "Eksplorasi", "Rute", "Kuliner", "Tentang"].map(
-                (item) => (
-                  <Link
-                    key={item}
-                    href="#"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="text-white text-3xl font-light tracking-widest hover:text-white/60 transition-colors"
-                    style={{ fontFamily: "var(--font-outfit)" }}
-                  >
-                    {item}
-                  </Link>
-                ),
-              )}
+            <div className="flex-1 flex flex-col justify-center px-8 relative z-10">
+              <div className="flex flex-col gap-6">
+                {["Beranda", "Eksplorasi", "Rute", "Kuliner", "Tentang"].map(
+                  (item, i) => (
+                    <motion.div
+                      key={item}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 20 }}
+                      transition={{ duration: 0.5, delay: 0.1 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      <Link
+                        href="#"
+                        onClick={() => setIsMenuOpen(false)}
+                        className="group flex items-center gap-4 text-[#2D2419] hover:text-[#C9A84C] transition-colors"
+                      >
+                        <span className="text-[10px] font-mono text-[#2D2419]/40 group-hover:text-[#C9A84C]/70 transition-colors">
+                          0{i + 1}
+                        </span>
+                        <span className="text-4xl sm:text-5xl font-serif font-medium tracking-wide">
+                          {item}
+                        </span>
+                      </Link>
+                    </motion.div>
+                  ),
+                )}
+              </div>
 
-              <Link
-                href="#explore"
-                onClick={() => setIsMenuOpen(false)}
-                className="mt-6 bg-white text-black px-8 py-3.5 rounded-full text-sm font-semibold shadow-lg active:scale-95 flex items-center gap-2"
+              {/* Divider */}
+              <motion.div 
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: 1, scaleX: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="w-full h-[1px] bg-gradient-to-r from-[#2D2419]/20 to-transparent my-10 origin-left" 
+              />
+
+              {/* Bottom Section: CTA & Small Links */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+                className="flex flex-col gap-8"
               >
-                Mulai Jelajah <ArrowUpRight size={18} />
-              </Link>
+                <Link
+                  href="#explore"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="group relative inline-flex items-center justify-between w-full sm:w-max bg-[#1A1A1A] text-white px-6 py-4 rounded-full text-sm font-bold tracking-widest uppercase overflow-hidden active:scale-95 transition-transform shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
+                >
+                  <span className="relative z-10">Mulai Jelajah</span>
+                  <div className="relative z-10 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-[#C9A84C] group-hover:text-black transition-colors">
+                    <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </div>
+                  {/* Hover effect background */}
+                  <div className="absolute inset-0 bg-[#2D2419] transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out" />
+                </Link>
+
+                <div className="flex items-center gap-6 text-[#2D2419]/50 text-xs font-medium tracking-widest uppercase">
+                  <button className="hover:text-[#2D2419] transition-colors font-bold text-[#2D2419]">ID</button>
+                  <span className="w-1 h-1 rounded-full bg-[#2D2419]/30" />
+                  <button className="hover:text-[#2D2419] transition-colors">EN</button>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
         )}

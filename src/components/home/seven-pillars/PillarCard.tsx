@@ -63,7 +63,7 @@ export function PillarCard({
 
   return (
     <motion.div
-      className="absolute top-1/2 left-1/2 cursor-pointer origin-center rounded-[32px] overflow-hidden"
+      className="absolute top-1/2 left-1/2 cursor-pointer origin-center rounded-[32px] overflow-hidden bg-black"
       style={{
         width: "380px",
         height: "560px",
