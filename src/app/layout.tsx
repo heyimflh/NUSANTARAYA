@@ -92,6 +92,9 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col antialiased" suppressHydrationWarning>
         <AppProvider>
+          {/* Global Fixed Background for seamless masking and mobile performance */}
+          <div className="fixed inset-0 z-[-50] bg-[url('/assets/background-primary.png')] max-md:bg-[url('/assets/background-primary-mobile.png')] bg-cover bg-center bg-no-repeat opacity-100 pointer-events-none w-full h-[100dvh]" />
+          
           {/* Main Content */}
           <main className="flex-1 pb-safe max-md:pb-20">
             {children}

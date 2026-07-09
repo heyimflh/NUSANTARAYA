@@ -1,11 +1,18 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  type ReactNode,
+} from "react";
 import type { Language, AppMode, PassportData } from "@/lib/types";
 
 /* ═══════════════════════════════════════════════════════════════════════════
    NUSANTARAYA Global State — React Context
-   
+
    Menyimpan state global app:
    - Bahasa (ID/EN)
    - Mode (Explore/Tourist/Learn)
@@ -95,11 +102,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   // Hydrate from localStorage on mount
   useEffect(() => {
-    setLanguageState(safeGetItem<Language>(LANG_KEY, "id"));
-    setModeState(safeGetItem<AppMode>(MODE_KEY, "explore"));
-    setPassport(safeGetItem<PassportData>(PASSPORT_KEY, DEFAULT_PASSPORT));
-    setAudioEnabledState(safeGetItem<boolean>(AUDIO_KEY, false));
-    setHydrated(true);
+    const timeoutId = window.setTimeout(() => {
+      setLanguageState(safeGetItem<Language>(LANG_KEY, "id"));
+      setModeState(safeGetItem<AppMode>(MODE_KEY, "explore"));
+      setPassport(safeGetItem<PassportData>(PASSPORT_KEY, DEFAULT_PASSPORT));
+      setAudioEnabledState(safeGetItem<boolean>(AUDIO_KEY, false));
+      setHydrated(true);
+    }, 0);
+
+    return () => window.clearTimeout(timeoutId);
   }, []);
 
   // Persist language
@@ -109,9 +120,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, []);
 
   // Bilingual helper
-  const t = useCallback((id: string, en: string) => {
-    return language === "en" ? en : id;
-  }, [language]);
+  const t = useCallback(
+    (id: string, en: string) => {
+      return language === "en" ? en : id;
+    },
+    [language],
+  );
 
   // Persist mode
   const setMode = useCallback((m: AppMode) => {
@@ -126,55 +140,82 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, []);
 
   // Passport mutations (all auto-persist)
-  const updatePassport = useCallback((updater: (prev: PassportData) => PassportData) => {
-    setPassport((prev) => {
-      const next = updater(prev);
-      safeSetItem(PASSPORT_KEY, next);
-      return next;
-    });
-  }, []);
+  const updatePassport = useCallback(
+    (updater: (prev: PassportData) => PassportData) => {
+      setPassport((prev) => {
+        const next = updater(prev);
+        safeSetItem(PASSPORT_KEY, next);
+        return next;
+      });
+    },
+    [],
+  );
 
-  const addStamp = useCallback((provinceId: string) => {
-    updatePassport((p) => {
-      if (p.stamps.includes(provinceId)) return p;
-      const stamps = [...p.stamps, provinceId];
-      return {
-        ...p,
-        stamps,
-        xp: p.xp + 10,
-        level: computeLevel(stamps.length),
-      };
-    });
-  }, [updatePassport]);
+  const addStamp = useCallback(
+    (provinceId: string) => {
+      updatePassport((p) => {
+        if (p.stamps.includes(provinceId)) return p;
+        const stamps = [...p.stamps, provinceId];
+        return {
+          ...p,
+          stamps,
+          xp: p.xp + 10,
+          level: computeLevel(stamps.length),
+        };
+      });
+    },
+    [updatePassport],
+  );
 
-  const addBadge = useCallback((badge: string) => {
-    updatePassport((p) => {
-      if (p.badges.includes(badge as PassportData["badges"][number])) return p;
-      return { ...p, badges: [...p.badges, badge as PassportData["badges"][number]], xp: p.xp + 25 };
-    });
-  }, [updatePassport]);
+  const addBadge = useCallback(
+    (badge: string) => {
+      updatePassport((p) => {
+        if (p.badges.includes(badge as PassportData["badges"][number]))
+          return p;
+        return {
+          ...p,
+          badges: [...p.badges, badge as PassportData["badges"][number]],
+          xp: p.xp + 25,
+        };
+      });
+    },
+    [updatePassport],
+  );
 
-  const addXP = useCallback((amount: number) => {
-    updatePassport((p) => ({ ...p, xp: p.xp + amount }));
-  }, [updatePassport]);
+  const addXP = useCallback(
+    (amount: number) => {
+      updatePassport((p) => ({ ...p, xp: p.xp + amount }));
+    },
+    [updatePassport],
+  );
 
-  const completeQuiz = useCallback((provinceId: string) => {
-    updatePassport((p) => {
-      if (p.completedQuizzes.includes(provinceId)) return p;
-      return {
-        ...p,
-        completedQuizzes: [...p.completedQuizzes, provinceId],
-        xp: p.xp + 20,
-      };
-    });
-  }, [updatePassport]);
+  const completeQuiz = useCallback(
+    (provinceId: string) => {
+      updatePassport((p) => {
+        if (p.completedQuizzes.includes(provinceId)) return p;
+        return {
+          ...p,
+          completedQuizzes: [...p.completedQuizzes, provinceId],
+          xp: p.xp + 20,
+        };
+      });
+    },
+    [updatePassport],
+  );
 
-  const saveRoute = useCallback((routeId: string) => {
-    updatePassport((p) => {
-      if (p.savedRoutes.includes(routeId)) return p;
-      return { ...p, savedRoutes: [...p.savedRoutes, routeId], xp: p.xp + 15 };
-    });
-  }, [updatePassport]);
+  const saveRoute = useCallback(
+    (routeId: string) => {
+      updatePassport((p) => {
+        if (p.savedRoutes.includes(routeId)) return p;
+        return {
+          ...p,
+          savedRoutes: [...p.savedRoutes, routeId],
+          xp: p.xp + 15,
+        };
+      });
+    },
+    [updatePassport],
+  );
 
   const resetPassport = useCallback(() => {
     setPassport(DEFAULT_PASSPORT);
@@ -186,10 +227,20 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return (
       <AppContext.Provider
         value={{
-          language: "id", setLanguage, t: (id) => id,
-          mode: "explore", setMode,
-          passport: DEFAULT_PASSPORT, addStamp, addBadge, addXP, completeQuiz, saveRoute, resetPassport,
-          audioEnabled: false, setAudioEnabled,
+          language: "id",
+          setLanguage,
+          t: (id) => id,
+          mode: "explore",
+          setMode,
+          passport: DEFAULT_PASSPORT,
+          addStamp,
+          addBadge,
+          addXP,
+          completeQuiz,
+          saveRoute,
+          resetPassport,
+          audioEnabled: false,
+          setAudioEnabled,
         }}
       >
         {children}
@@ -200,10 +251,20 @@ export function AppProvider({ children }: { children: ReactNode }) {
   return (
     <AppContext.Provider
       value={{
-        language, setLanguage, t,
-        mode, setMode,
-        passport, addStamp, addBadge, addXP, completeQuiz, saveRoute, resetPassport,
-        audioEnabled, setAudioEnabled,
+        language,
+        setLanguage,
+        t,
+        mode,
+        setMode,
+        passport,
+        addStamp,
+        addBadge,
+        addXP,
+        completeQuiz,
+        saveRoute,
+        resetPassport,
+        audioEnabled,
+        setAudioEnabled,
       }}
     >
       {children}
@@ -235,8 +296,24 @@ export function useMode() {
 
 /** Hook: passport data & mutations — auto-persist ke localStorage */
 export function usePassport() {
-  const { passport, addStamp, addBadge, addXP, completeQuiz, saveRoute, resetPassport } = useAppContext();
-  return { passport, addStamp, addBadge, addXP, completeQuiz, saveRoute, resetPassport };
+  const {
+    passport,
+    addStamp,
+    addBadge,
+    addXP,
+    completeQuiz,
+    saveRoute,
+    resetPassport,
+  } = useAppContext();
+  return {
+    passport,
+    addStamp,
+    addBadge,
+    addXP,
+    completeQuiz,
+    saveRoute,
+    resetPassport,
+  };
 }
 
 /** Hook: audio on/off */

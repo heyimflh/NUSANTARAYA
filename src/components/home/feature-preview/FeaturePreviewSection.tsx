@@ -31,7 +31,7 @@ export function FeaturePreviewSection() {
   const future = mainFeatures.find(f => f.id === 'future');
 
   return (
-    <section className="relative w-full py-24 bg-[#F8F4EA] overflow-hidden">
+    <section className="relative w-full py-24 overflow-hidden">
       {/* Animated Background Textures */}
       <motion.div 
         initial={{ opacity: 0 }}

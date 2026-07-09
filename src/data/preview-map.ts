@@ -70,7 +70,7 @@ export const featuredProvinces: FeaturedProvince[] = [
     category: ["kuliner", "budaya"],
     thumbnail: "/assets/province/sumatera-barat/thumb.webp",
     pinIcon: "/assets/map/pins/pin-kuliner-nusantara.svg",
-    previewPosition: { x: 23, y: 38 }, 
+    previewPosition: { x: 12.8, y: 44.5 }, 
     color: "#B85C38",
     href: "/provinsi/sumatera-barat"
   },
@@ -83,8 +83,8 @@ export const featuredProvinces: FeaturedProvince[] = [
     highlights: ["Keraton", "Batik", "Gudeg"],
     category: ["budaya", "sejarah"],
     thumbnail: "/assets/province/di-yogyakarta/thumb.webp",
-    pinIcon: "/assets/map/pins/pin-budaya-nusantara.svg",
-    previewPosition: { x: 38, y: 73 },
+    pinIcon: "/assets/map/pins/pin-sejarah-nusantara.svg",
+    previewPosition: { x: 34.0, y: 72.3 },
     color: "#2B4C8C",
     href: "/provinsi/di-yogyakarta"
   },
@@ -98,7 +98,7 @@ export const featuredProvinces: FeaturedProvince[] = [
     category: ["budaya", "alam"],
     thumbnail: "/assets/province/bali/thumb.webp",
     pinIcon: "/assets/map/pins/pin-budaya-nusantara.svg",
-    previewPosition: { x: 50, y: 75 },
+    previewPosition: { x: 43.7, y: 74.7 },
     color: "#6B3FA0",
     href: "/provinsi/bali"
   },
@@ -112,7 +112,7 @@ export const featuredProvinces: FeaturedProvince[] = [
     category: ["future", "alam"],
     thumbnail: "/assets/province/kalimantan-timur/thumb.webp",
     pinIcon: "/assets/map/pins/pin-kota-nusantara.svg",
-    previewPosition: { x: 55, y: 44 },
+    previewPosition: { x: 46.5, y: 39.1 },
     color: "#1A5C3A",
     href: "/provinsi/kalimantan-timur"
   },
@@ -126,7 +126,7 @@ export const featuredProvinces: FeaturedProvince[] = [
     category: ["budaya", "kuliner"],
     thumbnail: "/assets/province/sulawesi-selatan/thumb.webp",
     pinIcon: "/assets/map/pins/pin-budaya-nusantara.svg",
-    previewPosition: { x: 56, y: 62 },
+    previewPosition: { x: 55.1, y: 58.9 },
     color: "#D4691E",
     href: "/provinsi/sulawesi-selatan"
   },
@@ -140,7 +140,7 @@ export const featuredProvinces: FeaturedProvince[] = [
     category: ["rempah", "sejarah"],
     thumbnail: "/assets/province/maluku/thumb.webp",
     pinIcon: "/assets/map/pins/pin-rempah-nusantara.svg",
-    previewPosition: { x: 80, y: 55 },
+    previewPosition: { x: 75.5, y: 62.6 },
     color: "#1B7A7A",
     href: "/provinsi/maluku"
   },
@@ -154,7 +154,7 @@ export const featuredProvinces: FeaturedProvince[] = [
     category: ["alam", "budaya"],
     thumbnail: "/assets/province/nusa-tenggara-timur/thumb.webp",
     pinIcon: "/assets/map/pins/pin-alam-nusantara.svg",
-    previewPosition: { x: 62, y: 78 },
+    previewPosition: { x: 58.2, y: 79.1 },
     color: "#6B3FA0",
     href: "/provinsi/nusa-tenggara-timur"
   },
@@ -168,7 +168,7 @@ export const featuredProvinces: FeaturedProvince[] = [
     category: ["alam", "budaya"],
     thumbnail: "/assets/province/papua-barat-daya/thumb.webp",
     pinIcon: "/assets/map/pins/pin-alam-nusantara.svg",
-    previewPosition: { x: 88, y: 48 },
+    previewPosition: { x: 78.1, y: 44.2 },
     color: "#1A4A7A",
     href: "/provinsi/papua-barat-daya"
   }

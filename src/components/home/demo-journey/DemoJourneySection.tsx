@@ -45,11 +45,6 @@ export function DemoJourneySection({
     <section 
       aria-labelledby="demo-journey-title"
       className="relative w-full py-16 md:py-24 lg:py-32 overflow-hidden"
-      style={{
-        background: `radial-gradient(circle at 15% 20%, rgba(201,168,76,0.08), transparent 32%),
-                     radial-gradient(circle at 85% 70%, rgba(45,107,228,0.06), transparent 34%),
-                     #FFFDF8`
-      }}
     >
       <div className="container px-4 mx-auto max-w-7xl">
         {/* Section Header */}

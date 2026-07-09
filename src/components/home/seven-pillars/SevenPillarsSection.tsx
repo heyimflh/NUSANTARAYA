@@ -12,13 +12,12 @@ export function SevenPillarsSection() {
   const [activeMobileIndex, setActiveMobileIndex] = useState<number>(0);
 
   return (
-    <section className="relative w-full bg-[#F8F4EA] py-16 md:py-32 overflow-hidden font-sans">
-      {/* Background Decor */}
+    <section className="relative w-full pt-8 pb-16 md:pt-16 md:pb-32 overflow-hidden font-sans">
+      {/* Background Decor - Exactly matching to blend seamlessly with Mini Stats */}
       <div 
         className="absolute inset-0 opacity-[0.04] mix-blend-multiply pointer-events-none"
-        style={{ backgroundImage: `url('/assets/branding/ornamen-batik.svg')`, backgroundSize: '520px' }}
+        style={{ backgroundImage: `url('/assets/branding/ornamen-batik.svg')`, backgroundSize: '520px', backgroundPosition: 'top center' }}
       />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle_at_50%_20%,_rgba(201,168,76,0.14),_transparent_60%)] pointer-events-none" />
 
       <div className="relative z-10 max-w-[1400px] mx-auto">
         
