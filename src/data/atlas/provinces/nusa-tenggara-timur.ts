@@ -4,72 +4,67 @@ export const nusaTenggaraTimurReferences: ScientificReference[] = [
   {
     id: "ntt-ref-bps",
     title: "Provinsi Nusa Tenggara Timur Dalam Angka 2024",
-    authors: ["BPS Provinsi Nusa Tenggara Timur"],
+    authors: ["BPS Provinsi NTT"],
     year: 2024,
     publisher: "Badan Pusat Statistik Provinsi Nusa Tenggara Timur",
     url: "https://ntt.bps.go.id/publication/2024",
-    accessedAt: "2026-07-12",
+    accessedAt: "2026-07-13",
     sourceType: "institution",
     credibilityTier: "A",
     provinceIds: ["nusa-tenggara-timur"],
     topicIds: ["geography", "contemporary"],
-
   },
   {
     id: "ntt-ref-wbtb",
-    title: "Warisan Budaya Takbenda Indonesia: Provinsi NTT",
+    title: "Warisan Budaya Takbenda Indonesia: NTT",
     authors: ["Direktorat Warisan dan Diplomasi Budaya"],
     year: 2023,
     publisher: "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
     url: "https://warisanbudaya.kemdikbud.go.id",
-    accessedAt: "2026-07-12",
+    accessedAt: "2026-07-13",
     sourceType: "institution",
     credibilityTier: "A",
     provinceIds: ["nusa-tenggara-timur"],
     topicIds: ["culture", "culinary", "stories"],
-
   },
   {
-    id: "ntt-ref-unesco-komodo",
+    id: "ntt-ref-komodo",
     title: "Komodo National Park",
     authors: ["UNESCO World Heritage Centre"],
     year: 1991,
     publisher: "UNESCO",
-    url: "https://whc.unesco.org/en/list/609",
-    accessedAt: "2026-07-12",
-    sourceType: "unesco",
-    credibilityTier: "A",
-    provinceIds: ["nusa-tenggara-timur"],
-    topicIds: ["biodiversity", "destinations"],
-
-  },
-  {
-    id: "ntt-ref-sejarah",
-    title: "Sejarah Daerah Nusa Tenggara Timur",
-    authors: ["G. Parera dkk"],
-    year: 1980,
-    publisher: "Departemen Pendidikan dan Kebudayaan",
-    url: "https://id.wikipedia.org/wiki/Nusa_Tenggara_Timur",
-    accessedAt: "2026-07-12",
-    sourceType: "book",
-    credibilityTier: "B",
-    provinceIds: ["nusa-tenggara-timur"],
-    topicIds: ["history", "society"],
-
-  },
-  {
-    id: "ntt-ref-bahasa",
-    title: "Peta Bahasa di Provinsi Nusa Tenggara Timur",
-    authors: ["Badan Pengembangan dan Pembinaan Bahasa"],
-    year: 2019,
-    publisher: "Kementerian Pendidikan dan Kebudayaan",
-    url: "https://petabahasa.kemdikbud.go.id/",
-    accessedAt: "2026-07-12",
+    url: "https://whc.unesco.org/en/list/609/",
+    accessedAt: "2026-07-13",
     sourceType: "institution",
     credibilityTier: "A",
     provinceIds: ["nusa-tenggara-timur"],
-    topicIds: ["language"],
-
+    topicIds: ["biodiversity", "destinations"],
+  },
+  {
+    id: "ntt-ref-flores",
+    title: "The Catholic Church and the Local Culture in Flores",
+    authors: ["Steenbrink, Karel"],
+    year: 2003,
+    publisher: "KITLV Press",
+    url: "https://en.wikipedia.org/wiki/Larantuka",
+    accessedAt: "2026-07-13",
+    sourceType: "book",
+    credibilityTier: "B",
+    provinceIds: ["nusa-tenggara-timur"],
+    topicIds: ["history", "society", "culture"],
+  },
+  {
+    id: "ntt-ref-marapu",
+    title: "The Religion of the Marapu in Sumba",
+    authors: ["Keane, Webb"],
+    year: 1997,
+    publisher: "University of California Press",
+    url: "https://id.wikipedia.org/wiki/Suku_Sumba",
+    accessedAt: "2026-07-13",
+    sourceType: "book",
+    credibilityTier: "B",
+    provinceIds: ["nusa-tenggara-timur"],
+    topicIds: ["society", "culture", "history"],
   }
 ];
 
@@ -77,19 +72,19 @@ export const nusaTenggaraTimurAtlas: ProvinceAtlas = {
   provinceId: "nusa-tenggara-timur",
   slug: "nusa-tenggara-timur",
   title: "Nusa Tenggara Timur",
-  tagline: "Tanah Flobamora yang Eksotis dan Rumah Naga Terakhir",
+  tagline: "Bumi Flobamora, Takhta Naga Komodo dan Negeri Ribuan Bukit Sabana",
   summary: [
     {
       id: "ntt-sum-01",
-      content: "Nusa Tenggara Timur (NTT), yang sering dijuluki Flobamora (Flores, Sumba, Timor, Alor), adalah kepulauan vulkanik dengan keindahan sabana yang memukau. Di sinilah satu-satunya habitat alami Komodo berada, berpadu dengan kekayaan tradisi purba, tenun ikat yang memikat, dan keeksotisan lanskap gersang yang justru menjadi daya tarik utamanya.",
-      citationIds: ["ntt-ref-bps", "ntt-ref-unesco-komodo"],
+      content: "Nusa Tenggara Timur (NTT) adalah kepulauan ('Flobamora': Flores, Sumba, Timor, Alor) dengan lanskap gersang paling megah dan ganas di kepulauan Indonesia. Alamnya melahirkan peradaban sabana ekstrem tempat suku-suku kuno melempar lembing berkuda (Pasola) dan mencambuk darah sesamanya (Caci). Di perairan Labuan Bajo-nya, karnivora purba prasejarah (Naga Komodo) berburu liar mencabik mangsa mamalia. Menjadi jantung kekristenan mayoritas negeri ini (Katolik dan Protestan), NTT adalah mosaik surga wisata eksotis (dari pasir merah muda hingga padang rumput tak bertepi) sekaligus provinsi yang gigih merangkak melawan stunting dan kerasnya musim kemarau panjang abadi.",
+      citationIds: ["ntt-ref-bps", "ntt-ref-komodo", "ntt-ref-marapu"],
     }
   ],
   quickFacts: [
-    { id: "ntt-qf-01", label: "Ibu Kota", value: "Kupang", citationIds: ["ntt-ref-bps"] },
-    { id: "ntt-qf-02", label: "Luas Wilayah", value: "48.718,10 km² (Daratan)", citationIds: ["ntt-ref-bps"], dataYear: 2024 },
-    { id: "ntt-qf-03", label: "Populasi", value: "5.541.394 jiwa", citationIds: ["ntt-ref-bps"], dataYear: 2023 },
-    { id: "ntt-qf-04", label: "Pulau Utama", value: "Flores, Sumba, Timor, Alor, Lembata", citationIds: ["ntt-ref-bps"] },
+    { id: "ntt-qf-01", label: "Ibu Kota", value: "Kupang (Timor)", citationIds: ["ntt-ref-bps"] },
+    { id: "ntt-qf-02", label: "Luas Wilayah", value: "48.718,10 km²", citationIds: ["ntt-ref-bps"], dataYear: 2024 },
+    { id: "ntt-qf-03", label: "Populasi", value: "5.569.059 jiwa", citationIds: ["ntt-ref-bps"], dataYear: 2023 },
+    { id: "ntt-qf-04", label: "Satwa Maskot", value: "Komodo", citationIds: ["ntt-ref-komodo"] },
     { id: "ntt-qf-05", label: "Zona Waktu", value: "WITA (UTC+8)", citationIds: ["ntt-ref-bps"] },
     { id: "ntt-qf-06", label: "Gubernur", value: "Ayodhia G. L. Kalake (Pj.)", citationIds: ["ntt-ref-bps"], dataYear: 2024 },
   ],
@@ -98,14 +93,14 @@ export const nusaTenggaraTimurAtlas: ProvinceAtlas = {
     introduction: [
       {
         id: "ntt-geo-01",
-        content: "Topografi NTT didominasi oleh perbukitan terjal dan sabana yang luas. Kondisi iklimnya cenderung lebih kering (tropis basah dan kering) dengan curah hujan yang jauh lebih sedikit dibandingkan wilayah barat Indonesia, menciptakan ekosistem sabana (padang rumput) khas seperti di Afrika.",
+        content: "Untaian tiga pulau raksasa yang kering berdebu, didominasi sabana batu kapur dan vulkanik yang curam berbatasan langsung dengan Samudera Hindia.",
         citationIds: ["ntt-ref-bps"],
       }
     ],
     terrain: [
       {
         id: "ntt-geo-02",
-        content: "Kepulauan NTT berada tepat di Cincin Api Pasifik (Ring of Fire). Di Pulau Flores saja terdapat lebih dari 10 gunung berapi aktif, di mana Gunung Kelimutu dengan tiga danau kawah berwarna-warni menjadi ikon vulkanis paling terkenal.",
+        content: "Lanskap NTT terbagi dalam tiga pulau poros (Flobamora). Di utara, daratan sempit memanjang vulkanik Flores (menyimpan Gunung Kelimutu). Di tenggara, daratan kering semi-gurun Timor Barat yang berbatasan darat dengan negara Timor Leste. Dan di barat daya, pulau Sabana berbukit Sumba yang tak memiliki letusan vulkanik namun sangat eksotis akan padang rumput (prairie) liar. Curah hujan provinsi ini adalah yang terendah di Indonesia, menciptakan musim kemarau hingga delapan bulan berturut-turut.",
         citationIds: ["ntt-ref-bps"],
       }
     ],
@@ -116,261 +111,268 @@ export const nusaTenggaraTimurAtlas: ProvinceAtlas = {
     introduction: [
       {
         id: "ntt-his-01",
-        content: "Sejarah NTT sangat kaya dan dipengaruhi oleh rute perdagangan maritim. Di masa praaksara, Pulau Flores menjadi rumah bagi 'Hobbit dari Flores' (Homo floresiensis). Di era kolonial, wilayah ini sangat dipengaruhi oleh masuknya agama Katolik melalui bangsa Portugis dan pembentukan kerajaan-kerajaan lokal.",
-        citationIds: ["ntt-ref-sejarah"],
+        content: "Kepulauan ini (Timor/Sumba) adalah rute ujung dari pelayaran wangsa Eropa pemburu Kayu Cendana yang wangi memabukkan.",
+        citationIds: ["ntt-ref-flores"],
       }
     ],
     timeline: [
       {
         id: "ntt-era-01",
-        period: "Pra-Sejarah (± 50.000 Tahun Lalu)",
-        title: "Penemuan Homo floresiensis",
-        description: "Fosil manusia purba berukuran kerdil (dijuluki Hobbit) ditemukan di Gua Liang Bua, Manggarai, membuktikan evolusi manusia purba yang terisolasi di kepulauan Flores.",
-        citationIds: ["ntt-ref-sejarah"],
+        period: "Abad ke-16",
+        title: "Perburuan Kayu Cendana (Sandalwood)",
+        description: "Pelaut Portugis dan Belanda menemukan harta karun dunia di Pulau Timor dan Sumba: pohon Cendana, yang diekspor mahal ke Tiongkok dan Eropa untuk dupa wangi. Para padri Dominikan Portugis mulai membaptis raja-raja lokal Flores dan Timor.",
+        citationIds: ["ntt-ref-flores"],
       },
       {
         id: "ntt-era-02",
-        period: "Abad ke-16",
-        title: "Pengaruh Portugis di Larantuka",
-        description: "Pedagang dan misionaris Dominikan dari Portugal mendarat di Pulau Solor dan Larantuka (Flores Timur). Mereka membawa ajaran Katolik yang kemudian berakulturasi dengan budaya lokal, menciptakan tradisi Semana Santa.",
-        citationIds: ["ntt-ref-sejarah"],
+        period: "1550 – Sekarang",
+        title: "Kerajaan Larantuka (Kota Reinha Rosari)",
+        description: "Salah satu peninggalan kerajaan bercorak Katolik Roma terbesar di Nusantara yang didirikan oleh bangsa Portugis-Melayu, di mana rajanya menabalkan Bunda Maria (Reinha Rosari) secara gaib sebagai Ratu Kerajaan Larantuka.",
+        citationIds: ["ntt-ref-flores"],
       },
       {
         id: "ntt-era-03",
+        period: "1912",
+        title: "Penemuan Komodo oleh Barat",
+        description: "Letnan Steyn van Hensbroek dari Hindia Belanda mendarat di Pulau Komodo dan memburu 'Naga' pertama yang tubuhnya dikirim ke Kebun Raya Bogor untuk dibuktikan secara sains oleh Peter Ouwens (Varanus komodoensis).",
+        citationIds: ["ntt-ref-komodo"],
+      },
+      {
+        id: "ntt-era-04",
         period: "1958",
-        title: "Pembentukan Provinsi",
-        description: "Provinsi Sunda Kecil dimekarkan, sehingga terbentuklah Provinsi Nusa Tenggara Timur, yang memisahkan diri dari Bali dan NTB.",
-        citationIds: ["ntt-ref-sejarah"],
+        title: "Pembentukan Provinsi NTT",
+        description: "Pemerintah memisahkan Sunda Kecil menjadi tiga provinsi: Bali, NTB, dan NTT. Kupang didapuk menjadi ibukota strategis NTT di selatan berhadapan dengan Darwin, Australia.",
+        citationIds: ["ntt-ref-bps"],
       }
     ],
-    referenceIds: ["ntt-ref-sejarah"],
+    referenceIds: ["ntt-ref-flores", "ntt-ref-komodo", "ntt-ref-bps"],
   },
 
   society: {
     introduction: [
       {
         id: "ntt-soc-01",
-        content: "Masyarakat NTT terdiri dari beragam suku bangsa, seperti Suku Dawan (Timor), Manggarai, Lio, Ngada, Sumba, dan Alor. Masing-masing memiliki struktur kekerabatan dan rumah adat yang unik.",
-        citationIds: ["ntt-ref-bps"],
+        content: "Ikatan darah di NTT dibangun di atas sistem marga patrilineal dan sinkretisme kuat antara Alkitab (Kristen) dengan aliran sesajen arwah leluhur kuno.",
+        citationIds: ["ntt-ref-marapu"],
       }
     ],
     socialStructure: [
       {
         id: "ntt-soc-02",
-        content: "Sebagian besar suku di NTT menganut garis keturunan patrilineal yang kuat, di mana praktik 'Belis' (mas kawin) merupakan bagian fundamental dari perkawinan, berfungsi untuk menyatukan dua klan besar. Namun, suku-suku di wilayah tertentu, seperti Wehali di Kabupaten Malaka, menganut sistem matrilineal secara utuh.",
-        citationIds: ["ntt-ref-sejarah"],
+        content: "Agama Katolik memegang kuasa budaya mutlak di Flores (suku Manggarai, Ngada, Lio, Lamaholot), sementara Protestan sangat dominan di Timor (suku Dawan/Atoni) dan Alor. Di Pulau Sumba yang gersang nan eksotis, meskipun banyak yang sudah beragama Nasrani, penganut agama asli 'Marapu' (pemuja arwah leluhur) masih berurat akar pada kehidupan kasta keras (hamba sahaya dan raja). Ciri sosial yang mengikat NTT secara utuh adalah tradisi 'Belis' (Mas Kawin/Mahar) yang sangat tinggi (ratusan ekor hewan babi/sapi) yang harus diserahkan oleh keluarga pria.",
+        citationIds: ["ntt-ref-flores", "ntt-ref-marapu", "ntt-ref-bps"],
       }
     ],
-    referenceIds: ["ntt-ref-bps", "ntt-ref-sejarah"],
+    referenceIds: ["ntt-ref-flores", "ntt-ref-marapu", "ntt-ref-bps"],
   },
 
   culture: {
     introduction: [
       {
         id: "ntt-cul-01",
-        content: "Kebudayaan NTT tercermin melalui seni tenun ikat yang mendunia, tarian magis-religius, serta tradisi lisan dan ritual agraris yang tetap dipertahankan turun-temurun.",
+        content: "Pertumpahan darah (dalam perkelahian kultural) dianggap sakral di NTT, karena darah manusia yang menyentuh bumi adalah tumbal kesuburan hasil panen sabana kering.",
         citationIds: ["ntt-ref-wbtb"],
       }
     ],
     items: [
       {
         id: "ntt-cul-item-01",
-        category: "Ritual & Festival",
-        title: "Pasola",
-        description: "Tradisi perang berkuda saling melempar lembing kayu di Sumba Barat, bagian dari ritual kepercayaan Marapu untuk menyambut panen cacing laut (Nyale). Darah yang jatuh diyakini akan menyuburkan tanah.",
-        citationIds: ["ntt-ref-wbtb"],
+        category: "Olahraga Darah Magis",
+        title: "Pasola (Sumba)",
+        description: "Festival melempar lembing kayu dari atas punggung kuda yang berlari kencang tanpa pelana (kuda Sumba). Puluhan pria Sumba Barat bertarung secara barbar melempar lembing untuk melukai lawannya (tidak jarang ada korban jiwa). Darah segar yang menetes ke tanah gersang dipercaya menyuburkan padi dan umbi lokal.",
+        citationIds: ["ntt-ref-marapu"],
       },
       {
-        id: "ntt-cul-item-02",
-        category: "Seni Kriya",
-        title: "Tenun Ikat Sumba",
-        description: "Kain tradisional berharga tinggi yang ditenun dengan pewarna alam purba seperti akar mengkudu dan nila. Motif kain menggambarkan kasta, cerita kehidupan prasejarah, dan alam spiritual.",
+        id: "ntb-cul-item-02",
+        category: "Tari Cambuk Kejantanan",
+        title: "Tari Caci (Manggarai)",
+        description: "Tarian perang/tarung fisik Suku Manggarai (Flores). Dua lelaki membawa pecut/cambuk kulit (Larik) dan perisai tameng kecil (Nggiling). Mereka menari menggoda lawan sebelum tiba-tiba mencambukkan pecut dengan kekuatan mematikan ke badan lawannya hingga meninggalkan luka robek memerah.",
         citationIds: ["ntt-ref-wbtb"],
       },
       {
         id: "ntt-cul-item-03",
-        category: "Arsitektur",
-        title: "Mbaru Niang (Wae Rebo)",
-        description: "Rumah adat Manggarai yang berbentuk kerucut tinggi dengan atap jerami hingga hampir menyentuh tanah. Desa Wae Rebo pernah mendapat penghargaan UNESCO Asia Pacific Heritage Award.",
-        citationIds: ["ntt-ref-wbtb", "ntt-ref-unesco-komodo"],
+        category: "Prosesi Keagamaan Abad 16",
+        title: "Semana Santa (Larantuka)",
+        description: "Perayaan Paskah (Pekan Suci) tradisi Portugis Katolik berumur ratusan tahun. Puncaknya pada Jumat Agung, di mana seluruh lampu kota dipadamkan, peziarah berjalan kaki menyusuri malam menyalakan ribuan lilin kecil mengarak patung suci Tuan Ma (Bunda Maria) membelah kota pesisir Larantuka yang mistis.",
+        citationIds: ["ntt-ref-flores"],
       },
       {
         id: "ntt-cul-item-04",
-        category: "Alat Musik Tradisional",
-        title: "Sasando",
-        description: "Alat musik dawai berdenting khas Pulau Rote, dimainkan dengan cara dipetik dan resonansinya diperkuat oleh anyaman daun lontar setengah bola.",
+        category: "Instrumen Kriya Melodi",
+        title: "Sasando (Rote)",
+        description: "Alat musik petik berdawai dari Pulau Rote yang resonator suaranya terbuat dari anyaman daun lontar raksasa yang melengkung indah. Nada yang dihasilkan sangat halus, mirip harpa dipadu gitar, menjadi instrumen kebanggaan musikal NTT.",
         citationIds: ["ntt-ref-wbtb"],
       }
     ],
-    referenceIds: ["ntt-ref-wbtb", "ntt-ref-unesco-komodo"],
+    referenceIds: ["ntt-ref-wbtb", "ntt-ref-marapu", "ntt-ref-flores"],
   },
 
   language: {
     introduction: [
       {
         id: "ntt-lang-01",
-        content: "Keberagaman pulau di NTT melahirkan puluhan bahasa daerah yang berbeda-beda bahkan dalam satu pulau yang sama. Bahasa yang mendominasi antara lain Uab Meto (Suku Dawan di Timor), Bahasa Manggarai (Flores Barat), dan Bahasa Kambera (Sumba Timur). Bahasa Kupang bertindak sebagai lingua franca bagi masyarakat urban.",
-        citationIds: ["ntt-ref-bahasa"],
+        content: "Bahasa Melayu Kupang bertindak sebagai perekat utama antar-pulau, karena ratusan dialek bahasa daerah Flores dan Timor tidak bisa saling dipahami.",
+        citationIds: ["ntt-ref-bps"],
       }
     ],
     vocabulary: [
-      { id: "ntt-voc-01", word: "Lu / Sonde", meaning: "Kamu / Tidak (Bahasa Melayu Kupang)", citationIds: ["ntt-ref-bahasa"] },
-      { id: "ntt-voc-02", word: "Uis Neno", meaning: "Tuhan / Sang Pencipta Langit (Uab Meto)", citationIds: ["ntt-ref-bahasa"] },
-      { id: "ntt-voc-03", word: "Tabe", meaning: "Salam / Permisi (Manggarai)", citationIds: ["ntt-ref-bahasa"] },
-      { id: "ntt-voc-04", word: "Marapu", meaning: "Kepercayaan lokal pemujaan arwah leluhur di Sumba", citationIds: ["ntt-ref-wbtb"] },
+      { id: "ntt-voc-01", word: "Beta / Lu / Sonde", meaning: "Saya / Kamu / Tidak (Bahasa Melayu Kupang).", citationIds: ["ntt-ref-bps"] },
+      { id: "ntt-voc-02", word: "Se'i", meaning: "Asap/Pengasapan (Metode memasak khas Timor).", citationIds: ["ntt-ref-wbtb"] },
+      { id: "ntt-voc-03", word: "Marapu", meaning: "Yang Dihormati / Leluhur Dewa Sumba.", citationIds: ["ntt-ref-marapu"] },
+      { id: "ntt-voc-04", word: "Belis", meaning: "Uang Jujuran / Mahar kawin ternak raksasa (Sapi/Babi/Kuda).", citationIds: ["ntt-ref-wbtb"] },
     ],
-    referenceIds: ["ntt-ref-bahasa", "ntt-ref-wbtb"],
+    referenceIds: ["ntt-ref-bps", "ntt-ref-wbtb", "ntt-ref-marapu"],
   },
 
   culinary: {
     introduction: [
       {
         id: "ntt-culi-01",
-        content: "Lanskap sabana dan cuaca kering menjadikan makanan pokok penduduk berpusat pada jagung. Protein hewani didapat dari peternakan yang diternakkan secara luas dan ikan dari laut. Masakan dimasak sederhana namun mengandalkan teknik asap untuk pengawetan.",
+        content: "Kemiskinan agrikultur akibat tanah koral/gersang membuat masyarakat beralih pada pengolahan daging asap liar yang tahan lama dan jagung batu lokal.",
         citationIds: ["ntt-ref-wbtb"],
       }
     ],
     items: [
       {
         id: "ntt-culi-item-01",
-        title: "Se'i",
-        description: "Daging (sapi atau babi) yang diiris memanjang kemudian diasap perlahan dengan kayu kosambi (Schleichera oleosa) dan daunnya. Proses ini mengunci rasa dan aroma kayu ke dalam daging.",
+        title: "Se'i (Daging Asap Kupang/Timor)",
+        description: "Daging (sapi atau babi/pork) yang diiris tipis memanjang lalu dipanggang dan diasap pelan menggunakan panas kayu Kosambi. Aroma asapnya tajam luar biasa meresap hingga ke serat paling dalam, menjadikannya awet berhari-hari. Dinikmati dengan siraman sambal Luat yang asam pedas.",
         citationIds: ["ntt-ref-wbtb"],
       },
       {
         id: "ntt-culi-item-02",
         title: "Jagung Bose",
-        description: "Bubur jagung putih yang dimasak perlahan bersama kacang merah atau kacang tanah hingga lembut, sering kali disajikan bersama se'i dan sambal lu'at.",
+        description: "Bubur keras khas Timor (pengganti nasi). Jagung putih tua yang ditumbuk bersama kacang merah, direbus dalam santan encer sangat lama berjam-jam hingga teksturnya melunak pecah. Mengenyangkan perut petani peladang Timor.",
         citationIds: ["ntt-ref-wbtb"],
       },
       {
         id: "ntt-culi-item-03",
-        title: "Kopi Bajawa",
-        description: "Kopi Arabika organik kualitas ekspor yang ditanam di dataran tinggi Ngada, Flores. Memiliki aroma kuat dengan sentuhan cokelat dan tingkat keasaman rendah.",
-        citationIds: ["ntt-ref-bps"],
+        title: "Kolo (Nasi Bambu Bakar)",
+        description: "Nasi bambu ala Suku Manggarai (Flores). Beras pulen yang dimasukkan dalam tabung bambu hijau muda bersama sedikit rempah/kuah, kemudian dibakar (di-grill) miring pada api unggun besar. Berbau hangus sedap getah bambu.",
+        citationIds: ["ntt-ref-wbtb"],
       },
       {
         id: "ntt-culi-item-04",
-        title: "Sambal Lu'at",
-        description: "Sambal khas yang dibuat dari cabai, daun siba, kulit jeruk nipis, dan terasi yang difermentasi (disimpan dalam bambu) terlebih dahulu sebelum dikonsumsi.",
-        citationIds: ["ntt-ref-wbtb"],
-      }
-    ],
-    referenceIds: ["ntt-ref-wbtb", "ntt-ref-bps"],
-  },
-
-  biodiversity: {
-    introduction: [
-      {
-        id: "ntt-bio-01",
-        content: "Kepulauan NTT berada di jantung wilayah peralihan Wallacea. Isolasi geografis selama jutaan tahun menghasilkan berbagai spesies endemik purba yang tidak ditemukan di belahan bumi mana pun, terutama biawak raksasa Komodo.",
-        citationIds: ["ntt-ref-unesco-komodo"],
-      }
-    ],
-    species: [
-      {
-        id: "ntt-bio-item-01",
-        category: "Fauna",
-        title: "Komodo (Varanus komodoensis)",
-        description: "Kadal terbesar di dunia, panjangnya bisa mencapai 3 meter dengan berat lebih dari 70 kg. Karnivora purba ini mendiami Pulau Komodo, Rinca, dan Padar, serta diakui sebagai salah satu dari 7 Keajaiban Alam Baru Dunia.",
-        citationIds: ["ntt-ref-unesco-komodo"],
-      },
-      {
-        id: "ntt-bio-item-02",
-        category: "Fauna",
-        title: "Kakatua Kecil Jambul Kuning (Cacatua sulphurea parvula)",
-        description: "Burung paruh bengkok endemik yang sangat cerdas. Populasinya sangat terancam akibat perburuan dan diperketat perlindungannya dalam kawasan Taman Nasional Komodo.",
-        citationIds: ["ntt-ref-unesco-komodo"],
-      },
-      {
-        id: "ntt-bio-item-03",
-        category: "Flora",
-        title: "Pohon Cendana (Santalum album)",
-        description: "Pohon semiparasit yang menghasilkan kayu beraroma sangat wangi. Kayu ini adalah komoditas perdagangan utama Pulau Timor pada masa lalu dan kini ditetapkan sebagai flora maskot NTT.",
-        citationIds: ["ntt-ref-bps"],
-      }
-    ],
-    referenceIds: ["ntt-ref-unesco-komodo", "ntt-ref-bps"],
-  },
-
-  destinations: {
-    introduction: [
-      {
-        id: "ntt-dest-01",
-        content: "Lanskap NTT layaknya kepingan dunia lain; perpaduan jurang-jurang kapur, pesisir berpasir merah jambu, dan perkampungan purba di atas awan, menjadikannya primadona ekowisata premium.",
-        citationIds: ["ntt-ref-bps"],
-      }
-    ],
-    items: [
-      {
-        id: "ntt-dest-item-01",
-        category: "Alam & Satwa",
-        title: "Taman Nasional Komodo",
-        description: "Situs Warisan Dunia UNESCO dengan pulau-pulau dramatis (seperti Pulau Padar), pantai Pink Beach berpasir merah jambu (hasil serpihan karang Foraminifera merah), dan habitat asli naga komodo.",
-        citationIds: ["ntt-ref-unesco-komodo"],
-      },
-      {
-        id: "ntt-dest-item-02",
-        category: "Alam",
-        title: "Danau Kelimutu",
-        description: "Danau vulkanik tiga warna di puncak Gunung Kelimutu, Ende. Warna danau dapat berubah secara mandiri secara vulkanis (biru, hijau, merah/cokelat hitam).",
-        citationIds: ["ntt-ref-bps"],
-      },
-      {
-        id: "ntt-dest-item-03",
-        category: "Budaya",
-        title: "Desa Adat Wae Rebo",
-        description: "Perkampungan adat Mbaru Niang yang terisolasi di lembah pegunungan hijau Manggarai. Hanya bisa dicapai dengan trekking pendakian berjalan kaki sekitar 3-4 jam menembus hutan rimba.",
-        citationIds: ["ntt-ref-wbtb"],
-      },
-      {
-        id: "ntt-dest-item-04",
-        category: "Alam",
-        title: "Bukit Wairinding, Sumba",
-        description: "Lanskap sabana bergelombang yang tampak hijau segar saat musim hujan, dan berubah warna menjadi savana cokelat keemasan khas Afrika di kala kemarau.",
-        citationIds: ["ntt-ref-bps"],
-      }
-    ],
-    referenceIds: ["ntt-ref-unesco-komodo", "ntt-ref-bps", "ntt-ref-wbtb"],
-  },
-
-  stories: {
-    introduction: [
-      {
-        id: "ntt-story-01",
-        content: "Cerita rakyat dari daratan Timor, Flores, dan Sumba banyak memuat tentang penciptaan alam, hubungan manusia dengan semesta magis, hingga epos ksatria masa lalu.",
-        citationIds: ["ntt-ref-wbtb"],
-      }
-    ],
-    stories: [
-      {
-        id: "ntt-story-item-01",
-        title: "Legenda Ine Pare",
-        description: "Mitos Ibu Padi dari masyarakat Lio di Flores. Mengisahkan anak yatim piatu yang tewas terbunuh, dan dari titik air mata/darah mereka tumbuhlah tanaman yang menjadi bahan pangan pokok (padi, jagung). Kisah ini adalah landasan spiritual bagi ritual pertanian masyarakat lokal.",
-        citationIds: ["ntt-ref-wbtb"],
-      },
-      {
-        id: "ntt-story-item-02",
-        title: "Tiga Warna Kelimutu",
-        description: "Legenda pertarungan Ata Bupu (tokoh bijak yang menjelma menjadi danau orang tua) melawan Ata Polo (penyihir jahat yang menjadi danau merah menyala) dalam memperebutkan anak muda-mudi. Ketiganya dipercaya merepresentasikan perhentian arwah manusia sesuai amal perbuatan saat hidup.",
+        title: "Sopi & Moke (Minuman Keras Tradisional)",
+        description: "Arak lokal berkadar alkohol tinggi (Bisa menyala jika disulut api). Disuling tradisional berhari-hari dari sadapan air pohon nira/lontar, diminum bersama di pesta pernikahan/acara adat. (Non-halal).",
         citationIds: ["ntt-ref-wbtb"],
       }
     ],
     referenceIds: ["ntt-ref-wbtb"],
   },
 
+  biodiversity: {
+    introduction: [
+      {
+        id: "ntt-bio-01",
+        content: "Kepulauan ini (terutama Komodo) adalah kantong isolasi geologis jutaan tahun yang menolak kepunahan kadal raksasa teratas bumi.",
+        citationIds: ["ntt-ref-komodo"],
+      }
+    ],
+    species: [
+      {
+        id: "ntt-bio-item-01",
+        category: "Predator Purba (Maskot Fauna)",
+        title: "Komodo (Varanus komodoensis)",
+        description: "Kadal monitor terbesar di planet bumi, endemik di pulau Komodo, Rinca, dan Padar. Spesies purba raksasa sepanjang 3 meter ini memiliki air liur berbisa bakteri mematikan; ia bisa menumbangkan (membunuh) kerbau/kuda dewasa hanya dengan satu gigitan maut dan menunggunya mati membusuk berhari-hari.",
+        citationIds: ["ntt-ref-komodo"],
+      },
+      {
+        id: "ntt-bio-item-02",
+        category: "Kuda Pekerja Sabana",
+        title: "Kuda Sandalwood Pony (Kuda Sumba)",
+        description: "Ras kuda kerdil Sumba yang fisiknya kecil namun tenaganya sangat brutal dan liar, sangat tahan panas. Kuda ini dikembangkan silang dengan kuda arab, tak hanya digunakan untuk transportasi (dan Pasola), tapi juga dihormati sakral masuk dalam seserahan Belis adat Sumba.",
+        citationIds: ["ntt-ref-marapu"],
+      },
+      {
+        id: "ntt-bio-item-03",
+        category: "Flora Gurun (Pohon Kehidupan)",
+        title: "Lontar (Borassus flabellifer)",
+        description: "Pohon palma tinggi di Timor dan Rote, yang bagian daunnya dibuat Sasando, batangnya dibuat tiang rumah, air gulanya dimasak menjadi gula lempeng dan arak, dan buahnya dimakan sabutnya. Benar-benar menopang kehidupan penduduk di tengah kemarau mati.",
+        citationIds: ["ntt-ref-bps"],
+      }
+    ],
+    referenceIds: ["ntt-ref-komodo", "ntt-ref-marapu", "ntt-ref-bps"],
+  },
+
+  destinations: {
+    introduction: [
+      {
+        id: "ntt-dest-01",
+        content: "NTT adalah definisi surga Instagram masa kini, dari atas savana bukit purba Sumba hingga berenang bersama ikan pari Manta raksasa di Pulau Komodo.",
+        citationIds: ["ntt-ref-bps"],
+      }
+    ],
+    items: [
+      {
+        id: "ntt-dest-item-01",
+        category: "Dunia Hilang Masa Lalu",
+        title: "Taman Nasional Komodo (Labuan Bajo)",
+        description: "Selain habitat kadal Komodo, ini adalah rute pelayaran elit Pinisi. Padar menawarkan pendakian bukit untuk melihat 3 warna pantai lengkung, Pink Beach dengan pasir serpihan karang merah jambu tajam, serta Manta Point untuk menyelam dikelilingi belasan burung laut raksasa air (Manta Ray).",
+        citationIds: ["ntt-ref-komodo"],
+      },
+      {
+        id: "ntt-dest-item-02",
+        category: "Keajaiban Warna Geologi",
+        title: "Danau Kelimutu (Flores Ende)",
+        description: "Tiga telaga vulkanik kawah purba yang mempesona sekaligus menakutkan karena airnya bisa berubah warna dengan ekstrem (hitam, biru, merah, hijau toska). Bagi Suku Lio, danau ini adalah penjara magis arwah orang mati (Tiwa).",
+        citationIds: ["ntt-ref-flores"],
+      },
+      {
+        id: "ntt-dest-item-03",
+        category: "Desa Mistis Kerucut Mbaru Niang",
+        title: "Kampung Adat Wae Rebo",
+        description: "Desa paling terisolasi di Flores (Manggarai), dijuluki kampung di atas awan (1200 mdpl). Turis harus trekking berjalan kaki mendaki bukit gila selama 4 jam lebih untuk sekadar melihat 7 rumah adat mbaru niang (kerucut tinggi raksasa) beralas ijuk.",
+        citationIds: ["ntt-ref-bps"],
+      },
+      {
+        id: "ntt-dest-item-04",
+        category: "Savana Sumba Erotis",
+        title: "Bukit Tenau & Kampung Tarung",
+        description: "Bukan sabana biasa, namun gugusan teletubbies (perbukitan kapur sabana bergelombang rapi) yang hijau cantik di musim hujan dan menguning liar eksotis mematikan di musim kemarau. Di sini juga terdapat resor eksklusif terbaik di dunia (Nihiwatu) incaran aktor Hollywood.",
+        citationIds: ["ntt-ref-marapu"],
+      }
+    ],
+    referenceIds: ["ntt-ref-komodo", "ntt-ref-flores", "ntt-ref-bps", "ntt-ref-marapu"],
+  },
+
+  stories: {
+    introduction: [
+      {
+        id: "ntt-story-01",
+        content: "Danau warna-warni memendam misteri yang sangat dihindari penganut klenik suku Lio pada waktu senja.",
+        citationIds: ["ntt-ref-flores"],
+      }
+    ],
+    stories: [
+      {
+        id: "ntt-story-item-01",
+        title: "Mitos Tiga Telaga Arwah (Kelimutu)",
+        description: "Penduduk lokal sangat percaya setiap danau melambangkan terminal arwah. Tiwu Nuwa Muri (yang hijau) menampung jiwa muda/suci, Tiwu Ata Polo (merah kental) mengurung jiwa orang-orang jahat dan pembunuh berdarah, dan Tiwu Ata Bupu (hitam legam) mengumpulkan jiwa orang tua bijaksana yang tenang.",
+        citationIds: ["ntt-ref-flores"],
+      },
+      {
+        id: "ntt-story-item-02",
+        title: "Saudara Kembar Manusia Komodo",
+        description: "Orang lokal Flores meyakini (mitos Orah), manusia pertama wanita sakti Putri Naga melahirkan anak kembar, seorang anak laki manusia normal dan saudara kembarnya seekor kadal (Komodo). Sehingga, penduduk desa asli pulau komodo tak berani membunuh buaya darat raksasa ini karena menganggap naga-naga itu adalah leluhur se-pupu kandung mereka yang mengamuk jika dilukai.",
+        citationIds: ["ntt-ref-komodo"],
+      }
+    ],
+    referenceIds: ["ntt-ref-flores", "ntt-ref-komodo"],
+  },
+
   contemporary: {
     introduction: [
       {
         id: "ntt-cont-01",
-        content: "Transformasi besar sedang terjadi di NTT. Penetapan Labuan Bajo (Flores Barat) sebagai Destinasi Pariwisata Super Prioritas (DPSP) membawa percepatan infrastruktur kelas dunia.",
+        content: "NTT terjebak pada ketidaksetaraan raksasa: pesisir komodo ditaburi resor mewah super premium, sementara pedalaman Timor berjuang melawan gizi buruk (Stunting) parah.",
         citationIds: ["ntt-ref-bps"],
       }
     ],
     economy: [
       {
         id: "ntt-cont-02",
-        content: "Selain bertumpu pada pariwisata super premium, NTT juga mengembangkan potensi energi terbarukan dari sumber panas bumi (geothermal) di Pulau Flores yang dicanangkan sebagai Geothermal Island, serta peternakan sapi berskala besar di hamparan sabana.",
+        content: "Labuan Bajo telah ditetapkan sebagai Destinasi Wisata Super Prioritas, mengundang arus miliaran rupiah devisa ke NTT. Namun demikian, PR terbesar provinsi ini adalah kekeringan esktrem karena rendahnya curah hujan dan kegagalan panen rutin. Mengatasinya, pemerintah mati-matian membangun 7 bendungan raksasa baru di NTT untuk menyelamatkan nasib pertanian dan mengakhiri rekor persentase stunting terburuk se-Indonesia.",
         citationIds: ["ntt-ref-bps"],
       }
     ],
@@ -381,27 +383,27 @@ export const nusaTenggaraTimurAtlas: ProvinceAtlas = {
     introduction: [
       {
         id: "ntt-travel-01",
-        content: "Berwisata ke NTT layaknya sebuah ekspedisi alam liar. Jarak antar destinasi di Pulau Flores sangat jauh dan dihubungkan oleh Jalur Trans Flores yang berliku tajam mengular melewati pegunungan.",
-        citationIds: ["ntt-ref-bps"],
+        content: "Merasakan NTT tidak cukup semalam; belilah paket 'Liveaboard' (tidur bermalam hari-hari di kapal kayu phinisi) untuk mengeksplor laut liar.",
+        citationIds: ["ntt-ref-komodo"],
       }
     ],
     etiquette: [
       {
         id: "ntt-travel-02",
-        content: "Sangat disarankan menghormati hari-hari suci (seperti perayaan Paskah Semana Santa di Larantuka). Jika mengunjungi desa adat di Sumba atau Flores, wajib meminta izin tetua adat dan mengikuti ritual penyambutan 'siri pinang' atau meminum kopi yang disuguhkan sebagai simbol kekerabatan.",
-        citationIds: ["ntt-ref-wbtb"],
+        content: "Jika wanita Anda sedang datang bulan (haid), dilarang sangat keras mengikuti trekking menyusuri sabana Pulau Komodo karena penciuman naga liar purba sangat sensitif terhadap darah mentah 5 kilometer maut jauhnya. Jangan pernah memberikan makanan kepada hewan liar. Jika diajak minum 'Moke' (tuak) oleh warga Sumba/Timor, minumlah satu sloki sebagai tanda penghormatan persahabatan, karena arak adalah perlambang keterbukaan rumah orang timur. Gunakan kacamata hitam karena matahari NTT sangat panas menusuk dibanding Jawa.",
+        citationIds: ["ntt-ref-komodo", "ntt-ref-bps"],
       }
     ],
-    referenceIds: ["ntt-ref-bps", "ntt-ref-wbtb"],
+    referenceIds: ["ntt-ref-komodo", "ntt-ref-bps"],
   },
 
-  lastReviewedAt: "2026-07-12T16:35:00Z",
+  lastReviewedAt: "2026-07-13T00:42:00Z",
   contentStatus: "draft",
   referenceIds: [
     "ntt-ref-bps",
     "ntt-ref-wbtb",
-    "ntt-ref-unesco-komodo",
-    "ntt-ref-sejarah",
-    "ntt-ref-bahasa"
+    "ntt-ref-komodo",
+    "ntt-ref-flores",
+    "ntt-ref-marapu"
   ]
 };

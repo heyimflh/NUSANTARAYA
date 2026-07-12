@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-12T17:36:55.183Z",
+  "generatedAt": "2026-07-12T17:43:54.862Z",
   "totalProvinces": 38,
-  "completedProvinces": 31,
+  "completedProvinces": 32,
   "provinces": [
     {
       "id": "di-yogyakarta",
@@ -216,6 +216,13 @@
     {
       "id": "sulawesi-tenggara",
       "name": "Sulawesi Tenggara",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "nusa-tenggara-barat",
+      "name": "Nusa Tenggara Barat",
       "status": "Lengkap",
       "completedChaptersCount": 13,
       "missingChapters": []
