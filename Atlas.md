@@ -8,9 +8,9 @@
 - Fase: **P1 — Baseline dan fondasi canonical**
 - Status: **Berjalan**
 - Otorisasi: fase dan batch boleh berjalan berurutan tanpa konfirmasi rutin selama tetap di dalam kontrak P0-A1.
-- Fase terakhir selesai: **P1 - Batch 1B (Maluku, NTT, Papua Barat Daya)**.
-- Provinsi terakhir selesai: **Papua Barat Daya**.
-- Provinsi berikutnya: **Batch Regional Jawa** (Banten, DKI Jakarta, Jawa Barat, Jawa Tengah, Jawa Timur).
+- Fase terakhir selesai: **P1 - Batch Regional Jawa (Banten, DKI Jakarta, Jawa Barat, Jawa Tengah, Jawa Timur)**.
+- Provinsi terakhir selesai: **Jawa Timur**.
+- Provinsi berikutnya: **Batch 2 (Sumatera lainnya)**.
 
 ## Checklist Kontrak
 
@@ -57,7 +57,7 @@
 | 0 | Renderer, sitasi, validator, DIY, aset | Selesai | `npm run validate:atlas`, build, tsc lulus |
 | 1 | Flagship | Batch 1B Selesai | `npm run validate:atlas` lulus untuk 7 provinsi |
 | 2 | Sumatera lainnya | Belum dimulai | — |
-| 3 | Jawa lainnya | Belum dimulai | — |
+| 3 | Jawa lainnya (Regional Jawa) | Selesai | `npm run validate:atlas` lulus untuk 5 provinsi |
 | 4 | Kalimantan lainnya | Belum dimulai | — |
 | 5 | Sulawesi lainnya | Belum dimulai | — |
 | 6 | Maluku dan Papua lainnya | Belum dimulai | — |
@@ -76,12 +76,12 @@
 | 8 | Bengkulu | `bengkulu` | Stub existing | Belum dimulai | Belum diaudit | — |
 | 9 | Lampung | `lampung` | Stub existing | Belum dimulai | Belum diaudit | — |
 | 10 | Kepulauan Bangka Belitung | `kepulauan-bangka-belitung` | Stub existing | Belum dimulai | Belum diaudit | — |
-| 11 | Banten | `banten` | Stub existing | Belum dimulai | Belum diaudit | — |
-| 12 | DKI Jakarta | `dki-jakarta` | Stub existing | Belum dimulai | Belum diaudit | — |
-| 13 | Jawa Barat | `jawa-barat` | Stub existing | Belum dimulai | Belum diaudit | — |
-| 14 | Jawa Tengah | `jawa-tengah` | Stub existing | Belum dimulai | Belum diaudit | — |
+| 11 | Banten | `banten` | Canonical, lengkap | Selesai (Batch Jawa) | Sudah diaudit | Draft Validated |
+| 12 | DKI Jakarta | `dki-jakarta` | Canonical, lengkap | Selesai (Batch Jawa) | Sudah diaudit | Draft Validated |
+| 13 | Jawa Barat | `jawa-barat` | Canonical, lengkap | Selesai (Batch Jawa) | Sudah diaudit | Draft Validated |
+| 14 | Jawa Tengah | `jawa-tengah` | Canonical, lengkap | Selesai (Batch Jawa) | Sudah diaudit | Draft Validated |
 | 15 | DI Yogyakarta | `di-yogyakarta` | Canonical pilot, lengkap | Selesai (Batch 0) | Sudah diaudit | Society, biodiversity, tata kelola gubernur sudah dilengkapi. |
-| 16 | Jawa Timur | `jawa-timur` | Stub existing | Belum dimulai | Belum diaudit | — |
+| 16 | Jawa Timur | `jawa-timur` | Canonical, lengkap | Selesai (Batch Jawa) | Sudah diaudit | Draft Validated |
 | 17 | Bali | `bali` | Canonical, lengkap | Selesai (Batch 1A) | Sudah diaudit | Draft Validated |
 | 18 | Nusa Tenggara Barat | `nusa-tenggara-barat` | Stub existing | Belum dimulai | Belum diaudit | Hero perlu audit. |
 | 19 | Nusa Tenggara Timur | `nusa-tenggara-timur` | Canonical, lengkap | Selesai (Batch 1B) | Sudah diaudit | Draft Validated |
@@ -124,8 +124,8 @@
 ## Resume Jika Sesi Terputus
 
 - Fase aktif: P1 — Batch 1 (Flagship).
-- Fase terakhir selesai: Batch 1B (Maluku, NTT, Papua Barat Daya).
-- Provinsi terakhir selesai: Papua Barat Daya.
-- Provinsi berikutnya: Batch Regional Jawa (Banten, DKI Jakarta, Jawa Barat, Jawa Tengah, Jawa Timur).
+- Fase terakhir selesai: Batch Regional Jawa (Banten, DKI Jakarta, Jawa Barat, Jawa Tengah, Jawa Timur).
+- Provinsi terakhir selesai: Jawa Timur.
+- Provinsi berikutnya: Batch 2 (Sumatera lainnya).
 - Perintah validasi terakhir: `npm run validate:atlas` (Lulus).
-- Langkah berikutnya: Eksekusi Batch Regional Jawa.
+- Langkah berikutnya: Eksekusi Batch 2.

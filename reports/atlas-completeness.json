@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-12T16:45:00.000Z",
+  "generatedAt": "2026-07-12T17:00:00.000Z",
   "totalProvinces": 38,
-  "completedProvinces": 8,
+  "completedProvinces": 13,
   "provinces": [
     {
       "id": "di-yogyakarta",
@@ -55,6 +55,41 @@
     {
       "id": "papua-barat-daya",
       "name": "Papua Barat Daya",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "banten",
+      "name": "Banten",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "dki-jakarta",
+      "name": "DKI Jakarta",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "jawa-barat",
+      "name": "Jawa Barat",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "jawa-tengah",
+      "name": "Jawa Tengah",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "jawa-timur",
+      "name": "Jawa Timur",
       "status": "Lengkap",
       "completedChaptersCount": 13,
       "missingChapters": []
