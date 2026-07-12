@@ -24,6 +24,11 @@ export default async function ProvinceAtlasPage({ params }: { params: Promise<{ 
   const atlas = await getAtlasData(resolvedParams.slug);
   const references = await getAtlasReferences(resolvedParams.slug);
   const chapters = atlas ? getActiveChapters(atlas) : undefined;
+  
+  const citationIndex: Record<string, number> = {};
+  references.forEach((ref, index) => {
+    citationIndex[ref.id] = index + 1;
+  });
 
   return (
     <ProvinceAtlasShell provinceName={province.name}>
@@ -54,6 +59,7 @@ export default async function ProvinceAtlasPage({ params }: { params: Promise<{ 
             imageAlt={`Ringkasan ${atlas.title}`}
             imageCaption={atlas.tagline}
             allReferences={references}
+            citationIndex={citationIndex}
             chapterSources={references.filter(r => atlas.summary.some(p => p.citationIds.includes(r.id)))}
           />
 
@@ -68,6 +74,7 @@ export default async function ProvinceAtlasPage({ params }: { params: Promise<{ 
               imageAlt={`Geografi ${atlas.title}`}
               imageCaption={`Bentang alam ${atlas.title}`}
               allReferences={references}
+              citationIndex={citationIndex}
               chapterSources={references.filter(r => atlas.geography?.referenceIds.includes(r.id))}
               reverse
             />
@@ -84,6 +91,7 @@ export default async function ProvinceAtlasPage({ params }: { params: Promise<{ 
               imageAlt={`Sejarah ${atlas.title}`}
               imageCaption={`Jejak peradaban ${atlas.title}`}
               allReferences={references}
+              citationIndex={citationIndex}
               chapterSources={references.filter(r => atlas.history?.referenceIds.includes(r.id))}
             />
           )}
@@ -99,6 +107,7 @@ export default async function ProvinceAtlasPage({ params }: { params: Promise<{ 
               imageAlt={`Budaya ${atlas.title}`}
               imageCaption={`Ekspresi budaya ${atlas.title}`}
               allReferences={references}
+              citationIndex={citationIndex}
               chapterSources={references.filter(r => atlas.culture?.referenceIds.includes(r.id))}
               reverse
             />
@@ -115,6 +124,7 @@ export default async function ProvinceAtlasPage({ params }: { params: Promise<{ 
               imageAlt={`Bahasa ${atlas.title}`}
               imageCaption={`Aksara dan bahasa ${atlas.title}`}
               allReferences={references}
+              citationIndex={citationIndex}
               chapterSources={references.filter(r => atlas.language?.referenceIds.includes(r.id))}
             />
           )}
@@ -130,6 +140,7 @@ export default async function ProvinceAtlasPage({ params }: { params: Promise<{ 
               imageAlt={`Kuliner ${atlas.title}`}
               imageCaption={`Kekayaan cita rasa ${atlas.title}`}
               allReferences={references}
+              citationIndex={citationIndex}
               chapterSources={references.filter(r => atlas.culinary?.referenceIds.includes(r.id))}
               reverse
             />
@@ -146,6 +157,7 @@ export default async function ProvinceAtlasPage({ params }: { params: Promise<{ 
               imageAlt={`Destinasi ${atlas.title}`}
               imageCaption={`Daya tarik ${atlas.title}`}
               allReferences={references}
+              citationIndex={citationIndex}
               chapterSources={references.filter(r => atlas.destinations?.referenceIds.includes(r.id))}
             />
           )}
@@ -165,7 +177,7 @@ export default async function ProvinceAtlasPage({ params }: { params: Promise<{ 
                 </p>
               </div>
               <div className="w-full md:w-[65%]">
-                <ReferenceList references={references} />
+                <ReferenceList references={references} citationIndex={citationIndex} />
               </div>
             </div>
           </section>

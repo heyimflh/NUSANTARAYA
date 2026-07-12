@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import type { CitedParagraph, ScientificReference } from '@/types/atlas';
+import type { CitedParagraph, ScientificReference, CitationIndex } from '@/types/atlas';
 import { InlineCitation } from './InlineCitation';
 import { ChapterSourceFooter } from './ChapterSourceFooter';
 
@@ -16,10 +16,11 @@ type EditorialProps = {
   citedContent?: CitedParagraph[];
   chapterSources?: ScientificReference[];
   allReferences?: ScientificReference[];
+  citationIndex?: CitationIndex;
 };
 
 export const EditorialMediaBlock = ({
-  id, chapterNumber, title, description, imageSrc, imageAlt, imageCaption, reverse = false, citedContent, chapterSources, allReferences
+  id, chapterNumber, title, description, imageSrc, imageAlt, imageCaption, reverse = false, citedContent, chapterSources, allReferences, citationIndex
 }: EditorialProps) => {
   return (
     <section id={id} className="scroll-mt-36 mb-24 md:mb-32">
@@ -46,7 +47,7 @@ export const EditorialMediaBlock = ({
                 <p key={para.id}>
                   {para.content}{' '}
                   {para.citationIds && para.citationIds.length > 0 && (
-                    <InlineCitation ids={para.citationIds} references={allReferences} />
+                    <InlineCitation ids={para.citationIds} references={allReferences} citationIndex={citationIndex!} />
                   )}
                 </p>
               ))
@@ -56,7 +57,7 @@ export const EditorialMediaBlock = ({
           </div>
 
           {chapterSources && chapterSources.length > 0 && (
-            <ChapterSourceFooter references={chapterSources} />
+            <ChapterSourceFooter referenceIds={chapterSources.map(ref => ref.id)} references={chapterSources} citationIndex={citationIndex!} />
           )}
         </div>
       </div>

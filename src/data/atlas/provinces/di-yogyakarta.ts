@@ -411,10 +411,10 @@ export const diYogyakartaAtlas: ProvinceAtlas = {
       },
     ],
     vocabulary: [
-      { word: "Sugeng Rawuh", meaning: "Selamat Datang" },
-      { word: "Matur Nuwun", meaning: "Terima Kasih" },
-      { word: "Mangga", meaning: "Silakan" },
-      { word: "Nuwun Sewu", meaning: "Permisi / Mohon Maaf" },
+      { id: "diy-vocab-01", word: "Sugeng Rawuh", meaning: "Selamat Datang", citationIds: [] },
+      { id: "diy-vocab-02", word: "Matur Nuwun", meaning: "Terima Kasih", citationIds: [] },
+      { id: "diy-vocab-03", word: "Mangga", meaning: "Silakan", citationIds: [] },
+      { id: "diy-vocab-04", word: "Nuwun Sewu", meaning: "Permisi / Mohon Maaf", citationIds: [] },
     ],
     referenceIds: ["diy-ref-11", "diy-ref-15"],
   },
@@ -549,6 +549,7 @@ export const diYogyakartaAtlas: ProvinceAtlas = {
     ],
     itineraries: [
       {
+        id: "diy-itin-01",
         duration: 3,
         title: "Jogja Klasik 3 Hari",
         days: [
@@ -556,6 +557,7 @@ export const diYogyakartaAtlas: ProvinceAtlas = {
           { day: 2, activities: ["Candi Prambanan", "Kotagede", "Alun-Alun Kidul"] },
           { day: 3, activities: ["Merapi Lava Tour", "Kaliurang", "Oleh-oleh di Mirota Batik"] },
         ],
+        citationIds: [],
       },
     ],
     etiquette: [

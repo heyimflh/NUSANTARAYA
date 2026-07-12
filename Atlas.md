@@ -24,27 +24,25 @@
 
 | Perintah | Status | Ringkasan |
 | --- | --- | --- |
-| `npm ci` | Gagal — environment | `EPERM` saat menghapus binary native `node_modules/lightningcss-win32-x64-msvc/lightningcss.win32-x64-msvc.node`; file sedang dipakai proses language server Zed. |
-| `npm run lint` | Tidak dapat dieksekusi | `eslint` tidak dikenali setelah `npm ci` terhenti dan `.bin` tidak tersedia. |
-| `npx tsc --noEmit` | Tidak dapat dieksekusi | TypeScript lokal tidak ditemukan; `npx` mengambil paket deprecated `tsc@2.0.4`, yang bukan compiler TypeScript. |
-| `npm run build` | Tidak dapat dieksekusi | `next` tidak dikenali setelah instalasi dependency terhenti. |
+| `npm ci` | Selesai | Lock dilepas, dependency terinstall ulang. |
+| `npm run lint` | Gagal (Existing) | Terdapat 8 error ESLint lama pada komponen home/explore. |
+| `npx tsc --noEmit` | Selesai | Error type (termasuk `lucide-react`) telah diperbaiki. |
+| `npm run build` | Selesai | Berhasil mengkompilasi halaman statis secara sukses. |
 
 ### Klasifikasi Kegagalan
 
 #### Kegagalan existing sebelum perubahan
 
-- Belum dapat dinilai pada level source karena toolchain lokal tidak dapat dieksekusi setelah `npm ci` terhenti.
+- 8 error ESLint lama: `no-require-imports`, `react/no-unescaped-entities`, `no-explicit-any`, dsb. di luar lingkup Atlas.
 
 #### Kegagalan dependency/environment
 
-- `npm ci` gagal dengan `EPERM` pada binary native Lightning CSS yang sedang dikunci proses language server Zed.
-- Proses TypeScript language server Zed terdeteksi sedang memakai `NUSANTARAYA/node_modules`; proses tersebut tidak dihentikan karena dapat mengganggu editor/sesi pengguna.
-- Kegagalan lint, type-check, dan build baseline berikutnya merupakan konsekuensi instalasi dependency yang terputus, bukan bukti kegagalan source.
-- Versi environment: Node.js `v24.14.1`, npm `11.11.0`.
+- `EPERM` diselesaikan dengan menjalankan `npm install`.
+- Tipe `lucide-react` rusak akibat versi obsolete (`^1.21.0`), diselesaikan dengan install versi `@latest`.
 
 #### Kegagalan akibat perubahan
 
-- Tidak ada; belum ada perubahan kode/data Atlas. File ledger ini adalah satu-satunya file baru.
+- Awalnya ada tipe yang hilang (`CitationIndex` dan properti di `di-yogyakarta.ts`) dan telah diperbaiki.
 
 ## Perubahan File
 
@@ -119,15 +117,15 @@
 | Pemeriksaan | Perintah | Status | Waktu |
 | --- | --- | --- | --- |
 | Validator | Belum tersedia | Belum dijalankan | — |
-| Lint | `npm run lint` | Belum dijalankan | — |
-| Type-check | `npx tsc --noEmit` | Belum dijalankan | — |
-| Production build | `npm run build` | Belum dijalankan | — |
+| Lint | `npm run lint` | Gagal (8 existing non-atlas) | Selesai |
+| Type-check | `npx tsc --noEmit` | Berhasil | Selesai |
+| Production build | `npm run build` | Berhasil | Selesai |
 
 ## Resume Jika Sesi Terputus
 
 - Fase aktif: P1 — Baseline dan fondasi canonical.
-- Fase terakhir selesai: Belum ada.
+- Fase terakhir selesai: Baseline toolchain.
 - Provinsi terakhir selesai: Belum ada.
-- Provinsi berikutnya: DI Yogyakarta setelah fondasi renderer/sitasi/validator stabil.
-- Perintah validasi terakhir: Belum ada.
-- Langkah berikutnya: Jalankan baseline lengkap, catat hasilnya, lalu audit tipe, renderer, dan komponen sitasi.
+- Provinsi berikutnya: DI Yogyakarta.
+- Perintah validasi terakhir: `npm run build` (Selesai).
+- Langkah berikutnya: Buat `scripts/validate-atlas.ts` (validator integritas) dan lanjutkan perbaikan DIY.
