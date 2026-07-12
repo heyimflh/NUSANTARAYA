@@ -5,7 +5,7 @@ import { ArrowRight, Play, ArrowDown, Compass } from "lucide-react";
 
 export const MapHeroSection = () => {
   return (
-    <section className="relative w-full h-screen min-h-[750px] flex items-center overflow-hidden bg-[#FAFAFA]">
+    <section className="relative w-full h-screen min-h-[750px] flex items-center overflow-hidden bg-background">
         {/* Background Video */}
         <div className="absolute inset-0 z-0 w-full h-full">
           <video
@@ -24,10 +24,10 @@ export const MapHeroSection = () => {
 
 
         {/* Reduced Gradient Overlay to show more video */}
-        <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#FAFAFA] via-[#FAFAFA]/90 to-transparent w-full md:w-[60%] lg:w-[55%]" />
+        <div className="absolute inset-0 z-10 bg-gradient-to-r from-background via-background/90 to-transparent w-full md:w-[60%] lg:w-[55%]" />
         
         {/* Additional gradient for bottom fade for seamless transition */}
-        <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#FAFAFA]/50 via-transparent to-transparent h-[30%] mt-auto" />
+        <div className="absolute inset-0 z-10 bg-gradient-to-t from-background/50 via-transparent to-transparent h-[30%] mt-auto" />
 
         {/* Main Content Container */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-20 h-full flex flex-col justify-center">
@@ -153,7 +153,7 @@ export const MapHeroSection = () => {
           <div className="relative w-full h-[80px] md:h-[120px] lg:h-[160px]">
             <svg
               viewBox="0 0 1440 160"
-              className="absolute bottom-0 w-full h-full text-white fill-current preserve-3d"
+              className="absolute bottom-0 w-full h-full text-background fill-current preserve-3d"
               preserveAspectRatio="none"
             >
               <path d="M0,160 L1440,160 L1440,80 C1100,160 800,0 400,60 C200,90 0,60 0,60 Z" />
