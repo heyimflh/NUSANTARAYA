@@ -1,22 +1,31 @@
-# Laporan Kelengkapan Atlas NUSANTARAYA
+# Laporan Kelengkapan Atlas Provinsi
+**Terakhir Diperbarui:** 13/7/2026, 00.13.17
+**Total Provinsi:** 38
+**Provinsi Selesai (Lengkap 13 Bab):** 22 / 38 (58%)
 
-*Diperbarui: 2026-07-12T17:00:00Z*
+## Status Per Provinsi
 
-| No | Provinsi | Status | Chapter Selesai | Chapter Kurang |
+| ID Provinsi | Nama Provinsi | Status | Bab Selesai | Catatan (Bab Kurang) |
 |---|---|---|---|---|
-| 1 | DI Yogyakarta | ✅ Lengkap | 13 / 13 | - |
-| 2 | Bali | ✅ Lengkap | 13 / 13 | - |
-| 3 | Sumatera Barat | ✅ Lengkap | 13 / 13 | - |
-| 4 | Kalimantan Timur | ✅ Lengkap | 13 / 13 | - |
-| 5 | Sulawesi Selatan | ✅ Lengkap | 13 / 13 | - |
-| 6 | Maluku | ✅ Lengkap | 13 / 13 | - |
-| 7 | Nusa Tenggara Timur | ✅ Lengkap | 13 / 13 | - |
-| 8 | Papua Barat Daya | ✅ Lengkap | 13 / 13 | - |
-| 9 | Banten | ✅ Lengkap | 13 / 13 | - |
-| 10 | DKI Jakarta | ✅ Lengkap | 13 / 13 | - |
-| 11 | Jawa Barat | ✅ Lengkap | 13 / 13 | - |
-| 12 | Jawa Tengah | ✅ Lengkap | 13 / 13 | - |
-| 13 | Jawa Timur | ✅ Lengkap | 13 / 13 | - |
-| 14-38 | *25 Provinsi Lainnya* | ⏳ Belum | 0 / 13 | Semua |
-
-**Total Lengkap:** 13 / 38
+| di-yogyakarta | Daerah Istimewa Yogyakarta | Lengkap | 13/13 | - |
+| bali | Bali | Lengkap | 13/13 | - |
+| sumatera-barat | Sumatera Barat | Lengkap | 13/13 | - |
+| kalimantan-timur | Kalimantan Timur | Lengkap | 13/13 | - |
+| sulawesi-selatan | Sulawesi Selatan | Lengkap | 13/13 | - |
+| maluku | Maluku | Lengkap | 13/13 | - |
+| nusa-tenggara-timur | Nusa Tenggara Timur | Lengkap | 13/13 | - |
+| papua-barat-daya | Papua Barat Daya | Lengkap | 13/13 | - |
+| banten | Banten | Lengkap | 13/13 | - |
+| dki-jakarta | DKI Jakarta | Lengkap | 13/13 | - |
+| jawa-barat | Jawa Barat | Lengkap | 13/13 | - |
+| jawa-tengah | Jawa Tengah | Lengkap | 13/13 | - |
+| jawa-timur | Jawa Timur | Lengkap | 13/13 | - |
+| aceh | Aceh | Lengkap | 13/13 | - |
+| sumatera-utara | Sumatera Utara | Lengkap | 13/13 | - |
+| riau | Riau | Lengkap | 13/13 | - |
+| kepulauan-riau | Kepulauan Riau | Lengkap | 13/13 | - |
+| jambi | Jambi | Lengkap | 13/13 | - |
+| sumatera-selatan | Sumatera Selatan | Lengkap | 13/13 | - |
+| bengkulu | Bengkulu | Lengkap | 13/13 | - |
+| kepulauan-bangka-belitung | Kep. Bangka Belitung | Lengkap | 13/13 | - |
+| lampung | Lampung | Lengkap | 13/13 | - |

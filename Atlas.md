@@ -8,9 +8,9 @@
 - Fase: **P1 — Baseline dan fondasi canonical**
 - Status: **Berjalan**
 - Otorisasi: fase dan batch boleh berjalan berurutan tanpa konfirmasi rutin selama tetap di dalam kontrak P0-A1.
-- Fase terakhir selesai: **P1 - Batch Regional Jawa (Banten, DKI Jakarta, Jawa Barat, Jawa Tengah, Jawa Timur)**.
-- Provinsi terakhir selesai: **Jawa Timur**.
-- Provinsi berikutnya: **Batch 2 (Sumatera lainnya)**.
+- Fase terakhir selesai: **Batch 2 (Sumatera lainnya)**.
+- Provinsi terakhir selesai: **Lampung**.
+- Provinsi berikutnya: **Batch 4 (Kalimantan lainnya)**.
 
 ## Checklist Kontrak
 
@@ -56,7 +56,7 @@
 | --- | --- | --- | --- |
 | 0 | Renderer, sitasi, validator, DIY, aset | Selesai | `npm run validate:atlas`, build, tsc lulus |
 | 1 | Flagship | Batch 1B Selesai | `npm run validate:atlas` lulus untuk 7 provinsi |
-| 2 | Sumatera lainnya | Belum dimulai | — |
+| 2 | Sumatera lainnya | Selesai | `npm run validate:atlas` lulus untuk 9 provinsi |
 | 3 | Jawa lainnya (Regional Jawa) | Selesai | `npm run validate:atlas` lulus untuk 5 provinsi |
 | 4 | Kalimantan lainnya | Belum dimulai | — |
 | 5 | Sulawesi lainnya | Belum dimulai | — |
@@ -66,16 +66,16 @@
 
 | No. | Provinsi | Slug | Status Atlas | Status Riset | Referensi | Catatan |
 | ---: | --- | --- | --- | --- | ---: | --- |
-| 1 | Aceh | `aceh` | Stub existing | Belum dimulai | Belum diaudit | — |
-| 2 | Sumatera Utara | `sumatera-utara` | Stub existing | Belum dimulai | Belum diaudit | — |
+| 1 | Aceh | `aceh` | Canonical, lengkap | Selesai (Batch 2) | Sudah diaudit | Draft Validated |
+| 2 | Sumatera Utara | `sumatera-utara` | Canonical, lengkap | Selesai (Batch 2) | Sudah diaudit | Draft Validated |
 | 3 | Sumatera Barat | `sumatera-barat` | Canonical, lengkap | Selesai (Batch 1A) | Sudah diaudit | Draft Validated |
-| 4 | Riau | `riau` | Stub existing | Belum dimulai | Belum diaudit | — |
-| 5 | Kepulauan Riau | `kepulauan-riau` | Stub existing | Belum dimulai | Belum diaudit | — |
-| 6 | Jambi | `jambi` | Stub existing | Belum dimulai | Belum diaudit | — |
-| 7 | Sumatera Selatan | `sumatera-selatan` | Stub existing | Belum dimulai | Belum diaudit | — |
-| 8 | Bengkulu | `bengkulu` | Stub existing | Belum dimulai | Belum diaudit | — |
-| 9 | Lampung | `lampung` | Stub existing | Belum dimulai | Belum diaudit | — |
-| 10 | Kepulauan Bangka Belitung | `kepulauan-bangka-belitung` | Stub existing | Belum dimulai | Belum diaudit | — |
+| 4 | Riau | `riau` | Canonical, lengkap | Selesai (Batch 2) | Sudah diaudit | Draft Validated |
+| 5 | Kepulauan Riau | `kepulauan-riau` | Canonical, lengkap | Selesai (Batch 2) | Sudah diaudit | Draft Validated |
+| 6 | Jambi | `jambi` | Canonical, lengkap | Selesai (Batch 2) | Sudah diaudit | Draft Validated |
+| 7 | Sumatera Selatan | `sumatera-selatan` | Canonical, lengkap | Selesai (Batch 2) | Sudah diaudit | Draft Validated |
+| 8 | Bengkulu | `bengkulu` | Canonical, lengkap | Selesai (Batch 2) | Sudah diaudit | Draft Validated |
+| 9 | Lampung | `lampung` | Canonical, lengkap | Selesai (Batch 2) | Sudah diaudit | Draft Validated |
+| 10 | Kepulauan Bangka Belitung | `kepulauan-bangka-belitung` | Canonical, lengkap | Selesai (Batch 2) | Sudah diaudit | Draft Validated |
 | 11 | Banten | `banten` | Canonical, lengkap | Selesai (Batch Jawa) | Sudah diaudit | Draft Validated |
 | 12 | DKI Jakarta | `dki-jakarta` | Canonical, lengkap | Selesai (Batch Jawa) | Sudah diaudit | Draft Validated |
 | 13 | Jawa Barat | `jawa-barat` | Canonical, lengkap | Selesai (Batch Jawa) | Sudah diaudit | Draft Validated |
@@ -123,9 +123,9 @@
 
 ## Resume Jika Sesi Terputus
 
-- Fase aktif: P1 — Batch 1 (Flagship).
-- Fase terakhir selesai: Batch Regional Jawa (Banten, DKI Jakarta, Jawa Barat, Jawa Tengah, Jawa Timur).
-- Provinsi terakhir selesai: Jawa Timur.
-- Provinsi berikutnya: Batch 2 (Sumatera lainnya).
+- Fase aktif: P1 — Batch 2 (Sumatera lainnya).
+- Fase terakhir selesai: Batch 2 (Sumatera lainnya).
+- Provinsi terakhir selesai: Lampung.
+- Provinsi berikutnya: Batch 4 (Kalimantan lainnya).
 - Perintah validasi terakhir: `npm run validate:atlas` (Lulus).
-- Langkah berikutnya: Eksekusi Batch 2.
+- Langkah berikutnya: Eksekusi Batch 4.

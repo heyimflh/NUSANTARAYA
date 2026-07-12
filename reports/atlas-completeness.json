@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-12T17:00:00.000Z",
+  "generatedAt": "2026-07-12T17:12:31.606Z",
   "totalProvinces": 38,
-  "completedProvinces": 13,
+  "completedProvinces": 22,
   "provinces": [
     {
       "id": "di-yogyakarta",
@@ -90,6 +90,69 @@
     {
       "id": "jawa-timur",
       "name": "Jawa Timur",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "aceh",
+      "name": "Aceh",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "sumatera-utara",
+      "name": "Sumatera Utara",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "riau",
+      "name": "Riau",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "kepulauan-riau",
+      "name": "Kepulauan Riau",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "jambi",
+      "name": "Jambi",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "sumatera-selatan",
+      "name": "Sumatera Selatan",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "bengkulu",
+      "name": "Bengkulu",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "kepulauan-bangka-belitung",
+      "name": "Kep. Bangka Belitung",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "lampung",
+      "name": "Lampung",
       "status": "Lengkap",
       "completedChaptersCount": 13,
       "missingChapters": []
