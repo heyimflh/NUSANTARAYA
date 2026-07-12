@@ -1,7 +1,7 @@
 # Laporan Kelengkapan Atlas Provinsi
-**Terakhir Diperbarui:** 13/7/2026, 00.43.54
+**Terakhir Diperbarui:** 13/7/2026, 00.54.50
 **Total Provinsi:** 38
-**Provinsi Selesai (Lengkap 13 Bab):** 32 / 38 (84%)
+**Provinsi Selesai (Lengkap 13 Bab):** 38 / 38 (100%)
 
 ## Status Per Provinsi
 
@@ -39,3 +39,9 @@
 | sulawesi-barat | Sulawesi Barat | Lengkap | 13/13 | - |
 | sulawesi-tenggara | Sulawesi Tenggara | Lengkap | 13/13 | - |
 | nusa-tenggara-barat | Nusa Tenggara Barat | Lengkap | 13/13 | - |
+| maluku-utara | Maluku Utara | Lengkap | 13/13 | - |
+| papua | Papua | Lengkap | 13/13 | - |
+| papua-barat | Papua Barat | Lengkap | 13/13 | - |
+| papua-pegunungan | Papua Pegunungan | Lengkap | 13/13 | - |
+| papua-selatan | Papua Selatan | Lengkap | 13/13 | - |
+| papua-tengah | Papua Tengah | Lengkap | 13/13 | - |

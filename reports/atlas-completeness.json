@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-12T17:43:54.862Z",
+  "generatedAt": "2026-07-12T17:54:50.918Z",
   "totalProvinces": 38,
-  "completedProvinces": 32,
+  "completedProvinces": 38,
   "provinces": [
     {
       "id": "di-yogyakarta",
@@ -223,6 +223,48 @@
     {
       "id": "nusa-tenggara-barat",
       "name": "Nusa Tenggara Barat",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "maluku-utara",
+      "name": "Maluku Utara",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "papua",
+      "name": "Papua",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "papua-barat",
+      "name": "Papua Barat",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "papua-pegunungan",
+      "name": "Papua Pegunungan",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "papua-selatan",
+      "name": "Papua Selatan",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "papua-tengah",
+      "name": "Papua Tengah",
       "status": "Lengkap",
       "completedChaptersCount": 13,
       "missingChapters": []

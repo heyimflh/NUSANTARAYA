@@ -8,9 +8,9 @@
 - Fase: **P1 — Baseline dan fondasi canonical**
 - Status: **Berjalan**
 - Otorisasi: fase dan batch boleh berjalan berurutan tanpa konfirmasi rutin selama tetap di dalam kontrak P0-A1.
-- Fase terakhir selesai: **Batch 6 (Bali & Nusa Tenggara)**.
-- Provinsi terakhir selesai: **Nusa Tenggara Timur**.
-- Provinsi berikutnya: **Batch 7 (Maluku & Papua)**.
+- Fase terakhir selesai: **Batch 7 (Maluku & Papua)**.
+- Provinsi terakhir selesai: **Papua Tengah**.
+- Provinsi berikutnya: **Semua Provinsi Selesai (38/38)**.
 
 ## Checklist Kontrak
 
@@ -123,9 +123,9 @@
 
 ## Resume Jika Sesi Terputus
 
-- Fase aktif: P1 — Batch 6 (Bali & Nusa Tenggara).
-- Fase terakhir selesai: Batch 6 (Bali & Nusa Tenggara).
-- Provinsi terakhir selesai: Nusa Tenggara Timur.
-- Provinsi berikutnya: Batch 7 (Maluku & Papua).
+- Fase aktif: Selesai P1.
+- Fase terakhir selesai: Batch 7 (Maluku & Papua).
+- Provinsi terakhir selesai: Papua Tengah.
+- Provinsi berikutnya: Semua provinsi (38) telah selesai! Selesai fase draft (lanjut ke integrasi & deployment).
 - Perintah validasi terakhir: `npm run validate:atlas` (Lulus).
-- Langkah berikutnya: Eksekusi Batch 7.
+- Langkah berikutnya: Fase P1 (Atlas Drafting) Selesai. Melanjutkan ke Fase P2 (Integrasi Sistem).

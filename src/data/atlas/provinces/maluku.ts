@@ -8,82 +8,63 @@ export const malukuReferences: ScientificReference[] = [
     year: 2024,
     publisher: "Badan Pusat Statistik Provinsi Maluku",
     url: "https://maluku.bps.go.id/publication/2024",
-    accessedAt: "2026-07-12",
+    accessedAt: "2026-07-13",
     sourceType: "institution",
     credibilityTier: "A",
     provinceIds: ["maluku"],
-    topicIds: ["geography", "contemporary", "biodiversity", "destinations"],
-
+    topicIds: ["geography", "contemporary"],
   },
   {
     id: "mal-ref-wbtb",
-    title: "Warisan Budaya Takbenda Indonesia: Provinsi Maluku",
+    title: "Warisan Budaya Takbenda Indonesia: Maluku",
     authors: ["Direktorat Warisan dan Diplomasi Budaya"],
     year: 2023,
     publisher: "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
     url: "https://warisanbudaya.kemdikbud.go.id",
-    accessedAt: "2026-07-12",
+    accessedAt: "2026-07-13",
     sourceType: "institution",
     credibilityTier: "A",
     provinceIds: ["maluku"],
     topicIds: ["culture", "culinary", "stories"],
-
   },
   {
-    id: "mal-ref-sejarah",
-    title: "Sejarah Maluku: Banda Neira, Rempah, dan Kolonialisme",
-    authors: ["Des Alwi"],
-    year: 2005,
-    publisher: "Dian Rakyat",
-    url: "https://id.wikipedia.org/wiki/Banda_Neira",
-    accessedAt: "2026-07-12",
-    sourceType: "book",
-    credibilityTier: "B",
-    provinceIds: ["maluku"],
-    topicIds: ["history"],
-
-  },
-  {
-    id: "mal-ref-bahasa",
-    title: "Peta Bahasa di Provinsi Maluku",
-    authors: ["Badan Pengembangan dan Pembinaan Bahasa"],
-    year: 2019,
-    publisher: "Kementerian Pendidikan dan Kebudayaan",
-    url: "https://petabahasa.kemdikbud.go.id/",
-    accessedAt: "2026-07-12",
-    sourceType: "institution",
-    credibilityTier: "A",
-    provinceIds: ["maluku"],
-    topicIds: ["language"],
-
-  },
-  {
-    id: "mal-ref-unesco",
-    title: "Ambon City of Music",
-    authors: ["UNESCO Creative Cities Network"],
-    year: 2019,
-    publisher: "UNESCO",
-    url: "https://en.unesco.org/creative-cities/ambon",
-    accessedAt: "2026-07-12",
-    sourceType: "unesco",
-    credibilityTier: "A",
-    provinceIds: ["maluku"],
-    topicIds: ["culture", "contemporary"],
-
-  },
-  {
-    id: "mal-ref-pela",
-    title: "Pela Gandong: Kearifan Lokal Resolusi Konflik di Maluku",
-    authors: ["Pattikayhatu, J. A."],
-    year: 2010,
-    publisher: "Jurnal Sejarah dan Budaya",
-    url: "https://id.wikipedia.org/wiki/Pela_gandong",
-    accessedAt: "2026-07-12",
+    id: "mal-ref-banda",
+    title: "Banda Islands: The Spice Islands",
+    authors: ["Loth, Vincent C."],
+    year: 1995,
+    publisher: "Cakalele",
+    url: "https://id.wikipedia.org/wiki/Kepulauan_Banda",
+    accessedAt: "2026-07-13",
     sourceType: "journal",
     credibilityTier: "B",
     provinceIds: ["maluku"],
-    topicIds: ["society"],
-
+    topicIds: ["history", "destinations"],
+  },
+  {
+    id: "mal-ref-pela",
+    title: "Pela and Gandong: Alliance System in Central Maluku",
+    authors: ["Bartels, Dieter"],
+    year: 1977,
+    publisher: "Cornell University",
+    url: "https://id.wikipedia.org/wiki/Pela",
+    accessedAt: "2026-07-13",
+    sourceType: "journal",
+    credibilityTier: "A",
+    provinceIds: ["maluku"],
+    topicIds: ["society", "history"],
+  },
+  {
+    id: "mal-ref-wallacea",
+    title: "Ecology of the Indonesian Seas: Maluku",
+    authors: ["Tomascik, Tomas"],
+    year: 1997,
+    publisher: "Periplus Editions",
+    url: "https://en.wikipedia.org/wiki/Banda_Sea",
+    accessedAt: "2026-07-13",
+    sourceType: "book",
+    credibilityTier: "A",
+    provinceIds: ["maluku"],
+    topicIds: ["biodiversity", "geography"],
   }
 ];
 
@@ -91,19 +72,19 @@ export const malukuAtlas: ProvinceAtlas = {
   provinceId: "maluku",
   slug: "maluku",
   title: "Maluku",
-  tagline: "Kepulauan Rempah yang Kaya Akan Harmoni dan Keindahan Bahari",
+  tagline: "Bumi Raja-Raja, Titik Nol Jalur Rempah Dunia",
   summary: [
     {
       id: "mal-sum-01",
-      content: "Maluku, yang secara historis dikenal sebagai Kepulauan Rempah-Rempah (Spice Islands), adalah kepulauan yang pernah menjadi pusat perhatian dunia pada abad ke-15 hingga ke-17 karena kekayaan cengkeh dan palanya. Kini, Maluku dikenal dengan panorama baharinya yang memukau, kebudayaan musikalnya yang kuat, serta filosofi Pela Gandong yang mengikat persaudaraan masyarakatnya melintasi batas-batas keyakinan.",
-      citationIds: ["mal-ref-sejarah", "mal-ref-pela"],
+      content: "Jauh sebelum rempah menjadi emas yang memicu pelayaran global, kepulauan Maluku telah bertahta di atas Laut Banda sebagai The Spice Islands sejati. Beribu pulau mungil vulkanik dan atol (Ambon, Seram, Banda, Kei, Aru, Tanimbar) melahirkan pelaut tangguh, lagu-lagu persaudaraan yang menggetarkan (Pela Gandong), dan panggung sejarah berdarah monopoli VOC (Pembantaian Banda 1621). Meski pernah koyak oleh tragedi komunal (1999), Maluku hari ini kembali bernyanyi sebagai lumbung ikan nasional dan surga perawan pariwisata laut dalam (deep sea diving).",
+      citationIds: ["mal-ref-bps", "mal-ref-banda", "mal-ref-pela"],
     }
   ],
   quickFacts: [
     { id: "mal-qf-01", label: "Ibu Kota", value: "Ambon", citationIds: ["mal-ref-bps"] },
-    { id: "mal-qf-02", label: "Luas Wilayah", value: "46.150,92 km² (Daratan)", citationIds: ["mal-ref-bps"], dataYear: 2024 },
-    { id: "mal-qf-03", label: "Populasi", value: "1.908.000 jiwa", citationIds: ["mal-ref-bps"], dataYear: 2023 },
-    { id: "mal-qf-04", label: "Semboyan", value: "Siwa Lima (Milik Bersama)", citationIds: ["mal-ref-pela"] },
+    { id: "mal-qf-02", label: "Luas Wilayah Daratan", value: "46.150,92 km²", citationIds: ["mal-ref-bps"], dataYear: 2024 },
+    { id: "mal-qf-03", label: "Populasi", value: "1.905.772 jiwa", citationIds: ["mal-ref-bps"], dataYear: 2023 },
+    { id: "mal-qf-04", label: "Laut Utama", value: "Laut Banda (Laut terdalam di Indonesia)", citationIds: ["mal-ref-wallacea"] },
     { id: "mal-qf-05", label: "Zona Waktu", value: "WIT (UTC+9)", citationIds: ["mal-ref-bps"] },
     { id: "mal-qf-06", label: "Gubernur", value: "Sadali Ie (Pj.)", citationIds: ["mal-ref-bps"], dataYear: 2024 },
   ],
@@ -112,161 +93,168 @@ export const malukuAtlas: ProvinceAtlas = {
     introduction: [
       {
         id: "mal-geo-01",
-        content: "Provinsi Maluku merupakan provinsi kepulauan yang sebagian besar wilayahnya terdiri dari lautan. Dikelilingi oleh Laut Banda, Laut Seram, dan Laut Arafura, Maluku memiliki ribuan pulau kecil dengan topografi vulkanik dan pegunungan.",
+        content: "Provinsi yang 90% wilayahnya adalah air, di mana pulau-pulau tersusun membengkok seperti bulan sabit di atas palung laut terdalam.",
         citationIds: ["mal-ref-bps"],
       }
     ],
     terrain: [
       {
         id: "mal-geo-02",
-        content: "Secara morfologi, sebagian besar pulau di Maluku bergunung-gunung dan berbukit. Laut Banda yang terletak di wilayah ini adalah salah satu laut terdalam di Indonesia, dengan kedalaman mencapai lebih dari 7.000 meter (Palung Weber). Kondisi tektonik di wilayah ini sangat aktif karena merupakan zona pertemuan tiga lempeng tektonik utama dunia.",
-        citationIds: ["mal-ref-bps"],
+        content: "Geografi Maluku didominasi oleh perairan Laut Banda dan Laut Seram. Daratan-daratan besarnya (Pulau Seram dan Pulau Buru) dipenuhi hutan hujan tropis lebat yang belum terjamah, sementara pulau-pulau kecilnya (Ambon, Banda Neira) adalah puncak-puncak gunung api vulkanik yang mencuat vertikal dari dasar laut. Lebih ke selatan (Kei, Aru, Tanimbar), lanskap berubah menjadi kepulauan karang koral putih yang datar dan dikelilingi laut dangkal (paparan Sahul) yang sangat jernih.",
+        citationIds: ["mal-ref-bps", "mal-ref-wallacea"],
       }
     ],
-    referenceIds: ["mal-ref-bps"],
+    referenceIds: ["mal-ref-bps", "mal-ref-wallacea"],
   },
 
   history: {
     introduction: [
       {
         id: "mal-his-01",
-        content: "Sejarah Maluku adalah sejarah perniagaan global purba. Daya tarik rempah-rempah eksotis menjadikan kepulauan ini sebagai episentrum perdagangan yang diperebutkan oleh penjelajah Arab, Tiongkok, hingga bangsa-bangsa Eropa seperti Portugis, Spanyol, Inggris, dan Belanda.",
-        citationIds: ["mal-ref-sejarah"],
+        content: "Kepulauan inilah alasan mengapa Christopher Columbus salah arah ke Amerika, dan mengapa bangsa Eropa menjajah Nusantara.",
+        citationIds: ["mal-ref-banda"],
       }
     ],
     timeline: [
       {
         id: "mal-era-01",
-        period: "Abad ke-15 & 16",
-        title: "Era Monopoli dan Penjelajahan Eropa",
-        description: "Portugis (di bawah pimpinan Antonio de Abreu) mencapai Kepulauan Banda pada 1512. Spanyol menyusul, memicu perebutan monopoli rempah-rempah yang berujung pada Traktat Saragosa.",
-        citationIds: ["mal-ref-sejarah"],
+        period: "Abad ke-15 – 16",
+        title: "Pusat Perdagangan Rempah Dunia",
+        description: "Pedagang Arab, Tiongkok, dan Eropa (Portugis) berlomba mencapai Maluku (terutama Banda) yang saat itu merupakan satu-satunya tempat di planet bumi yang ditumbuhi pohon Pala (Nutmeg) dan Cengkeh (Clove).",
+        citationIds: ["mal-ref-banda"],
       },
       {
         id: "mal-era-02",
-        period: "Abad ke-17",
-        title: "Dominasi VOC di Banda Neira",
-        description: "Jan Pieterszoon Coen menaklukkan Kepulauan Banda pada 1621 untuk memonopoli pala. Sistem perbudakan dan perkebunan (perken) diterapkan, diwarnai dengan pembantaian besar-besaran penduduk asli Banda.",
-        citationIds: ["mal-ref-sejarah"],
+        period: "1621",
+        title: "Genosida Kepulauan Banda oleh VOC",
+        description: "Gubernur Jenderal Jan Pieterszoon Coen (JP Coen) memimpin pembantaian mengerikan terhadap hampir seluruh penduduk asli Kepulauan Banda demi menguasai mutlak monopoli Pala dunia, menggantikan mereka dengan budak pekerja dari luar pulau.",
+        citationIds: ["mal-ref-banda"],
       },
       {
         id: "mal-era-03",
         period: "1817",
-        title: "Perang Pattimura",
-        description: "Thomas Matulessy (Kapitan Pattimura) memimpin perlawanan rakyat Maluku melawan kembalinya kolonialisme Belanda setelah masa pemerintahan Inggris singkat. Ia merebut Benteng Duurstede di Saparua sebelum akhirnya ditangkap dan dihukum gantung di Ambon.",
-        citationIds: ["mal-ref-sejarah"],
+        title: "Pemberontakan Kapitan Pattimura",
+        description: "Thomas Matulessy (Pattimura) memimpin rakyat Saparua dan merebut Benteng Duurstede dari tangan Belanda. Perlawanan gigih ini akhirnya dipatahkan dengan eksekusi gantung terhadap Pattimura di Ambon.",
+        citationIds: ["mal-ref-wbtb"],
+      },
+      {
+        id: "mal-era-04",
+        period: "1999 – 2002",
+        title: "Konflik Sektarian Maluku",
+        description: "Tragedi kemanusiaan (kerusuhan bernuansa agama Islam-Kristen) meledak di Ambon dan merambat ke pulau lain. Konflik ini berakhir damai melalui Perjanjian Malino II (2002), di mana kedua pihak sepakat meletakkan senjata dan kembali merajut persaudaraan.",
+        citationIds: ["mal-ref-pela"],
       }
     ],
-    referenceIds: ["mal-ref-sejarah"],
+    referenceIds: ["mal-ref-banda", "mal-ref-wbtb", "mal-ref-pela"],
   },
 
   society: {
     introduction: [
       {
         id: "mal-soc-01",
-        content: "Masyarakat Maluku dikenal sangat menghargai nilai persaudaraan, keterbukaan, dan kerukunan beragama. Toleransi antarumat beragama di Maluku sangat tinggi, diikat oleh ikatan adat yang kuat peninggalan leluhur.",
+        content: "Masyarakat Maluku bersuara sangat lantang, namun memiliki ikatan toleransi darah (Pela Gandong) yang tidak dapat dipatahkan oleh sejarah.",
         citationIds: ["mal-ref-pela"],
       }
     ],
     socialStructure: [
       {
         id: "mal-soc-02",
-        content: "Konsep Pela Gandong adalah sistem persekutuan antar-negeri (desa) di Maluku, yang menyatukan dua desa atau lebih (biasanya berbeda agama) dalam ikatan persaudaraan yang tak terputuskan. Sistem ini menjadi instrumen utama resolusi konflik dan pembangunan perdamaian di Maluku pasca-konflik tahun 1999.",
-        citationIds: ["mal-ref-pela"],
+        content: "Maluku dihuni oleh kelompok etnis kepulauan yang beragam: Ambon (dominan), Alifuru (suku pedalaman Seram pelindung hutan), serta suku-suku di Kei dan Tanimbar. Mayoritas populasi beragama Kristen Protestan dan Islam dengan rasio yang hampir seimbang. Fondasi sosial terkuat mereka adalah 'Pela Gandong'—perjanjian persaudaraan sakral sejak zaman leluhur antara desa Kristen dan desa Islam. Jika sebuah desa Kristen membangun gereja, desa Islam yang menjadi 'Pela'-nya wajib membantu membangun, begitu pula sebaliknya (membangun Masjid).",
+        citationIds: ["mal-ref-pela", "mal-ref-bps"],
       }
     ],
-    referenceIds: ["mal-ref-pela"],
+    referenceIds: ["mal-ref-pela", "mal-ref-bps"],
   },
 
   culture: {
     introduction: [
       {
         id: "mal-cul-01",
-        content: "Budaya Maluku sangat ekspresif, ditandai dengan kecintaan pada musik dan tarian. Sejak 2019, Ambon telah diakui oleh UNESCO sebagai Kota Musik Dunia (City of Music).",
-        citationIds: ["mal-ref-unesco", "mal-ref-wbtb"],
+        content: "Lompatan perang pedang yang beringas dari Cakalele akan selalu ditenangkan oleh irama merdu nyanyian paduan suara yang harmoni.",
+        citationIds: ["mal-ref-wbtb"],
       }
     ],
     items: [
       {
         id: "mal-cul-item-01",
-        category: "Tari Tradisional",
+        category: "Tarian Perang Magis",
         title: "Tari Cakalele",
-        description: "Tarian perang tradisional Maluku yang melambangkan keberanian dan jiwa kepahlawanan. Penari pria menggunakan parang (salawaku), sementara penari wanita mengayunkan sapu tangan (lenso).",
+        description: "Tari kebesaran dan tarian perang pria Maluku. Penari memegang parang (salawaku/perisai) dan menari dengan gerakan mata melotot dan lompatan agresif layaknya kerasukan roh kapitan leluhur, diiringi tabuhan keras tifa dan tiupan kerang raksasa (Tahuri).",
         citationIds: ["mal-ref-wbtb"],
       },
       {
         id: "mal-cul-item-02",
-        category: "Arsitektur",
-        title: "Baileo",
-        description: "Rumah adat sekaligus balai pertemuan masyarakat di Maluku. Baileo berbentuk rumah panggung tanpa dinding, melambangkan keterbukaan masyarakat serta memberikan tempat bagi roh leluhur untuk leluasa masuk dan keluar.",
+        category: "Atraksi Klenik Kuno",
+        title: "Bambu Gila (Bulu Gila)",
+        description: "Pertunjukan supranatural di mana tujuh pria dewasa berusaha menahan sebatang bambu panjang yang telah dimantrai oleh seorang dukun (pawang) menggunakan asap kemenyan. Bambu tersebut akan bergerak liar seakan memiliki nyawa dan kekuatan banteng, mengombang-ambingkan ketujuh penahannya.",
         citationIds: ["mal-ref-wbtb"],
       },
       {
         id: "mal-cul-item-03",
-        category: "Tradisi Ekologi",
-        title: "Sasi",
-        description: "Hukum adat larangan mengambil hasil alam (laut maupun darat) di suatu wilayah untuk jangka waktu tertentu. Sasi adalah bentuk awal dari upaya konservasi lingkungan yang berbasis pada kearifan lokal.",
+        category: "Musikalitas Vokal",
+        title: "Ambon City of Music (UNESCO)",
+        description: "Orang Ambon diakui dunia (UNESCO 2019) karena talenta menyanyinya yang luar biasa. Budaya berkumpul dan bernyanyi harmoni (dengan iringan gitar/tifa) adalah DNA yang melahirkan puluhan penyanyi papan atas nasional dari tanah ini.",
         citationIds: ["mal-ref-wbtb"],
       },
       {
         id: "mal-cul-item-04",
-        category: "Adat & Ritus",
-        title: "Pukul Sapu",
-        description: "Tradisi saling memukul menggunakan sapu lidi dari tulang daun kelapa yang biasanya dilakukan oleh pemuda dari Negeri Mamala dan Morella. Tradisi ini menunjukkan ketangguhan fisik sekaligus diakhiri dengan perdamaian menggunakan minyak khusus pemulih luka.",
+        category: "Kriya Tekstil Tradisional",
+        title: "Tenun Tanimbar",
+        description: "Kain tenun (Tais) dengan warna-warna gelap berani yang dihiasi garis/corak panah dan kelapa dari pulau Tanimbar di ujung selatan Maluku. Ditenun sangat kaku dan sering digunakan dalam penobatan adat.",
         citationIds: ["mal-ref-wbtb"],
       }
     ],
-    referenceIds: ["mal-ref-wbtb", "mal-ref-unesco"],
+    referenceIds: ["mal-ref-wbtb"],
   },
 
   language: {
     introduction: [
       {
         id: "mal-lang-01",
-        content: "Meskipun memiliki puluhan bahasa daerah endemik yang terancam punah, bahasa pergaulan (lingua franca) yang paling banyak digunakan di Maluku adalah Bahasa Melayu Ambon. Bahasa ini memiliki banyak kata serapan dari bahasa Belanda dan Portugis akibat sejarah kolonialisme yang panjang.",
-        citationIds: ["mal-ref-bahasa"],
+        content: "Bahasa Melayu Ambon adalah lingua franca berintonasi tinggi yang merdu, banyak meminjam pelafalan Portugis dan Belanda.",
+        citationIds: ["mal-ref-bps"],
       }
     ],
     vocabulary: [
-      { id: "mal-voc-01", word: "Dangke", meaning: "Terima kasih (berasal dari bahasa Belanda 'Dank je')", citationIds: ["mal-ref-bahasa"] },
-      { id: "mal-voc-02", word: "Beta", meaning: "Saya", citationIds: ["mal-ref-bahasa"] },
-      { id: "mal-voc-03", word: "Ose / Ale", meaning: "Kamu", citationIds: ["mal-ref-bahasa"] },
-      { id: "mal-voc-04", word: "Katong", meaning: "Kita", citationIds: ["mal-ref-bahasa"] },
+      { id: "mal-voc-01", word: "Beta / Ose", meaning: "Saya / Kamu.", citationIds: ["mal-ref-bps"] },
+      { id: "mal-voc-02", word: "Pela Gandong", meaning: "Ikatan persaudaraan sekandung antardesa yang beda agama.", citationIds: ["mal-ref-pela"] },
+      { id: "mal-voc-03", word: "Nyong / Nona", meaning: "Panggilan kesayangan untuk anak laki-laki / perempuan yang belum menikah.", citationIds: ["mal-ref-bps"] },
+      { id: "mal-voc-04", word: "Dangke", meaning: "Terima Kasih (serapan dari Dank je, Belanda).", citationIds: ["mal-ref-bps"] },
     ],
-    referenceIds: ["mal-ref-bahasa"],
+    referenceIds: ["mal-ref-bps", "mal-ref-pela"],
   },
 
   culinary: {
     introduction: [
       {
         id: "mal-culi-01",
-        content: "Kuliner Maluku berbasis pada hasil laut (seafood) segar dan pemanfaatan pati sagu. Cita rasa masakan didominasi oleh asam segar dari jeruk lemon cui dan rasa pedas yang membangkitkan selera.",
+        content: "Kuliner Maluku berpusat pada kekayaan ikan laut (pelagis) yang dibumbui rempah tajam kenari dan lemon cui segar, disandingkan dengan getah sagu.",
         citationIds: ["mal-ref-wbtb"],
       }
     ],
     items: [
       {
         id: "mal-culi-item-01",
-        title: "Papeda",
-        description: "Bubur sagu bertekstur lengket bak lem, disantap sebagai pengganti nasi. Biasanya disajikan dengan kuah ikan kuning yang kaya rempah kunyit dan kemangi.",
+        title: "Papeda & Ikan Kuah Kuning",
+        description: "Makanan pokok kepulauan (pengganti nasi). Papeda terbuat dari pati sagu yang disiram air mendidih hingga berubah menjadi gumpalan lem lengket transparan. Cara makannya harus 'diseruput' cepat (jangan dikunyah) bersama siraman kaldu ikan tuna kuah kuning yang beraroma kunyit dan kemangi (lemon cui).",
         citationIds: ["mal-ref-wbtb"],
       },
       {
         id: "mal-culi-item-02",
-        title: "Ikan Kuah Kuning",
-        description: "Hidangan ikan (biasanya tuna, cakalang, atau tongkol) yang dimasak dalam kuah berwarna kuning dari kunyit, dibumbui serai, kemangi, dan jeruk nipis.",
+        title: "Kohu-kohu",
+        description: "Mirip urap Jawa, namun versi pesisir. Terdiri dari campuran parutan kelapa, kacang panjang rebus, tauge, daun kemangi, dan suwiran ikan cakalang asap yang diaduk mentah dengan perasan jeruk nipis tanpa dimasak ulang.",
         citationIds: ["mal-ref-wbtb"],
       },
       {
         id: "mal-culi-item-03",
-        title: "Sambal Colo-Colo",
-        description: "Sambal khas yang tidak diulek, melainkan irisan tomat, cabai rawit, bawang merah, yang disiram dengan air perasan jeruk nipis (lemon cui), kecap, dan kadang ditambahkan irisan kenari.",
+        title: "Rujak Natsepa",
+        description: "Rujak buah legendaris di pesisir Pantai Natsepa (Ambon). Kekuatannya ada pada bumbu kacang tanah giling kasar yang sangat tebal, kental, legit karena menggunakan gula aren (gula merah sapi) asli.",
         citationIds: ["mal-ref-wbtb"],
       },
       {
         id: "mal-culi-item-04",
-        title: "Kohi-Kohi",
-        description: "Olahan ikan cakalang asar (asap) yang disuwir dan dicampur dengan kelapa parut dan bumbu rempah.",
+        title: "Kopi Rarobang",
+        description: "Racikan kopi robusta khas Ambon yang direbus bersama rempah-rempah: jahe, cengkeh, kayu manis, lalu ditaburi kepingan kacang kenari panggang gurih di atasnya. Menghangatkan badan saat malam laut dingin.",
         citationIds: ["mal-ref-wbtb"],
       }
     ],
@@ -277,139 +265,145 @@ export const malukuAtlas: ProvinceAtlas = {
     introduction: [
       {
         id: "mal-bio-01",
-        content: "Terletak di kawasan Wallacea, Maluku memiliki keanekaragaman flora dan fauna endemik perpaduan antara tipe Asia dan Australasia. Laut Banda juga merupakan salah satu kawasan dengan terumbu karang terkaya di dunia.",
-        citationIds: ["mal-ref-bps"],
+        content: "Garis Wallace dan Weber menjepit Maluku (Wallacea), menjadikannya daerah perlintasan spesies aneh dari benua Asia menuju Australasia.",
+        citationIds: ["mal-ref-wallacea"],
       }
     ],
     species: [
       {
         id: "mal-bio-item-01",
-        category: "Flora",
-        title: "Anggrek Larat (Dendrobium phalaenopsis)",
-        description: "Anggrek endemik Pulau Larat (Kepulauan Tanimbar) yang memiliki warna ungu cerah. Anggrek ini ditetapkan sebagai flora maskot Provinsi Maluku.",
-        citationIds: ["mal-ref-bps"],
+        category: "Avifauna Cerdas Endemik",
+        title: "Burung Nuri Maluku & Kakatua Seram",
+        description: "Hutan hujan lebat di Seram adalah surga bagi burung paruh bengkok berwarna sangat cerah (merah jambu/hijau neon) yang memiliki kepintaran meniru suara manusia. Sayangnya mereka sangat rawan perburuan liar.",
+        citationIds: ["mal-ref-wallacea"],
       },
       {
         id: "mal-bio-item-02",
-        category: "Fauna",
-        title: "Burung Nuri Maluku (Eos bornea)",
-        description: "Burung paruh bengkok endemik yang memiliki bulu dominan merah terang. Merupakan fauna identitas Provinsi Maluku, keberadaannya dilindungi dari perburuan liar.",
-        citationIds: ["mal-ref-bps"],
+        category: "Ekosistem Palung Laut Dalam",
+        title: "Terumbu Karang Dinding (Drop-off) Laut Banda",
+        description: "Laut Banda memiliki kedalaman palung lebih dari 7.000 meter. Formasi terumbu karangnya seringkali tidak datar, melainkan berupa dinding curam vertikal (Drop-off Wall) yang menjadi perlintasan migrasi kawanan paus biru dan hiu martil.",
+        citationIds: ["mal-ref-wallacea"],
       },
       {
         id: "mal-bio-item-03",
-        category: "Flora",
-        title: "Pohon Pala (Myristica fragrans) dan Cengkeh (Syzygium aromaticum)",
-        description: "Tanaman endemik asli Maluku yang pernah mengubah jalannya sejarah penjelajahan dunia. Terutama di Pulau Banda dan Ternate-Tidore.",
-        citationIds: ["mal-ref-sejarah"],
+        category: "Flora Rempah Sejarah",
+        title: "Pohon Pala (Myristica fragrans) & Cengkeh (Syzygium aromaticum)",
+        description: "Dua spesies flora ini aslinya hanya tumbuh secara endemik di pulau sekecil Banda dan Makian, namun wanginya mengubah peta dunia modern akibat perburuan Eropa.",
+        citationIds: ["mal-ref-banda"],
       }
     ],
-    referenceIds: ["mal-ref-bps", "mal-ref-sejarah"],
+    referenceIds: ["mal-ref-wallacea", "mal-ref-banda"],
   },
 
   destinations: {
     introduction: [
       {
         id: "mal-dest-01",
-        content: "Sebagai provinsi kepulauan, Maluku menawarkan destinasi wisata yang menggabungkan situs bersejarah era kolonial dengan panorama tropis kepulauan bahari yang perawan.",
+        content: "Destinasi wisata di Maluku sangat jauh, mahal, dan sulit dijangkau, namun membalas dengan keperawanan alam paling paripurna di Indonesia.",
         citationIds: ["mal-ref-bps"],
       }
     ],
     items: [
       {
         id: "mal-dest-item-01",
-        category: "Sejarah & Bahari",
-        title: "Kepulauan Banda Neira",
-        description: "Gugusan pulau bersejarah tempat pembuangan tokoh nasional seperti Bung Hatta dan Sjahrir. Terdapat Benteng Belgica peninggalan VOC, Gunung Api Banda, dan spot diving berkelas dunia.",
-        citationIds: ["mal-ref-sejarah"],
+        category: "Surga Sejarah & Scuba Diving",
+        title: "Kepulauan Banda (Banda Neira)",
+        description: "Gugusan pulau romantis berbau pala. Banda Neira menawarkan wisata sejarah rumah pengasingan Bung Hatta, kemegahan Benteng Belgica (berbentuk segi lima), disandingkan dengan menyelam melihat aliran lava bawah laut dari Gunung Api Banda yang meletus.",
+        citationIds: ["mal-ref-banda"],
       },
       {
         id: "mal-dest-item-02",
-        category: "Alam",
-        title: "Pantai Ora, Pulau Seram",
-        description: "Sering dijuluki 'Maladewa-nya Indonesia', Pantai Ora menawarkan perairan kristal dengan penginapan terapung (eco-lodge) yang menghadap tebing kapur menjulang.",
+        category: "Pasir Paling Halus di Dunia",
+        title: "Pantai Ngurbloat (Kepulauan Kei)",
+        description: "Berada di Maluku Tenggara (Tual/Kei), pantai ini memiliki bentangan pasir putih yang saking putih dan halusnya seperti bubuk tepung terigu (sering diklaim National Geographic sebagai pasir terhalus di bumi).",
         citationIds: ["mal-ref-bps"],
       },
       {
         id: "mal-dest-item-03",
-        category: "Alam",
-        title: "Pantai Natsepa, Ambon",
-        description: "Pantai pasir putih populer di Ambon, sangat ikonis dan terkenal dengan kuliner rujak buah khas Natsepa yang dijajakan di sepanjang garis pantainya.",
+        category: "Bora-Bora-nya Indonesia",
+        title: "Pantai Ora (Pulau Seram)",
+        description: "Tersembunyi di utara pulau Seram. Resor dengan rumah-rumah panggung eksotis yang dibangun mengapung tepat di atas terumbu karang laut dangkal jernih, berlatarkan tebing batu kapur (karst) menjulang vertikal raksasa.",
+        citationIds: ["mal-ref-bps"],
+      },
+      {
+        id: "mal-dest-item-04",
+        category: "Pintu Gerbang Pantai Kota",
+        title: "Pantai Natsepa (Ambon)",
+        description: "Pantai berpasir putih luas dengan laut tenang berombak kecil yang paling mudah dijangkau dari ibukota Ambon, tempat wajib menyantap rujak kacang kenari yang legendaris.",
         citationIds: ["mal-ref-bps"],
       }
     ],
-    referenceIds: ["mal-ref-bps", "mal-ref-sejarah"],
+    referenceIds: ["mal-ref-bps", "mal-ref-banda"],
   },
 
   stories: {
     introduction: [
       {
         id: "mal-story-01",
-        content: "Kisah-kisah rakyat di Maluku kental dengan nuansa nilai-nilai keluarga, pengorbanan, serta tragedi, sering kali mewujudkan pesan moral bagi anak-anak.",
-        citationIds: ["mal-ref-wbtb"],
+        content: "Gugusan Banda Neira pernah ditukar oleh Inggris dengan sebuah pulau rawa di Amerika yang kini bernama Manhattan (New York).",
+        citationIds: ["mal-ref-banda"],
       }
     ],
     stories: [
       {
         id: "mal-story-item-01",
-        title: "Nenek Luhu",
-        description: "Legenda tragis tentang Ta Ina Luhu, putri raja yang kerajaannya dihancurkan oleh VOC Belanda. Kesedihannya dan penolakannya terhadap penjajah membuatnya menjelma menjadi sosok tak kasat mata. Masyarakat Maluku, khususnya di Pulau Ambon, memercayai Nenek Luhu akan muncul pada cuaca panas dan hujan rintik-rintik (hujan orang mati) untuk menculik anak-anak, sebuah mitos yang dipakai para ibu agar anaknya tetap berada di dalam rumah saat cuaca buruk.",
-        citationIds: ["mal-ref-wbtb"],
+        title: "Misteri Perjanjian Breda (Run Island)",
+        description: "Pada tahun 1667, untuk mengakhiri perang monopoli Pala, Inggris dan Belanda bertukar wilayah (Perjanjian Breda). Inggris merelakan Pulau Run (di Kepulauan Banda yang penuh Pala) kepada Belanda, dan sebagai gantinya Inggris mendapatkan pulau rawa kecil di ujung Amerika, 'Nieuw Amsterdam'. Kini, pulau rawa itu adalah jantung keuangan dunia: Manhattan, New York.",
+        citationIds: ["mal-ref-banda"],
       },
       {
         id: "mal-story-item-02",
-        title: "Batu Badaong",
-        description: "Legenda tentang seorang ibu yang patah hati melihat anak-anaknya yang durhaka. Sang ibu lalu berdoa kepada sebuah batu karang raksasa di tepi laut agar menelan dirinya. Cerita ini menjadi pesan moral penting tentang bakti seorang anak kepada orang tua.",
-        citationIds: ["mal-ref-wbtb"],
+        title: "Bung Hatta dan Sepatu Bally",
+        description: "Saat dibuang/diasingkan ke Banda Neira oleh Belanda (1936-1942), Mohammad Hatta menghabiskan hari-harinya mendidik anak-anak pulau secara gratis (sekolah sore). Di sana, ia memendam mimpi sederhana memiliki sepasang sepatu mahal 'Bally' yang iklannya ia simpan dari koran. Sepatu itu tak pernah terbeli hingga akhir hayatnya yang jujur (bersih dari korupsi).",
+        citationIds: ["mal-ref-banda"],
       }
     ],
-    referenceIds: ["mal-ref-wbtb"],
+    referenceIds: ["mal-ref-banda"],
   },
 
   contemporary: {
     introduction: [
       {
         id: "mal-cont-01",
-        content: "Di masa kini, Maluku berupaya bangkit sebagai kekuatan maritim dan ibu kota kreativitas musik. Pengakuan Ambon sebagai City of Music oleh UNESCO pada 2019 menumbuhkan industri ekonomi kreatif.",
-        citationIds: ["mal-ref-unesco"],
+        content: "Ambon telah meruntuhkan stigma gelap perang saudaranya, bertransformasi menjadi laboratorium perdamaian dunia terbesar di timur Indonesia.",
+        citationIds: ["mal-ref-pela"],
       }
     ],
     economy: [
       {
         id: "mal-cont-02",
-        content: "Sektor perikanan menjadi tulang punggung ekonomi Maluku, yang dicanangkan sebagai Lumbung Ikan Nasional (LIN). Laut Banda dan Laut Arafura berkontribusi signifikan pada tangkapan ikan tuna dan cakalang nasional.",
+        content: "Maluku secara bertahap bersiap menjadi Lumbung Ikan Nasional (LIN) dengan pelabuhan perikanan terpadu di Ambon yang menyokong ekspor tuna dunia. Selain itu, pengeboran Blok Masela (gas alam cair abadi) di Maluku Barat Daya sedang dirancang sebagai mega-proyek energi yang akan mengubah wajah ekonomi penduduk dari pulau-pulau miskin di sekitarnya.",
         citationIds: ["mal-ref-bps"],
       }
     ],
-    referenceIds: ["mal-ref-unesco", "mal-ref-bps"],
+    referenceIds: ["mal-ref-bps", "mal-ref-pela"],
   },
 
   travel: {
     introduction: [
       {
         id: "mal-travel-01",
-        content: "Perjalanan ke Maluku memberikan pengalaman napak tilas sejarah dunia yang dikelilingi oleh surga tropis. Aksesibilitas antar pulau sangat bergantung pada transportasi laut seperti kapal Pelni dan speedboat (kapal cepat).",
+        content: "Bepergian di Maluku adalah ujian kesabaran jadwal kapal ferry pelni, namun lautan di sela-selanya adalah meditasi panjang tiada dua.",
         citationIds: ["mal-ref-bps"],
       }
     ],
     etiquette: [
       {
         id: "mal-travel-02",
-        content: "Saat berkunjung ke negeri (desa adat) di Maluku, hargai sistem kepemimpinan Raja (kepala desa adat) dan aturan Sasi jika sedang diberlakukan. Penduduk lokal sangat menghargai senyuman dan sapaan; memanggil warga dengan sebutan 'Nyong' (untuk pemuda) atau 'Nona' (untuk pemudi) dianggap ramah.",
-        citationIds: ["mal-ref-pela"],
+        content: "Orang Maluku berbicara dengan volume suara dan intonasi yang sangat keras; jangan kaget atau salah paham menganggap mereka sedang marah/berkelahi, itu adalah ciri khas kegembiraan mereka (berwatak kasar namun berhati salju). Hargai tradisi sasi (larangan memancing/mengambil hasil bumi dalam waktu tertentu) yang dipasang pemuka adat di pesisir desa, karena melanggarnya berarti menantang denda denda adat magis dari masyarakat sekampung.",
+        citationIds: ["mal-ref-wbtb"],
       }
     ],
-    referenceIds: ["mal-ref-bps", "mal-ref-pela"],
+    referenceIds: ["mal-ref-bps", "mal-ref-wbtb"],
   },
 
-  lastReviewedAt: "2026-07-12T16:35:00Z",
+  lastReviewedAt: "2026-07-13T00:46:00Z",
   contentStatus: "draft",
   referenceIds: [
     "mal-ref-bps",
     "mal-ref-wbtb",
-    "mal-ref-sejarah",
-    "mal-ref-bahasa",
-    "mal-ref-unesco",
-    "mal-ref-pela"
+    "mal-ref-banda",
+    "mal-ref-pela",
+    "mal-ref-wallacea"
   ]
 };
