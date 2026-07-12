@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-12T17:27:06.158Z",
+  "generatedAt": "2026-07-12T17:36:55.183Z",
   "totalProvinces": 38,
-  "completedProvinces": 26,
+  "completedProvinces": 31,
   "provinces": [
     {
       "id": "di-yogyakarta",
@@ -181,6 +181,41 @@
     {
       "id": "kalimantan-utara",
       "name": "Kalimantan Utara",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "sulawesi-utara",
+      "name": "Sulawesi Utara",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "gorontalo",
+      "name": "Gorontalo",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "sulawesi-tengah",
+      "name": "Sulawesi Tengah",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "sulawesi-barat",
+      "name": "Sulawesi Barat",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "sulawesi-tenggara",
+      "name": "Sulawesi Tenggara",
       "status": "Lengkap",
       "completedChaptersCount": 13,
       "missingChapters": []

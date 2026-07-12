@@ -8,9 +8,9 @@
 - Fase: **P1 — Baseline dan fondasi canonical**
 - Status: **Berjalan**
 - Otorisasi: fase dan batch boleh berjalan berurutan tanpa konfirmasi rutin selama tetap di dalam kontrak P0-A1.
-- Fase terakhir selesai: **Batch 4 (Kalimantan lainnya)**.
-- Provinsi terakhir selesai: **Kalimantan Utara**.
-- Provinsi berikutnya: **Batch 5 (Sulawesi lainnya)**.
+- Fase terakhir selesai: **Batch 5 (Sulawesi lainnya)**.
+- Provinsi terakhir selesai: **Sulawesi Tenggara**.
+- Provinsi berikutnya: **Batch 6 (Bali & Nusa Tenggara)**.
 
 ## Checklist Kontrak
 
@@ -59,7 +59,7 @@
 | 2 | Sumatera lainnya | Selesai | `npm run validate:atlas` lulus untuk 9 provinsi |
 | 3 | Jawa lainnya (Regional Jawa) | Selesai | `npm run validate:atlas` lulus untuk 5 provinsi |
 | 4 | Kalimantan lainnya | Selesai | `npm run validate:atlas` lulus untuk 4 provinsi |
-| 5 | Sulawesi lainnya | Belum dimulai | — |
+| 5 | Sulawesi lainnya | Selesai | `npm run validate:atlas` lulus untuk 5 provinsi |
 | 6 | Maluku dan Papua lainnya | Belum dimulai | — |
 
 ## Status 38 Provinsi
@@ -123,9 +123,9 @@
 
 ## Resume Jika Sesi Terputus
 
-- Fase aktif: P1 — Batch 4 (Kalimantan lainnya).
-- Fase terakhir selesai: Batch 4 (Kalimantan lainnya).
-- Provinsi terakhir selesai: Kalimantan Utara.
-- Provinsi berikutnya: Batch 5 (Sulawesi lainnya).
+- Fase aktif: P1 — Batch 5 (Sulawesi lainnya).
+- Fase terakhir selesai: Batch 5 (Sulawesi lainnya).
+- Provinsi terakhir selesai: Sulawesi Tenggara.
+- Provinsi berikutnya: Batch 6 (Bali & Nusa Tenggara).
 - Perintah validasi terakhir: `npm run validate:atlas` (Lulus).
-- Langkah berikutnya: Eksekusi Batch 5.
+- Langkah berikutnya: Eksekusi Batch 6.

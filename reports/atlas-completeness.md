@@ -1,7 +1,7 @@
 # Laporan Kelengkapan Atlas Provinsi
-**Terakhir Diperbarui:** 13/7/2026, 00.27.24
+**Terakhir Diperbarui:** 13/7/2026, 00.37.11
 **Total Provinsi:** 38
-**Provinsi Selesai (Lengkap 13 Bab):** 26 / 38 (68%)
+**Provinsi Selesai (Lengkap 13 Bab):** 31 / 38 (82%)
 
 ## Status Per Provinsi
 
@@ -33,3 +33,8 @@
 | kalimantan-tengah | Kalimantan Tengah | Lengkap | 13/13 | - |
 | kalimantan-selatan | Kalimantan Selatan | Lengkap | 13/13 | - |
 | kalimantan-utara | Kalimantan Utara | Lengkap | 13/13 | - |
+| sulawesi-utara | Sulawesi Utara | Lengkap | 13/13 | - |
+| gorontalo | Gorontalo | Lengkap | 13/13 | - |
+| sulawesi-tengah | Sulawesi Tengah | Lengkap | 13/13 | - |
+| sulawesi-barat | Sulawesi Barat | Lengkap | 13/13 | - |
+| sulawesi-tenggara | Sulawesi Tenggara | Lengkap | 13/13 | - |
