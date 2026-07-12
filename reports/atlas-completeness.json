@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-12T17:12:31.606Z",
+  "generatedAt": "2026-07-12T17:27:06.158Z",
   "totalProvinces": 38,
-  "completedProvinces": 22,
+  "completedProvinces": 26,
   "provinces": [
     {
       "id": "di-yogyakarta",
@@ -153,6 +153,34 @@
     {
       "id": "lampung",
       "name": "Lampung",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "kalimantan-barat",
+      "name": "Kalimantan Barat",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "kalimantan-tengah",
+      "name": "Kalimantan Tengah",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "kalimantan-selatan",
+      "name": "Kalimantan Selatan",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "kalimantan-utara",
+      "name": "Kalimantan Utara",
       "status": "Lengkap",
       "completedChaptersCount": 13,
       "missingChapters": []

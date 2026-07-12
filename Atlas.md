@@ -8,9 +8,9 @@
 - Fase: **P1 — Baseline dan fondasi canonical**
 - Status: **Berjalan**
 - Otorisasi: fase dan batch boleh berjalan berurutan tanpa konfirmasi rutin selama tetap di dalam kontrak P0-A1.
-- Fase terakhir selesai: **Batch 2 (Sumatera lainnya)**.
-- Provinsi terakhir selesai: **Lampung**.
-- Provinsi berikutnya: **Batch 4 (Kalimantan lainnya)**.
+- Fase terakhir selesai: **Batch 4 (Kalimantan lainnya)**.
+- Provinsi terakhir selesai: **Kalimantan Utara**.
+- Provinsi berikutnya: **Batch 5 (Sulawesi lainnya)**.
 
 ## Checklist Kontrak
 
@@ -58,7 +58,7 @@
 | 1 | Flagship | Batch 1B Selesai | `npm run validate:atlas` lulus untuk 7 provinsi |
 | 2 | Sumatera lainnya | Selesai | `npm run validate:atlas` lulus untuk 9 provinsi |
 | 3 | Jawa lainnya (Regional Jawa) | Selesai | `npm run validate:atlas` lulus untuk 5 provinsi |
-| 4 | Kalimantan lainnya | Belum dimulai | — |
+| 4 | Kalimantan lainnya | Selesai | `npm run validate:atlas` lulus untuk 4 provinsi |
 | 5 | Sulawesi lainnya | Belum dimulai | — |
 | 6 | Maluku dan Papua lainnya | Belum dimulai | — |
 
@@ -85,11 +85,11 @@
 | 17 | Bali | `bali` | Canonical, lengkap | Selesai (Batch 1A) | Sudah diaudit | Draft Validated |
 | 18 | Nusa Tenggara Barat | `nusa-tenggara-barat` | Stub existing | Belum dimulai | Belum diaudit | Hero perlu audit. |
 | 19 | Nusa Tenggara Timur | `nusa-tenggara-timur` | Canonical, lengkap | Selesai (Batch 1B) | Sudah diaudit | Draft Validated |
-| 20 | Kalimantan Barat | `kalimantan-barat` | Stub existing | Belum dimulai | Belum diaudit | — |
-| 21 | Kalimantan Tengah | `kalimantan-tengah` | Stub existing | Belum dimulai | Belum diaudit | — |
-| 22 | Kalimantan Selatan | `kalimantan-selatan` | Stub existing | Belum dimulai | Belum diaudit | — |
+| 20 | Kalimantan Barat | `kalimantan-barat` | Canonical, lengkap | Selesai (Batch 4) | Sudah diaudit | Draft Validated |
+| 21 | Kalimantan Tengah | `kalimantan-tengah` | Canonical, lengkap | Selesai (Batch 4) | Sudah diaudit | Draft Validated |
+| 22 | Kalimantan Selatan | `kalimantan-selatan` | Canonical, lengkap | Selesai (Batch 4) | Sudah diaudit | Draft Validated |
 | 23 | Kalimantan Timur | `kalimantan-timur` | Canonical, lengkap | Selesai (Batch 1A) | Sudah diaudit | Draft Validated |
-| 24 | Kalimantan Utara | `kalimantan-utara` | Stub existing | Belum dimulai | Belum diaudit | — |
+| 24 | Kalimantan Utara | `kalimantan-utara` | Canonical, lengkap | Selesai (Batch 4) | Sudah diaudit | Draft Validated |
 | 25 | Sulawesi Utara | `sulawesi-utara` | Stub existing | Belum dimulai | Belum diaudit | — |
 | 26 | Gorontalo | `gorontalo` | Stub existing | Belum dimulai | Belum diaudit | — |
 | 27 | Sulawesi Tengah | `sulawesi-tengah` | Stub existing | Belum dimulai | Belum diaudit | Hero perlu audit. |
@@ -123,9 +123,9 @@
 
 ## Resume Jika Sesi Terputus
 
-- Fase aktif: P1 — Batch 2 (Sumatera lainnya).
-- Fase terakhir selesai: Batch 2 (Sumatera lainnya).
-- Provinsi terakhir selesai: Lampung.
-- Provinsi berikutnya: Batch 4 (Kalimantan lainnya).
+- Fase aktif: P1 — Batch 4 (Kalimantan lainnya).
+- Fase terakhir selesai: Batch 4 (Kalimantan lainnya).
+- Provinsi terakhir selesai: Kalimantan Utara.
+- Provinsi berikutnya: Batch 5 (Sulawesi lainnya).
 - Perintah validasi terakhir: `npm run validate:atlas` (Lulus).
-- Langkah berikutnya: Eksekusi Batch 4.
+- Langkah berikutnya: Eksekusi Batch 5.

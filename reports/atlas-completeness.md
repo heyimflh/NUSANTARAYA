@@ -1,7 +1,7 @@
 # Laporan Kelengkapan Atlas Provinsi
-**Terakhir Diperbarui:** 13/7/2026, 00.13.17
+**Terakhir Diperbarui:** 13/7/2026, 00.27.24
 **Total Provinsi:** 38
-**Provinsi Selesai (Lengkap 13 Bab):** 22 / 38 (58%)
+**Provinsi Selesai (Lengkap 13 Bab):** 26 / 38 (68%)
 
 ## Status Per Provinsi
 
@@ -29,3 +29,7 @@
 | bengkulu | Bengkulu | Lengkap | 13/13 | - |
 | kepulauan-bangka-belitung | Kep. Bangka Belitung | Lengkap | 13/13 | - |
 | lampung | Lampung | Lengkap | 13/13 | - |
+| kalimantan-barat | Kalimantan Barat | Lengkap | 13/13 | - |
+| kalimantan-tengah | Kalimantan Tengah | Lengkap | 13/13 | - |
+| kalimantan-selatan | Kalimantan Selatan | Lengkap | 13/13 | - |
+| kalimantan-utara | Kalimantan Utara | Lengkap | 13/13 | - |
