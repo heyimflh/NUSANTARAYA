@@ -8,9 +8,9 @@
 - Fase: **P1 — Baseline dan fondasi canonical**
 - Status: **Berjalan**
 - Otorisasi: fase dan batch boleh berjalan berurutan tanpa konfirmasi rutin selama tetap di dalam kontrak P0-A1.
-- Fase terakhir selesai: Belum ada.
-- Provinsi terakhir selesai: Belum ada.
-- Provinsi berikutnya: **DI Yogyakarta** setelah renderer, sitasi, dan validator stabil.
+- Fase terakhir selesai: **P1 - Batch 1B (Maluku, NTT, Papua Barat Daya)**.
+- Provinsi terakhir selesai: **Papua Barat Daya**.
+- Provinsi berikutnya: **Batch Regional Jawa** (Banten, DKI Jakarta, Jawa Barat, Jawa Tengah, Jawa Timur).
 
 ## Checklist Kontrak
 
@@ -55,7 +55,7 @@
 | Batch | Cakupan | Status | Validasi terakhir |
 | --- | --- | --- | --- |
 | 0 | Renderer, sitasi, validator, DIY, aset | Selesai | `npm run validate:atlas`, build, tsc lulus |
-| 1 | Flagship | Belum dimulai | — |
+| 1 | Flagship | Batch 1B Selesai | `npm run validate:atlas` lulus untuk 7 provinsi |
 | 2 | Sumatera lainnya | Belum dimulai | — |
 | 3 | Jawa lainnya | Belum dimulai | — |
 | 4 | Kalimantan lainnya | Belum dimulai | — |
@@ -68,7 +68,7 @@
 | ---: | --- | --- | --- | --- | ---: | --- |
 | 1 | Aceh | `aceh` | Stub existing | Belum dimulai | Belum diaudit | — |
 | 2 | Sumatera Utara | `sumatera-utara` | Stub existing | Belum dimulai | Belum diaudit | — |
-| 3 | Sumatera Barat | `sumatera-barat` | Stub existing | Belum dimulai | Belum diaudit | — |
+| 3 | Sumatera Barat | `sumatera-barat` | Canonical, lengkap | Selesai (Batch 1A) | Sudah diaudit | Draft Validated |
 | 4 | Riau | `riau` | Stub existing | Belum dimulai | Belum diaudit | — |
 | 5 | Kepulauan Riau | `kepulauan-riau` | Stub existing | Belum dimulai | Belum diaudit | — |
 | 6 | Jambi | `jambi` | Stub existing | Belum dimulai | Belum diaudit | — |
@@ -82,25 +82,25 @@
 | 14 | Jawa Tengah | `jawa-tengah` | Stub existing | Belum dimulai | Belum diaudit | — |
 | 15 | DI Yogyakarta | `di-yogyakarta` | Canonical pilot, lengkap | Selesai (Batch 0) | Sudah diaudit | Society, biodiversity, tata kelola gubernur sudah dilengkapi. |
 | 16 | Jawa Timur | `jawa-timur` | Stub existing | Belum dimulai | Belum diaudit | — |
-| 17 | Bali | `bali` | Stub existing | Belum dimulai | Belum diaudit | — |
+| 17 | Bali | `bali` | Canonical, lengkap | Selesai (Batch 1A) | Sudah diaudit | Draft Validated |
 | 18 | Nusa Tenggara Barat | `nusa-tenggara-barat` | Stub existing | Belum dimulai | Belum diaudit | Hero perlu audit. |
-| 19 | Nusa Tenggara Timur | `nusa-tenggara-timur` | Stub existing | Belum dimulai | Belum diaudit | — |
+| 19 | Nusa Tenggara Timur | `nusa-tenggara-timur` | Canonical, lengkap | Selesai (Batch 1B) | Sudah diaudit | Draft Validated |
 | 20 | Kalimantan Barat | `kalimantan-barat` | Stub existing | Belum dimulai | Belum diaudit | — |
 | 21 | Kalimantan Tengah | `kalimantan-tengah` | Stub existing | Belum dimulai | Belum diaudit | — |
 | 22 | Kalimantan Selatan | `kalimantan-selatan` | Stub existing | Belum dimulai | Belum diaudit | — |
-| 23 | Kalimantan Timur | `kalimantan-timur` | Stub existing | Belum dimulai | Belum diaudit | — |
+| 23 | Kalimantan Timur | `kalimantan-timur` | Canonical, lengkap | Selesai (Batch 1A) | Sudah diaudit | Draft Validated |
 | 24 | Kalimantan Utara | `kalimantan-utara` | Stub existing | Belum dimulai | Belum diaudit | — |
 | 25 | Sulawesi Utara | `sulawesi-utara` | Stub existing | Belum dimulai | Belum diaudit | — |
 | 26 | Gorontalo | `gorontalo` | Stub existing | Belum dimulai | Belum diaudit | — |
 | 27 | Sulawesi Tengah | `sulawesi-tengah` | Stub existing | Belum dimulai | Belum diaudit | Hero perlu audit. |
 | 28 | Sulawesi Barat | `sulawesi-barat` | Stub existing | Belum dimulai | Belum diaudit | — |
-| 29 | Sulawesi Selatan | `sulawesi-selatan` | Stub existing | Belum dimulai | Belum diaudit | Culture image perlu audit. |
+| 29 | Sulawesi Selatan | `sulawesi-selatan` | Canonical, lengkap | Selesai (Batch 1A) | Sudah diaudit | Draft Validated |
 | 30 | Sulawesi Tenggara | `sulawesi-tenggara` | Stub existing | Belum dimulai | Belum diaudit | Hero perlu audit. |
-| 31 | Maluku | `maluku` | Stub existing | Belum dimulai | Belum diaudit | — |
+| 31 | Maluku | `maluku` | Canonical, lengkap | Selesai (Batch 1B) | Sudah diaudit | Draft Validated |
 | 32 | Maluku Utara | `maluku-utara` | Stub existing | Belum dimulai | Belum diaudit | — |
 | 33 | Papua | `papua` | Stub existing | Belum dimulai | Belum diaudit | Wajib batas pasca-2022. |
 | 34 | Papua Barat | `papua-barat` | Stub existing | Belum dimulai | Belum diaudit | Wajib batas pasca-2022. |
-| 35 | Papua Barat Daya | `papua-barat-daya` | Stub existing | Belum dimulai | Belum diaudit | Wajib UU pembentukan 2022. |
+| 35 | Papua Barat Daya | `papua-barat-daya` | Canonical, lengkap | Selesai (Batch 1B) | Sudah diaudit | Draft Validated |
 | 36 | Papua Tengah | `papua-tengah` | Stub existing | Belum dimulai | Belum diaudit | Wajib UU pembentukan 2022. |
 | 37 | Papua Pegunungan | `papua-pegunungan` | Stub existing | Belum dimulai | Belum diaudit | Wajib UU pembentukan 2022. |
 | 38 | Papua Selatan | `papua-selatan` | Stub existing | Belum dimulai | Belum diaudit | Wajib UU pembentukan 2022. |
@@ -124,8 +124,8 @@
 ## Resume Jika Sesi Terputus
 
 - Fase aktif: P1 — Batch 1 (Flagship).
-- Fase terakhir selesai: Batch 0 (Baseline, Validator, DIY).
-- Provinsi terakhir selesai: DI Yogyakarta.
-- Provinsi berikutnya: Batch 1 (Flagship provinces).
-- Perintah validasi terakhir: `npm run validate:atlas` (Selesai).
-- Langkah berikutnya: Eksekusi Batch 1.
+- Fase terakhir selesai: Batch 1B (Maluku, NTT, Papua Barat Daya).
+- Provinsi terakhir selesai: Papua Barat Daya.
+- Provinsi berikutnya: Batch Regional Jawa (Banten, DKI Jakarta, Jawa Barat, Jawa Tengah, Jawa Timur).
+- Perintah validasi terakhir: `npm run validate:atlas` (Lulus).
+- Langkah berikutnya: Eksekusi Batch Regional Jawa.

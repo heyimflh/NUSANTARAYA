@@ -64,17 +64,21 @@ export type AtlasFact = {
 export type AtlasTimelineItem = {
   id: string;
   period: string;
-  title: string;
+  title?: string;
+  name?: string; // alias for title
   description: string;
   citationIds: string[];
 };
 
 export type AtlasContentItem = {
   id: string;
-  name: string;
-  category: string;
-  summary: string;
-  description: CitedParagraph[];
+  name?: string;
+  title?: string; // alias for name
+  category?: string;
+  summary?: string;
+  description: string | CitedParagraph[];
+  significance?: string;
+  status?: string;
   image?: string;
   imageAlt?: string;
   citationIds: string[];
@@ -92,7 +96,8 @@ export type GeographyChapter = {
 
 export type HistoryChapter = {
   introduction: CitedParagraph[];
-  timeline: AtlasTimelineItem[];
+  timeline?: AtlasTimelineItem[];
+  eras?: AtlasTimelineItem[]; // alias for timeline
   referenceIds: string[];
 };
 
@@ -116,10 +121,17 @@ export type AtlasVocabularyItem = {
   citationIds: string[];
 };
 
+export type AtlasScriptItem = {
+  id: string;
+  name: string;
+  description: string;
+  citationIds: string[];
+};
+
 export type LanguageChapter = {
   introduction: CitedParagraph[];
   languages?: CitedParagraph[];
-  scripts?: CitedParagraph[];
+  scripts?: CitedParagraph[] | AtlasScriptItem[];
   vocabulary?: AtlasVocabularyItem[];
   referenceIds: string[];
 };

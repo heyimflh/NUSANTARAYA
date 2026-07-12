@@ -32,7 +32,7 @@ export const AtlasTimeline = ({
               {item.period}
             </p>
             <h4 className="mt-1 font-serif text-xl font-bold text-nusaNavy">
-              {item.title}
+              {item.title || item.name}
             </h4>
             <p className="mt-2 leading-relaxed text-nusaNavy/70">
               {item.description}{" "}

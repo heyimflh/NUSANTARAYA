@@ -1,0 +1,63 @@
+{
+  "generatedAt": "2026-07-12T16:45:00.000Z",
+  "totalProvinces": 38,
+  "completedProvinces": 8,
+  "provinces": [
+    {
+      "id": "di-yogyakarta",
+      "name": "Daerah Istimewa Yogyakarta",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "bali",
+      "name": "Bali",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "sumatera-barat",
+      "name": "Sumatera Barat",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "kalimantan-timur",
+      "name": "Kalimantan Timur",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "sulawesi-selatan",
+      "name": "Sulawesi Selatan",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "maluku",
+      "name": "Maluku",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "nusa-tenggara-timur",
+      "name": "Nusa Tenggara Timur",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    },
+    {
+      "id": "papua-barat-daya",
+      "name": "Papua Barat Daya",
+      "status": "Lengkap",
+      "completedChaptersCount": 13,
+      "missingChapters": []
+    }
+  ]
+}
