@@ -326,6 +326,24 @@ export const diYogyakartaAtlas: ProvinceAtlas = {
     referenceIds: ["diy-ref-08", "diy-ref-09", "diy-ref-02", "diy-ref-03", "diy-ref-07", "diy-ref-12", "diy-ref-14"],
   },
 
+  society: {
+    introduction: [
+      {
+        id: "diy-soc-01",
+        content: "Masyarakat Daerah Istimewa Yogyakarta sangat menjunjung tinggi nilai-nilai filosofi Jawa dan keraton. Hubungan antara pemimpin (Sultan) dan rakyatnya tercermin dalam konsep 'Manunggaling Kawula Gusti', yang menciptakan harmoni sosial dan penghormatan yang mendalam terhadap tradisi.",
+        citationIds: ["diy-ref-08", "diy-ref-09"],
+      },
+    ],
+    socialStructure: [
+      {
+        id: "diy-soc-02",
+        content: "Berdasarkan Undang-Undang Nomor 13 Tahun 2012 tentang Keistimewaan DIY, tata kelola pemerintahan di Yogyakarta memiliki keunikan. Gubernur dan Wakil Gubernur DIY tidak dipilih melalui pemilihan umum (Pilkada), melainkan ditetapkan secara langsung, di mana Sultan Hamengku Buwono yang bertahta bertindak sebagai Gubernur, dan Adipati Paku Alam yang bertahta sebagai Wakil Gubernur.",
+        citationIds: ["diy-ref-03"],
+      },
+    ],
+    referenceIds: ["diy-ref-03", "diy-ref-08", "diy-ref-09"],
+  },
+
   culture: {
     introduction: [
       {
@@ -458,6 +476,17 @@ export const diYogyakartaAtlas: ProvinceAtlas = {
       },
     ],
     referenceIds: ["diy-ref-10"],
+  },
+
+  biodiversity: {
+    introduction: [
+      {
+        id: "diy-bio-01",
+        content: "Keanekaragaman hayati di Daerah Istimewa Yogyakarta sangat dipengaruhi oleh keberadaan Gunung Merapi di utara dan bentang pesisir Samudra Hindia di selatan. Taman Nasional Gunung Merapi menjadi salah satu kawasan konservasi utama yang melindungi berbagai flora dan fauna endemik.",
+        citationIds: ["diy-ref-13"],
+      },
+    ],
+    referenceIds: ["diy-ref-13"],
   },
 
   destinations: {

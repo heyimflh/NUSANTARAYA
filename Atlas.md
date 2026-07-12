@@ -54,7 +54,7 @@
 
 | Batch | Cakupan | Status | Validasi terakhir |
 | --- | --- | --- | --- |
-| 0 | Renderer, sitasi, validator, DIY, aset | Berjalan | Baseline toolchain terblokir lock environment; audit source dilanjutkan |
+| 0 | Renderer, sitasi, validator, DIY, aset | Selesai | `npm run validate:atlas`, build, tsc lulus |
 | 1 | Flagship | Belum dimulai | — |
 | 2 | Sumatera lainnya | Belum dimulai | — |
 | 3 | Jawa lainnya | Belum dimulai | — |
@@ -80,7 +80,7 @@
 | 12 | DKI Jakarta | `dki-jakarta` | Stub existing | Belum dimulai | Belum diaudit | — |
 | 13 | Jawa Barat | `jawa-barat` | Stub existing | Belum dimulai | Belum diaudit | — |
 | 14 | Jawa Tengah | `jawa-tengah` | Stub existing | Belum dimulai | Belum diaudit | — |
-| 15 | DI Yogyakarta | `di-yogyakarta` | Canonical pilot, belum lengkap | Menunggu fondasi | Belum diaudit ulang | Society/biodiversity dan gap sitasi wajib diperbaiki. |
+| 15 | DI Yogyakarta | `di-yogyakarta` | Canonical pilot, lengkap | Selesai (Batch 0) | Sudah diaudit | Society, biodiversity, tata kelola gubernur sudah dilengkapi. |
 | 16 | Jawa Timur | `jawa-timur` | Stub existing | Belum dimulai | Belum diaudit | — |
 | 17 | Bali | `bali` | Stub existing | Belum dimulai | Belum diaudit | — |
 | 18 | Nusa Tenggara Barat | `nusa-tenggara-barat` | Stub existing | Belum dimulai | Belum diaudit | Hero perlu audit. |
@@ -110,7 +110,7 @@
 - Exact BPS Province in Figures terbaru belum diverifikasi untuk seluruh 38 provinsi.
 - Source pack minimum dan citation coverage belum diaudit ulang.
 - Empat aset berdimensi/rasio bermasalah belum diperiksa lisensi dan sumbernya.
-- Mekanisme penetapan Gubernur/Wakil Gubernur DIY dan gap canonical lain belum diperbaiki.
+- Mekanisme penetapan Gubernur/Wakil Gubernur DIY sudah diperbaiki, gap canonical batch 0 tertutup.
 
 ## Hasil Validasi Terakhir
 
@@ -123,9 +123,9 @@
 
 ## Resume Jika Sesi Terputus
 
-- Fase aktif: P1 — Baseline dan fondasi canonical.
-- Fase terakhir selesai: Baseline toolchain.
-- Provinsi terakhir selesai: Belum ada.
-- Provinsi berikutnya: DI Yogyakarta.
-- Perintah validasi terakhir: `npm run build` (Selesai).
-- Langkah berikutnya: Buat `scripts/validate-atlas.ts` (validator integritas) dan lanjutkan perbaikan DIY.
+- Fase aktif: P1 — Batch 1 (Flagship).
+- Fase terakhir selesai: Batch 0 (Baseline, Validator, DIY).
+- Provinsi terakhir selesai: DI Yogyakarta.
+- Provinsi berikutnya: Batch 1 (Flagship provinces).
+- Perintah validasi terakhir: `npm run validate:atlas` (Selesai).
+- Langkah berikutnya: Eksekusi Batch 1.
