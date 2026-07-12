@@ -22,6 +22,8 @@ export type SourceType =
 
 export type CredibilityTier = "A" | "B" | "C";
 
+export type CitationIndex = Readonly<Record<string, number>>;
+
 export type ScientificReference = {
   id: string;
   title: string;
@@ -107,11 +109,18 @@ export type CultureChapter = {
   referenceIds: string[];
 };
 
+export type AtlasVocabularyItem = {
+  id: string;
+  word: string;
+  meaning: string;
+  citationIds: string[];
+};
+
 export type LanguageChapter = {
   introduction: CitedParagraph[];
   languages?: CitedParagraph[];
   scripts?: CitedParagraph[];
-  vocabulary?: { word: string; meaning: string }[];
+  vocabulary?: AtlasVocabularyItem[];
   referenceIds: string[];
 };
 
@@ -147,13 +156,18 @@ export type ContemporaryChapter = {
   referenceIds: string[];
 };
 
+export type AtlasItinerary = {
+  id: string;
+  duration: number;
+  title: string;
+  days: { day: number; activities: string[] }[];
+  citationIds: string[];
+  editorialRecommendation?: boolean;
+};
+
 export type TravelChapter = {
   introduction: CitedParagraph[];
-  itineraries?: {
-    duration: number;
-    title: string;
-    days: { day: number; activities: string[] }[];
-  }[];
+  itineraries?: AtlasItinerary[];
   etiquette?: CitedParagraph[];
   referenceIds: string[];
 };

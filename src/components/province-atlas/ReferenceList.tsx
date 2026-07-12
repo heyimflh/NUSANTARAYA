@@ -1,8 +1,13 @@
 import React from "react";
-import type { ScientificReference, SourceType } from "@/types/atlas";
+import type {
+  CitationIndex,
+  ScientificReference,
+  SourceType,
+} from "@/types/atlas";
 
 type ReferenceListProps = {
   references: ScientificReference[];
+  citationIndex: CitationIndex;
 };
 
 const SOURCE_TYPE_LABELS: Record<SourceType, string> = {
@@ -29,7 +34,7 @@ const TIER_LABELS: Record<string, string> = {
   C: "Sumber Pendukung",
 };
 
-export const ReferenceList = ({ references }: ReferenceListProps) => {
+export const ReferenceList = ({ references, citationIndex }: ReferenceListProps) => {
   if (!references || references.length === 0) return null;
 
   // Group by sourceType
@@ -38,8 +43,6 @@ export const ReferenceList = ({ references }: ReferenceListProps) => {
     if (items.length > 0) acc[type] = items;
     return acc;
   }, {});
-
-  let globalIndex = 0;
 
   return (
     <div className="flex flex-col gap-6">
@@ -50,11 +53,17 @@ export const ReferenceList = ({ references }: ReferenceListProps) => {
           </h4>
           <ol className="flex flex-col gap-3 list-none">
             {refs.map((ref) => {
-              globalIndex++;
+              const referenceNumber = citationIndex[ref.id];
+              const numberLabel = referenceNumber
+                ? `[${referenceNumber}]`
+                : process.env.NODE_ENV !== "production"
+                  ? "[?]"
+                  : "";
+
               return (
-                <li key={ref.id} id={`ref-${ref.id}`} className="flex gap-3 scroll-mt-36">
+                <li key={ref.id} id={`ref-${ref.id}`} tabIndex={-1} className="flex gap-3 scroll-mt-36 focus:outline-none">
                   <span className="text-sm font-bold text-nusaGold flex-shrink-0 w-8 text-right">
-                    [{globalIndex}]
+                    {numberLabel}
                   </span>
                   <div className="flex flex-col gap-0.5 min-w-0">
                     <span className="text-sm font-semibold text-nusaNavy leading-snug">
