@@ -13,25 +13,29 @@ export function ExploreModeSelector({
   onModeChange,
 }: ExploreModeSelectorProps) {
   return (
-    <div className="flex bg-[#0D1B2A]/[0.04] p-1.5 rounded-full w-full md:w-auto shadow-inner border border-[#0D1B2A]/[0.06] backdrop-blur-sm">
+    <div 
+      className="flex bg-[#0D1B2A]/5 p-1.5 rounded-full w-full min-w-0 shadow-inner border border-[#0D1B2A]/5 backdrop-blur-sm"
+      role="radiogroup"
+      aria-label="Pilih mode eksplorasi"
+    >
       {exploreModes.map((mode) => {
         const isActive = activeMode === mode.id;
 
         return (
           <button
             key={mode.id}
-            type="button"
-            aria-pressed={isActive}
+            role="radio"
+            aria-checked={isActive}
             onClick={() => onModeChange(mode.id)}
             title={mode.description}
             className={cn(
-              "flex-1 md:flex-none px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#C9A84C]/25",
+              "relative flex-1 px-4 py-2 rounded-full text-[13px] md:text-sm font-semibold transition-all duration-[220ms] ease-out active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C] focus-visible:ring-offset-2",
               isActive
-                ? "bg-white text-[#0D1B2A] shadow-[0_4px_16px_rgba(13,27,42,0.08)] ring-1 ring-black/[0.03]"
-                : "text-[#0D1B2A]/60 hover:text-[#0D1B2A]/90 hover:bg-black/[0.03]"
+                ? "text-[#0D1B2A] shadow-[0_2px_8px_rgba(13,27,42,0.08)] bg-white ring-1 ring-black/5"
+                : "text-[#0D1B2A]/60 hover:text-[#0D1B2A] hover:bg-[#0D1B2A]/5"
             )}
           >
-            {mode.label}
+            <span className="relative z-10">{mode.label}</span>
           </button>
         );
       })}

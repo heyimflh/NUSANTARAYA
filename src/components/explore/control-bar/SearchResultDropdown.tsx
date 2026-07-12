@@ -1,15 +1,16 @@
-import { ProvinceSearchItem } from "@/data/provinceSearchData";
-import { MapPin } from "lucide-react";
+import { MapPin, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { RankedSearchResult } from "@/lib/provinceMatch";
+import { memo } from "react";
 
 type SearchResultDropdownProps = {
   isOpen: boolean;
-  results: ProvinceSearchItem[];
+  results: RankedSearchResult[];
   selectedIndex: number;
   onSelect: (id: string) => void;
 };
 
-export function SearchResultDropdown({
+export const SearchResultDropdown = memo(function SearchResultDropdown({
   isOpen,
   results,
   selectedIndex,
@@ -18,52 +19,75 @@ export function SearchResultDropdown({
   if (!isOpen) return null;
 
   return (
-    <div className="absolute top-full left-0 right-0 mt-2 bg-white/95 backdrop-blur-xl border border-[#E8E0CE] rounded-3xl shadow-xl overflow-hidden z-50">
-      <div className="px-4 py-3 text-xs font-semibold tracking-wider text-[#0D1B2A]/50 uppercase border-b border-[#E8E0CE]/50">
-        Hasil Pencarian
-      </div>
-      
-      {results.length === 0 ? (
-        <div className="p-6 text-sm text-center text-[#0D1B2A]/60">
-          Belum ditemukan. Coba kata kunci lain seperti &quot;Bali&quot;, &quot;Rendang&quot;, atau &quot;IKN&quot;.
-        </div>
-      ) : (
-        <ul className="max-h-[300px] overflow-y-auto py-2">
-          {results.map((item, index) => {
+    <div 
+      className="absolute top-full left-0 right-0 mt-3 bg-white/95 backdrop-blur-xl border border-nusaBorder rounded-2xl shadow-lg overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200"
+      id="province-search-dropdown"
+      role="listbox"
+    >
+      {results.length > 0 ? (
+        <ul className="max-h-[320px] overflow-y-auto hide-scrollbar py-2">
+          {results.map((result, index) => {
+            const { province, matchedField } = result;
             const isSelected = index === selectedIndex;
+            
             return (
-              <li key={item.id}>
-                <button
-                  type="button"
-                  className={cn(
-                    "w-full text-left px-5 py-3 transition-colors flex items-start gap-4 hover:bg-[#F8F4EA]",
-                    isSelected && "bg-[#F8F4EA]"
-                  )}
-                  onClick={() => onSelect(item.id)}
-                  onMouseEnter={() => {}} // Could be used to set hover index if desired
-                >
-                  <div className="flex-shrink-0 mt-0.5 w-8 h-8 rounded-full bg-[#0D1B2A]/5 flex items-center justify-center">
-                    <MapPin className="w-4 h-4 text-[#C9A84C]" />
+              <li
+                key={province.id}
+                id={`search-result-${province.id}`}
+                role="option"
+                aria-selected={isSelected}
+                className={cn(
+                  "px-4 py-3 cursor-pointer flex items-center justify-between group transition-colors",
+                  isSelected ? "bg-nusaGold/10" : "hover:bg-nusaGold/5"
+                )}
+                onClick={() => onSelect(province.id)}
+              >
+                <div className="flex flex-col gap-1">
+                  <div className="flex items-center gap-2">
+                    <MapPin className={cn(
+                      "w-4 h-4 transition-colors",
+                      isSelected ? "text-nusaGold" : "text-nusaNavy/40 group-hover:text-nusaGold"
+                    )} />
+                    <span className="font-semibold text-nusaNavy">
+                      {province.name}
+                    </span>
+                    {province.isFlagship && (
+                      <span className="px-1.5 py-0.5 text-[10px] font-bold bg-nusaGold/20 text-nusaNavy rounded-full uppercase tracking-wider">
+                        Unggulan
+                      </span>
+                    )}
                   </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className="font-semibold text-[#0D1B2A]">{item.name}</span>
-                      {item.tier === "deep" && (
-                        <span className="px-2 py-0.5 text-[10px] font-bold tracking-wider text-[#C9A84C] bg-[#C9A84C]/10 rounded-full uppercase">
-                          Flagship
-                        </span>
-                      )}
+                  <div className="flex items-center gap-2 text-xs text-nusaNavy/60 pl-6">
+                    <span>{province.capital}</span>
+                    <span className="w-1 h-1 rounded-full bg-nusaBorder" />
+                    <span>{province.region}</span>
+                  </div>
+                  
+                  {matchedField !== "name" && matchedField !== "capital" && matchedField !== "region" && matchedField !== "officialName" && (
+                    <div className="pl-6 pt-1">
+                      <span className="inline-block px-2 py-0.5 bg-nusaNavy/5 text-nusaNavy/70 rounded-md text-[11px] font-medium border border-nusaNavy/10">
+                        {matchedField}
+                      </span>
                     </div>
-                    <p className="text-sm text-[#0D1B2A]/60 mt-1">
-                      {item.region} &middot; {item.highlights.join(" · ")}
-                    </p>
-                  </div>
-                </button>
+                  )}
+                </div>
+
+                <ArrowRight className={cn(
+                  "w-4 h-4 transition-all duration-300",
+                  isSelected 
+                    ? "opacity-100 translate-x-0 text-nusaGold" 
+                    : "opacity-0 -translate-x-2 text-nusaGold group-hover:opacity-100 group-hover:translate-x-0"
+                )} />
               </li>
             );
           })}
         </ul>
+      ) : (
+        <div className="p-8 text-center text-nusaNavy/50">
+          <p className="text-sm">Provinsi atau lokasi tidak ditemukan.</p>
+          <p className="text-xs mt-1">Coba kata kunci lain seperti "Bali" atau "Rendang"</p>
+        </div>
       )}
     </div>
   );
-}
+});

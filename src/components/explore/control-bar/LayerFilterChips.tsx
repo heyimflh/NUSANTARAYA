@@ -28,44 +28,52 @@ const iconMap: Record<string, LucideIcon> = {
   Building2,
 };
 
-export function LayerFilterChips({
-  activeLayer,
-  onLayerChange,
-}: LayerFilterChipsProps) {
+const layerThemeMap: Record<string, string> = {
+  all: "bg-[#0D1B2A] text-[#C9A84C] border-[#0D1B2A]",
+  budaya: "bg-[#9A3B3B] text-white border-[#9A3B3B]",
+  kuliner: "bg-[#D97706] text-white border-[#D97706]",
+  alam: "bg-[#2D5A27] text-white border-[#2D5A27]",
+  sejarah: "bg-[#2D6BE4] text-white border-[#2D6BE4]",
+  "jalur-rempah": "bg-[#1B7A7A] text-white border-[#1B7A7A]",
+  "masa-depan": "bg-[#6B3FA0] text-white border-[#6B3FA0]",
+};
+
+export function LayerFilterChips({ activeLayer, onLayerChange }: LayerFilterChipsProps) {
   return (
     <div className="relative w-full">
-      {/* Optional: Add gradient fades on the sides for better scroll affordance on mobile */}
-      <div className="absolute left-0 top-0 bottom-0 w-4 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none md:hidden" />
-      <div className="absolute right-0 top-0 bottom-0 w-4 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none md:hidden" />
+      {/* Edge fades for horizontal scroll indication on mobile */}
+      <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white/90 to-transparent pointer-events-none md:hidden z-10" />
       
-      <div className="flex gap-3 overflow-x-auto scrollbar-hide snap-x py-2 -my-2 px-1">
+      <div 
+        className="flex items-center gap-2 pt-2 pb-1 overflow-x-auto hide-scrollbar snap-x snap-mandatory pr-6 md:pr-0"
+        role="radiogroup"
+        aria-label="Pilih layer peta"
+      >
+        <span className="text-xs font-bold text-[#0D1B2A]/50 uppercase tracking-wider pl-1 mr-2 hidden md:block shrink-0">
+          Layer Peta
+        </span>
+        
         {exploreLayers.map((layer) => {
-          const IconComponent = iconMap[layer.icon] || Map;
+          const Icon = iconMap[layer.icon] || Map;
           const isActive = activeLayer === layer.id;
+          const activeTheme = layerThemeMap[layer.id] || layerThemeMap.all;
 
           return (
             <button
               key={layer.id}
-              type="button"
-              aria-pressed={isActive}
+              role="radio"
+              aria-checked={isActive}
               onClick={() => onLayerChange(layer.id)}
               className={cn(
-                "snap-start flex items-center gap-2 px-5 py-2.5 rounded-full whitespace-nowrap transition-all duration-300 border focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#C9A84C]/25",
+                "flex items-center shrink-0 snap-start gap-1.5 px-3.5 py-1.5 rounded-full text-[13px] md:text-sm font-semibold transition-all duration-[220ms] ease-out border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C] focus-visible:ring-offset-2 active:scale-[0.98]",
                 isActive
-                  ? "bg-[#0D1B2A] text-white border-[#0D1B2A] shadow-none"
-                  : "bg-white/80 text-[#0D1B2A]/70 border-[#E8E0CE] shadow-none hover:bg-white hover:border-[#C9A84C]/50 hover:text-[#0D1B2A]"
+                  ? cn(activeTheme, "shadow-md")
+                  : "bg-white text-[#0D1B2A]/70 border-[#E8E0CE] hover:border-[#C9A84C]/50 hover:text-[#0D1B2A] hover:bg-[#C9A84C]/5 hover:-translate-y-[1px] hover:shadow-sm"
               )}
+              title={layer.description}
             >
-              <IconComponent 
-                className={cn(
-                  "w-4 h-4 transition-all duration-300", 
-                  isActive ? "text-[#C9A84C] scale-110 drop-shadow-[0_0_8px_rgba(201,168,76,0.5)]" : "text-[#0D1B2A]/60"
-                )} 
-              />
-              <span className="font-medium text-sm">
-                <span className="hidden md:inline">{layer.label}</span>
-                <span className="md:hidden">{layer.shortLabel}</span>
-              </span>
+              <Icon className={cn("w-4 h-4 transition-colors", isActive ? "opacity-90" : "text-[#0D1B2A]/40")} />
+              <span>{layer.label}</span>
             </button>
           );
         })}

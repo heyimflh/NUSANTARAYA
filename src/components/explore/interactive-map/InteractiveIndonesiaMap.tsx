@@ -8,6 +8,7 @@ import { MapStatusBar } from './MapStatusBar';
 import { MapToolbar } from './MapToolbar';
 import { ProvinceTooltip } from './ProvinceTooltip';
 import { ProvinceDetailPanel } from '../province-panel/ProvinceDetailPanel';
+import { MapLegend } from './MapLegend';
 
 type InteractiveIndonesiaMapProps = {
   provinces: ProvinceMapItem[];
@@ -66,7 +67,7 @@ export const InteractiveIndonesiaMap: React.FC<InteractiveIndonesiaMapProps> = (
   const isPanelOpen = !!selectedProvinceId;
 
   return (
-    <section className="w-full max-w-7xl mx-auto px-4 md:px-8 py-8 relative" aria-labelledby="interactive-map-heading">
+    <section className="w-full max-w-7xl mx-auto px-4 md:px-8 pt-16 pb-8 md:pt-24 md:pb-12 relative animate-in fade-in slide-in-from-bottom-3 duration-[500ms] motion-reduce:animate-none z-10" aria-labelledby="interactive-map-heading">
       <header className="mb-6">
         <h2 id="interactive-map-heading" className="text-sm font-bold uppercase tracking-widest text-nusaGold mb-2">
           Peta Interaktif Nusantara
@@ -113,12 +114,20 @@ export const InteractiveIndonesiaMap: React.FC<InteractiveIndonesiaMapProps> = (
               onFocus={setFocusedProvinceId}
             />
           </div>
-          <MapToolbar onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} onReset={handleResetMap} />
+          <MapToolbar 
+            onZoomIn={handleZoomIn} 
+            onZoomOut={handleZoomOut} 
+            onReset={handleResetMap} 
+            canZoomIn={zoom < 3}
+            canZoomOut={zoom > 1}
+          />
+          <MapLegend activeLayer={activeLayer} />
         </div>
 
         {/* Province Detail Panel */}
         <ProvinceDetailPanel 
           selectedProvinceId={selectedProvinceId}
+          activeMode={activeMode}
           onClose={() => onProvinceSelect('')}
         />
       </div>

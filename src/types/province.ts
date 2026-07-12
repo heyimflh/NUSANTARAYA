@@ -15,7 +15,7 @@ export type ProvinceMapItem = {
   officialName?: string;
   capital: string;
   region: string;
-  tier: "deep" | "standard" | "basic";
+  tier: "deep" | "standard";
   isFlagship: boolean;
   tagline: string;
   summary: string;
@@ -40,9 +40,3 @@ export type ProvincePanelSummary = {
   learnSourceCount?: number;
 };
 
-export type ProvinceSelectionPayload = {
-  provinceId: string;
-  source: "map" | "search" | "keyboard" | "card";
-  activeLayer: ExploreLayerId;
-  activeMode: ExploreModeId;
-};

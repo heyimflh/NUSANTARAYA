@@ -2,6 +2,7 @@ import React from 'react';
 import { ProvinceMapItem } from '@/types/province';
 import { MapPin, Compass } from 'lucide-react';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 type ProvincePanelIdentityProps = {
   province: ProvinceMapItem;
@@ -28,19 +29,40 @@ export const ProvincePanelIdentity: React.FC<ProvincePanelIdentityProps> = ({ pr
         )}
       </div>
       
-      <p className="text-sm text-nusaNavy/70 mb-4 leading-relaxed">
+      <p className="text-sm text-nusaNavy/70 mb-4 leading-relaxed line-clamp-3" title={province.summary}>
         {province.summary}
       </p>
 
-      <div className="flex items-center gap-3">
-        <Link 
-          href={province.href}
-          className="flex-1 text-center bg-nusaNavy text-white py-2.5 rounded-xl font-medium text-sm hover:bg-nusaNavy/90 transition-colors shadow-sm"
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+        {province.isFlagship ? (
+          <Link 
+            href={province.href}
+            className="flex-1 text-center bg-nusaNavy text-white py-2.5 rounded-xl font-medium text-sm hover:bg-nusaNavy/90 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-nusaNavy focus:ring-offset-2"
+          >
+            Jelajahi Detail
+          </Link>
+        ) : (
+          <button 
+            disabled
+            aria-disabled="true"
+            className="flex-1 flex justify-center items-center gap-2 bg-nusaNavy/5 text-nusaNavy/40 py-2.5 rounded-xl font-medium text-sm cursor-not-allowed border border-nusaNavy/10"
+          >
+            Jelajahi Detail
+            <span className="bg-nusaNavy/10 text-nusaNavy/50 text-[10px] uppercase px-1.5 py-0.5 rounded-full font-bold">
+              Soon
+            </span>
+          </button>
+        )}
+        
+        <button 
+          disabled
+          aria-disabled="true"
+          className="flex-1 flex justify-center items-center gap-2 bg-white text-nusaNavy/40 border border-nusaBorder py-2.5 rounded-xl font-medium text-sm cursor-not-allowed"
         >
-          Jelajahi Provinsi
-        </Link>
-        <button className="flex-1 bg-nusaWarm text-nusaNavy border border-nusaBorder py-2.5 rounded-xl font-medium text-sm hover:bg-nusaBorder/50 transition-colors">
-          Tambah ke Passport
+          Buka Passport
+          <span className="bg-nusaBorder text-nusaNavy/50 text-[10px] uppercase px-1.5 py-0.5 rounded-full font-bold">
+            Soon
+          </span>
         </button>
       </div>
     </div>

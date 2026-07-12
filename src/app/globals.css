@@ -94,6 +94,17 @@
   --color-maluku: var(--color-maluku);
   --color-papua: var(--color-papua);
 
+  /* Nusa Design System — Heritage Futuristic */
+  --color-nusaNavy: #0D1B2A;
+  --color-nusaGold: #C9A84C;
+  --color-nusaIvory: #FFFDF8;
+  --color-nusaWarm: #F8F4EA;
+  --color-nusaBorder: #E8E0CE;
+  --color-historyBlue: #2D6BE4;
+  --color-natureForest: #2D5A27;
+  --color-spiceTeal: #1B7A7A;
+  --color-futureViolet: #6B3FA0;
+
   /* Shadows */
   --shadow-sm: var(--shadow-sm);
   --shadow-md: var(--shadow-md);
@@ -106,6 +117,16 @@
   --radius-lg: var(--radius-lg);
   --radius-xl: var(--radius-xl);
   --radius-full: var(--radius-full);
+}
+
+/* ─── Reduced Motion ─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ─── Base Styles ────────────────────────────────────────────────────────── */
