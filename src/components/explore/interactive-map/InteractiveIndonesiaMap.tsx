@@ -7,7 +7,7 @@ import { IndonesiaSvgMap } from './IndonesiaSvgMap';
 import { MapStatusBar } from './MapStatusBar';
 import { MapToolbar } from './MapToolbar';
 import { ProvinceTooltip } from './ProvinceTooltip';
-import { ProvinceDetailPanel } from '../province-panel/ProvinceDetailPanel';
+import { ProvinceSummaryPanel } from '../province-summary/ProvinceSummaryPanel';
 import { MapLegend } from './MapLegend';
 
 type InteractiveIndonesiaMapProps = {
@@ -125,9 +125,8 @@ export const InteractiveIndonesiaMap: React.FC<InteractiveIndonesiaMapProps> = (
         </div>
 
         {/* Province Detail Panel */}
-        <ProvinceDetailPanel 
+        <ProvinceSummaryPanel 
           selectedProvinceId={selectedProvinceId}
-          activeMode={activeMode}
           onClose={() => onProvinceSelect('')}
         />
       </div>

@@ -28,15 +28,24 @@ export type ProvinceMapItem = {
   href: string;
 };
 
+export type SummaryFact = {
+  label: string;
+  value: string;
+};
+
+export type AtlasPreview = {
+  category: string;
+  title: string;
+  description?: string;
+  href: string;
+};
+
 export type ProvincePanelSummary = {
   provinceId: string;
-  cultureHighlights: string[];
-  culinaryHighlights: string[];
-  destinationHighlights: string[];
-  modernHighlights: string[];
-  languages?: string[];
-  scripts?: string[];
-  touristTip?: string;
-  learnSourceCount?: number;
+  facts: SummaryFact[];
+  signatures: string[];
+  atlasPreviews: AtlasPreview[];
+  whyItMatters?: string;
+  materialCount?: number;
 };
 
