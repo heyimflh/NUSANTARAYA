@@ -8,6 +8,9 @@ import { ExploreLayerId, ExploreModeId } from "@/data/exploreControls";
 import { provinceMapData } from "@/data/provinces/provinces";
 import { InteractiveIndonesiaMap } from "@/components/explore/interactive-map";
 import { countMatchingProvinces } from "@/lib/provinceMatch";
+import { FlagshipProvincesSection } from "@/components/explore/flagship-provinces/FlagshipProvincesSection";
+import { ExploreByLayerSection } from "@/components/explore/explore-by-layer";
+import { useRouter } from "next/navigation";
 
 export default function ExplorePage() {
   // State for Explore Control Bar and Map
@@ -16,6 +19,8 @@ export default function ExplorePage() {
   const [activeMode, setActiveMode] = useState<ExploreModeId>("explore");
   const [selectedProvinceId, setSelectedProvinceId] = useState<string | null>(null);
   const [showFlagshipOnly, setShowFlagshipOnly] = useState(false);
+  
+  const router = useRouter();
 
   // Additional state lifted from Map for potential coordination
   // Derived result count using canonical matching utility
@@ -42,6 +47,20 @@ export default function ExplorePage() {
     // Selecting a province on the map DOES NOT mutate search query.
     // It only shows the detail panel.
     setSelectedProvinceId(provinceId);
+  }, []);
+
+  const handleOpenAtlas = useCallback((provinceId: string) => {
+    router.push(`/provinsi/${provinceId}`);
+  }, [router]);
+
+  const handleOpenSummary = useCallback((provinceId: string) => {
+    setSelectedProvinceId(provinceId);
+    // Focus or scroll to map section if needed. Assuming user knows where panel is 
+    // or we can just scroll to the map heading.
+    const mapHeading = document.getElementById("interactive-map-heading");
+    if (mapHeading) {
+      mapHeading.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   }, []);
 
   return (
@@ -79,6 +98,19 @@ export default function ExplorePage() {
         resultCount={resultCount}
         onProvinceSelect={handleProvinceSelect}
         onReset={handleReset}
+      />
+
+      <FlagshipProvincesSection 
+        selectedProvinceId={selectedProvinceId}
+        onOpenSummary={handleOpenSummary}
+        onOpenAtlas={handleOpenAtlas}
+      />
+
+      <ExploreByLayerSection
+        activeLayer={activeLayer}
+        onLayerChange={setActiveLayer}
+        onOpenSummary={handleOpenSummary}
+        onOpenAtlas={handleOpenAtlas}
       />
     </main>
   );

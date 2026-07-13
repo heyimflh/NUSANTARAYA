@@ -693,7 +693,6 @@ export const provincePanelData: ProvincePanelSummary[] = provinceMapData.map(p =
       { category: 'Rasa', title: 'Materi Kuliner', href: `/provinsi/${p.id}#kuliner` },
       { category: 'Alam', title: 'Materi Destinasi', href: `/provinsi/${p.id}#destinasi` }
     ],
-    whyItMatters: p.summary,
-    materialCount: Math.floor(Math.random() * 50) + 20
+    materialCount: (p.id.length * 7 % 50) + 20
   };
 });
