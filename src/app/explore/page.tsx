@@ -11,7 +11,10 @@ import { countMatchingProvinces } from "@/lib/provinceMatch";
 import { FlagshipProvincesSection } from "@/components/explore/flagship-provinces/FlagshipProvincesSection";
 import { ExploreByLayerSection } from "@/components/explore/explore-by-layer";
 import { RecommendedJourneySection } from "@/components/explore/recommended-journey";
+import { RegionalExplorerSection } from "@/components/explore/regional-explorer";
 import { useRouter } from "next/navigation";
+import { getRegionById } from "@/data/regions/regionProvinceMap";
+import { RegionId } from "@/types/region";
 
 export default function ExplorePage() {
   // State for Explore Control Bar and Map
@@ -59,6 +62,18 @@ export default function ExplorePage() {
     // Focus or scroll to map section if needed. Assuming user knows where panel is 
     // or we can just scroll to the map heading.
     const mapHeading = document.getElementById("interactive-map-heading");
+    if (mapHeading) {
+      mapHeading.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
+
+  const handleExploreMapRegion = useCallback((regionId: string) => {
+    // Adapter: To filter the map by region, we set the search query to the region name
+    const region = getRegionById(regionId as RegionId);
+    if (region) {
+      setSearchQuery(region.label);
+    }
+    const mapHeading = document.getElementById("interactive-map-heading") || document.getElementById("interactive-map");
     if (mapHeading) {
       mapHeading.scrollIntoView({ behavior: "smooth", block: "start" });
     }
@@ -119,6 +134,16 @@ export default function ExplorePage() {
         selectedProvinceId={selectedProvinceId}
         searchQuery={searchQuery}
         showFlagshipOnly={showFlagshipOnly}
+      />
+
+      <RegionalExplorerSection
+        activeLayer={activeLayer}
+        activeMode={activeMode}
+        selectedProvinceId={selectedProvinceId}
+        searchQuery={searchQuery}
+        showFlagshipOnly={showFlagshipOnly}
+        onExploreMap={handleExploreMapRegion}
+        onOpenSummary={handleOpenSummary}
       />
     </main>
   );

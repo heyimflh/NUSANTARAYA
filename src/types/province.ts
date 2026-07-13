@@ -1,4 +1,4 @@
-import { ExploreLayerId, ExploreModeId } from "@/data/exploreControls";
+import { ExploreLayerId } from "@/data/exploreControls";
 
 export type ProvinceAssets = {
   thumb: string;
