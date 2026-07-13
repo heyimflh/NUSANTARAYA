@@ -12,13 +12,18 @@ export type ExploreLayerDefinition = {
   accentColor: string;
   visualAsset?: string;
   mapOverlay?: string;
-  ctaLabel: string;
-  keywords: string[];
+  ctaShortLabel: string;
+  ctaAriaLabel: string;
+  ctaBackground: string;
+  ctaHoverBackground: string;
 };
 
 export type LayerProvinceRecommendation = {
   provinceId: string;
+  provinceName: string;
+  region: string;
   reason: string;
   thumbnail: string;
   href: string;
+  isFlagship: boolean;
 };

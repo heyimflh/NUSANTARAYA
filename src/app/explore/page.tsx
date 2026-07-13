@@ -10,6 +10,7 @@ import { InteractiveIndonesiaMap } from "@/components/explore/interactive-map";
 import { countMatchingProvinces } from "@/lib/provinceMatch";
 import { FlagshipProvincesSection } from "@/components/explore/flagship-provinces/FlagshipProvincesSection";
 import { ExploreByLayerSection } from "@/components/explore/explore-by-layer";
+import { RecommendedJourneySection } from "@/components/explore/recommended-journey";
 import { useRouter } from "next/navigation";
 
 export default function ExplorePage() {
@@ -110,7 +111,14 @@ export default function ExplorePage() {
         activeLayer={activeLayer}
         onLayerChange={setActiveLayer}
         onOpenSummary={handleOpenSummary}
-        onOpenAtlas={handleOpenAtlas}
+      />
+
+      <RecommendedJourneySection
+        activeLayer={activeLayer}
+        activeMode={activeMode}
+        selectedProvinceId={selectedProvinceId}
+        searchQuery={searchQuery}
+        showFlagshipOnly={showFlagshipOnly}
       />
     </main>
   );

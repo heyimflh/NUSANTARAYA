@@ -67,9 +67,9 @@ export const InteractiveIndonesiaMap: React.FC<InteractiveIndonesiaMapProps> = (
   const isPanelOpen = !!selectedProvinceId;
 
   return (
-    <section className="w-full max-w-7xl mx-auto px-4 md:px-8 pt-16 pb-8 md:pt-24 md:pb-12 relative animate-in fade-in slide-in-from-bottom-3 duration-[500ms] motion-reduce:animate-none z-10" aria-labelledby="interactive-map-heading">
+    <section id="interactive-map" className="w-full max-w-7xl mx-auto px-4 md:px-8 pt-16 pb-8 md:pt-24 md:pb-12 relative animate-in fade-in slide-in-from-bottom-3 duration-[500ms] motion-reduce:animate-none z-10" aria-labelledby="interactive-map-heading">
       <header className="mb-6">
-        <h2 id="interactive-map-heading" className="text-sm font-bold uppercase tracking-widest text-nusaGold mb-2">
+        <h2 id="interactive-map-heading" tabIndex={-1} className="text-sm font-bold uppercase tracking-widest text-nusaGold mb-2 outline-none">
           Peta Interaktif Nusantara
         </h2>
         <h3 className="font-serif text-3xl md:text-4xl text-nusaNavy font-bold">

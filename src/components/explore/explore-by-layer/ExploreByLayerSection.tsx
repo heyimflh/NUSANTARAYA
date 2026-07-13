@@ -5,11 +5,11 @@ import { layerEditorialData } from "@/data/layers/layerEditorial";
 import { LayerSelector } from "./LayerSelector";
 import { LayerObservatory } from "./LayerObservatory";
 
+
 interface ExploreByLayerSectionProps {
   activeLayer: ExploreLayerId;
   onLayerChange: (layer: ExploreLayerId) => void;
   onOpenSummary: (provinceId: string) => void;
-  onOpenAtlas: (provinceId: string) => void;
 }
 
 export const ExploreByLayerSection: React.FC<ExploreByLayerSectionProps> = ({
@@ -25,18 +25,27 @@ export const ExploreByLayerSection: React.FC<ExploreByLayerSectionProps> = ({
   const currentLayerData = layerEditorialData[previewLayerId];
 
   const handleApplyToMap = () => {
-    // If we are showing a preview (activeLayer === "all"), apply it first
     if (activeLayer === "all") {
       onLayerChange(previewLayerId);
     }
     
     // Smooth scroll to map
-    const mapHeading = document.getElementById("interactive-map-heading") || document.getElementById("interactive-map");
-    if (mapHeading) {
-      // Find sticky offset if needed, or just let scrollIntoView handle it. 
-      // Many projects have sticky navbars, scrollIntoView might hide under it.
-      // Assuming CSS scroll-margin-top is set on the map ID or we do custom offset.
-      mapHeading.scrollIntoView({ behavior: shouldReduceMotion ? "auto" : "smooth", block: "start" });
+    const mapHeading = document.getElementById("interactive-map-heading");
+    const mapSection = document.getElementById("interactive-map");
+    
+    if (mapSection) {
+      const yOffset = -80; // approximate sticky navbar offset
+      const y = mapSection.getBoundingClientRect().top + window.scrollY + yOffset;
+      
+      window.scrollTo({
+        top: y,
+        behavior: shouldReduceMotion ? "auto" : "smooth"
+      });
+
+      // Shift focus for accessibility without jumping
+      if (mapHeading) {
+        mapHeading.focus({ preventScroll: true });
+      }
     }
   };
 
@@ -49,34 +58,39 @@ export const ExploreByLayerSection: React.FC<ExploreByLayerSectionProps> = ({
       id="explore-by-layer" 
       ref={sectionRef}
       aria-labelledby="explore-by-layer-heading"
-      className="relative w-full bg-background pt-24 pb-32 overflow-hidden"
+      className="relative w-full bg-[#FFFDF8] pt-24 pb-32 overflow-hidden"
     >
       <div className="container mx-auto px-4 md:px-8 max-w-[1440px]">
         
         {/* Header */}
         <motion.div 
-          className="mb-10 md:mb-16"
-          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+          className="mb-8 md:mb-14 max-w-3xl"
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="text-nusaNavy/60 font-inter font-semibold text-xs md:text-sm uppercase tracking-wider mb-3">
-            Jelajah Berdasarkan Minat
-          </p>
-          <h2 id="explore-by-layer-heading" className="text-nusaNavy font-playfair text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Enam Lensa untuk Melihat Nusantara
+          <div className="flex items-center gap-3 mb-4">
+            <span className="w-8 h-[1px] bg-nusaGold" />
+            <p className="text-nusaNavy/60 font-inter font-bold text-[11px] md:text-xs uppercase tracking-[0.2em]">
+              Jelajah Berdasarkan Minat
+            </p>
+          </div>
+          
+          <h2 id="explore-by-layer-heading" className="text-nusaNavy font-playfair text-4xl md:text-5xl lg:text-6xl font-bold mb-5 leading-tight tracking-tight">
+            Enam Lensa untuk <br className="hidden md:block" />Melihat Nusantara
           </h2>
-          <p className="text-nusaNavy/80 font-inter text-base md:text-lg max-w-2xl leading-relaxed">
+          <p className="text-nusaNavy/70 font-inter text-base md:text-lg leading-[1.6]">
             Pilih budaya, rasa, alam, sejarah, jalur rempah, atau masa depan—lalu temukan provinsi dan cerita yang terhubung melalui peta NUSANTARAYA.
+            <span className="block mt-2 font-medium text-nusaNavy/90">Satu peta, enam cara memulai perjalanan.</span>
           </p>
         </motion.div>
 
-        {/* Main Content Layout */}
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 xl:gap-12">
+        {/* Outer Shell for Desktop */}
+        <div className="flex flex-col xl:flex-row gap-6 xl:gap-0 xl:bg-white/80 xl:backdrop-blur-sm xl:border xl:border-[#E8E0CE] xl:rounded-[36px] xl:p-3 xl:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-colors duration-500 min-h-[580px]">
           
           {/* Vertical Selector (Desktop) / Horizontal Rail (Tablet/Mobile) */}
-          <div className="lg:w-[22%] shrink-0">
+          <div className="xl:w-[22%] shrink-0 xl:pr-3 xl:py-3 z-20">
             <LayerSelector 
               activeLayer={activeLayer} 
               previewLayerId={previewLayerId}
@@ -85,7 +99,7 @@ export const ExploreByLayerSection: React.FC<ExploreByLayerSectionProps> = ({
           </div>
 
           {/* Active Observatory Stage */}
-          <div className="lg:w-[78%] shrink-0 flex-1 min-h-[600px] lg:min-h-[680px]">
+          <div className="xl:w-[78%] shrink-0 flex-1 z-10">
             <LayerObservatory 
               layerData={currentLayerData}
               isActive={activeLayer !== "all"}
