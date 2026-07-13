@@ -10,122 +10,102 @@ interface SmartSuggestionsProps {
 export function SmartSuggestions({ suggestions, onSelect }: SmartSuggestionsProps) {
   if (suggestions.length === 0) return null;
 
-  const featured = suggestions[0];
-  const compacts = suggestions.slice(1);
+  // Derive contextual strategy labels based on index or properties.
+  const getStrategyLabel = (idx: number, journey: RecommendedJourney) => {
+    if (idx === 0) return "Lanjutkan Cerita";
+    if (idx === 1) return "Coba Kontras";
+    return "Lengkapi Passport";
+  };
 
   return (
-    <div className="mt-20 pt-16 border-t border-[var(--journey-line)]">
-      
-      <div className="flex items-center gap-3 mb-10">
-        <Sparkles className="w-5 h-5 text-[var(--journey-muted)]" />
-        <h4 className="text-xs font-bold text-[var(--journey-ink)] uppercase tracking-[0.2em]">
-          Alternatif Penjelajahan
-        </h4>
+    <div className="mt-16 md:mt-24 border-t border-[var(--journey-line)] pt-12 md:pt-16">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
+        <div className="flex items-center gap-3">
+          <Sparkles className="w-5 h-5 text-[var(--journey-saffron)]" />
+          <h4 className="text-sm font-bold text-[var(--journey-ink)] uppercase tracking-[0.2em]">
+            Eksplorasi Alternatif
+          </h4>
+        </div>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
-        
-        {/* Featured Alternative (Large, Image-led) */}
-        {featured && (
-          <div className="md:col-span-6 lg:col-span-7">
-            <button
-              onClick={() => onSelect(featured.id)}
-              className="group text-left w-full h-full flex flex-col focus:outline-none"
-            >
-              <div 
-                className="relative w-full aspect-[4/3] md:aspect-[16/9] mb-5 overflow-hidden bg-[var(--journey-paper-deep)]"
-                style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 40px 100%, 0 calc(100% - 40px))" }}
-              >
-                <img 
-                  src={featured.coverAsset} 
-                  alt={featured.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100%" height="100%" fill="%23e8ddc8" /></svg>';
-                  }}
-                />
-                <div className="absolute inset-0 bg-noise opacity-[0.03] mix-blend-multiply pointer-events-none" />
-              </div>
+      {/* 
+        Desktop: Asymmetric 3-column grid.
+        Tablet/Mobile: Horizontal scroll rail.
+      */}
+      <div className="flex overflow-x-auto lg:grid lg:grid-cols-[1.15fr_0.925fr_0.925fr] gap-5 md:gap-6 pb-8 hide-scrollbar snap-x snap-mandatory">
+        {suggestions.map((journey, idx) => (
+          <button
+            key={journey.id}
+            onClick={() => onSelect(journey.id)}
+            className="group relative text-left flex flex-col focus:outline-none w-[280px] sm:w-[320px] lg:w-auto shrink-0 snap-start rounded-[24px] overflow-hidden min-h-[400px] lg:min-h-[460px] shadow-sm hover:shadow-2xl transition-all duration-700 focus-visible:ring-2 focus-visible:ring-[var(--journey-saffron)] bg-[#1A1A1A]"
+          >
+            {/* Background Image with Dark Base */}
+            <div className="absolute inset-0 bg-black">
+              <img 
+                src={journey.coverAsset} 
+                alt={`Visual untuk ${journey.shortTitle}`}
+                className="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-110 transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100%" height="100%" fill="%232D3748" /></svg>';
+                }}
+              />
+            </div>
+            
+            {/* Gradient Overlays for Readability */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/90 group-hover:to-black/95 transition-colors duration-700" />
+
+            {/* Inner Content Container */}
+            <div className="relative z-10 flex flex-col h-full p-6 lg:p-8 w-full">
               
-              <div className="px-2">
-                <span 
-                  className="text-[10px] font-bold tracking-[0.15em] uppercase mb-2 block"
-                  style={{ color: featured.accentColor }}
-                >
-                  {featured.eyebrow}
+              {/* Header: Badge & Arrow */}
+              <div className="flex items-start justify-between mb-auto">
+                <span className="text-[9px] lg:text-[10px] font-bold tracking-[0.2em] uppercase px-3.5 py-2 rounded-full bg-white/10 backdrop-blur-md text-white border border-white/20 shadow-[0_4px_12px_rgba(0,0,0,0.1)]">
+                  {getStrategyLabel(idx, journey)}
                 </span>
                 
-                <h5 className="font-serif font-bold text-2xl md:text-3xl text-[var(--journey-ink)] leading-tight mb-3">
-                  {featured.shortTitle}
-                </h5>
-                
-                <p className="text-[15px] text-[var(--journey-muted)] leading-relaxed mb-4 line-clamp-2">
-                  {featured.promise}
-                </p>
-
-                <div className="flex items-center gap-3">
-                  <span className="text-[13px] font-bold text-[var(--journey-ink)] uppercase tracking-wider group-hover:opacity-70 transition-opacity">
-                    Lihat Perjalanan
-                  </span>
-                  <div 
-                    className="w-6 h-px transition-all group-hover:w-10"
-                    style={{ backgroundColor: featured.accentColor }}
-                  />
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" style={{ color: featured.accentColor }} />
+                <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 ease-out shadow-[0_4px_12px_rgba(0,0,0,0.1)]">
+                  <ArrowRight className="w-4 h-4 text-white" />
                 </div>
               </div>
-            </button>
-          </div>
-        )}
-
-        {/* Compact Alternatives */}
-        {compacts.length > 0 && (
-          <div className="md:col-span-6 lg:col-span-5 flex flex-col gap-8 md:justify-end">
-            {compacts.map((compact) => (
-              <button
-                key={compact.id}
-                onClick={() => onSelect(compact.id)}
-                className="group text-left flex items-center gap-5 focus:outline-none"
-              >
-                <div 
-                  className="relative w-28 h-28 md:w-32 md:h-32 shrink-0 overflow-hidden bg-[var(--journey-paper-deep)]"
-                  style={{ clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%)" }}
-                >
-                  <img 
-                    src={compact.coverAsset} 
-                    alt={compact.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100%" height="100%" fill="%23e8ddc8" /></svg>';
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-noise opacity-[0.03] mix-blend-multiply pointer-events-none" />
-                </div>
-
-                <div className="flex-1 py-1">
-                  <span 
-                    className="text-[10px] font-bold tracking-[0.15em] uppercase mb-1.5 block"
-                    style={{ color: compact.accentColor }}
-                  >
-                    {compact.eyebrow}
+              
+              {/* Bottom Content: Title & Expanding Description */}
+              <div className="mt-8 flex flex-col justify-end transform transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:-translate-y-2">
+                
+                {/* Meta Strip */}
+                <div className="flex items-center gap-3 mb-4 text-white/80">
+                  <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[var(--journey-saffron)]">
+                    A0{idx + 1}
                   </span>
-                  
-                  <h5 className="font-serif font-bold text-xl md:text-2xl text-[var(--journey-ink)] leading-tight mb-2 group-hover:opacity-80 transition-opacity">
-                    {compact.shortTitle}
-                  </h5>
-                  
-                  <div className="flex items-center gap-2 mt-4 opacity-80 group-hover:opacity-100 transition-opacity">
-                    <span className="text-xs font-bold text-[var(--journey-ink)] uppercase tracking-wider">
-                      Jelajahi
-                    </span>
-                    <ArrowRight className="w-3 h-3" style={{ color: compact.accentColor }} />
+                  <span className="w-6 h-[1px] bg-white/30" />
+                  <span className="text-[9px] lg:text-[10px] font-medium tracking-widest uppercase truncate">
+                    {journey.stops[0].label} — {journey.stops[journey.stops.length - 1].label}
+                  </span>
+                </div>
+                
+                {/* Title */}
+                <h5 className="font-serif font-bold text-3xl lg:text-[32px] !text-white leading-[1.1] mb-1 drop-shadow-lg">
+                  {journey.shortTitle}
+                </h5>
+                
+                {/* Animated Expanding Description (CSS Grid Trick) */}
+                <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out">
+                  <div className="overflow-hidden">
+                    <p className="text-[13px] lg:text-sm text-white/70 leading-relaxed pt-4 mt-4 border-t border-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150 transform translate-y-2 group-hover:translate-y-0">
+                      {journey.promise}
+                    </p>
                   </div>
                 </div>
-              </button>
-            ))}
-          </div>
-        )}
 
+              </div>
+            </div>
+            
+            {/* Ambient Base Glow (Active indicator effect on hover) */}
+            <div 
+              className="absolute bottom-0 left-0 right-0 h-1.5 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700 ease-out"
+              style={{ backgroundColor: journey.accentColor || 'var(--journey-saffron)' }}
+            />
+          </button>
+        ))}
       </div>
     </div>
   );

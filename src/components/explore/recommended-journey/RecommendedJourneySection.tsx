@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { ExploreLayerId, ExploreModeId } from "@/data/exploreControls";
 import { useLanguage, usePassport } from "@/context/app-context";
 import { JourneyDossier } from "./JourneyDossier";
 import { SmartSuggestions } from "./SmartSuggestions";
 import { getRecommendedJourneys } from "@/lib/recommendation/engine";
-import { JourneyRecommendationContext } from "@/data/journeys/types";
-import { RefreshCw, ArrowRight } from "lucide-react";
+import { JourneyRecommendationContext, RecommendedJourney } from "@/data/journeys/types";
+import { Map, MapPin, Compass } from "lucide-react";
 
 interface RecommendedJourneySectionProps {
   activeLayer: ExploreLayerId;
@@ -27,153 +27,167 @@ export function RecommendedJourneySection({
   const { passport } = usePassport();
   const { language } = useLanguage();
   
-  const [viewedJourneyIds, setViewedJourneyIds] = useState<string[]>([]);
-  const [activeJourneyId, setActiveJourneyId] = useState<string | null>(null);
+  // Track viewed history internally without causing immediate visual jumps
+  const viewedJourneyIds = useRef<string[]>([]);
+  
+  // Presentation state
+  const [displayedPrimary, setDisplayedPrimary] = useState<RecommendedJourney | null>(null);
+  const [displayedReasons, setDisplayedReasons] = useState<string[]>([]);
+  const [displayedAlternatives, setDisplayedAlternatives] = useState<RecommendedJourney[]>([]);
 
-  const context: JourneyRecommendationContext = useMemo(() => ({
-    activeLayer,
-    activeMode,
-    selectedProvinceId,
-    searchQuery,
-    showFlagshipOnly,
-    passportProvinceIds: passport.stamps,
-    viewedJourneyIds,
-    locale: language,
-  }), [
-    activeLayer, activeMode, selectedProvinceId, searchQuery, 
-    showFlagshipOnly, passport.stamps, viewedJourneyIds, language
-  ]);
-
-  const recommendationResult = useMemo(() => {
-    return getRecommendedJourneys(context);
-  }, [context]);
-
-  const displayedPrimary = useMemo(() => {
-    if (activeJourneyId) {
-      if (recommendationResult.primary.id === activeJourneyId) return recommendationResult.primary;
-      const foundAlt = recommendationResult.alternatives.find(a => a.id === activeJourneyId);
-      if (foundAlt) return foundAlt;
-    }
-    return recommendationResult.primary;
-  }, [activeJourneyId, recommendationResult]);
-
-  const displayedSuggestions = useMemo(() => {
-    const all = [recommendationResult.primary, ...recommendationResult.alternatives];
-    return all.filter(j => j.id !== displayedPrimary.id).slice(0, 3);
-  }, [displayedPrimary, recommendationResult]);
-
+  // Re-compute recommendation strictly when context changes
   useEffect(() => {
-    if (displayedPrimary && !viewedJourneyIds.includes(displayedPrimary.id)) {
-      setViewedJourneyIds(prev => [...prev, displayedPrimary.id]);
+    const context: JourneyRecommendationContext = {
+      activeLayer,
+      activeMode,
+      selectedProvinceId,
+      searchQuery,
+      showFlagshipOnly,
+      passportProvinceIds: passport.stamps,
+      viewedJourneyIds: viewedJourneyIds.current,
+      locale: language,
+    };
+    
+    const result = getRecommendedJourneys(context);
+    
+    setDisplayedPrimary(result.primary);
+    setDisplayedReasons(result.reasons);
+    setDisplayedAlternatives(result.alternatives.slice(0, 3));
+    
+    if (!viewedJourneyIds.current.includes(result.primary.id)) {
+      viewedJourneyIds.current.push(result.primary.id);
     }
-  }, [displayedPrimary, viewedJourneyIds]);
+  }, [activeLayer, activeMode, selectedProvinceId, searchQuery, showFlagshipOnly, passport.stamps, language]);
 
   const handleRegenerate = () => {
-    if (displayedSuggestions.length > 0) {
-      setActiveJourneyId(displayedSuggestions[0].id);
+    if (displayedAlternatives.length > 0) {
+      const newPrimary = displayedAlternatives[0];
+      setDisplayedPrimary(newPrimary);
+      setDisplayedReasons(["THEMATIC_CONTINUITY"]); 
+      
+      if (!viewedJourneyIds.current.includes(newPrimary.id)) {
+        viewedJourneyIds.current.push(newPrimary.id);
+      }
+      
+      const context: JourneyRecommendationContext = {
+        activeLayer,
+        activeMode,
+        selectedProvinceId,
+        searchQuery,
+        showFlagshipOnly,
+        passportProvinceIds: passport.stamps,
+        viewedJourneyIds: viewedJourneyIds.current,
+        locale: language,
+      };
+      
+      const nextResult = getRecommendedJourneys(context);
+      
+      const newAlts = [];
+      if (nextResult.primary.id !== newPrimary.id) newAlts.push(nextResult.primary);
+      newAlts.push(...nextResult.alternatives.filter(a => a.id !== newPrimary.id));
+      
+      setDisplayedAlternatives(newAlts.slice(0, 3));
     }
   };
 
   const handleSelectSuggestion = (id: string) => {
-    setActiveJourneyId(id);
+    const selectedAlt = displayedAlternatives.find(a => a.id === id);
+    if (selectedAlt) {
+      setDisplayedPrimary(selectedAlt);
+      setDisplayedReasons(["THEMATIC_CONTINUITY"]);
+      
+      if (!viewedJourneyIds.current.includes(selectedAlt.id)) {
+        viewedJourneyIds.current.push(selectedAlt.id);
+      }
+      
+      const context: JourneyRecommendationContext = {
+        activeLayer,
+        activeMode,
+        selectedProvinceId,
+        searchQuery,
+        showFlagshipOnly,
+        passportProvinceIds: passport.stamps,
+        viewedJourneyIds: viewedJourneyIds.current,
+        locale: language,
+      };
+      
+      const nextResult = getRecommendedJourneys(context);
+      const newAlts = [];
+      if (nextResult.primary.id !== selectedAlt.id) newAlts.push(nextResult.primary);
+      newAlts.push(...nextResult.alternatives.filter(a => a.id !== selectedAlt.id));
+      
+      setDisplayedAlternatives(newAlts.slice(0, 3));
+    }
   };
+
+  if (!displayedPrimary) return null;
 
   return (
     <section 
       id="recommended-journey" 
       aria-labelledby="recommended-journey-heading"
-      className="py-24 relative overflow-hidden"
+      className="py-20 md:py-28 lg:py-32 relative overflow-hidden"
       style={{
-        // Local Semantic Tokens for Archipelago Journey Atelier
-        "--journey-canvas": "#F4EBDD",
-        "--journey-paper": "#FFF9F0",
-        "--journey-paper-deep": "#E8DDC8",
-        "--journey-ink": "#2B2118",
-        "--journey-muted": "#766A5D",
-        "--journey-terracotta": "#B8563F",
-        "--journey-saffron": "#D2A52C",
-        "--journey-sage": "#718064",
-        "--journey-teal": "#2F766D",
-        "--journey-coral": "#D9785F",
-        "--journey-plum": "#76536A",
-        "--journey-line": "#CDBFA9",
+        "--journey-canvas": "#F8F4EA",
+        "--journey-paper": "#FFFDF8",
+        "--journey-paper-deep": "#E8E0CE",
+        "--journey-ink": "#0D1B2A",
+        "--journey-muted": "#5E6570",
+        "--journey-terracotta": "#B85C38",
+        "--journey-saffron": "#C9A84C",
+        "--journey-sage": "#2D5A27",
+        "--journey-teal": "#1B7A7A",
+        "--journey-coral": "#D4691E",
+        "--journey-plum": "#6B3FA0",
+        "--journey-line": "#E8E0CE",
         backgroundColor: "var(--journey-canvas)",
       } as React.CSSProperties}
     >
-      <div className="container-custom mx-auto">
+      <div className="container mx-auto px-5 sm:px-6 md:px-8 lg:px-10 xl:px-12 max-w-[1440px]">
         
-        {/* LAYER 1 — EDITORIAL HEADER */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 mb-16 items-start">
+        {/* EDITORIAL HEADER */}
+        <div className="max-w-[720px] mb-12 lg:mb-14">
+          <p className="text-[11px] md:text-xs font-bold text-[var(--journey-muted)] uppercase tracking-[0.2em] mb-4">
+            DISUSUN UNTUK JELAJAHMU
+          </p>
+          <h2 id="recommended-journey-heading" className="text-4xl md:text-[44px] lg:text-[56px] font-serif text-[var(--journey-ink)] font-bold leading-[1.15] mb-5 tracking-tight">
+            Perjalanan Berikutnya, <br className="hidden sm:block"/>Lebih Terarah
+          </h2>
+          <p className="text-base md:text-[17px] text-[var(--journey-muted)] leading-[1.6] mb-8">
+            NUSANTARAYA menghubungkan minat, mode jelajah, provinsi pilihan, dan progres Passport menjadi satu jalur yang relevan.
+          </p>
           
-          <div className="md:col-span-2 hidden md:block">
-            <span 
-              className="text-6xl font-serif italic text-[var(--journey-muted)] opacity-20 block leading-none"
-              aria-hidden="true"
-            >
-              07
+          {/* Context Summary */}
+          <div className="flex flex-wrap items-center gap-2 text-[13px] md:text-sm font-medium text-[var(--journey-ink)]">
+            <span className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--journey-paper)] border border-[var(--journey-line)] rounded-full">
+              <Compass className="w-3.5 h-3.5 text-[var(--journey-muted)]" />
+              Mode {activeMode === 'explore' ? 'Explore' : activeMode === 'tourist' ? 'Wisata' : 'Pelajar'}
             </span>
-          </div>
-
-          <div className="md:col-span-5">
-            <h2 id="recommended-journey-heading" className="text-xs font-bold text-[var(--journey-ink)] uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
-              <span className="md:hidden">07. </span>Disusun untuk Jelajahmu
-            </h2>
-            <h3 className="text-4xl md:text-5xl font-serif text-[var(--journey-ink)] font-bold leading-[1.15] mb-5 tracking-tight">
-              Perjalanan Berikutnya, Dirangkai untukmu
-            </h3>
-            <p className="text-[17px] text-[var(--journey-muted)] leading-[1.6]">
-              Satu jalur terkurasi dari minat, mode jelajah, provinsi aktif, dan progres Passport.
-            </p>
-          </div>
-
-          <div className="md:col-span-5 flex flex-col md:items-end justify-end h-full">
-            <div className="text-left md:text-right w-full md:w-auto mt-4 md:mt-0 pt-6 border-t border-[var(--journey-line)] md:border-0 md:pt-0">
-              <p className="text-sm font-medium text-[var(--journey-muted)] mb-4">
-                Tidak yakin dengan pilihan ini?
-              </p>
-              <button 
-                onClick={handleRegenerate}
-                className="group flex items-center gap-2 px-5 py-2.5 rounded-full border border-[var(--journey-line)] text-[var(--journey-ink)] font-medium hover:bg-[var(--journey-paper)] hover:border-[var(--journey-muted)] transition-all shrink-0 active:scale-95"
-                aria-label="Beri saran lain"
-              >
-                <RefreshCw className="w-4 h-4 text-[var(--journey-muted)] group-hover:rotate-180 transition-transform duration-500" />
-                Beri Saran Lain
-              </button>
-            </div>
+            <span className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--journey-paper)] border border-[var(--journey-line)] rounded-full capitalize">
+              {activeLayer === 'all' ? 'Semua Minat' : activeLayer}
+            </span>
+            {selectedProvinceId && (
+              <span className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--journey-paper)] border border-[var(--journey-line)] rounded-full">
+                <MapPin className="w-3.5 h-3.5 text-[var(--journey-muted)]" />
+                Dimulai dari {selectedProvinceId.replace(/-/g, ' ')}
+              </span>
+            )}
           </div>
         </div>
 
-        {/* LAYER 2 & 3 — CINEMATIC JOURNEY STAGE & ROUTE CHAPTER STRIP */}
-        <div aria-live="polite">
-          <JourneyDossier 
-            journey={displayedPrimary} 
-            reasons={activeJourneyId === displayedPrimary.id ? [] : recommendationResult.reasons} 
-          />
-        </div>
+        {/* PRIMARY DOSSIER */}
+        <JourneyDossier 
+          journey={displayedPrimary} 
+          reasons={displayedReasons}
+          onRegenerate={handleRegenerate}
+        />
 
-        {/* LAYER 4 — SMART SUGGESTIONS FILMSTRIP */}
+        {/* SMART ROUTE BRIEFS (SUGGESTIONS) */}
         <SmartSuggestions 
-          suggestions={displayedSuggestions} 
+          suggestions={displayedAlternatives} 
           onSelect={handleSelectSuggestion} 
         />
         
-        {/* LAYER 5 — SECTION HANDOFF */}
-        <div className="mt-24 pt-12 border-t border-[var(--journey-line)] text-center max-w-2xl mx-auto">
-          <h4 className="text-xl md:text-2xl font-serif text-[var(--journey-ink)] mb-4">
-            Ingin melihat pilihan dari sudut wilayah?
-          </h4>
-          <p className="text-base text-[var(--journey-muted)] mb-6">
-            Bandingkan karakter Sumatera, Jawa, Kalimantan, Sulawesi, Bali–Nusa Tenggara, Maluku, dan Papua.
-          </p>
-          <a 
-            href="#regional-explorer"
-            className="inline-flex items-center gap-2 text-sm font-bold text-[var(--journey-ink)] uppercase tracking-wider hover:opacity-70 transition-opacity group"
-          >
-            Lanjut ke Regional Explorer
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
-        </div>
-
       </div>
     </section>
   );

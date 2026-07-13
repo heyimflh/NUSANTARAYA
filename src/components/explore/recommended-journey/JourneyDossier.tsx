@@ -1,19 +1,21 @@
 import React from "react";
 import { RecommendedJourney } from "@/data/journeys/types";
 import { REASON_COPY_ID } from "@/lib/recommendation/engine";
-import { Map, BookOpen, Compass, Bookmark, ExternalLink } from "lucide-react";
+import { Map, BookOpen, Compass, Bookmark, ExternalLink, RefreshCw, Sparkles } from "lucide-react";
 import { usePassport } from "@/context/app-context";
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 interface JourneyDossierProps {
   journey: RecommendedJourney;
   reasons: string[];
+  onRegenerate: () => void;
 }
 
-export function JourneyDossier({ journey, reasons }: JourneyDossierProps) {
+export function JourneyDossier({ journey, reasons, onRegenerate }: JourneyDossierProps) {
   const { passport, saveRoute } = usePassport();
   const router = useRouter();
+  const shouldReduceMotion = useReducedMotion();
   
   const isSaved = passport.savedRoutes.includes(journey.id);
 
@@ -27,201 +29,271 @@ export function JourneyDossier({ journey, reasons }: JourneyDossierProps) {
     }
   };
 
+  const handleSecondaryAction = (action: RecommendedJourney['secondaryActions'][0]) => {
+    if (action.type === 'map') {
+      const mapHeading = document.getElementById("interactive-map-heading");
+      const mapSection = document.getElementById("interactive-map");
+      
+      if (mapSection) {
+        const yOffset = -80; // approximate sticky navbar offset
+        const y = mapSection.getBoundingClientRect().top + window.scrollY + yOffset;
+        
+        window.scrollTo({
+          top: y,
+          behavior: shouldReduceMotion ? "auto" : "smooth"
+        });
+
+        if (mapHeading) {
+          mapHeading.focus({ preventScroll: true });
+        }
+      }
+    }
+  };
+
   const handleSave = () => {
     saveRoute(journey.id);
   };
 
+  const getPrimaryActionIcon = () => {
+    switch (journey.primaryAction.type) {
+      case "learn": return <BookOpen className="w-5 h-5" />;
+      case "route-planner": return <Compass className="w-5 h-5" />;
+      default: return <ExternalLink className="w-5 h-5" />;
+    }
+  };
+
   return (
-    <AnimatePresence mode="wait">
-      <motion.div 
-        key={journey.id}
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -15 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="flex flex-col gap-12"
-      >
-        {/* LAYER 2 — CINEMATIC JOURNEY STAGE (7/5 Asymmetric) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center relative">
-          
-          {/* Left: Cinematic Hero Collage (7 cols) */}
-          <div className="col-span-1 lg:col-span-7 relative z-0">
-            <div 
-              className="relative aspect-[4/5] md:aspect-[4/3] lg:aspect-[16/10] overflow-hidden bg-[var(--journey-paper-deep)]"
-              style={{
-                // Asymmetric clipping shape instead of a generic box
-                clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%)",
-              }}
-            >
-              <motion.img 
-                initial={{ scale: 1.05 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.8 }}
-                src={journey.coverAsset} 
-                alt={`Hero visual for ${journey.title}`}
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100%" height="100%" fill="%23e8ddc8" /></svg>';
-                }}
-              />
-              {/* Subtle paper grain overlay */}
-              <div className="absolute inset-0 bg-noise opacity-[0.03] mix-blend-multiply pointer-events-none" />
-              
-              {/* Route Ribbon on Image (Desktop) */}
-              <div className="absolute bottom-6 left-6 right-6 hidden md:flex items-center text-[var(--journey-paper)]">
-                {journey.stops.map((stop, idx) => (
-                  <React.Fragment key={stop.id}>
-                    <div className="flex items-center gap-2 relative">
-                      <div className="w-5 h-5 rounded-full border-2 border-[var(--journey-paper)] flex items-center justify-center text-[10px] font-bold bg-[var(--journey-ink)]/20 backdrop-blur-sm">
-                        {idx + 1}
+    <div 
+      aria-live="polite"
+      className="w-full max-w-[1360px] mx-auto bg-[var(--journey-paper)] border border-[var(--journey-line)] rounded-[28px] shadow-[0_4px_24px_-8px_rgba(13,27,42,0.06)] flex flex-col relative overflow-hidden"
+    >
+      {/* EDITORIAL SPINE (LEFT SIDE) */}
+      <div className="absolute left-0 top-0 bottom-0 w-12 border-r border-[var(--journey-line)] hidden lg:flex flex-col items-center justify-between py-12 z-20 bg-[var(--journey-paper)]/50 backdrop-blur-sm">
+        <span className="text-[10px] font-bold tracking-[0.2em] text-[var(--journey-muted)] rotate-180" style={{ writingMode: 'vertical-rl' }}>
+          07
+        </span>
+        <div className="flex-1 w-px bg-gradient-to-b from-[var(--journey-line)] to-transparent my-6" />
+        <span className="text-[10px] font-bold tracking-[0.2em] text-[var(--journey-muted)] rotate-180" style={{ writingMode: 'vertical-rl' }}>
+          JOURNEY DOSSIER
+        </span>
+      </div>
+
+      <AnimatePresence mode="wait">
+        <motion.div 
+          key={journey.id}
+          initial={{ opacity: 0, filter: 'blur(4px)' }}
+          animate={{ opacity: 1, filter: 'blur(0px)' }}
+          exit={{ opacity: 0, filter: 'blur(4px)' }}
+          transition={{ duration: shouldReduceMotion ? 0.15 : 0.4, ease: "easeInOut" }}
+          className="flex flex-col w-full lg:pl-12"
+        >
+          <div className="flex flex-col lg:flex-row w-full min-w-0 h-full">
+            
+            {/* VISUAL REGION & CARTOGRAPHIC OVERLAY (58%) */}
+            <div className="w-full lg:w-[58%] relative min-w-0 border-b lg:border-b-0 lg:border-r border-[var(--journey-line)] bg-[#FDFBF7]">
+              <div className="relative w-full aspect-[4/3] md:aspect-[16/9] lg:h-full lg:min-h-[580px] overflow-hidden">
+                <img 
+                  src={journey.coverAsset} 
+                  alt={`Visual jalur ${journey.title}`}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100%" height="100%" fill="%23e8ddc8" /></svg>';
+                  }}
+                />
+                
+                {/* Cartographic Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--journey-ink)]/80 via-[var(--journey-ink)]/10 to-transparent mix-blend-multiply" />
+                <div className="absolute inset-0 bg-noise opacity-[0.04] pointer-events-none" />
+                
+                {/* Cartographic Route Line Overlay */}
+                <div className="absolute bottom-12 md:bottom-16 left-10 right-10 flex items-center text-white" aria-hidden="true">
+                  {journey.stops.map((stop, idx) => (
+                    <React.Fragment key={stop.id}>
+                      <div className="relative flex justify-center group cursor-default">
+                        {/* Top Label (e.g. SUL, JBW) */}
+                        <span className={`text-[9px] font-bold tracking-[0.2em] text-white/70 whitespace-nowrap absolute bottom-full mb-2 opacity-0 md:opacity-100 ${
+                          journey.stops.length === 1 ? 'left-1/2 -translate-x-1/2 text-center' :
+                          idx === 0 ? 'left-1/2 -translate-x-3 text-left' :
+                          idx === journey.stops.length - 1 ? 'right-1/2 translate-x-3 text-right' :
+                          'left-1/2 -translate-x-1/2 text-center'
+                        }`}>
+                          {(stop.provinceId || stop.label).slice(0, 3).toUpperCase()}
+                        </span>
+                        
+                        {/* Node */}
+                        <div className="w-2.5 h-2.5 rounded-full border-[1.5px] border-white bg-white/20 backdrop-blur-sm relative z-10" />
+                        
+                        {/* Bottom Label (Province Name) */}
+                        <span className={`text-[11px] font-bold tracking-wider drop-shadow-md whitespace-nowrap absolute top-full mt-2 hidden sm:block ${
+                          journey.stops.length === 1 ? 'left-1/2 -translate-x-1/2 text-center' :
+                          idx === 0 ? 'left-1/2 -translate-x-3 text-left' :
+                          idx === journey.stops.length - 1 ? 'right-1/2 translate-x-3 text-right' :
+                          'left-1/2 -translate-x-1/2 text-center'
+                        }`}>
+                          {stop.label}
+                        </span>
                       </div>
-                      <span className="text-xs font-medium tracking-wide drop-shadow-md whitespace-nowrap hidden lg:block">
-                        {stop.label}
-                      </span>
-                    </div>
-                    {idx < journey.stops.length - 1 && (
-                      <div className="flex-1 h-px bg-[var(--journey-paper)]/40 mx-4" />
-                    )}
-                  </React.Fragment>
-                ))}
+                      {idx < journey.stops.length - 1 && (
+                        <div className="flex-1 h-[1px] mx-3 relative">
+                          {/* Abstract dashed connector */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+                          <div className="w-full h-full border-b border-dashed border-white/40" />
+                        </div>
+                      )}
+                    </React.Fragment>
+                  ))}
+                </div>
+
+                {/* Coordinate Decor */}
+                <div className="absolute top-6 left-6 text-[9px] font-mono tracking-widest text-white/50 hidden md:block">
+                  LAT 0.7893° S / LONG 113.9213° E
+                </div>
               </div>
             </div>
-            
-            {/* Organic offset paper layer behind image to create tactile depth */}
-            <div 
-              className="absolute -inset-4 bg-[var(--journey-paper)]/50 -z-10 mix-blend-multiply hidden lg:block"
-              style={{ clipPath: "polygon(0 40px, 40px 0, 100% 0, 100% 100%, 0 100%)" }}
-            />
-          </div>
 
-          {/* Right: Floating Journey Ticket (5 cols) */}
-          <div className="col-span-1 lg:col-span-5 lg:-ml-12 relative z-10 pt-4 lg:pt-0">
-            <div className="bg-[var(--journey-paper)] p-8 md:p-10 shadow-[0_20px_40px_-15px_rgba(43,33,24,0.08)] relative overflow-hidden border border-[var(--journey-paper-deep)]">
-              {/* Vertical Accent Line */}
-              <div 
-                className="absolute left-0 top-0 bottom-0 w-1.5"
-                style={{ backgroundColor: journey.accentColor }}
-              />
+            {/* EDITORIAL REGION (42%) */}
+            <div className="w-full lg:w-[42%] min-w-0 flex flex-col relative bg-[var(--journey-paper)] p-6 sm:p-8 md:p-10 lg:p-12 shadow-[-10px_0_30px_-10px_rgba(13,27,42,0.03)] z-10">
+              
+              {/* TOP HEADER: Metadata & Regenerate Button */}
+              <div className="flex items-start justify-between mb-8">
+                {/* Journey Metadata Strip */}
+                <div className="flex flex-wrap items-center text-[10px] md:text-[11px] font-bold tracking-[0.15em] uppercase text-[var(--journey-muted)]">
+                  <span>DIGITAL TRAIL</span>
+                  <span className="mx-2">/</span>
+                  <span style={{ color: journey.accentColor }}>{journey.kind.replace('-', ' ')}</span>
+                  <span className="mx-2">/</span>
+                  <span>{journey.stops.length} TITIK</span>
+                </div>
 
-              <div className="flex items-center justify-between mb-6">
-                <span className="text-[10px] font-bold tracking-[0.15em] uppercase text-[var(--journey-muted)] border border-[var(--journey-line)] px-2.5 py-1 rounded-full">
-                  {journey.kind.replace('-', ' ')}
-                </span>
-                <span 
-                  className="text-xs font-bold uppercase tracking-widest"
-                  style={{ color: journey.accentColor }}
+                {/* The Relocated "Beri Saran Lain" Utility Button */}
+                <button
+                  onClick={onRegenerate}
+                  className="flex items-center gap-1.5 px-3 py-1.5 -mt-1.5 -mr-2 rounded-md border border-transparent text-[11px] font-bold uppercase tracking-wider text-[var(--journey-muted)] hover:text-[var(--journey-ink)] hover:bg-[var(--journey-saffron)]/10 hover:border-[var(--journey-saffron)]/20 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--journey-saffron)]"
+                  aria-label="Regenerate journey suggestion"
                 >
-                  {journey.eyebrow}
-                </span>
+                  <RefreshCw className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Saran Lain</span>
+                </button>
               </div>
 
-              <h3 className="text-3xl md:text-4xl font-serif font-bold text-[var(--journey-ink)] leading-[1.1] mb-5 tracking-tight">
+              {/* TITLE & PROMISE */}
+              <h3 className="text-3xl md:text-[40px] lg:text-[46px] font-serif font-bold text-[var(--journey-ink)] leading-[1.05] mb-5 tracking-tight">
                 {journey.title}
               </h3>
               
-              <p className="text-[15px] text-[var(--journey-ink)] leading-relaxed mb-6 font-medium">
+              <p className="text-[15px] md:text-[16px] text-[var(--journey-ink)] leading-relaxed mb-8 font-medium">
                 {journey.promise}
               </p>
 
-              {/* Condensed Reasons - Editorial List */}
+              {/* REASON BLOCK (Editorial Note) */}
               {reasons.length > 0 && (
-                <div className="mb-8">
-                  <p className="text-xs font-bold text-[var(--journey-muted)] uppercase tracking-wider mb-3">
-                    Dirangkai karena:
-                  </p>
-                  <ul className="space-y-2.5">
+                <div 
+                  className="mb-10 p-5 rounded-xl border border-[var(--journey-line)]/50 relative overflow-hidden"
+                  style={{ backgroundColor: `${journey.accentColor}08` }} /* 08 = ~3-5% opacity */
+                >
+                  <div className="flex items-center gap-2 mb-3">
+                    <Sparkles className="w-3.5 h-3.5" style={{ color: journey.accentColor }} />
+                    <span className="text-[10px] font-bold uppercase tracking-[0.15em]" style={{ color: journey.accentColor }}>
+                      MENGAPA JALUR INI DIPILIH
+                    </span>
+                  </div>
+                  <ul className="space-y-2">
                     {reasons.map((reasonCode, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5">
-                        <span 
-                          className="text-[10px] mt-1 flex-shrink-0" 
-                          style={{ color: journey.accentColor }}
-                        >
-                          ✦
-                        </span>
-                        <p className="text-[14px] text-[var(--journey-muted)] leading-snug">
+                      <li key={idx} className="flex items-start gap-2">
+                        <span className="text-[14px] text-[var(--journey-muted)] leading-snug font-medium">
                           {REASON_COPY_ID[reasonCode as keyof typeof REASON_COPY_ID]}
-                        </p>
+                        </span>
                       </li>
                     ))}
                   </ul>
+                  {/* Subtle edge highlight */}
+                  <div className="absolute left-0 top-0 bottom-0 w-0.5" style={{ backgroundColor: journey.accentColor }} />
                 </div>
               )}
 
-              {/* Signals */}
-              <div className="flex flex-wrap gap-2 mb-10">
-                {journey.signals.map((signal, i) => (
-                  <span 
-                    key={i} 
-                    className="px-3 py-1.5 bg-[var(--journey-paper-deep)] text-[var(--journey-ink)] text-xs font-medium tracking-wide"
-                  >
-                    {signal}
-                  </span>
-                ))}
-              </div>
+              <div className="flex-1" /> {/* Spacer */}
 
-              {/* Controls / Actions */}
-              <div className="flex flex-col sm:flex-row gap-3">
+              {/* ACTION HIERARCHY */}
+              <div className="flex flex-col gap-3 mt-8">
+                {/* Primary Action (Full Width) */}
                 <button
                   onClick={handlePrimaryAction}
-                  className="px-6 py-3.5 text-white font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2 flex-1"
-                  style={{ backgroundColor: journey.accentColor }}
+                  className="w-full h-[52px] text-white font-bold tracking-wide hover:opacity-90 transition-opacity flex items-center justify-center gap-2 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                  style={{ backgroundColor: journey.accentColor, '--tw-ring-color': journey.accentColor } as React.CSSProperties}
                 >
-                  {journey.primaryAction.type === "learn" ? <BookOpen className="w-5 h-5" /> : 
-                   journey.primaryAction.type === "route-planner" ? <Compass className="w-5 h-5" /> :
-                   <ExternalLink className="w-5 h-5" />}
+                  {getPrimaryActionIcon()}
                   {journey.primaryAction.label}
                 </button>
-                <button
-                  onClick={handleSave}
-                  aria-pressed={isSaved}
-                  className={`px-6 py-3.5 font-medium transition-colors flex items-center justify-center gap-2 flex-1 sm:flex-none border
-                    ${isSaved 
-                      ? 'bg-[var(--journey-paper-deep)] text-[var(--journey-ink)] border-[var(--journey-paper-deep)]' 
-                      : 'bg-transparent text-[var(--journey-ink)] border-[var(--journey-line)] hover:border-[var(--journey-muted)]'}`}
-                >
-                  <Bookmark className={`w-5 h-5 ${isSaved ? 'fill-current' : ''}`} />
-                  {isSaved ? "Tersimpan" : "Simpan"}
-                </button>
+                
+                {/* Secondary Actions (Split) */}
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    onClick={handleSave}
+                    aria-pressed={isSaved}
+                    className={`w-full h-11 font-medium transition-colors flex items-center justify-center gap-2 rounded-xl border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--journey-saffron)]
+                      ${isSaved 
+                        ? 'bg-[var(--journey-paper-deep)] text-[var(--journey-ink)] border-[var(--journey-paper-deep)]' 
+                        : 'bg-transparent text-[var(--journey-ink)] border-[var(--journey-line)] hover:border-[var(--journey-muted)]'}`}
+                  >
+                    <Bookmark className={`w-4 h-4 ${isSaved ? 'fill-current' : ''}`} />
+                    <span className="text-sm">{isSaved ? "Tersimpan" : "Simpan"}</span>
+                  </button>
+                  
+                  {journey.secondaryActions[0] && (
+                    <button
+                      onClick={() => handleSecondaryAction(journey.secondaryActions[0])}
+                      className="w-full h-11 bg-transparent text-[var(--journey-ink)] border border-[var(--journey-line)] hover:border-[var(--journey-muted)] font-medium transition-colors flex items-center justify-center gap-2 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--journey-saffron)]"
+                    >
+                      <Map className="w-4 h-4" />
+                      <span className="text-sm">{journey.secondaryActions[0].label}</span>
+                    </button>
+                  )}
+                </div>
               </div>
+
             </div>
           </div>
-        </div>
 
-        {/* LAYER 3 — ROUTE CHAPTER STRIP */}
-        <div className="mt-4 border-t border-[var(--journey-line)] pt-8 relative">
-          <div className="absolute top-0 left-0 w-8 h-[1px] bg-[var(--journey-ink)]" />
-          
-          <h4 className="text-xs font-bold text-[var(--journey-ink)] uppercase tracking-[0.2em] mb-6">
-            Rute Perjalanan ({journey.stops.length} Titik)
-          </h4>
-          
-          <div className="flex gap-4 md:gap-6 overflow-x-auto pb-4 hide-scrollbar snap-x snap-mandatory">
-            {journey.stops.map((stop, i) => (
-              <div 
-                key={stop.id} 
-                className="snap-start shrink-0 w-[240px] md:w-[280px] flex flex-col group relative"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <span 
-                    className="text-2xl font-serif font-bold opacity-30 group-hover:opacity-100 transition-opacity"
-                    style={{ color: journey.accentColor }}
-                  >
-                    0{i + 1}
-                  </span>
-                  <div className="h-[1px] flex-1 bg-[var(--journey-line)] group-hover:bg-[var(--journey-muted)] transition-colors" />
-                </div>
-                
-                <h5 className="font-bold text-[17px] text-[var(--journey-ink)] leading-tight mb-2">
-                  {stop.label}
-                </h5>
-                <p className="text-sm text-[var(--journey-muted)] leading-relaxed">
-                  {stop.shortReason}
-                </p>
-              </div>
-            ))}
+          {/* LAYER 3 — JOURNEY CHAPTER RAIL (ROUTE SEQUENCE FOOTER) */}
+          <div className="w-full border-t border-[var(--journey-line)] bg-[var(--journey-paper)] lg:bg-[var(--journey-paper-deep)]/10 p-6 sm:p-8 lg:px-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+            <h4 className="text-[10px] md:text-xs font-bold text-[var(--journey-muted)] uppercase tracking-[0.2em] md:-rotate-90 origin-center whitespace-nowrap">
+              CHAPTERS
+            </h4>
+            
+            <ol className="flex flex-col md:flex-row gap-6 md:gap-8 w-full">
+              {journey.stops.map((stop, i) => (
+                <li 
+                  key={stop.id} 
+                  className="flex-1 relative group"
+                >
+                  <div className="flex items-center gap-4 mb-3">
+                    <span 
+                      className="text-2xl md:text-3xl font-serif font-bold text-[var(--journey-line)] transition-colors group-hover:text-[var(--journey-saffron)]"
+                    >
+                      0{i + 1}
+                    </span>
+                    {/* Horizontal Connector (Desktop) */}
+                    {i < journey.stops.length - 1 && (
+                      <div className="hidden md:block flex-1 h-[1px] bg-[var(--journey-line)] relative">
+                        <div className="absolute top-1/2 right-0 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[var(--journey-line)] group-hover:bg-[var(--journey-saffron)] transition-colors" />
+                      </div>
+                    )}
+                  </div>
+                  
+                  <div className="pl-10 md:pl-0">
+                    <h5 className="font-bold text-[15px] md:text-[16px] text-[var(--journey-ink)] leading-tight mb-1.5">
+                      {stop.label}
+                    </h5>
+                    <p className="text-[13px] text-[var(--journey-muted)] leading-relaxed">
+                      {stop.shortReason}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
-        </div>
-      </motion.div>
-    </AnimatePresence>
+        </motion.div>
+      </AnimatePresence>
+    </div>
   );
 }
