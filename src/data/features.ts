@@ -58,7 +58,7 @@ export const mainFeatures = [
     icon: "/assets/ui/icons/icon-passport.svg",
     image: "/assets/features/passport-preview.png",
     color: "#C9A84C",
-    href: "/passport"
+    href: "/explore#passport-progress"
   },
   {
     id: "rani",

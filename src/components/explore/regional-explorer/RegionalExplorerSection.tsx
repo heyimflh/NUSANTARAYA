@@ -20,6 +20,7 @@ interface RegionalExplorerSectionProps {
   showFlagshipOnly: boolean;
   activeJourney: RecommendedJourney | null;
   onExploreMap: (regionId: string) => void;
+  onHighlightRegion: (regionId: string) => void;
   onOpenSummary: (provinceId: string) => void;
 }
 
@@ -31,6 +32,7 @@ export function RegionalExplorerSection({
   showFlagshipOnly,
   activeJourney,
   onExploreMap,
+  onHighlightRegion,
   onOpenSummary,
 }: RegionalExplorerSectionProps) {
   const router = useRouter();
@@ -169,12 +171,11 @@ export function RegionalExplorerSection({
           </div>
         </div>
 
-        {/* HANDOFF TO PASSPORT */}
         <div className="mt-20 pt-16 border-t border-[var(--atlas-line)] text-center">
           <p className="text-[16px] md:text-[18px] text-[var(--atlas-ink-soft)] font-medium mb-2">Sudah menemukan wilayah yang ingin dijelajahi?</p>
           <p className="text-[15px] md:text-[16px] text-[var(--atlas-ink-soft)]/80 mb-6">Lihat bagaimana pilihanmu melengkapi peta dan Passport Nusantara.</p>
           <button 
-            onClick={() => router.push('/passport')}
+            onClick={() => onHighlightRegion(state.activeRegionId)}
             className="inline-flex items-center justify-center h-12 px-6 rounded-full bg-[var(--atlas-ink)] text-[var(--atlas-paper)] font-medium transition-transform hover:scale-[1.02] active:scale-[0.98]"
           >
             Lihat Progress Passport

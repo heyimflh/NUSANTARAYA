@@ -9,6 +9,7 @@ import React, {
   type ReactNode,
 } from "react";
 import type { Language, AppMode, PassportData } from "@/lib/types";
+import { evaluateBadges } from "@/lib/passport/badges";
 
 /* ═══════════════════════════════════════════════════════════════════════════
    NUSANTARAYA Global State — React Context
@@ -28,6 +29,7 @@ const DEFAULT_PASSPORT: PassportData = {
   startedProvinces: [],
   plannedProvinces: [],
   badges: [],
+  achievements: [],
   xp: 0,
   level: "Penjelajah Baru",
   completedQuizzes: [],
@@ -58,7 +60,7 @@ interface AppContextType {
   addBadge: (badge: string) => void;
   addXP: (amount: number) => void;
   completeQuiz: (provinceId: string) => void;
-  saveRoute: (routeId: string) => void;
+  saveRoute: (routeId: string, provinceIds?: string[]) => void;
   resetPassport: () => void;
 
   // Audio
@@ -119,6 +121,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         // Ensure arrays exist even if legacy data didn't have them
         startedProvinces: savedPassport.startedProvinces || [],
         plannedProvinces: savedPassport.plannedProvinces || [],
+        achievements: savedPassport.achievements || [],
       });
       
       setAudioEnabledState(safeGetItem<boolean>(AUDIO_KEY, false));
@@ -158,7 +161,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const updatePassport = useCallback(
     (updater: (prev: PassportData) => PassportData) => {
       setPassport((prev) => {
-        const next = updater(prev);
+        let next = updater(prev);
+        next = evaluateBadges(next); // Automatically evaluate badges on every mutation
         safeSetItem(PASSPORT_KEY, next);
         return next;
       });
@@ -257,12 +261,23 @@ export function AppProvider({ children }: { children: ReactNode }) {
   );
 
   const saveRoute = useCallback(
-    (routeId: string) => {
+    (routeId: string, provinceIds?: string[]) => {
       updatePassport((p) => {
         if (p.savedRoutes.includes(routeId)) return p;
+        
+        let newPlanned = [...(p.plannedProvinces || [])];
+        if (provinceIds) {
+          provinceIds.forEach(id => {
+            if (!p.stamps.includes(id) && !(p.startedProvinces || []).includes(id) && !newPlanned.includes(id)) {
+              newPlanned.push(id);
+            }
+          });
+        }
+        
         return {
           ...p,
           savedRoutes: [...p.savedRoutes, routeId],
+          plannedProvinces: newPlanned,
           xp: p.xp + 15,
         };
       });

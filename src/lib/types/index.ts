@@ -271,6 +271,26 @@ export type BadgeTematik =
   | "Future City Explorer"
   | "RANI Companion";
 
+export interface PassportAchievement {
+  id: string;
+  type: "stamp" | "badge" | "level";
+  referenceId: string;
+  unlockedAt: string;
+  source: string;
+  seenAt?: string;
+}
+
+export type BadgeCategory = "region" | "theme" | "special";
+
+export interface BadgeDefinition {
+  id: string;
+  label: string;
+  category: BadgeCategory;
+  description: string;
+  requirementText: string;
+  asset: string;
+}
+
 export interface PassportData {
   version?: number;
   userId: string;
@@ -278,6 +298,7 @@ export interface PassportData {
   startedProvinces?: string[];
   plannedProvinces?: string[];
   badges: (BadgeWilayah | BadgeTematik)[];
+  achievements?: PassportAchievement[];
   xp: number;
   level: string;
   completedQuizzes: string[];    // province ids

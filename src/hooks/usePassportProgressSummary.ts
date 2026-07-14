@@ -4,6 +4,8 @@ import { provinceMapData } from "@/data/provinces/provinces";
 import { flagshipProvinces } from "@/data/provinces/flagshipProvinces";
 import { RegionId } from "@/types/region";
 import { getRegionById } from "@/data/regions/regionProvinceMap";
+import { regions } from "@/data/regions/regions";
+import { PassportAchievement } from "@/lib/types";
 
 export type ExplorerLevel = "Penjelajah Baru" | "Petualang Nusantara" | "Pengembara Sejati" | "Penjaga Warisan" | "Pahlawan Nusantara";
 
@@ -28,6 +30,9 @@ export type PassportNextMilestone = {
 };
 
 export type PassportProgressSummary = {
+  planned: string[];
+  started: string[];
+  completed: string[];
   plannedCount: number;
   startedCount: number;
   completedCount: number;
@@ -37,6 +42,7 @@ export type PassportProgressSummary = {
   nextLevel: ExplorerLevel | null;
   stampsToNextLevel: number;
   nextMilestone: PassportNextMilestone | null;
+  latestAchievement: PassportAchievement | null;
 };
 
 const EXPLORER_LEVELS = [
@@ -88,7 +94,15 @@ export function usePassportProgressSummary(
       }
     }
 
-    // 3. Determine Next Milestone deterministically
+    // 3. Latest Achievement
+    let latestAchievement: PassportAchievement | null = null;
+    if (passport.achievements && passport.achievements.length > 0) {
+      // Sort by unlockedAt descending
+      const sorted = [...passport.achievements].sort((a, b) => new Date(b.unlockedAt).getTime() - new Date(a.unlockedAt).getTime());
+      latestAchievement = sorted[0];
+    }
+
+    // 4. Determine Next Milestone deterministically
     let nextMilestone: PassportNextMilestone | null = null;
 
     const createMilestone = (
@@ -140,7 +154,36 @@ export function usePassportProgressSummary(
       }
     }
 
-    // 3. Selected province
+    // 3. Completes Region Badge
+    if (!nextMilestone) {
+      for (const region of regions) {
+        let incompleteCount = 0;
+        let lastIncompleteId = "";
+        
+        for (const provId of region.provinceIds) {
+          if (!completedIds.has(provId)) {
+            incompleteCount++;
+            lastIncompleteId = provId;
+          }
+        }
+        
+        if (incompleteCount === 1) {
+          const prov = provinceMapData.find(p => p.id === lastIncompleteId);
+          if (prov) {
+            nextMilestone = createMilestone(
+              lastIncompleteId,
+              "COMPLETES_REGION_BADGE",
+              prov.name,
+              `Selesaikan satu provinsi lagi untuk melengkapi wilayah ${region.label}.`,
+              "Lengkapi Wilayah Ini"
+            );
+            break;
+          }
+        }
+      }
+    }
+
+    // 4. Selected province
     if (!nextMilestone && selectedProvinceId && !completedIds.has(selectedProvinceId)) {
       const prov = provinceMapData.find(p => p.id === selectedProvinceId);
       if (prov) {
@@ -205,6 +248,9 @@ export function usePassportProgressSummary(
     }
 
     return {
+      planned: Array.from(plannedIds),
+      started: Array.from(startedIds),
+      completed: Array.from(completedIds),
       plannedCount,
       startedCount,
       completedCount,
@@ -214,11 +260,13 @@ export function usePassportProgressSummary(
       nextLevel,
       stampsToNextLevel,
       nextMilestone,
+      latestAchievement,
     };
   }, [
     passport.stamps,
     passport.startedProvinces,
     passport.plannedProvinces,
+    passport.achievements,
     highlightedRegionId,
     selectedProvinceId,
   ]);

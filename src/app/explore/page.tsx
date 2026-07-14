@@ -13,7 +13,9 @@ import { ExploreByLayerSection } from "@/components/explore/explore-by-layer";
 import { RecommendedJourneySection } from "@/components/explore/recommended-journey";
 import { RegionalExplorerSection } from "@/components/explore/regional-explorer";
 import { PassportProgressSection } from "@/components/explore/passport-progress/PassportProgressSection";
+import { RaniMapAssistantSection } from "@/components/explore/rani-map-assistant";
 import { useRouter } from "next/navigation";
+import { usePassport } from "@/context/app-context";
 import { getRegionById } from "@/data/regions/regionProvinceMap";
 import { RegionId } from "@/types/region";
 import { RecommendedJourney } from "@/data/journeys/types";
@@ -27,8 +29,10 @@ export default function ExplorePage() {
   const [showFlagshipOnly, setShowFlagshipOnly] = useState(false);
   const [activeJourney, setActiveJourney] = useState<RecommendedJourney | null>(null);
   const [activeRegionFilter, setActiveRegionFilter] = useState<RegionId | null>(null);
+  const [highlightedRegionId, setHighlightedRegionId] = useState<RegionId | null>(null);
   
   const router = useRouter();
+  const { startProvince } = usePassport();
 
   // Additional state lifted from Map for potential coordination
   // Derived result count using canonical matching utility
@@ -43,6 +47,7 @@ export default function ExplorePage() {
     setActiveMode("explore");
     setSelectedProvinceId(null);
     setShowFlagshipOnly(false);
+    setHighlightedRegionId(null);
   }, []);
 
   const handleToggleFlagship = useCallback(() => {
@@ -58,8 +63,9 @@ export default function ExplorePage() {
   }, []);
 
   const handleOpenAtlas = useCallback((provinceId: string) => {
+    startProvince(provinceId);
     router.push(`/provinsi/${provinceId}`);
-  }, [router]);
+  }, [router, startProvince]);
 
   const handleOpenSummary = useCallback((provinceId: string) => {
     setSelectedProvinceId(provinceId);
@@ -78,6 +84,19 @@ export default function ExplorePage() {
     const mapHeading = document.getElementById("interactive-map-heading") || document.getElementById("interactive-map");
     if (mapHeading) {
       mapHeading.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
+
+  const handleHighlightRegion = useCallback((regionId: string) => {
+    setHighlightedRegionId(regionId as RegionId);
+    const passportHeading = document.getElementById("passport-progress-heading");
+    if (passportHeading) {
+      passportHeading.focus();
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      passportHeading.scrollIntoView({ 
+        behavior: prefersReducedMotion ? "auto" : "smooth", 
+        block: "start" 
+      });
     }
   }, []);
 
@@ -155,15 +174,28 @@ export default function ExplorePage() {
         showFlagshipOnly={showFlagshipOnly}
         activeJourney={activeJourney}
         onExploreMap={handleExploreMapRegion}
+        onHighlightRegion={handleHighlightRegion}
         onOpenSummary={handleOpenSummary}
       />
 
       <PassportProgressSection
-        highlightedRegionId={activeRegionFilter}
+        highlightedRegionId={highlightedRegionId}
         selectedProvinceId={selectedProvinceId}
         onExploreMapRegion={handleExploreMapRegion}
         onOpenAtlas={handleOpenAtlas}
         onOpenSummary={handleOpenSummary}
+      />
+
+      <RaniMapAssistantSection
+        activeMode={activeMode}
+        activeLayer={activeLayer}
+        selectedProvinceId={selectedProvinceId}
+        searchQuery={searchQuery}
+        showFlagshipOnly={showFlagshipOnly}
+        highlightedRegionId={highlightedRegionId}
+        onExploreMapRegion={handleExploreMapRegion}
+        onOpenSummary={handleOpenSummary}
+        onOpenAtlas={handleOpenAtlas}
       />
     </main>
   );

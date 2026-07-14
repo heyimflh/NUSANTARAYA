@@ -15,7 +15,7 @@ export const footerLinkGroups = [
       { label: "Nusa Archive", href: "/archive", status: "soon" },
       { label: "NusaRasa", href: "/rasa", status: "soon" },
       { label: "Route Planner", href: "/routes", status: "soon" },
-      { label: "Passport", href: "/passport", status: "soon" }
+      { label: "Passport", href: "/explore#passport-progress", status: "live" }
     ] as FooterLink[]
   },
   {

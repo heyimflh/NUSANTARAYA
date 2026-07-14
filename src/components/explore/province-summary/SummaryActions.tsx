@@ -5,20 +5,27 @@ import Link from 'next/link';
 import { Plus, MessageSquare, ArrowRight } from 'lucide-react';
 import { ProvinceMapItem } from '@/types/province';
 import { usePassport } from '@/context/app-context';
+import { useRouter } from 'next/navigation';
 
 export const SummaryActions = ({ province }: { province: ProvinceMapItem }) => {
-  const { addStamp } = usePassport();
+  const { addStamp, startProvince } = usePassport();
+  const router = useRouter();
+
+  const handleOpenAtlas = () => {
+    startProvince(province.id);
+    router.push(`/provinsi/${province.id}`);
+  };
 
   return (
     <div className="absolute bottom-0 inset-x-0 p-5 pt-8 bg-gradient-to-t from-[#FFFDF8] via-[#FFFDF8] to-transparent pointer-events-none z-10">
       <div className="pointer-events-auto flex flex-col gap-3">
-        <Link 
-          href={`/provinsi/${province.id}`}
+        <button 
+          onClick={handleOpenAtlas}
           className="group w-full flex items-center justify-center gap-2 h-[52px] bg-[#0D1B2A] hover:bg-[#0D1B2A]/90 text-white rounded-2xl font-semibold transition-all shadow-md"
         >
           Buka Atlas Provinsi
           <ArrowRight size={18} className="text-[#C9A84C] group-hover:translate-x-1 transition-transform" />
-        </Link>
+        </button>
         
         <div className="flex gap-3">
           <button 
