@@ -6,6 +6,7 @@
 
 import { ProvinceMapItem } from "@/types/province";
 import { ExploreLayerId } from "@/data/exploreControls";
+import { getRegionByProvinceId } from "@/data/regions/regionProvinceMap";
 
 // ─── Filter: does a province match the current filter state? ─────────────
 
@@ -22,8 +23,16 @@ export function getProvinceRelevance(
   province: ProvinceMapItem,
   query: string,
   layer: ExploreLayerId,
-  flagshipOnly: boolean
+  flagshipOnly: boolean,
+  regionFilter?: string | null
 ): LayerRelevance {
+  // Region filter (strict)
+  if (regionFilter) {
+    const provinceRegionId = getRegionByProvinceId(province.id)?.id;
+    if (provinceRegionId !== regionFilter) {
+      return 0;
+    }
+  }
   // Layer filter
   if (layer !== "all" && !province.categories.includes(layer)) {
     return 0;
@@ -81,9 +90,10 @@ export function matchesProvince(
   province: ProvinceMapItem,
   query: string,
   layer: ExploreLayerId,
-  flagshipOnly: boolean
+  flagshipOnly: boolean,
+  regionFilter?: string | null
 ): boolean {
-  return getProvinceRelevance(province, query, layer, flagshipOnly) > 0;
+  return getProvinceRelevance(province, query, layer, flagshipOnly, regionFilter) > 0;
 }
 
 // ─── Search: ranked results for the combobox dropdown ────────────────────
@@ -201,9 +211,10 @@ export function countMatchingProvinces(
   provinces: ProvinceMapItem[],
   query: string,
   layer: ExploreLayerId,
-  flagshipOnly: boolean
+  flagshipOnly: boolean,
+  regionFilter?: string | null
 ): number {
   return provinces.filter((p) =>
-    matchesProvince(p, query, layer, flagshipOnly)
+    matchesProvince(p, query, layer, flagshipOnly, regionFilter)
   ).length;
 }

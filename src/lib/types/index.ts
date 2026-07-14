@@ -272,8 +272,11 @@ export type BadgeTematik =
   | "RANI Companion";
 
 export interface PassportData {
+  version?: number;
   userId: string;
   stamps: string[];              // province ids
+  startedProvinces?: string[];
+  plannedProvinces?: string[];
   badges: (BadgeWilayah | BadgeTematik)[];
   xp: number;
   level: string;

@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "validate:atlas": "tsx scripts/validate-atlas.ts",
+    "validate:regions": "tsx scripts/validate-regions.ts",
     "start": "next start",
     "lint": "eslint"
   },

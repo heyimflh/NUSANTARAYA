@@ -20,6 +20,8 @@ type InteractiveIndonesiaMapProps = {
   resultCount: number;
   onProvinceSelect: (provinceId: string) => void;
   onReset: () => void;
+  regionFilter?: string | null;
+  onClearRegionFilter?: () => void;
 };
 
 export const InteractiveIndonesiaMap: React.FC<InteractiveIndonesiaMapProps> = ({
@@ -31,7 +33,9 @@ export const InteractiveIndonesiaMap: React.FC<InteractiveIndonesiaMapProps> = (
   showFlagshipOnly,
   resultCount,
   onProvinceSelect,
-  onReset
+  onReset,
+  regionFilter,
+  onClearRegionFilter
 }) => {
   const [hoveredProvinceId, setHoveredProvinceId] = useState<string | null>(null);
   const [focusedProvinceId, setFocusedProvinceId] = useState<string | null>(null);
@@ -83,6 +87,8 @@ export const InteractiveIndonesiaMap: React.FC<InteractiveIndonesiaMapProps> = (
           activeMode={activeMode}
           activeLayer={activeLayer}
           resultCount={resultCount}
+          regionFilter={regionFilter}
+          onClearRegionFilter={onClearRegionFilter}
         />
       </header>
 
@@ -109,6 +115,7 @@ export const InteractiveIndonesiaMap: React.FC<InteractiveIndonesiaMapProps> = (
               focusedProvinceId={focusedProvinceId}
               showFlagshipOnly={showFlagshipOnly}
               searchQuery={searchQuery}
+              regionFilter={regionFilter}
               onHover={handleHover}
               onSelect={onProvinceSelect}
               onFocus={setFocusedProvinceId}

@@ -10,16 +10,20 @@ export function useRegionalPassportProgress(regionId: RegionId): RegionalProgres
     const provinceIds = getProvincesByRegionId(regionId);
     const totalProvinceCount = provinceIds.length;
     
-    // In current implementation, passport only has stamps (completed).
-    // If the system supported planned/started, we would filter those here.
-    const completedProvinceCount = provinceIds.filter(id => 
-      passport.stamps.includes(id)
-    ).length;
-
-    // For now, started and planned are not tracked explicitly in the current passport state, 
-    // we'll default them to 0.
-    const startedProvinceCount = 0;
-    const plannedProvinceCount = 0;
+    // Normalize Disjoint Sets
+    const completedIds = new Set(passport.stamps);
+    const startedIds = new Set(
+      (passport.startedProvinces || []).filter((id) => !completedIds.has(id))
+    );
+    const plannedIds = new Set(
+      (passport.plannedProvinces || []).filter(
+        (id) => !completedIds.has(id) && !startedIds.has(id)
+      )
+    );
+    
+    const completedProvinceCount = provinceIds.filter(id => completedIds.has(id)).length;
+    const startedProvinceCount = provinceIds.filter(id => startedIds.has(id)).length;
+    const plannedProvinceCount = provinceIds.filter(id => plannedIds.has(id)).length;
     
     // Badge unlocked if all provinces in the region are completed
     const badgeUnlocked = totalProvinceCount > 0 && completedProvinceCount === totalProvinceCount;
@@ -32,5 +36,5 @@ export function useRegionalPassportProgress(regionId: RegionId): RegionalProgres
       completedProvinceCount,
       badgeUnlocked,
     };
-  }, [regionId, passport.stamps]);
+  }, [regionId, passport.stamps, passport.startedProvinces, passport.plannedProvinces]);
 }

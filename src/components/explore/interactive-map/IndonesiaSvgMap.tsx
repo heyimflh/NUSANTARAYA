@@ -12,6 +12,7 @@ type IndonesiaSvgMapProps = {
   focusedProvinceId: string | null;
   showFlagshipOnly: boolean;
   searchQuery: string;
+  regionFilter?: string | null;
   onHover: (id: string | null) => void;
   onSelect: (id: string) => void;
   onFocus: (id: string | null) => void;
@@ -72,6 +73,7 @@ export const IndonesiaSvgMap = memo(function IndonesiaSvgMap({
   focusedProvinceId,
   showFlagshipOnly,
   searchQuery,
+  regionFilter,
   onHover,
   onSelect,
   onFocus
@@ -160,6 +162,7 @@ export const IndonesiaSvgMap = memo(function IndonesiaSvgMap({
               isSelected={selectedProvinceId === prov.id}
               isFocused={focusedProvinceId === prov.id}
               searchQuery={searchQuery}
+              regionFilter={regionFilter}
               activeLayer={activeLayer}
               showFlagshipOnly={showFlagshipOnly}
               onHover={onHover}

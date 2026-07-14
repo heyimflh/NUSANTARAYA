@@ -15,6 +15,7 @@ interface RecommendedJourneySectionProps {
   selectedProvinceId: string | null;
   searchQuery: string;
   showFlagshipOnly: boolean;
+  onJourneyChange?: (journey: RecommendedJourney | null) => void;
 }
 
 export function RecommendedJourneySection({
@@ -23,6 +24,7 @@ export function RecommendedJourneySection({
   selectedProvinceId,
   searchQuery,
   showFlagshipOnly,
+  onJourneyChange,
 }: RecommendedJourneySectionProps) {
   const { passport } = usePassport();
   const { language } = useLanguage();
@@ -57,7 +59,11 @@ export function RecommendedJourneySection({
     if (!viewedJourneyIds.current.includes(result.primary.id)) {
       viewedJourneyIds.current.push(result.primary.id);
     }
-  }, [activeLayer, activeMode, selectedProvinceId, searchQuery, showFlagshipOnly, passport.stamps, language]);
+
+    if (onJourneyChange) {
+      onJourneyChange(result.primary);
+    }
+  }, [activeLayer, activeMode, selectedProvinceId, searchQuery, showFlagshipOnly, passport.stamps, language, onJourneyChange]);
 
   const handleRegenerate = () => {
     if (displayedAlternatives.length > 0) {
@@ -67,6 +73,10 @@ export function RecommendedJourneySection({
       
       if (!viewedJourneyIds.current.includes(newPrimary.id)) {
         viewedJourneyIds.current.push(newPrimary.id);
+      }
+      
+      if (onJourneyChange) {
+        onJourneyChange(newPrimary);
       }
       
       const context: JourneyRecommendationContext = {
@@ -98,6 +108,10 @@ export function RecommendedJourneySection({
       
       if (!viewedJourneyIds.current.includes(selectedAlt.id)) {
         viewedJourneyIds.current.push(selectedAlt.id);
+      }
+      
+      if (onJourneyChange) {
+        onJourneyChange(selectedAlt);
       }
       
       const context: JourneyRecommendationContext = {

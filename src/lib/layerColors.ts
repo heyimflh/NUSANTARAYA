@@ -92,10 +92,10 @@ export const PROVINCE_STATES = {
     strokeWidth: 2,
   },
   dimmed: {
-    fill: "#0D1B2A",
-    fillOpacity: 0.05,
-    stroke: "rgba(13,27,42,0.05)",
-    strokeWidth: 0.3,
+    fill: "#F2EBDD",
+    fillOpacity: 0.3,
+    stroke: "rgba(207, 196, 175, 0.4)",
+    strokeWidth: 0.4,
   },
   // High relevance
   primary_match: {

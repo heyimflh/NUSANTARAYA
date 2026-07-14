@@ -4,14 +4,26 @@ import { Star } from "lucide-react";
 import { RegionalProfile } from "@/types/region";
 import { provinceMapData } from "@/data/provinces/provinces";
 
+import { ExploreLayerId, ExploreModeId } from "@/data/exploreControls";
+import { LAYER_COLORS } from "@/lib/layerColors";
+
 interface RegionalProvinceRailProps {
   region: RegionalProfile;
   selectedProvinceId: string | null;
+  activeLayer: ExploreLayerId;
+  activeMode: ExploreModeId;
   onSelectProvince: (id: string) => void;
   onOpenAtlas: (id: string) => void;
 }
 
-export function RegionalProvinceRail({ region, selectedProvinceId, onSelectProvince, onOpenAtlas }: RegionalProvinceRailProps) {
+export function RegionalProvinceRail({ 
+  region, 
+  selectedProvinceId, 
+  activeLayer, 
+  activeMode, 
+  onSelectProvince, 
+  onOpenAtlas 
+}: RegionalProvinceRailProps) {
   
   // Get province data mapping
   const provinces = region.provinceIds.map(id => provinceMapData.find(p => p.id === id)).filter(Boolean) as typeof provinceMapData;
@@ -26,76 +38,94 @@ export function RegionalProvinceRail({ region, selectedProvinceId, onSelectProvi
   });
 
   return (
-    <div className="w-full mt-8">
-      <div className="flex items-center justify-between mb-4 px-1">
-        <h4 className="text-sm font-bold tracking-widest uppercase text-[var(--region-muted)]">
-          Provinsi dalam Wilayah
+    <div className="w-full mt-10">
+      <div className="flex items-center gap-2 mb-6 px-1">
+        <span className="w-4 h-px bg-[var(--atlas-gold)]"></span>
+        <h4 className="text-[11px] font-bold tracking-[0.2em] uppercase text-[var(--atlas-ink-soft)]">
+          Catatan Lapangan Provinsi
         </h4>
       </div>
       
-      <div className="flex gap-4 overflow-x-auto pb-6 scrollbar-hide snap-x snap-mandatory">
+      <div className="flex gap-5 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory px-1">
         {sortedProvinces.map((province) => {
           const isSelected = province.id === selectedProvinceId;
+          const layerRelevance = activeLayer !== 'all' && province.categories.includes(activeLayer);
+          const accentColor = layerRelevance ? LAYER_COLORS[activeLayer].fill : 'var(--atlas-gold)';
           
           return (
             <div 
               key={province.id}
               className={`
-                snap-start flex-shrink-0 w-[200px] md:w-[240px] flex flex-col bg-[var(--region-paper)] rounded-2xl overflow-hidden border transition-all duration-300
+                snap-start flex-shrink-0 w-[220px] md:w-[260px] flex flex-col bg-[var(--atlas-paper)] rounded-lg overflow-hidden transition-all duration-300 relative group
                 ${isSelected 
-                  ? "border-[var(--region-gold)] shadow-md ring-1 ring-[var(--region-gold)]/20 scale-[1.02]" 
-                  : "border-[var(--region-border)] hover:border-[var(--region-border)]/80 hover:shadow-sm"
+                  ? "shadow-[0_8px_24px_rgba(36,42,46,0.08)] scale-[1.02] border-t-4 z-10" 
+                  : "border border-[var(--atlas-line)] shadow-[0_2px_8px_rgba(36,42,46,0.03)] hover:shadow-[0_6px_16px_rgba(36,42,46,0.06)] hover:-translate-y-1"
                 }
               `}
+              style={isSelected ? { borderTopColor: accentColor } : {}}
             >
+              {/* Ticket Edge Effects */}
+              <div className="absolute top-[100px] -left-1.5 w-3 h-3 bg-[var(--atlas-canvas)] rounded-full border-r border-[var(--atlas-line)] z-20 hidden md:block"></div>
+              <div className="absolute top-[100px] -right-1.5 w-3 h-3 bg-[var(--atlas-canvas)] rounded-full border-l border-[var(--atlas-line)] z-20 hidden md:block"></div>
+              
+              <div className="absolute top-[106px] left-0 w-full border-t-[1.5px] border-dashed border-[var(--atlas-line)] opacity-60 z-20"></div>
+
               {/* Thumbnail */}
               <div 
-                className="relative h-[120px] bg-[var(--region-canvas)] cursor-pointer group"
+                className="relative h-[100px] bg-[var(--atlas-canvas)] cursor-pointer overflow-hidden p-2"
                 onClick={() => onSelectProvince(province.id)}
               >
-                <Image
-                  src={province.assets.thumb}
-                  alt={`Thumbnail ${province.name}`}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="240px"
-                />
+                <div className="relative w-full h-full rounded bg-[var(--atlas-paper-aged)] overflow-hidden border border-[var(--atlas-line)]/50">
+                  <Image
+                    src={province.assets.thumb}
+                    alt={`Thumbnail ${province.name}`}
+                    fill
+                    className={`object-cover transition-transform duration-700 group-hover:scale-110 ${!layerRelevance && activeLayer !== 'all' ? 'grayscale opacity-70' : ''}`}
+                    sizes="240px"
+                  />
+                  {/* Photo Corner Effects */}
+                  <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-white/50 z-10"></div>
+                  <div className="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-white/50 z-10"></div>
+                  <div className="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-white/50 z-10"></div>
+                  <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-white/50 z-10"></div>
+                </div>
+                
                 {province.isFlagship && (
-                  <div className="absolute top-2 right-2 bg-[var(--region-ink)]/80 backdrop-blur-sm text-[var(--region-gold)] p-1.5 rounded-full">
+                  <div className="absolute -top-1 -right-1 bg-[var(--atlas-ink)] backdrop-blur-sm text-[var(--atlas-gold)] p-1.5 rounded-bl-lg rounded-tr-lg shadow-sm border border-[var(--atlas-gold)]/20 z-20">
                     <Star className="w-3 h-3 fill-current" />
                   </div>
                 )}
                 {isSelected && (
-                  <div className="absolute top-2 left-2 bg-[var(--region-gold)] text-[var(--region-ink)] text-[10px] font-bold px-2 py-0.5 rounded-full">
+                  <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-md text-[var(--atlas-ink)] text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded shadow-sm z-20">
                     Dipilih
                   </div>
                 )}
               </div>
               
               {/* Content */}
-              <div className="p-4 flex flex-col gap-3 flex-1">
-                <div>
-                  <h5 className="font-semibold text-[var(--region-ink)] text-sm mb-1 leading-tight line-clamp-1">
+              <div className="p-5 pt-6 flex flex-col flex-1 bg-gradient-to-b from-[var(--atlas-paper)] to-[var(--atlas-canvas)]/30">
+                <div className="flex-1">
+                  <h5 className="font-serif font-bold text-[var(--atlas-ink)] text-base mb-2 leading-tight line-clamp-1 group-hover:text-[var(--atlas-gold)] transition-colors">
                     {province.name}
                   </h5>
-                  <p className="text-[11px] text-[var(--region-muted)] line-clamp-2 leading-relaxed">
+                  <p className="text-[12px] text-[var(--atlas-ink-soft)] line-clamp-3 leading-relaxed font-serif italic opacity-90">
                     {province.summary}
                   </p>
                 </div>
                 
                 {/* Actions */}
-                <div className="mt-auto flex gap-2">
+                <div className="mt-5 flex items-center justify-between border-t border-[var(--atlas-line)]/50 pt-3">
                   <button 
                     onClick={() => onSelectProvince(province.id)}
-                    className="flex-1 py-1.5 text-xs font-semibold bg-[var(--region-canvas)] text-[var(--region-ink)] rounded-lg hover:bg-[var(--region-border)]/50 transition-colors"
+                    className="text-[11px] font-bold tracking-widest uppercase text-[var(--atlas-ink)] hover:text-[var(--atlas-gold)] transition-colors flex items-center gap-1"
                   >
-                    Buka Ringkasan
+                    Ringkasan
                   </button>
                   <button 
                     onClick={() => onOpenAtlas(province.id)}
-                    className="flex-1 py-1.5 text-xs font-semibold text-[var(--region-muted)] hover:text-[var(--region-ink)] transition-colors"
+                    className="text-[11px] font-bold tracking-widest uppercase text-[var(--atlas-ink-soft)] hover:text-[var(--atlas-ink)] transition-colors"
                   >
-                    Atlas
+                    Buka Atlas
                   </button>
                 </div>
               </div>

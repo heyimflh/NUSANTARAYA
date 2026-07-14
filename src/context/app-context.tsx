@@ -22,8 +22,11 @@ import type { Language, AppMode, PassportData } from "@/lib/types";
 
 // ─── Default Passport ────────────────────────────────────────────────────────
 const DEFAULT_PASSPORT: PassportData = {
+  version: 1,
   userId: "local",
   stamps: [],
+  startedProvinces: [],
+  plannedProvinces: [],
   badges: [],
   xp: 0,
   level: "Penjelajah Baru",
@@ -50,6 +53,8 @@ interface AppContextType {
   // Passport
   passport: PassportData;
   addStamp: (provinceId: string) => void;
+  startProvince: (provinceId: string) => void;
+  planProvince: (provinceId: string) => void;
   addBadge: (badge: string) => void;
   addXP: (amount: number) => void;
   completeQuiz: (provinceId: string) => void;
@@ -105,7 +110,17 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const timeoutId = window.setTimeout(() => {
       setLanguageState(safeGetItem<Language>(LANG_KEY, "id"));
       setModeState(safeGetItem<AppMode>(MODE_KEY, "explore"));
-      setPassport(safeGetItem<PassportData>(PASSPORT_KEY, DEFAULT_PASSPORT));
+      
+      // Hydrate passport with backward compatibility
+      const savedPassport = safeGetItem<Partial<PassportData>>(PASSPORT_KEY, {});
+      setPassport({
+        ...DEFAULT_PASSPORT,
+        ...savedPassport,
+        // Ensure arrays exist even if legacy data didn't have them
+        startedProvinces: savedPassport.startedProvinces || [],
+        plannedProvinces: savedPassport.plannedProvinces || [],
+      });
+      
       setAudioEnabledState(safeGetItem<boolean>(AUDIO_KEY, false));
       setHydrated(true);
     }, 0);
@@ -159,8 +174,46 @@ export function AppProvider({ children }: { children: ReactNode }) {
         return {
           ...p,
           stamps,
+          // Remove from started and planned if it exists
+          startedProvinces: (p.startedProvinces || []).filter(id => id !== provinceId),
+          plannedProvinces: (p.plannedProvinces || []).filter(id => id !== provinceId),
           xp: p.xp + 10,
           level: computeLevel(stamps.length),
+        };
+      });
+    },
+    [updatePassport],
+  );
+
+  const startProvince = useCallback(
+    (provinceId: string) => {
+      updatePassport((p) => {
+        if (p.stamps.includes(provinceId)) return p; // Already completed
+        const started = p.startedProvinces || [];
+        if (started.includes(provinceId)) return p; // Already started
+        
+        return {
+          ...p,
+          startedProvinces: [...started, provinceId],
+          // Remove from planned if it exists
+          plannedProvinces: (p.plannedProvinces || []).filter(id => id !== provinceId),
+        };
+      });
+    },
+    [updatePassport],
+  );
+
+  const planProvince = useCallback(
+    (provinceId: string) => {
+      updatePassport((p) => {
+        if (p.stamps.includes(provinceId)) return p; // Already completed
+        if ((p.startedProvinces || []).includes(provinceId)) return p; // Already started
+        const planned = p.plannedProvinces || [];
+        if (planned.includes(provinceId)) return p; // Already planned
+        
+        return {
+          ...p,
+          plannedProvinces: [...planned, provinceId],
         };
       });
     },
@@ -234,6 +287,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
           setMode,
           passport: DEFAULT_PASSPORT,
           addStamp,
+          startProvince,
+          planProvince,
           addBadge,
           addXP,
           completeQuiz,
@@ -258,6 +313,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setMode,
         passport,
         addStamp,
+        startProvince,
+        planProvince,
         addBadge,
         addXP,
         completeQuiz,
@@ -299,6 +356,8 @@ export function usePassport() {
   const {
     passport,
     addStamp,
+    startProvince,
+    planProvince,
     addBadge,
     addXP,
     completeQuiz,
@@ -308,6 +367,8 @@ export function usePassport() {
   return {
     passport,
     addStamp,
+    startProvince,
+    planProvince,
     addBadge,
     addXP,
     completeQuiz,

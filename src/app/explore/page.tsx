@@ -12,9 +12,11 @@ import { FlagshipProvincesSection } from "@/components/explore/flagship-province
 import { ExploreByLayerSection } from "@/components/explore/explore-by-layer";
 import { RecommendedJourneySection } from "@/components/explore/recommended-journey";
 import { RegionalExplorerSection } from "@/components/explore/regional-explorer";
+import { PassportProgressSection } from "@/components/explore/passport-progress/PassportProgressSection";
 import { useRouter } from "next/navigation";
 import { getRegionById } from "@/data/regions/regionProvinceMap";
 import { RegionId } from "@/types/region";
+import { RecommendedJourney } from "@/data/journeys/types";
 
 export default function ExplorePage() {
   // State for Explore Control Bar and Map
@@ -23,14 +25,16 @@ export default function ExplorePage() {
   const [activeMode, setActiveMode] = useState<ExploreModeId>("explore");
   const [selectedProvinceId, setSelectedProvinceId] = useState<string | null>(null);
   const [showFlagshipOnly, setShowFlagshipOnly] = useState(false);
+  const [activeJourney, setActiveJourney] = useState<RecommendedJourney | null>(null);
+  const [activeRegionFilter, setActiveRegionFilter] = useState<RegionId | null>(null);
   
   const router = useRouter();
 
   // Additional state lifted from Map for potential coordination
   // Derived result count using canonical matching utility
   const resultCount = useMemo(() => {
-    return countMatchingProvinces(provinceMapData, searchQuery, activeLayer, showFlagshipOnly);
-  }, [activeLayer, searchQuery, showFlagshipOnly]);
+    return countMatchingProvinces(provinceMapData, searchQuery, activeLayer, showFlagshipOnly, activeRegionFilter);
+  }, [activeLayer, searchQuery, showFlagshipOnly, activeRegionFilter]);
 
   // Handlers
   const handleReset = useCallback(() => {
@@ -68,11 +72,9 @@ export default function ExplorePage() {
   }, []);
 
   const handleExploreMapRegion = useCallback((regionId: string) => {
-    // Adapter: To filter the map by region, we set the search query to the region name
-    const region = getRegionById(regionId as RegionId);
-    if (region) {
-      setSearchQuery(region.label);
-    }
+    // Typed Regional Filter
+    setActiveRegionFilter(regionId as RegionId);
+    
     const mapHeading = document.getElementById("interactive-map-heading") || document.getElementById("interactive-map");
     if (mapHeading) {
       mapHeading.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -100,7 +102,10 @@ export default function ExplorePage() {
           if (p) setSearchQuery(p.name);
           handleProvinceSelect(id);
         }}
-        onReset={handleReset}
+        onReset={() => {
+          handleReset();
+          setActiveRegionFilter(null);
+        }}
         onToggleFlagship={handleToggleFlagship}
       />
 
@@ -111,9 +116,14 @@ export default function ExplorePage() {
         activeMode={activeMode}
         selectedProvinceId={selectedProvinceId}
         showFlagshipOnly={showFlagshipOnly}
+        regionFilter={activeRegionFilter}
         resultCount={resultCount}
         onProvinceSelect={handleProvinceSelect}
-        onReset={handleReset}
+        onReset={() => {
+          handleReset();
+          setActiveRegionFilter(null);
+        }}
+        onClearRegionFilter={() => setActiveRegionFilter(null)}
       />
 
       <FlagshipProvincesSection 
@@ -134,6 +144,7 @@ export default function ExplorePage() {
         selectedProvinceId={selectedProvinceId}
         searchQuery={searchQuery}
         showFlagshipOnly={showFlagshipOnly}
+        onJourneyChange={setActiveJourney}
       />
 
       <RegionalExplorerSection
@@ -142,7 +153,16 @@ export default function ExplorePage() {
         selectedProvinceId={selectedProvinceId}
         searchQuery={searchQuery}
         showFlagshipOnly={showFlagshipOnly}
+        activeJourney={activeJourney}
         onExploreMap={handleExploreMapRegion}
+        onOpenSummary={handleOpenSummary}
+      />
+
+      <PassportProgressSection
+        highlightedRegionId={activeRegionFilter}
+        selectedProvinceId={selectedProvinceId}
+        onExploreMapRegion={handleExploreMapRegion}
+        onOpenAtlas={handleOpenAtlas}
         onOpenSummary={handleOpenSummary}
       />
     </main>
