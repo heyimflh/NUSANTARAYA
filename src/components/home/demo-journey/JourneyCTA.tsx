@@ -22,14 +22,14 @@ export function JourneyCTA() {
       
       <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
         <Link
-          href="/map"
+          href="/explore"
           className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-primary text-primary-foreground font-medium rounded-full hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
         >
           Mulai Jelajah
           <ArrowRight className="w-4 h-4" />
         </Link>
         <Link
-          href="/map"
+          href="/explore"
           className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-white text-foreground border border-input font-medium rounded-full hover:bg-accent hover:text-accent-foreground transition-colors shadow-sm"
         >
           <Map className="w-4 h-4" />

@@ -19,6 +19,9 @@ import { AtlasVocabulary } from '@/components/province-atlas/AtlasVocabulary';
 import { AtlasBiodiversitySection } from '@/components/province-atlas/AtlasBiodiversitySection';
 import { AtlasItinerary } from '@/components/province-atlas/AtlasItinerary';
 import { AtlasEtiquette } from '@/components/province-atlas/AtlasEtiquette';
+import { AtlasLifecycleBridge } from '@/components/province-atlas/AtlasLifecycleBridge';
+import { AtlasCompletionAction } from '@/components/province-atlas/AtlasCompletionAction';
+import { RelatedProvinces } from '@/components/province-atlas/RelatedProvinces';
 
 export default async function ProvinceAtlasPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
@@ -41,6 +44,7 @@ export default async function ProvinceAtlasPage({ params }: { params: Promise<{ 
 
   return (
     <ProvinceAtlasShell provinceName={province.name}>
+      <AtlasLifecycleBridge provinceId={resolvedParams.slug} />
       <AtlasMasthead province={province} materialCount={summary.materialCount} />
       
       {atlas && (
@@ -443,6 +447,9 @@ export default async function ProvinceAtlasPage({ params }: { params: Promise<{ 
               </div>
             </div>
           </section>
+
+          <AtlasCompletionAction provinceId={resolvedParams.slug} provinceName={province.name} />
+          <RelatedProvinces currentProvinceId={resolvedParams.slug} />
         </>
       ) : (
         // ─── FALLBACK GENERIC CONTENT ──────────────────────────────────────
@@ -488,6 +495,9 @@ export default async function ProvinceAtlasPage({ params }: { params: Promise<{ 
             imageCaption={`Keindahan alam ${province.name}`}
             reverse
           />
+
+          <AtlasCompletionAction provinceId={resolvedParams.slug} provinceName={province.name} />
+          <RelatedProvinces currentProvinceId={resolvedParams.slug} />
         </>
       )}
     </ProvinceAtlasShell>

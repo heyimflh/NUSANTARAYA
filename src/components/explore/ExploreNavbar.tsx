@@ -4,9 +4,11 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import { useLanguage } from "@/context/app-context";
 
 export const ExploreNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { language, setLanguage } = useLanguage();
   // Force smart color mode from the start for Explore Page
   const isScrolled = true;
 
@@ -175,9 +177,19 @@ export const ExploreNavbar = () => {
                 </Link>
 
                 <div className="flex items-center gap-6 text-[#2D2419]/50 text-xs font-medium tracking-widest uppercase">
-                  <button className="hover:text-[#2D2419] transition-colors font-bold text-[#2D2419]">ID</button>
+                  <button 
+                    onClick={() => setLanguage("id")}
+                    className={`hover:text-[#2D2419] transition-colors ${language === "id" ? "font-bold text-[#2D2419]" : ""}`}
+                  >
+                    ID
+                  </button>
                   <span className="w-1 h-1 rounded-full bg-[#2D2419]/30" />
-                  <button className="hover:text-[#2D2419] transition-colors">EN</button>
+                  <button 
+                    onClick={() => setLanguage("en")}
+                    className={`hover:text-[#2D2419] transition-colors ${language === "en" ? "font-bold text-[#2D2419]" : ""}`}
+                  >
+                    EN
+                  </button>
                 </div>
               </motion.div>
             </div>

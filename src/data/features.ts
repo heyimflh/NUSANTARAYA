@@ -1,4 +1,20 @@
-export const mainFeatures = [
+export type FeatureStatus = "live" | "soon";
+
+export interface FeatureData {
+  id: string;
+  title: string;
+  eyebrow: string;
+  description: string;
+  chips: string[];
+  icon: string;
+  image: string;
+  color: string;
+  href: string;
+  status?: FeatureStatus;
+  featured?: boolean;
+}
+
+export const mainFeatures: FeatureData[] = [
   {
     id: "route-planner",
     title: "Nusa Route Planner",
@@ -10,6 +26,7 @@ export const mainFeatures = [
     image: "/assets/features/route-planner-preview.png",
     color: "#C9A84C",
     href: "/routes",
+    status: "soon",
     featured: true
   },
   {
@@ -34,7 +51,8 @@ export const mainFeatures = [
     icon: "/assets/ui/icons/icon-archive.svg",
     image: "/assets/features/archive-preview.png",
     color: "#8B2020",
-    href: "/archive"
+    href: "/archive",
+    status: "soon"
   },
   {
     id: "nusarasa",
@@ -46,7 +64,8 @@ export const mainFeatures = [
     icon: "/assets/ui/icons/icon-culinary.svg",
     image: "/assets/features/nusarasa-preview.png",
     color: "#D4691E",
-    href: "/rasa"
+    href: "/rasa",
+    status: "soon"
   },
   {
     id: "passport",
@@ -70,7 +89,8 @@ export const mainFeatures = [
     icon: "/assets/ui/icons/icon-rani.svg",
     image: "/assets/features/rani-chat-preview.png",
     color: "#6B3FA0",
-    href: "/rani"
+    href: "/rani",
+    status: "soon"
   },
   {
     id: "future",
@@ -82,6 +102,7 @@ export const mainFeatures = [
     icon: "/assets/ui/icons/icon-future.svg",
     image: "/assets/features/future-preview.png",
     color: "#1A5C3A",
-    href: "/future"
+    href: "/future",
+    status: "soon"
   }
 ];

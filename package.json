@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "validate:atlas": "tsx scripts/validate-atlas.ts",
-    "validate:regions": "tsx scripts/validate-regions.ts",
+    "validate:atlas": "npx tsx scripts/validate-atlas.ts",
+    "validate:regions": "npx tsx scripts/validate-regions.ts",
+    "validate:foundation": "npx tsx scripts/validate-foundation.ts",
     "start": "next start",
     "lint": "eslint"
   },

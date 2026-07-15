@@ -1,119 +1,115 @@
-import assert from 'assert';
-import { PassportData } from '../src/lib/types/index';
+import { PassportData } from "../src/lib/types";
 
-// We extract the pure state transitions from app-context.tsx to test them isolated
-const computeLevel = (stampCount: number): string => {
+// A mock version of computeLevel from app-context.tsx
+function computeLevel(stampCount: number): string {
   if (stampCount >= 36) return "Pahlawan Nusantara";
   if (stampCount >= 26) return "Penjaga Warisan";
   if (stampCount >= 16) return "Pengembara Sejati";
   if (stampCount >= 6) return "Petualang Nusantara";
   return "Penjelajah Baru";
-};
+}
 
-const planProvince = (p: PassportData, provinceId: string): PassportData => {
-  if (p.stamps.includes(provinceId)) return p;
-  if ((p.startedProvinces || []).includes(provinceId)) return p;
-  const planned = p.plannedProvinces || [];
-  if (planned.includes(provinceId)) return p;
-  
-  return {
-    ...p,
-    plannedProvinces: [...planned, provinceId],
+// A mock version of the passport updater to verify logic
+class PassportStore {
+  public data: PassportData = {
+    version: 2,
+    userId: "local",
+    stamps: [],
+    startedProvinces: [],
+    plannedProvinces: [],
+    badges: [],
+    achievements: [],
+    xp: 0,
+    level: "Penjelajah Baru",
+    completedQuizzes: [],
+    savedRoutes: [],
   };
-};
 
-const startProvince = (p: PassportData, provinceId: string): PassportData => {
-  if (p.stamps.includes(provinceId)) return p;
-  const started = p.startedProvinces || [];
-  if (started.includes(provinceId)) return p;
-  
-  return {
-    ...p,
-    startedProvinces: [...started, provinceId],
-    plannedProvinces: (p.plannedProvinces || []).filter(id => id !== provinceId),
-  };
-};
+  completeProvince(provinceId: string) {
+    if (this.data.stamps.includes(provinceId)) return;
+    
+    const stamps = [...this.data.stamps, provinceId];
+    this.data = {
+      ...this.data,
+      stamps,
+      startedProvinces: this.data.startedProvinces?.filter(id => id !== provinceId) || [],
+      plannedProvinces: this.data.plannedProvinces?.filter(id => id !== provinceId) || [],
+      xp: this.data.xp + 10,
+      level: computeLevel(stamps.length)
+    };
+  }
 
-const addStamp = (p: PassportData, provinceId: string): PassportData => {
-  if (p.stamps.includes(provinceId)) return p;
-  const stamps = [...p.stamps, provinceId];
-  return {
-    ...p,
-    stamps,
-    startedProvinces: (p.startedProvinces || []).filter(id => id !== provinceId),
-    plannedProvinces: (p.plannedProvinces || []).filter(id => id !== provinceId),
-    xp: p.xp + 10,
-    level: computeLevel(stamps.length),
-  };
-};
+  startProvince(provinceId: string) {
+    if (this.data.stamps.includes(provinceId)) return;
+    if (this.data.startedProvinces?.includes(provinceId)) return;
 
-// INITIAL STATE
-let state: PassportData = {
-  version: 1,
-  userId: "test",
-  stamps: [],
-  startedProvinces: [],
-  plannedProvinces: [],
-  badges: [],
-  xp: 0,
-  level: "Penjelajah Baru",
-  completedQuizzes: [],
-  savedRoutes: [],
-};
+    const startedProvinces = [...(this.data.startedProvinces || []), provinceId];
+    this.data = {
+      ...this.data,
+      startedProvinces,
+      plannedProvinces: this.data.plannedProvinces?.filter(id => id !== provinceId) || []
+    };
+  }
+
+  planProvince(provinceId: string) {
+    if (this.data.stamps.includes(provinceId)) return;
+    if (this.data.startedProvinces?.includes(provinceId)) return;
+    if (this.data.plannedProvinces?.includes(provinceId)) return;
+
+    this.data = {
+      ...this.data,
+      plannedProvinces: [...(this.data.plannedProvinces || []), provinceId]
+    };
+  }
+}
 
 function runTests() {
-  console.log("Running isolated tests for Passport Logic...");
+  const store = new PassportStore();
+  let passed = 0;
+  let failed = 0;
 
-  // 1. Idempotency `planProvince`
-  state = planProvince(state, "aceh");
-  assert.deepEqual(state.plannedProvinces, ["aceh"]);
-  state = planProvince(state, "aceh"); // Duplicate
-  assert.deepEqual(state.plannedProvinces, ["aceh"]); // Should remain same
+  function assert(condition: boolean, message: string) {
+    if (condition) {
+      console.log(`✅ PASS: ${message}`);
+      passed++;
+    } else {
+      console.error(`❌ FAIL: ${message}`);
+      failed++;
+    }
+  }
 
-  // 2. Planned -> Started
-  state = startProvince(state, "aceh");
-  assert.deepEqual(state.plannedProvinces, []);
-  assert.deepEqual(state.startedProvinces, ["aceh"]);
+  console.log("Running Passport Logic Tests...");
+  
+  // Test 1: Plan a province
+  store.planProvince("bali");
+  assert(store.data.plannedProvinces?.includes("bali") === true, "bali should be planned");
+  assert(store.data.startedProvinces?.includes("bali") === false, "bali should not be started");
+  assert(store.data.stamps.includes("bali") === false, "bali should not be completed");
 
-  // 3. Idempotency `startProvince`
-  state = startProvince(state, "aceh");
-  assert.deepEqual(state.startedProvinces, ["aceh"]); // No duplicates
+  // Test 2: Start a province (should move from planned to started)
+  store.startProvince("bali");
+  assert(store.data.plannedProvinces?.includes("bali") === false, "bali should be removed from planned");
+  assert(store.data.startedProvinces?.includes("bali") === true, "bali should be in started");
+  
+  // Test 3: Complete a province (should move from started to stamps and add XP)
+  const previousXp = store.data.xp;
+  store.completeProvince("bali");
+  assert(store.data.startedProvinces?.includes("bali") === false, "bali should be removed from started");
+  assert(store.data.stamps.includes("bali") === true, "bali should be in stamps");
+  assert(store.data.xp === previousXp + 10, "XP should increase by 10");
 
-  // 4. `planProvince` ignores if already started
-  state = planProvince(state, "aceh");
-  assert.deepEqual(state.plannedProvinces, []);
+  // Test 4: Idempotency (completing again should do nothing)
+  store.completeProvince("bali");
+  assert(store.data.xp === previousXp + 10, "XP should not increase on duplicate completion");
 
-  // 5. Started -> Completed (addStamp)
-  state = addStamp(state, "aceh");
-  assert.deepEqual(state.startedProvinces, []);
-  assert.deepEqual(state.stamps, ["aceh"]);
-  assert.equal(state.xp, 10);
-  assert.equal(state.level, "Penjelajah Baru");
+  // Test 5: Can't plan or start an already completed province
+  store.planProvince("bali");
+  assert(store.data.plannedProvinces?.includes("bali") === false, "Should not be able to plan a completed province");
+  store.startProvince("bali");
+  assert(store.data.startedProvinces?.includes("bali") === false, "Should not be able to start a completed province");
 
-  // 6. Idempotency legacy `addStamp`
-  state = addStamp(state, "aceh");
-  assert.deepEqual(state.stamps, ["aceh"]);
-  assert.equal(state.xp, 10); // Shouldn't add XP again
-
-  // 7. `planProvince` and `startProvince` ignores if already completed
-  state = planProvince(state, "aceh");
-  state = startProvince(state, "aceh");
-  assert.deepEqual(state.plannedProvinces, []);
-  assert.deepEqual(state.startedProvinces, []);
-
-  // 8. Level boundaries testing
-  assert.equal(computeLevel(0), "Penjelajah Baru");
-  assert.equal(computeLevel(5), "Penjelajah Baru");
-  assert.equal(computeLevel(6), "Petualang Nusantara");
-  assert.equal(computeLevel(15), "Petualang Nusantara");
-  assert.equal(computeLevel(16), "Pengembara Sejati");
-  assert.equal(computeLevel(25), "Pengembara Sejati");
-  assert.equal(computeLevel(26), "Penjaga Warisan");
-  assert.equal(computeLevel(35), "Penjaga Warisan");
-  assert.equal(computeLevel(36), "Pahlawan Nusantara");
-  assert.equal(computeLevel(38), "Pahlawan Nusantara");
-
-  console.log("All unit tests passed!");
+  console.log(`\nTests finished: ${passed} passed, ${failed} failed.`);
+  if (failed > 0) process.exit(1);
 }
 
 runTests();

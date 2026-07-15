@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter, Montserrat, Outfit, Pacifico, Philosopher } from "next/font/google";
 import { AppProvider } from "@/context/app-context";
+import { DocumentPreferenceSync } from "@/components/system/DocumentPreferenceSync";
 import "./globals.css";
 
 /**
@@ -92,6 +93,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col antialiased" suppressHydrationWarning>
         <AppProvider>
+          <DocumentPreferenceSync />
           {/* Global Fixed Background for seamless masking and mobile performance */}
           <div className="fixed inset-0 z-[-50] bg-[url('/assets/background-primary.png')] max-md:bg-[url('/assets/background-primary-mobile.png')] bg-cover bg-center bg-no-repeat opacity-100 pointer-events-none w-full h-[100dvh]" />
           

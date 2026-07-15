@@ -4,18 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
+import { FeatureData } from '@/data/features';
+
 interface FeaturedRoutePlannerCardProps {
-  feature: {
-    id: string;
-    title: string;
-    eyebrow: string;
-    description: string;
-    chips: string[];
-    icon: string;
-    image: string;
-    color: string;
-    href: string;
-  };
+  feature: FeatureData;
 }
 
 export default function FeaturedRoutePlannerCard({ feature }: FeaturedRoutePlannerCardProps) {
@@ -76,10 +68,13 @@ export default function FeaturedRoutePlannerCard({ feature }: FeaturedRoutePlann
           ))}
         </div>
 
-        {/* CTA Button */}
         <div className="mt-auto">
           <Link 
             href={feature.href}
+            onClick={(e) => {
+              if (feature.status === 'soon') e.preventDefault();
+            }}
+            aria-disabled={feature.status === 'soon' ? true : undefined}
             className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full text-white font-semibold transition-all duration-300 hover:gap-4 hover:-translate-y-1 hover:shadow-lg"
             style={{ 
               backgroundColor: feature.color,

@@ -4,18 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
+import { FeatureData } from '@/data/features';
+
 interface FeatureCardProps {
-  feature: {
-    id: string;
-    title: string;
-    eyebrow: string;
-    description: string;
-    chips: string[];
-    icon: string;
-    image: string;
-    color: string;
-    href: string;
-  };
+  feature: FeatureData;
   layout?: 'vertical' | 'horizontal-left' | 'horizontal-right';
   className?: string;
 }
@@ -27,6 +19,10 @@ export default function FeatureCard({ feature, layout = 'vertical', className = 
   return (
     <Link 
       href={feature.href}
+      onClick={(e) => {
+        if (feature.status === 'soon') e.preventDefault();
+      }}
+      aria-disabled={feature.status === 'soon' ? true : undefined}
       className={`relative flex ${isHorizontal ? (isImageRight ? 'flex-col md:flex-row' : 'flex-col md:flex-row-reverse') : 'flex-col'} bg-white rounded-[32px] overflow-hidden group shadow-[0_4px_20px_rgb(0,0,0,0.02)] border border-black/[0.04] transition-all duration-500 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:-translate-y-1 ${className}`}
     >
       {/* Content Area */}

@@ -58,7 +58,7 @@ export const destinations: Destination[] = [
     title: "Gunung Rinjani",
     tagline: "Keagungan Kaldera & Danau Segara Anak",
     shortLabel: "NTB",
-    background: "/assets/video/video4_gunung rinjani.mp4",
+    background: "/assets/video/video4_gunungrinjani.mp4",
     alt: "Kawah Gunung Rinjani dengan latar belakang Danau Segara Anak",
     description: "Taklukkan salah satu puncak vulkanik paling menantang dan memukau di Indonesia, nikmati pemandangan danau kawah Segara Anak yang mistis di bawah langit berbintang.",
     carouselTitle: "Puncak Rinjani",

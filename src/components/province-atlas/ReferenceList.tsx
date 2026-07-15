@@ -34,6 +34,14 @@ const TIER_LABELS: Record<string, string> = {
   C: "Sumber Pendukung",
 };
 
+const normalizeDoi = (doi: string) => {
+  if (!doi) return "";
+  let clean = doi.trim();
+  clean = clean.replace(/^(https?:\/\/)?(dx\.)?doi\.org\//i, '');
+  clean = clean.replace(/^doi:/i, '');
+  return `https://doi.org/${clean}`;
+};
+
 export const ReferenceList = ({ references, citationIndex }: ReferenceListProps) => {
   if (!references || references.length === 0) return null;
 
@@ -86,7 +94,7 @@ export const ReferenceList = ({ references, citationIndex }: ReferenceListProps)
                     )}
                     {ref.doi && (
                       <a
-                        href={`https://doi.org/${ref.doi}`}
+                        href={normalizeDoi(ref.doi)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-xs text-nusaGold hover:underline"

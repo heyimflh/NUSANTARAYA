@@ -37,6 +37,17 @@ export const SummaryActions = ({ province }: { province: ProvinceMapItem }) => {
           </button>
           
           <button 
+            onClick={() => {
+              const raniSection = document.getElementById("rani-map-assistant");
+              const raniHeading = document.getElementById("rani-map-assistant-heading");
+              if (raniSection && raniHeading) {
+                raniHeading.focus();
+                raniSection.scrollIntoView({ 
+                  behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", 
+                  block: "start" 
+                });
+              }
+            }}
             className="flex-1 flex items-center justify-center gap-2 h-[44px] border border-transparent hover:border-[#E8E0CE] bg-transparent hover:bg-[#F8F4EA] rounded-xl text-[13px] font-bold text-[#0D1B2A]/80 hover:text-[#0D1B2A] transition-colors"
           >
             <MessageSquare size={16} />

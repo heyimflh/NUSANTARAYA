@@ -60,7 +60,7 @@ export const BREAKPOINTS = {
 // ─── Navigasi ────────────────────────────────────────────────────────────────
 export const NAV_ITEMS = [
   { label: "Beranda", labelEn: "Home", href: "/", icon: "home" },
-  { label: "Jelajahi", labelEn: "Explore", href: "/map", icon: "map" },
+  { label: "Jelajahi", labelEn: "Explore", href: "/explore", icon: "map" },
   { label: "Rute", labelEn: "Routes", href: "/routes", icon: "route" },
   { label: "Passport", labelEn: "Passport", href: "/passport", icon: "stamp" },
   { label: "Menu", labelEn: "Menu", href: "#menu", icon: "menu" },
@@ -68,8 +68,8 @@ export const NAV_ITEMS = [
 
 export const DESKTOP_NAV_ITEMS = [
   { label: "Beranda", labelEn: "Home", href: "/" },
-  { label: "Jelajahi", labelEn: "Explore", href: "/map", children: [
-    { label: "Peta Indonesia", labelEn: "Indonesia Map", href: "/map" },
+  { label: "Jelajahi", labelEn: "Explore", href: "/explore", children: [
+    { label: "Peta Indonesia", labelEn: "Indonesia Map", href: "/explore" },
   ]},
   { label: "Budaya", labelEn: "Culture", href: "/archive" },
   { label: "Kuliner", labelEn: "Culinary", href: "/nusarasa" },

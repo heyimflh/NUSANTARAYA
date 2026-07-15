@@ -32,24 +32,17 @@ export function resolveRaniAction({
       }
       break;
     case "OPEN_ROUTE_PLANNER":
-      // Navigation to route planner with context
-      if (router) {
-        router.push("/route-planner");
-      }
+      // Route planner is not yet available, fallback gracefully
       break;
     case "OPEN_ARCHIVE":
-      if (router) {
-        router.push("/archive");
-      }
+      // Archive is not yet available, fallback gracefully
       break;
     case "OPEN_NUSARASA":
-      if (router) {
-        router.push("/nusarasa");
-      }
+      // NusaRasa is not yet available, fallback gracefully
       break;
     case "OPEN_PASSPORT":
       if (router) {
-        router.push("/passport");
+        router.push("/explore#passport-progress");
       } else {
         const pSection = document.getElementById("passport-progress-heading");
         if (pSection) {

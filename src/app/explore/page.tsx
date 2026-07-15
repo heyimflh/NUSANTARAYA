@@ -17,7 +17,7 @@ import { PassportProgressSection } from "@/components/explore/passport-progress/
 import { RaniMapAssistantSection } from "@/components/explore/rani-map-assistant";
 import { FinalCtaFooterSection } from '@/components/home/final-cta-footer';
 import { useRouter } from "next/navigation";
-import { usePassport } from "@/context/app-context";
+import { usePassport, useMode } from "@/context/app-context";
 import { getRegionById } from "@/data/regions/regionProvinceMap";
 import { RegionId } from "@/types/region";
 import { RecommendedJourney } from "@/data/journeys/types";
@@ -26,7 +26,7 @@ export default function ExplorePage() {
   // State for Explore Control Bar and Map
   const [searchQuery, setSearchQuery] = useState("");
   const [activeLayer, setActiveLayer] = useState<ExploreLayerId>("all");
-  const [activeMode, setActiveMode] = useState<ExploreModeId>("explore");
+  const { mode: activeMode, setMode: setActiveMode } = useMode();
   const [selectedProvinceId, setSelectedProvinceId] = useState<string | null>(null);
   const [showFlagshipOnly, setShowFlagshipOnly] = useState(false);
   const [activeJourney, setActiveJourney] = useState<RecommendedJourney | null>(null);
@@ -46,7 +46,6 @@ export default function ExplorePage() {
   const handleReset = useCallback(() => {
     setSearchQuery("");
     setActiveLayer("all");
-    setActiveMode("explore");
     setSelectedProvinceId(null);
     setShowFlagshipOnly(false);
     setHighlightedRegionId(null);

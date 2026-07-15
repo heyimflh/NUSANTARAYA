@@ -4,13 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Compass, ArrowUpRight, Search, Menu, Globe } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "@/context/app-context";
 
 export default function HeroNavbar() {
   const pathname = usePathname();
-  const [lang, setLang] = useState<"ID" | "EN">("ID");
+  const { language, setLanguage } = useLanguage();
 
   const menuItems = [
-    { name: "Peta", href: "/map" },
+    { name: "Peta", href: "/explore" },
     { name: "Arsip Budaya", href: "/archive" },
     { name: "Route Planner", href: "/routes" },
     { name: "Cerita Rakyat", href: "/cerita" },
@@ -54,18 +55,18 @@ export default function HeroNavbar() {
           {/* Language Toggle */}
           <div className="hidden sm:flex items-center gap-1.5 bg-black/40 rounded-full px-3 py-1 text-xs font-semibold text-white/95 border border-white/10">
             <button
-              onClick={() => setLang("ID")}
+              onClick={() => setLanguage("id")}
               className={`transition-all duration-200 cursor-pointer ${
-                lang === "ID" ? "text-[#C9A84C] font-bold" : "opacity-50 hover:opacity-100"
+                language === "id" ? "text-[#C9A84C] font-bold" : "opacity-50 hover:opacity-100"
               }`}
             >
               ID
             </button>
             <span className="opacity-30">|</span>
             <button
-              onClick={() => setLang("EN")}
+              onClick={() => setLanguage("en")}
               className={`transition-all duration-200 cursor-pointer ${
-                lang === "EN" ? "text-[#C9A84C] font-bold" : "opacity-50 hover:opacity-100"
+                language === "en" ? "text-[#C9A84C] font-bold" : "opacity-50 hover:opacity-100"
               }`}
             >
               EN
@@ -74,7 +75,7 @@ export default function HeroNavbar() {
 
           {/* Mulai Jelajah CTA (BromoRise Book Now style) */}
           <Link
-            href="/map"
+            href="/explore"
             className="bg-white hover:bg-[#F0EAD9] text-black text-xs md:text-sm font-bold px-4 py-2 md:px-5 md:py-2.5 rounded-full flex items-center gap-2.5 transition-all duration-300 shadow-[0_4px_20px_rgba(255,255,255,0.15)] group hover:scale-105 active:scale-95"
           >
             <span>Mulai Jelajah</span>

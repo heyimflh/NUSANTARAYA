@@ -23,7 +23,7 @@ import { evaluateBadges } from "@/lib/passport/badges";
 
 // ─── Default Passport ────────────────────────────────────────────────────────
 const DEFAULT_PASSPORT: PassportData = {
-  version: 1,
+  version: 2,
   userId: "local",
   stamps: [],
   startedProvinces: [],
@@ -54,6 +54,7 @@ interface AppContextType {
 
   // Passport
   passport: PassportData;
+  completeProvince: (provinceId: string, source?: "atlas" | "quiz") => void;
   addStamp: (provinceId: string) => void;
   startProvince: (provinceId: string) => void;
   planProvince: (provinceId: string) => void;
@@ -99,6 +100,38 @@ function computeLevel(stampCount: number): string {
   return "Penjelajah Baru";
 }
 
+// ─── Type Validators ─────────────────────────────────────────────────────────
+function isLanguage(value: unknown): value is Language {
+  return value === "id" || value === "en";
+}
+
+function isAppMode(value: unknown): value is AppMode {
+  return (
+    value === "explore" ||
+    value === "tourist" ||
+    value === "learn"
+  );
+}
+
+// ─── Migration Helper ────────────────────────────────────────────────────────
+const LEGACY_PROVINCE_CODE_TO_SLUG: Record<string, string> = {
+  "13": "sumatera-barat",
+  "34": "di-yogyakarta",
+  "51": "bali",
+  "53": "nusa-tenggara-timur",
+  "64": "kalimantan-timur",
+  "73": "sulawesi-selatan",
+  "81": "maluku",
+  "82": "maluku-utara",
+  "96": "papua-barat-daya",
+};
+
+function migrateIds(ids: string[]): string[] {
+  if (!Array.isArray(ids)) return [];
+  const migrated = ids.map(id => LEGACY_PROVINCE_CODE_TO_SLUG[id] || id);
+  return Array.from(new Set(migrated));
+}
+
 // ─── Provider ────────────────────────────────────────────────────────────────
 export function AppProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>("id");
@@ -110,17 +143,21 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // Hydrate from localStorage on mount
   useEffect(() => {
     const timeoutId = window.setTimeout(() => {
-      setLanguageState(safeGetItem<Language>(LANG_KEY, "id"));
-      setModeState(safeGetItem<AppMode>(MODE_KEY, "explore"));
+      const storedLang = safeGetItem<unknown>(LANG_KEY, "id");
+      setLanguageState(isLanguage(storedLang) ? storedLang : "id");
+      
+      const storedMode = safeGetItem<unknown>(MODE_KEY, "explore");
+      setModeState(isAppMode(storedMode) ? storedMode : "explore");
       
       // Hydrate passport with backward compatibility
       const savedPassport = safeGetItem<Partial<PassportData>>(PASSPORT_KEY, {});
       setPassport({
         ...DEFAULT_PASSPORT,
         ...savedPassport,
-        // Ensure arrays exist even if legacy data didn't have them
-        startedProvinces: savedPassport.startedProvinces || [],
-        plannedProvinces: savedPassport.plannedProvinces || [],
+        // Migrate numeric IDs to slugs and remove duplicates
+        stamps: migrateIds(savedPassport.stamps || []),
+        startedProvinces: migrateIds(savedPassport.startedProvinces || []),
+        plannedProvinces: migrateIds(savedPassport.plannedProvinces || []),
         achievements: savedPassport.achievements || [],
       });
       
@@ -170,8 +207,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     [],
   );
 
-  const addStamp = useCallback(
-    (provinceId: string) => {
+  const completeProvince = useCallback(
+    (provinceId: string, source?: "atlas" | "quiz") => {
       updatePassport((p) => {
         if (p.stamps.includes(provinceId)) return p;
         const stamps = [...p.stamps, provinceId];
@@ -179,14 +216,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
           ...p,
           stamps,
           // Remove from started and planned if it exists
-          startedProvinces: (p.startedProvinces || []).filter(id => id !== provinceId),
-          plannedProvinces: (p.plannedProvinces || []).filter(id => id !== provinceId),
+          startedProvinces: (p.startedProvinces || []).filter((id) => id !== provinceId),
+          plannedProvinces: (p.plannedProvinces || []).filter((id) => id !== provinceId),
           xp: p.xp + 10,
           level: computeLevel(stamps.length),
         };
       });
     },
     [updatePassport],
+  );
+
+  const addStamp = useCallback(
+    (provinceId: string) => completeProvince(provinceId),
+    [completeProvince],
   );
 
   const startProvince = useCallback(
@@ -301,6 +343,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
           mode: "explore",
           setMode,
           passport: DEFAULT_PASSPORT,
+          completeProvince,
           addStamp,
           startProvince,
           planProvince,
@@ -327,6 +370,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         mode,
         setMode,
         passport,
+        completeProvince,
         addStamp,
         startProvince,
         planProvince,
@@ -370,6 +414,7 @@ export function useMode() {
 export function usePassport() {
   const {
     passport,
+    completeProvince,
     addStamp,
     startProvince,
     planProvince,
@@ -381,6 +426,7 @@ export function usePassport() {
   } = useAppContext();
   return {
     passport,
+    completeProvince,
     addStamp,
     startProvince,
     planProvince,

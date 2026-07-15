@@ -51,7 +51,11 @@ export function JourneyDossier({ journey, reasons, onRegenerate }: JourneyDossie
   };
 
   const handleSave = () => {
-    saveRoute(journey.id);
+    const provinceIds = journey.stops
+      .map(stop => stop.provinceId)
+      .filter((id): id is string => Boolean(id));
+      
+    saveRoute(journey.id, provinceIds);
   };
 
   const getPrimaryActionIcon = () => {
