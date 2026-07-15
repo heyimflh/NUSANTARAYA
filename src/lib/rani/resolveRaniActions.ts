@@ -5,7 +5,7 @@ type ActionResolverParams = {
   onExploreMapRegion?: (regionId: string) => void;
   onOpenSummary?: (provinceId: string) => void;
   onOpenAtlas?: (provinceId: string) => void;
-  router?: any; // Next router
+  router?: { push: (url: string) => void };
 };
 
 export function resolveRaniAction({
@@ -18,17 +18,17 @@ export function resolveRaniAction({
   switch (action.type) {
     case "APPLY_MAP_CONTEXT":
       if (action.payload?.regionId && onExploreMapRegion) {
-        onExploreMapRegion(action.payload.regionId);
+        onExploreMapRegion(action.payload.regionId as string);
       }
       break;
     case "OPEN_PROVINCE_SUMMARY":
       if (action.payload?.provinceId && onOpenSummary) {
-        onOpenSummary(action.payload.provinceId);
+        onOpenSummary(action.payload.provinceId as string);
       }
       break;
     case "OPEN_PROVINCE_ATLAS":
       if (action.payload?.provinceId && onOpenAtlas) {
-        onOpenAtlas(action.payload.provinceId);
+        onOpenAtlas(action.payload.provinceId as string);
       }
       break;
     case "OPEN_ROUTE_PLANNER":

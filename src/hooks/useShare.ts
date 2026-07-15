@@ -6,11 +6,15 @@ interface ShareOptions {
   url: string;
 }
 
+function toError(value: unknown): Error {
+  return value instanceof Error ? value : new Error(String(value) || "Unknown share error");
+}
+
 export function useShare() {
   const [isSharing, setIsSharing] = useState(false);
   const [hasCopied, setHasCopied] = useState(false);
   const [error, setError] = useState<Error | null>(null);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     return () => {
@@ -30,8 +34,10 @@ export function useShare() {
         // Fallback to clipboard
         if (navigator.clipboard && window.isSecureContext) {
           await navigator.clipboard.writeText(options.url);
+          setHasCopied(true);
         } else {
           // Legacy textarea fallback
+          const activeElement = document.activeElement as HTMLElement | null;
           const textArea = document.createElement("textarea");
           textArea.value = options.url;
           textArea.style.position = "fixed";
@@ -41,20 +47,27 @@ export function useShare() {
           textArea.focus();
           textArea.select();
           try {
-            document.execCommand('copy');
-          } catch (err) {
-            console.error('Fallback: Oops, unable to copy', err);
+            const success = document.execCommand('copy');
+            if (!success) {
+              throw new Error("execCommand returned false");
+            }
+            setHasCopied(true);
+          } finally {
+            document.body.removeChild(textArea);
+            if (activeElement) {
+              activeElement.focus();
+            }
           }
-          document.body.removeChild(textArea);
         }
-        setHasCopied(true);
+        
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
         timeoutRef.current = setTimeout(() => setHasCopied(false), 2000);
       }
-    } catch (err: any) {
-      if (err.name !== 'AbortError') {
-        console.error('Error sharing:', err);
-        setError(err);
+    } catch (err: unknown) {
+      const errorObj = toError(err);
+      if (errorObj.name !== 'AbortError') {
+        console.error('Error sharing:', errorObj);
+        setError(errorObj);
       }
     } finally {
       setIsSharing(false);

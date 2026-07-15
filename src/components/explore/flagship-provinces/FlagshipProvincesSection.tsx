@@ -55,6 +55,7 @@ export const FlagshipProvincesSection: React.FC<FlagshipProvincesSectionProps> =
     if (selectedProvinceId && !hasInteracted) {
       const isFlagship = flagshipProvinces.some((p) => p.provinceId === selectedProvinceId);
       if (isFlagship) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setActiveId(selectedProvinceId);
       }
     }

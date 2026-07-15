@@ -1,6 +1,6 @@
 import React from "react";
 import { PassportProgressSummary } from "@/hooks/usePassportProgressSummary";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Bookmark, Map, Stamp } from "lucide-react";
 
@@ -11,7 +11,7 @@ type PassportHowItWorksProps = {
 export const PassportHowItWorks: React.FC<PassportHowItWorksProps> = ({ summary }) => {
   const shouldReduceMotion = useReducedMotion();
 
-  const container = {
+  const container: Variants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
@@ -19,7 +19,7 @@ export const PassportHowItWorks: React.FC<PassportHowItWorksProps> = ({ summary 
     }
   };
 
-  const item: any = {
+  const item: Variants = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
     show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
   };

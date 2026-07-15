@@ -1,4 +1,4 @@
-import { PassportData, BadgeDefinition, PassportAchievement } from "@/lib/types";
+import { PassportData, BadgeDefinition, PassportAchievement, BadgeWilayah } from "@/lib/types";
 import { provinceMapData } from "@/data/provinces/provinces";
 
 export const BADGE_REGISTRY: BadgeDefinition[] = [
@@ -69,15 +69,15 @@ export const BADGE_REGISTRY: BadgeDefinition[] = [
 ];
 
 export function evaluateBadges(passport: PassportData): PassportData {
-  let p = { ...passport };
-  let newBadges = [...p.badges];
-  let newAchievements = [...(p.achievements || [])];
+  const p = { ...passport };
+  const newBadges = [...p.badges];
+  const newAchievements = [...(p.achievements || [])];
   
   const completedSet = new Set(p.stamps);
   let updated = false;
 
   // Evaluate Regional Badges
-  const regions = [
+  const regions: { name: string; badgeId: BadgeWilayah }[] = [
     { name: "Sumatera", badgeId: "Sumatra Seeker" },
     { name: "Jawa", badgeId: "Java Heritage Keeper" },
     { name: "Kalimantan", badgeId: "Borneo Nature Guardian" },
@@ -88,13 +88,13 @@ export function evaluateBadges(passport: PassportData): PassportData {
   ];
 
   for (const region of regions) {
-    if (newBadges.includes(region.badgeId as any)) continue;
+    if (newBadges.includes(region.badgeId)) continue;
     
     const provsInRegion = provinceMapData.filter(prov => prov.region === region.name);
     const allCompleted = provsInRegion.length > 0 && provsInRegion.every(prov => completedSet.has(prov.id));
     
     if (allCompleted) {
-      newBadges.push(region.badgeId as any);
+      newBadges.push(region.badgeId);
       newAchievements.push({
         id: `badge-${region.badgeId}-${Date.now()}`,
         type: "badge",
@@ -108,9 +108,9 @@ export function evaluateBadges(passport: PassportData): PassportData {
   }
 
   // Evaluate Indonesia Complete Explorer
-  if (!newBadges.includes("Indonesia Complete Explorer" as any)) {
+  if (!newBadges.includes("Indonesia Complete Explorer")) {
     if (completedSet.size === 38) {
-      newBadges.push("Indonesia Complete Explorer" as any);
+      newBadges.push("Indonesia Complete Explorer");
       newAchievements.push({
         id: `badge-complete-${Date.now()}`,
         type: "badge",

@@ -29,6 +29,7 @@ export const PassportProgressSection: React.FC<PassportProgressSectionProps> = (
   
   // Hydration state sync
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setHasHydrated(true);
   }, []);
 

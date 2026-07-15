@@ -92,7 +92,7 @@ export function RegionCompareTray({ activeRegion, compareRegionId, activeLayer, 
           </div>
 
           <CompareColumn region={activeRegion} isPrimary={true} />
-          <CompareColumn region={compareRegion} isPrimary={false} onChangeRegion={() => onSelectCompare(null as any)} />
+          <CompareColumn region={compareRegion} isPrimary={false} onChangeRegion={() => onSelectCompare(null as unknown as RegionId)} />
           
         </div>
       )}

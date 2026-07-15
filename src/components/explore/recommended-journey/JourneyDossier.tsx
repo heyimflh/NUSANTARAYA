@@ -26,8 +26,9 @@ export function JourneyDossier({ journey, reasons, onRegenerate }: JourneyDossie
         router.push(journey.primaryAction.href);
       }
     } else if (journey.primaryAction.type === "route-planner") {
-      if (isRouteAvailable("/planner")) {
-        router.push(`/planner?journeyId=${journey.id}`);
+      const routePlannerHref = `/routes?journeyId=${encodeURIComponent(journey.id)}`;
+      if (isRouteAvailable(routePlannerHref)) {
+        router.push(routePlannerHref);
       }
     }
   };
@@ -227,7 +228,7 @@ export function JourneyDossier({ journey, reasons, onRegenerate }: JourneyDossie
                   onClick={handlePrimaryAction}
                   disabled={
                     Boolean(
-                      (journey.primaryAction.type === "route-planner" && !isRouteAvailable("/planner")) ||
+                      (journey.primaryAction.type === "route-planner" && !isRouteAvailable(`/routes?journeyId=${encodeURIComponent(journey.id)}`)) ||
                       ((journey.primaryAction.type === "atlas" || journey.primaryAction.type === "learn") && 
                         journey.primaryAction.href && !isRouteAvailable(journey.primaryAction.href))
                     )

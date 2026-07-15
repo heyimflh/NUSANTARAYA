@@ -25,6 +25,7 @@ export function ExploreActiveSummary({
 
   // Trigger brief animation when filters change
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsUpdating(true);
     const t = setTimeout(() => setIsUpdating(false), 400);
     return () => clearTimeout(t);

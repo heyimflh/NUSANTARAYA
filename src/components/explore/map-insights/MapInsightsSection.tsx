@@ -401,6 +401,7 @@ export function MapInsightsSection({
     }
     
     const vm = resolveMapInsight(ctxToResolve);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setViewModel(vm);
   }, [context, hoveredNode]);
 

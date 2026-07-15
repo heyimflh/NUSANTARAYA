@@ -4,6 +4,7 @@ import {
   RecommendedJourney,
   JourneyReasonCode,
   RecommendationConfidence,
+  JourneyLayer,
 } from "@/data/journeys/types";
 import { journeyPresets } from "@/data/journeys/presets";
 
@@ -30,7 +31,7 @@ function scoreJourney(j: RecommendedJourney, context: JourneyRecommendationConte
     if (j.primaryLayer === context.activeLayer) {
       score += 30;
       reasons.push("MATCHES_ACTIVE_LAYER");
-    } else if (j.secondaryLayers?.includes(context.activeLayer as any)) {
+    } else if (j.secondaryLayers?.includes(context.activeLayer as JourneyLayer)) {
       score += 15;
     }
   }

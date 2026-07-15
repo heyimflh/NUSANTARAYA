@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const fs = require('fs');
 const content = fs.readFileSync('src/data/provinces/provinces.ts', 'utf8');
 const matches = content.match(/id:\s*"([^"]+)"/g);

@@ -88,6 +88,7 @@ export function useRaniConversation({ context }: UseRaniConversationParams) {
   // Initial load
   useEffect(() => {
     if (conversation.messages.length === 0 && conversation.status === "idle") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       computeProactiveRecommendation();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -178,6 +179,7 @@ export function useRaniConversation({ context }: UseRaniConversationParams) {
     const handleOnline = () => setIsOffline(false);
     
     if (typeof window !== "undefined") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsOffline(!window.navigator.onLine);
       window.addEventListener("offline", handleOffline);
       window.addEventListener("online", handleOnline);

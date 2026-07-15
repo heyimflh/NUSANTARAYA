@@ -38,6 +38,7 @@ export function useRegionalExplorer({ selectedProvinceId, activeJourney }: UseRe
       }
       
       if (initialRegion) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setState((prev) => ({
           ...prev,
           activeRegionId: initialRegion as RegionId,

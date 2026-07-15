@@ -85,7 +85,7 @@ export const SearchResultDropdown = memo(function SearchResultDropdown({
       ) : (
         <div className="p-8 text-center text-nusaNavy/50">
           <p className="text-sm">Provinsi atau lokasi tidak ditemukan.</p>
-          <p className="text-xs mt-1">Coba kata kunci lain seperti "Bali" atau "Rendang"</p>
+          <p className="text-xs mt-1">Coba kata kunci lain seperti &quot;Bali&quot; atau &quot;Rendang&quot;</p>
         </div>
       )}
     </div>

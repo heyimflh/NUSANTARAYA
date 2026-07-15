@@ -8,7 +8,7 @@ import { useShare } from '@/hooks/useShare';
 
 export const AtlasTopBar = ({ provinceName }: { provinceName: string }) => {
   const { passport } = usePassport();
-  const { share, hasCopied } = useShare();
+  const { share, hasCopied, isSharing } = useShare();
   
   const handleShare = () => {
     share({
@@ -34,13 +34,17 @@ export const AtlasTopBar = ({ provinceName }: { provinceName: string }) => {
         <div className="flex items-center gap-2 md:gap-3">
           <button 
             onClick={handleShare}
-            className="flex items-center justify-center w-8 h-8 rounded-full border border-[#E8E0CE] bg-[#F8F4EA] text-nusaNavy hover:bg-nusaNavy hover:text-white transition-colors"
+            disabled={isSharing}
+            aria-busy={isSharing}
+            className="flex items-center justify-center w-8 h-8 rounded-full border border-[#E8E0CE] bg-[#F8F4EA] text-nusaNavy hover:bg-nusaNavy hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             title="Bagikan Atlas ini"
-            aria-label={hasCopied ? "Tautan disalin ke clipboard" : "Bagikan Atlas ini"}
-            aria-live="polite"
+            aria-label="Bagikan Atlas ini"
           >
             {hasCopied ? <Check size={14} className="text-green-600" aria-hidden="true" /> : <Share2 size={14} aria-hidden="true" />}
           </button>
+          <span className="sr-only" aria-live="polite">
+            {hasCopied ? "Tautan disalin ke clipboard" : ""}
+          </span>
           <div className="flex items-center gap-1.5 bg-[#F8F4EA] px-3 py-1.5 rounded-full border border-[#E8E0CE] text-xs font-semibold text-nusaNavy">
             <Map size={14} className="text-nusaGold" />
             <span className="hidden md:inline">{passport.stamps.length} Stamps</span>

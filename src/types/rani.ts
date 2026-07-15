@@ -86,7 +86,7 @@ export type RaniAction = {
   id: string;
   type: RaniActionTargetType;
   label: string;
-  payload?: any;
+  payload?: Record<string, unknown>;
 };
 
 export type RaniPrompt = {
@@ -114,7 +114,7 @@ export type RaniSource = {
 
 export type RaniActionTarget = {
   type: RaniActionTargetType;
-  payload?: any;
+  payload?: Record<string, unknown>;
 };
 
 export type RaniKnowledgeRecord = {

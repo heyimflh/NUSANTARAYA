@@ -1,6 +1,6 @@
 import React from "react";
 import { PassportProgressSummary } from "@/hooks/usePassportProgressSummary";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, Variants } from "framer-motion";
 
 type PassportManifestoProps = {
   summary: PassportProgressSummary;
@@ -9,7 +9,7 @@ type PassportManifestoProps = {
 export const PassportManifesto: React.FC<PassportManifestoProps> = ({ summary }) => {
   const shouldReduceMotion = useReducedMotion();
 
-  const fadeUp: any = {
+  const fadeUp: Variants = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
     show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
   };

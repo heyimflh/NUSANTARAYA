@@ -166,6 +166,10 @@ const atlasRegistry: Record<string, () => Promise<{ atlas: ProvinceAtlas; refere
 
 // ─── Public API ─────────────────────────────────────────────────────────
 
+export function getAtlasIds(): string[] {
+  return Object.keys(atlasRegistry);
+}
+
 export async function getAtlasData(slug: string): Promise<ProvinceAtlas | null> {
   const loader = atlasRegistry[slug];
   if (!loader) return null;

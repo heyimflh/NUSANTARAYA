@@ -66,7 +66,7 @@ export function RecommendedJourneySection({
     if (onJourneyChange) {
       onJourneyChange(result.primary);
     }
-  }, [activeLayer, activeMode, selectedProvinceId, searchQuery, showFlagshipOnly, passport.stamps, language, onJourneyChange]);
+  }, [activeLayer, activeMode, selectedProvinceId, searchQuery, showFlagshipOnly, passport.stamps, passport.startedProvinces, passport.plannedProvinces, passport.savedRoutes, language, onJourneyChange]);
 
   const handleRegenerate = () => {
     if (displayedAlternatives.length > 0) {

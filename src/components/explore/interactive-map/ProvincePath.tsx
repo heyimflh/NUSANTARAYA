@@ -63,7 +63,7 @@ export const ProvincePath = memo(function ProvincePath({
     stateKey = "dimmed";
   }
 
-  const baseStyle = PROVINCE_STATES[stateKey] as any;
+  const baseStyle = PROVINCE_STATES[stateKey] as { fill?: string; fillOpacity?: number; stroke?: string; strokeWidth?: number };
   let fill = baseStyle.fill || "transparent";
   let fillOpacity = baseStyle.fillOpacity || 0;
   let stroke = baseStyle.stroke || "rgba(13,27,42,0.12)";
@@ -121,7 +121,7 @@ export const ProvincePath = memo(function ProvincePath({
       tabIndex={relevance > 0 ? 0 : -1}
       role="button"
       aria-label={province.name}
-      aria-selected={isSelected}
+      aria-pressed={isSelected}
     />
   );
 });

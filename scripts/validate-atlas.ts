@@ -6,19 +6,20 @@ import * as path from 'path';
 
 const PROVINCES_DIR = path.join(process.cwd(), 'src/data/atlas/provinces');
 
-function findCitedParagraphs(obj: any): any[] {
-  let results: any[] = [];
+function findCitedParagraphs(obj: Record<string, unknown> | unknown): Record<string, unknown>[] {
+  let results: Record<string, unknown>[] = [];
   if (Array.isArray(obj)) {
     for (const item of obj) {
       results = results.concat(findCitedParagraphs(item));
     }
   } else if (obj !== null && typeof obj === 'object') {
-    if (obj.content && typeof obj.content === 'string' && Array.isArray(obj.citationIds)) {
-      results.push(obj);
+    const record = obj as Record<string, unknown>;
+    if (record.content && typeof record.content === 'string' && Array.isArray(record.citationIds)) {
+      results.push(record);
     }
-    for (const key of Object.keys(obj)) {
+    for (const key of Object.keys(obj as Record<string, unknown>)) {
       if (key !== 'citationIds') { // hindari rekursi tak perlu
-        results = results.concat(findCitedParagraphs(obj[key]));
+        results = results.concat(findCitedParagraphs((obj as Record<string, unknown>)[key]));
       }
     }
   }
@@ -29,13 +30,13 @@ import { pathToFileURL } from 'url';
 
 async function validateProvince(filePath: string) {
   const fileUrl = pathToFileURL(filePath).href;
-  const module = await import(fileUrl);
-  let atlasObj: any = null;
-  let provinceName = path.basename(filePath, '.ts');
+  const mod = await import(fileUrl);
+  let atlasObj: Record<string, unknown> | null = null;
+  const provinceName = path.basename(filePath, '.ts');
 
-  for (const key in module) {
-    if (module[key] && typeof module[key] === 'object' && module[key].provinceId && module[key].slug) {
-      atlasObj = module[key];
+  for (const key in mod) {
+    if (mod[key] && typeof mod[key] === 'object' && mod[key].provinceId && mod[key].slug) {
+      atlasObj = mod[key] as Record<string, unknown>;
       break;
     }
   }
@@ -63,12 +64,12 @@ async function validateProvince(filePath: string) {
   }
 
   // 2. Validate citationIndex
-  const referenceIds = atlasObj.referenceIds || [];
+  const referenceIds = (atlasObj.referenceIds as string[]) || [];
   const allParagraphs = findCitedParagraphs(atlasObj);
   let citationErrorCount = 0;
 
   for (const para of allParagraphs) {
-    const citations = para.citationIds || [];
+    const citations = (para.citationIds as string[]) || [];
     for (const citation of citations) {
       if (!referenceIds.includes(citation)) {
         console.error(`  [ERROR] Paragraph ID '${para.id}' menggunakan citationId '${citation}' yang tidak terdaftar di referenceIds provinsi.`);
