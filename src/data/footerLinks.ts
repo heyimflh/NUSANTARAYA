@@ -68,7 +68,8 @@ export const finalCta = {
   },
   secondary: {
     label: "Coba Route Planner",
-    href: "/routes"
+    href: "/routes",
+    status: "soon"
   },
   microcopy: "Mulai dari satu klik. Sisanya biarkan Nusantara bercerita."
 };

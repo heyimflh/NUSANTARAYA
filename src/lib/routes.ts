@@ -34,3 +34,9 @@ export const ROUTE_AVAILABILITY = {
 export function getProvinceAtlasRoute(slug: string) {
   return `/provinsi/${slug}`;
 }
+
+export function isRouteAvailable(route: string): boolean {
+  if (route.startsWith("/provinsi/") && route !== "/provinsi") return true;
+  if (route.startsWith("/explore#")) return true;
+  return ROUTE_AVAILABILITY[route as keyof typeof ROUTE_AVAILABILITY] === true;
+}

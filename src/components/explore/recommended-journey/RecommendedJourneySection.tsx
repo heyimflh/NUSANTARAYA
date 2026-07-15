@@ -46,6 +46,9 @@ export function RecommendedJourneySection({
       searchQuery,
       showFlagshipOnly,
       passportProvinceIds: passport.stamps,
+      startedProvinceIds: passport.startedProvinces || [],
+      plannedProvinceIds: passport.plannedProvinces || [],
+      savedRouteIds: passport.savedRoutes || [],
       viewedJourneyIds: viewedJourneyIds.current,
       locale: language,
     };
@@ -86,6 +89,9 @@ export function RecommendedJourneySection({
         searchQuery,
         showFlagshipOnly,
         passportProvinceIds: passport.stamps,
+        startedProvinceIds: passport.startedProvinces || [],
+        plannedProvinceIds: passport.plannedProvinces || [],
+        savedRouteIds: passport.savedRoutes || [],
         viewedJourneyIds: viewedJourneyIds.current,
         locale: language,
       };
@@ -121,6 +127,9 @@ export function RecommendedJourneySection({
         searchQuery,
         showFlagshipOnly,
         passportProvinceIds: passport.stamps,
+        startedProvinceIds: passport.startedProvinces || [],
+        plannedProvinceIds: passport.plannedProvinces || [],
+        savedRouteIds: passport.savedRoutes || [],
         viewedJourneyIds: viewedJourneyIds.current,
         locale: language,
       };

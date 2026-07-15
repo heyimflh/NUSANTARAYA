@@ -23,6 +23,13 @@ export function useRaniConversation({ context }: UseRaniConversationParams) {
   
   const [isOffline, setIsOffline] = useState(false);
   const prevContextRef = useRef(context);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   const getQuickPrompts = useCallback((mode: ExploreModeId): RaniPrompt[] => {
     switch (mode) {
@@ -55,8 +62,8 @@ export function useRaniConversation({ context }: UseRaniConversationParams) {
   const computeProactiveRecommendation = useCallback(() => {
     setConversation(prev => ({ ...prev, status: "loading" }));
     
-    // Slight delay to mimic processing
-    setTimeout(() => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
       const candidates = retrieveRaniKnowledge("", "UNKNOWN", context);
       const ranked = rankRaniRecommendations(candidates, context, "UNKNOWN");
       const bestCandidate = ranked.length > 0 ? ranked[0] : null;
@@ -125,7 +132,8 @@ export function useRaniConversation({ context }: UseRaniConversationParams) {
       };
     });
     
-    setTimeout(() => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
       const { intent } = classifyRaniIntent(query, context.activeMode);
       
       const candidates = retrieveRaniKnowledge(query, intent, context);
@@ -161,7 +169,8 @@ export function useRaniConversation({ context }: UseRaniConversationParams) {
       generatedBy: null,
       error: null
     });
-    setTimeout(() => computeProactiveRecommendation(), 50);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => computeProactiveRecommendation(), 50);
   }, [computeProactiveRecommendation]);
 
   useEffect(() => {

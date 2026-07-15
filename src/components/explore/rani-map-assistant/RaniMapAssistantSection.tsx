@@ -10,6 +10,7 @@ import { ExploreLayerId, ExploreModeId } from "@/data/exploreControls";
 import { RegionId } from "@/types/region";
 import { usePassportProgressSummary } from "@/hooks/usePassportProgressSummary";
 import { RecommendedJourney } from "@/data/journeys/types";
+import { useLanguage } from "@/context/app-context";
 
 import { RaniEditorialHeader } from "./RaniEditorialHeader";
 import { RaniPassportJourneyPath } from "./RaniPassportJourneyPath";
@@ -45,10 +46,11 @@ export function RaniMapAssistantSection({
 }: Props) {
   const router = useRouter();
   const passportSummary = usePassportProgressSummary(highlightedRegionId, selectedProvinceId);
+  const { language } = useLanguage();
   
   const context = useMemo(() => {
     return buildRaniContext({
-      locale: "id", 
+      locale: language, 
       activeMode,
       activeLayer,
       selectedProvinceId,
@@ -73,7 +75,8 @@ export function RaniMapAssistantSection({
     showFlagshipOnly,
     highlightedRegionId,
     activeJourney,
-    passportSummary
+    passportSummary,
+    language
   ]);
 
   const {

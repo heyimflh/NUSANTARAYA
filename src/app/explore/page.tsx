@@ -17,7 +17,7 @@ import { PassportProgressSection } from "@/components/explore/passport-progress/
 import { RaniMapAssistantSection } from "@/components/explore/rani-map-assistant";
 import { FinalCtaFooterSection } from '@/components/home/final-cta-footer';
 import { useRouter } from "next/navigation";
-import { usePassport, useMode } from "@/context/app-context";
+import { usePassport, useMode, useLanguage } from "@/context/app-context";
 import { getRegionById } from "@/data/regions/regionProvinceMap";
 import { RegionId } from "@/types/region";
 import { RecommendedJourney } from "@/data/journeys/types";
@@ -27,6 +27,7 @@ export default function ExplorePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeLayer, setActiveLayer] = useState<ExploreLayerId>("all");
   const { mode: activeMode, setMode: setActiveMode } = useMode();
+  const { language } = useLanguage();
   const [selectedProvinceId, setSelectedProvinceId] = useState<string | null>(null);
   const [showFlagshipOnly, setShowFlagshipOnly] = useState(false);
   const [activeJourney, setActiveJourney] = useState<RecommendedJourney | null>(null);
@@ -164,7 +165,7 @@ export default function ExplorePage() {
 
       <MapInsightsSection
         context={{
-          locale: "id",
+          locale: language,
           activeMode,
           activeLayer,
           searchQuery,

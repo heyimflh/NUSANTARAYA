@@ -7,6 +7,7 @@ import { usePassport } from "@/context/app-context";
 import { Button } from "@/components/ui/button";
 import { BookmarkPlus, BookmarkCheck, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { getProvincePassportStatus } from "@/lib/passport/getProvincePassportStatus";
 import { 
   motion, 
   AnimatePresence, 
@@ -28,7 +29,7 @@ export const FlagshipProvincesSection: React.FC<FlagshipProvincesSectionProps> =
   onOpenSummary,
   onOpenAtlas,
 }) => {
-  const { passport, addStamp } = usePassport();
+  const { passport, planProvince } = usePassport();
   const [activeId, setActiveId] = useState<string>("di-yogyakarta");
   const [hasInteracted, setHasInteracted] = useState(false);
   const railRef = useRef<HTMLDivElement>(null);
@@ -65,8 +66,8 @@ export const FlagshipProvincesSection: React.FC<FlagshipProvincesSectionProps> =
   }, []);
 
   const handlePassportToggle = useCallback((id: string) => {
-    addStamp(id);
-  }, [addStamp]);
+    planProvince(id);
+  }, [planProvince]);
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     if (shouldReduceMotion) return;
@@ -84,7 +85,8 @@ export const FlagshipProvincesSection: React.FC<FlagshipProvincesSectionProps> =
   }, [mouseX, mouseY, shouldReduceMotion]);
 
   const activeProvince = flagshipProvinces.find((p) => p.provinceId === activeId) || flagshipProvinces[0];
-  const isSaved = passport.stamps.includes(activeProvince.provinceId);
+  const passportStatus = getProvincePassportStatus(passport, activeProvince.provinceId);
+  const isSaved = passportStatus !== "unvisited";
 
   // Animation variants
   const sectionVariants = {

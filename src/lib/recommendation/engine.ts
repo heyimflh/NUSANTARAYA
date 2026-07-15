@@ -56,6 +56,17 @@ function scoreJourney(j: RecommendedJourney, context: JourneyRecommendationConte
     reasons.push("NEW_FOR_PASSPORT");
   }
 
+  // Active / Planned continuation (10%)
+  const hasStartedOrPlanned = j.stopIds.some((id) => context.startedProvinceIds.includes(id) || context.plannedProvinceIds.includes(id));
+  if (hasStartedOrPlanned) {
+    score += 10;
+  }
+
+  // Already saved penalty (-20%)
+  if (context.savedRouteIds.includes(j.id)) {
+    score -= 20;
+  }
+
   // Flagship preference (5%)
   if (context.showFlagshipOnly && j.slug === "flagship-grand-tour") {
     score += 25; // boost if strictly asking for flagship

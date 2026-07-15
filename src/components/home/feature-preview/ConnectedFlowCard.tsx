@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { mainFeatures } from '@/data/features';
+import { isRouteAvailable } from '@/lib/routes';
 
 export default function ConnectedFlowCard() {
   return (
@@ -108,11 +109,15 @@ export default function ConnectedFlowCard() {
         
         {/* Elegant CTA Button (Dark on Light) */}
         <Link 
-          href="/demo"
-          className="relative inline-flex items-center justify-center gap-4 px-10 py-5 rounded-full bg-[#0D1B2A] text-white font-bold text-[15px] tracking-wide transition-all duration-500 hover:scale-105 hover:bg-[#1A2942] shadow-[0_15px_40px_rgba(13,27,42,0.25)] overflow-hidden group/btn"
+          href={isRouteAvailable("/demo") ? "/demo" : "#"}
+          onClick={(e) => {
+            if (!isRouteAvailable("/demo")) e.preventDefault();
+          }}
+          aria-disabled={!isRouteAvailable("/demo")}
+          className="relative inline-flex items-center justify-center gap-4 px-10 py-5 rounded-full bg-[#0D1B2A] text-white font-bold text-[15px] tracking-wide transition-all duration-500 hover:scale-105 hover:bg-[#1A2942] shadow-[0_15px_40px_rgba(13,27,42,0.25)] overflow-hidden group/btn aria-disabled:opacity-50 aria-disabled:cursor-not-allowed aria-disabled:hover:scale-100 aria-disabled:hover:bg-[#0D1B2A]"
         >
           {/* Button Shine Effect */}
-          <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover/btn:animate-[shine_1.5s_ease-in-out]" />
+          <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover/btn:animate-[shine_1.5s_ease-in-out] group-aria-disabled/btn:hidden" />
           
           Lihat Alur Demo
           <svg className="w-5 h-5 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">

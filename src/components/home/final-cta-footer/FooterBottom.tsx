@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { footerMeta, footerSocials } from "@/data/footerLinks";
+import { isRouteAvailable } from "@/lib/routes";
 
 const WORDMARK = "NUSANTARAYA";
 
@@ -149,10 +150,20 @@ export function FooterBottom() {
           </div>
 
           <div className="flex gap-5 text-[10px] font-semibold text-[#e5f2dc]/48">
-            <a href="/privacy" className="transition hover:text-[#f4d88a]">
+            <a 
+              href={isRouteAvailable("/privacy") ? "/privacy" : "#"} 
+              onClick={(e) => { if (!isRouteAvailable("/privacy")) e.preventDefault(); }}
+              aria-disabled={!isRouteAvailable("/privacy")}
+              className="transition hover:text-[#f4d88a] aria-disabled:opacity-50 aria-disabled:cursor-not-allowed aria-disabled:hover:text-[#e5f2dc]/48"
+            >
               Privasi
             </a>
-            <a href="/terms" className="transition hover:text-[#f4d88a]">
+            <a 
+              href={isRouteAvailable("/terms") ? "/terms" : "#"} 
+              onClick={(e) => { if (!isRouteAvailable("/terms")) e.preventDefault(); }}
+              aria-disabled={!isRouteAvailable("/terms")}
+              className="transition hover:text-[#f4d88a] aria-disabled:opacity-50 aria-disabled:cursor-not-allowed aria-disabled:hover:text-[#e5f2dc]/48"
+            >
               Ketentuan
             </a>
           </div>

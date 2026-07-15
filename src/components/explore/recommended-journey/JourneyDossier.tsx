@@ -4,6 +4,7 @@ import { REASON_COPY_ID } from "@/lib/recommendation/engine";
 import { Map, BookOpen, Compass, Bookmark, ExternalLink, RefreshCw, Sparkles } from "lucide-react";
 import { usePassport } from "@/context/app-context";
 import { useRouter } from "next/navigation";
+import { isRouteAvailable } from "@/lib/routes";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 interface JourneyDossierProps {
@@ -21,11 +22,13 @@ export function JourneyDossier({ journey, reasons, onRegenerate }: JourneyDossie
 
   const handlePrimaryAction = () => {
     if (journey.primaryAction.type === "atlas" || journey.primaryAction.type === "learn") {
-      if (journey.primaryAction.href) {
+      if (journey.primaryAction.href && isRouteAvailable(journey.primaryAction.href)) {
         router.push(journey.primaryAction.href);
       }
     } else if (journey.primaryAction.type === "route-planner") {
-      router.push(`/planner?journeyId=${journey.id}`);
+      if (isRouteAvailable("/planner")) {
+        router.push(`/planner?journeyId=${journey.id}`);
+      }
     }
   };
 
@@ -222,7 +225,14 @@ export function JourneyDossier({ journey, reasons, onRegenerate }: JourneyDossie
                 {/* Primary Action (Full Width) */}
                 <button
                   onClick={handlePrimaryAction}
-                  className="w-full h-[52px] text-white font-bold tracking-wide hover:opacity-90 transition-opacity flex items-center justify-center gap-2 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                  disabled={
+                    Boolean(
+                      (journey.primaryAction.type === "route-planner" && !isRouteAvailable("/planner")) ||
+                      ((journey.primaryAction.type === "atlas" || journey.primaryAction.type === "learn") && 
+                        journey.primaryAction.href && !isRouteAvailable(journey.primaryAction.href))
+                    )
+                  }
+                  className="w-full h-[52px] text-white font-bold tracking-wide hover:opacity-90 transition-opacity flex items-center justify-center gap-2 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{ backgroundColor: journey.accentColor, '--tw-ring-color': journey.accentColor } as React.CSSProperties}
                 >
                   {getPrimaryActionIcon()}

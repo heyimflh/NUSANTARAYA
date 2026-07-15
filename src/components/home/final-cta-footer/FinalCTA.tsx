@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { finalCta } from "@/data/footerLinks";
 import { FinalCTAVisual } from "./FinalCTAVisual";
 
+import { isRouteAvailable } from "@/lib/routes";
+
 export function FinalCTA() {
   return (
     <section
@@ -67,8 +69,12 @@ export function FinalCTA() {
             {finalCta.primary.label}
           </Link>
           <Link
-            href={finalCta.secondary.href}
-            className="inline-flex min-h-13 items-center justify-center rounded-full border border-[#fff6df]/20 bg-[#fff6df]/10 px-7 text-xs font-black uppercase tracking-[-0.02em] text-[#fff6df] shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-[#f4d88a]/56 hover:bg-[#f4d88a] hover:text-[#123527] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f4d88a]"
+            href={isRouteAvailable(finalCta.secondary.href) ? finalCta.secondary.href : "#"}
+            onClick={(e) => {
+              if (!isRouteAvailable(finalCta.secondary.href)) e.preventDefault();
+            }}
+            aria-disabled={!isRouteAvailable(finalCta.secondary.href)}
+            className="inline-flex min-h-13 items-center justify-center rounded-full border border-[#fff6df]/20 bg-[#fff6df]/10 px-7 text-xs font-black uppercase tracking-[-0.02em] text-[#fff6df] shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-[#f4d88a]/56 hover:bg-[#f4d88a] hover:text-[#123527] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f4d88a] aria-disabled:opacity-50 aria-disabled:cursor-not-allowed aria-disabled:hover:translate-y-0 aria-disabled:hover:bg-[#fff6df]/10 aria-disabled:hover:border-[#fff6df]/20 aria-disabled:hover:text-[#fff6df]"
           >
             {finalCta.secondary.label}
           </Link>

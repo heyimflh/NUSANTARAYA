@@ -303,6 +303,7 @@ export interface PassportData {
   level: string;
   completedQuizzes: string[];    // province ids
   savedRoutes: string[];         // route ids
+  completedChapters?: Record<string, string[]>; // provinceId -> chapterIds
 }
 
 // ─── App State ───────────────────────────────────────────────────────────────

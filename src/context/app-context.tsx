@@ -11,6 +11,18 @@ import React, {
 import type { Language, AppMode, PassportData } from "@/lib/types";
 import { evaluateBadges } from "@/lib/passport/badges";
 
+import {
+  DEFAULT_PASSPORT,
+  normalizePassportData,
+  planProvinceTransition,
+  startProvinceTransition,
+  completeProvinceTransition,
+  completeQuizTransition,
+  completeChapterTransition,
+  saveRouteTransition,
+  resetPassportTransition,
+} from "@/lib/passport/transitions";
+
 /* ═══════════════════════════════════════════════════════════════════════════
    NUSANTARAYA Global State — React Context
 
@@ -20,21 +32,6 @@ import { evaluateBadges } from "@/lib/passport/badges";
    - Passport (stamps, badges, xp, level — persisted ke localStorage)
    - Audio (on/off)
    ═══════════════════════════════════════════════════════════════════════════ */
-
-// ─── Default Passport ────────────────────────────────────────────────────────
-const DEFAULT_PASSPORT: PassportData = {
-  version: 2,
-  userId: "local",
-  stamps: [],
-  startedProvinces: [],
-  plannedProvinces: [],
-  badges: [],
-  achievements: [],
-  xp: 0,
-  level: "Penjelajah Baru",
-  completedQuizzes: [],
-  savedRoutes: [],
-};
 
 const PASSPORT_KEY = "nusantaraya-passport";
 const LANG_KEY = "nusantaraya-lang";
@@ -55,12 +52,14 @@ interface AppContextType {
   // Passport
   passport: PassportData;
   completeProvince: (provinceId: string, source?: "atlas" | "quiz") => void;
+  /** @deprecated Use planProvince or completeProvince instead */
   addStamp: (provinceId: string) => void;
   startProvince: (provinceId: string) => void;
   planProvince: (provinceId: string) => void;
   addBadge: (badge: string) => void;
   addXP: (amount: number) => void;
   completeQuiz: (provinceId: string) => void;
+  completeChapter: (provinceId: string, chapterId: string) => void;
   saveRoute: (routeId: string, provinceIds?: string[]) => void;
   resetPassport: () => void;
 
@@ -91,15 +90,6 @@ function safeSetItem(key: string, value: unknown): void {
   }
 }
 
-// ─── Compute level from stamps count ─────────────────────────────────────────
-function computeLevel(stampCount: number): string {
-  if (stampCount >= 36) return "Pahlawan Nusantara";
-  if (stampCount >= 26) return "Penjaga Warisan";
-  if (stampCount >= 16) return "Pengembara Sejati";
-  if (stampCount >= 6) return "Petualang Nusantara";
-  return "Penjelajah Baru";
-}
-
 // ─── Type Validators ─────────────────────────────────────────────────────────
 function isLanguage(value: unknown): value is Language {
   return value === "id" || value === "en";
@@ -111,25 +101,6 @@ function isAppMode(value: unknown): value is AppMode {
     value === "tourist" ||
     value === "learn"
   );
-}
-
-// ─── Migration Helper ────────────────────────────────────────────────────────
-const LEGACY_PROVINCE_CODE_TO_SLUG: Record<string, string> = {
-  "13": "sumatera-barat",
-  "34": "di-yogyakarta",
-  "51": "bali",
-  "53": "nusa-tenggara-timur",
-  "64": "kalimantan-timur",
-  "73": "sulawesi-selatan",
-  "81": "maluku",
-  "82": "maluku-utara",
-  "96": "papua-barat-daya",
-};
-
-function migrateIds(ids: string[]): string[] {
-  if (!Array.isArray(ids)) return [];
-  const migrated = ids.map(id => LEGACY_PROVINCE_CODE_TO_SLUG[id] || id);
-  return Array.from(new Set(migrated));
 }
 
 // ─── Provider ────────────────────────────────────────────────────────────────
@@ -149,17 +120,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
       const storedMode = safeGetItem<unknown>(MODE_KEY, "explore");
       setModeState(isAppMode(storedMode) ? storedMode : "explore");
       
-      // Hydrate passport with backward compatibility
+      // Hydrate passport using transition normalizer
       const savedPassport = safeGetItem<Partial<PassportData>>(PASSPORT_KEY, {});
-      setPassport({
-        ...DEFAULT_PASSPORT,
-        ...savedPassport,
-        // Migrate numeric IDs to slugs and remove duplicates
-        stamps: migrateIds(savedPassport.stamps || []),
-        startedProvinces: migrateIds(savedPassport.startedProvinces || []),
-        plannedProvinces: migrateIds(savedPassport.plannedProvinces || []),
-        achievements: savedPassport.achievements || [],
-      });
+      setPassport(normalizePassportData(savedPassport));
       
       setAudioEnabledState(safeGetItem<boolean>(AUDIO_KEY, false));
       setHydrated(true);
@@ -209,19 +172,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const completeProvince = useCallback(
     (provinceId: string, source?: "atlas" | "quiz") => {
-      updatePassport((p) => {
-        if (p.stamps.includes(provinceId)) return p;
-        const stamps = [...p.stamps, provinceId];
-        return {
-          ...p,
-          stamps,
-          // Remove from started and planned if it exists
-          startedProvinces: (p.startedProvinces || []).filter((id) => id !== provinceId),
-          plannedProvinces: (p.plannedProvinces || []).filter((id) => id !== provinceId),
-          xp: p.xp + 10,
-          level: computeLevel(stamps.length),
-        };
-      });
+      updatePassport((p) => completeProvinceTransition(p, provinceId));
     },
     [updatePassport],
   );
@@ -233,35 +184,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const startProvince = useCallback(
     (provinceId: string) => {
-      updatePassport((p) => {
-        if (p.stamps.includes(provinceId)) return p; // Already completed
-        const started = p.startedProvinces || [];
-        if (started.includes(provinceId)) return p; // Already started
-        
-        return {
-          ...p,
-          startedProvinces: [...started, provinceId],
-          // Remove from planned if it exists
-          plannedProvinces: (p.plannedProvinces || []).filter(id => id !== provinceId),
-        };
-      });
+      updatePassport((p) => startProvinceTransition(p, provinceId));
     },
     [updatePassport],
   );
 
   const planProvince = useCallback(
     (provinceId: string) => {
-      updatePassport((p) => {
-        if (p.stamps.includes(provinceId)) return p; // Already completed
-        if ((p.startedProvinces || []).includes(provinceId)) return p; // Already started
-        const planned = p.plannedProvinces || [];
-        if (planned.includes(provinceId)) return p; // Already planned
-        
-        return {
-          ...p,
-          plannedProvinces: [...planned, provinceId],
-        };
-      });
+      updatePassport((p) => planProvinceTransition(p, provinceId));
     },
     [updatePassport],
   );
@@ -290,46 +220,29 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const completeQuiz = useCallback(
     (provinceId: string) => {
-      updatePassport((p) => {
-        if (p.completedQuizzes.includes(provinceId)) return p;
-        return {
-          ...p,
-          completedQuizzes: [...p.completedQuizzes, provinceId],
-          xp: p.xp + 20,
-        };
-      });
+      updatePassport((p) => completeQuizTransition(p, provinceId));
     },
     [updatePassport],
   );
 
+  const completeChapter = useCallback(
+    (provinceId: string, chapterId: string) => {
+      updatePassport((p) => completeChapterTransition(p, provinceId, chapterId));
+    },
+    [updatePassport]
+  );
+
   const saveRoute = useCallback(
     (routeId: string, provinceIds?: string[]) => {
-      updatePassport((p) => {
-        if (p.savedRoutes.includes(routeId)) return p;
-        
-        let newPlanned = [...(p.plannedProvinces || [])];
-        if (provinceIds) {
-          provinceIds.forEach(id => {
-            if (!p.stamps.includes(id) && !(p.startedProvinces || []).includes(id) && !newPlanned.includes(id)) {
-              newPlanned.push(id);
-            }
-          });
-        }
-        
-        return {
-          ...p,
-          savedRoutes: [...p.savedRoutes, routeId],
-          plannedProvinces: newPlanned,
-          xp: p.xp + 15,
-        };
-      });
+      updatePassport((p) => saveRouteTransition(p, routeId, provinceIds));
     },
     [updatePassport],
   );
 
   const resetPassport = useCallback(() => {
-    setPassport(DEFAULT_PASSPORT);
-    safeSetItem(PASSPORT_KEY, DEFAULT_PASSPORT);
+    const fresh = resetPassportTransition();
+    setPassport(fresh);
+    safeSetItem(PASSPORT_KEY, fresh);
   }, []);
 
   // Prevent hydration mismatch: render nothing until hydrated
@@ -350,6 +263,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
           addBadge,
           addXP,
           completeQuiz,
+          completeChapter,
           saveRoute,
           resetPassport,
           audioEnabled: false,
@@ -377,6 +291,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         addBadge,
         addXP,
         completeQuiz,
+        completeChapter,
         saveRoute,
         resetPassport,
         audioEnabled,
@@ -421,6 +336,7 @@ export function usePassport() {
     addBadge,
     addXP,
     completeQuiz,
+    completeChapter,
     saveRoute,
     resetPassport,
   } = useAppContext();
@@ -433,6 +349,7 @@ export function usePassport() {
     addBadge,
     addXP,
     completeQuiz,
+    completeChapter,
     saveRoute,
     resetPassport,
   };

@@ -36,8 +36,10 @@ export const AtlasTopBar = ({ provinceName }: { provinceName: string }) => {
             onClick={handleShare}
             className="flex items-center justify-center w-8 h-8 rounded-full border border-[#E8E0CE] bg-[#F8F4EA] text-nusaNavy hover:bg-nusaNavy hover:text-white transition-colors"
             title="Bagikan Atlas ini"
+            aria-label={hasCopied ? "Tautan disalin ke clipboard" : "Bagikan Atlas ini"}
+            aria-live="polite"
           >
-            {hasCopied ? <Check size={14} className="text-green-600" /> : <Share2 size={14} />}
+            {hasCopied ? <Check size={14} className="text-green-600" aria-hidden="true" /> : <Share2 size={14} aria-hidden="true" />}
           </button>
           <div className="flex items-center gap-1.5 bg-[#F8F4EA] px-3 py-1.5 rounded-full border border-[#E8E0CE] text-xs font-semibold text-nusaNavy">
             <Map size={14} className="text-nusaGold" />

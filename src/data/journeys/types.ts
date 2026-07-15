@@ -73,7 +73,10 @@ export type JourneyRecommendationContext = {
   selectedProvinceId: string | null;
   searchQuery: string;
   showFlagshipOnly: boolean;
-  passportProvinceIds: string[];
+  passportProvinceIds: string[]; // completed
+  startedProvinceIds: string[];
+  plannedProvinceIds: string[];
+  savedRouteIds: string[];
   viewedJourneyIds: string[];
   locale: "id" | "en";
 };

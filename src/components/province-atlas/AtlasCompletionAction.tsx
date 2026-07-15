@@ -16,17 +16,24 @@ export function AtlasCompletionAction({ provinceId, provinceName }: AtlasComplet
   
   const isCompleted = passport.stamps.includes(provinceId);
 
+  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+
+  React.useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
+
   const handleComplete = () => {
     if (isCompleted) return;
     setIsAnimating(true);
-    // Add a slight delay for the visual effect before mutating the global state
-    setTimeout(() => {
-      completeProvince(provinceId, "atlas");
+    completeProvince(provinceId, "atlas");
+    timeoutRef.current = setTimeout(() => {
       setIsAnimating(false);
     }, 1500);
   };
 
-  if (isCompleted) {
+  if (isCompleted && !isAnimating) {
     return (
       <div className="w-full py-16 flex flex-col items-center justify-center border-t border-[#DED3C3]/50">
         <div className="flex items-center gap-3 text-nusaGold mb-2">

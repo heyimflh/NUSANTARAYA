@@ -6,10 +6,12 @@ import { Plus, MessageSquare, ArrowRight } from 'lucide-react';
 import { ProvinceMapItem } from '@/types/province';
 import { usePassport } from '@/context/app-context';
 import { useRouter } from 'next/navigation';
+import { getProvincePassportStatus } from '@/lib/passport/getProvincePassportStatus';
 
 export const SummaryActions = ({ province }: { province: ProvinceMapItem }) => {
-  const { addStamp, startProvince } = usePassport();
+  const { passport, planProvince, startProvince } = usePassport();
   const router = useRouter();
+  const status = getProvincePassportStatus(passport, province.id);
 
   const handleOpenAtlas = () => {
     startProvince(province.id);
@@ -29,8 +31,10 @@ export const SummaryActions = ({ province }: { province: ProvinceMapItem }) => {
         
         <div className="flex gap-3">
           <button 
-            onClick={() => addStamp(province.id)}
-            className="flex-1 flex items-center justify-center gap-2 h-[44px] border border-[#E8E0CE] hover:border-[#0D1B2A]/20 bg-[#FFFDF8] hover:bg-[#F8F4EA] rounded-xl text-[13px] font-bold text-[#0D1B2A] transition-colors shadow-sm"
+            onClick={() => planProvince(province.id)}
+            data-passport-status={status}
+            aria-pressed={status !== 'unvisited'}
+            className="flex-1 flex items-center justify-center gap-2 h-[44px] border border-[#E8E0CE] hover:border-[#0D1B2A]/20 bg-[#FFFDF8] hover:bg-[#F8F4EA] rounded-xl text-[13px] font-bold text-[#0D1B2A] transition-colors shadow-sm data-[passport-status=completed]:text-[#C9A84C]"
           >
             <Plus size={16} className="text-[#C9A84C]" />
             Passport

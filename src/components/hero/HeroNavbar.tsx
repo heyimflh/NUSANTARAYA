@@ -5,16 +5,17 @@ import { usePathname } from "next/navigation";
 import { Compass, ArrowUpRight, Search, Menu, Globe } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/context/app-context";
+import { isRouteAvailable } from "@/lib/routes";
 
 export default function HeroNavbar() {
   const pathname = usePathname();
   const { language, setLanguage } = useLanguage();
 
   const menuItems = [
-    { name: "Peta", href: "/explore" },
-    { name: "Arsip Budaya", href: "/archive" },
-    { name: "Route Planner", href: "/routes" },
-    { name: "Cerita Rakyat", href: "/cerita" },
+    { name: "Peta", href: "/explore", active: isRouteAvailable("/explore") },
+    { name: "Arsip Budaya", href: "/archive", active: isRouteAvailable("/archive") },
+    { name: "Route Planner", href: "/routes", active: isRouteAvailable("/routes") },
+    { name: "Cerita Rakyat", href: "/cerita", active: isRouteAvailable("/cerita") },
   ];
 
   return (
@@ -37,11 +38,17 @@ export default function HeroNavbar() {
             return (
               <Link
                 key={item.href}
-                href={item.href}
+                href={item.active ? item.href : "#"}
+                onClick={(e) => {
+                  if (!item.active) e.preventDefault();
+                }}
+                aria-disabled={!item.active}
                 className={`relative px-4 py-1.5 text-xs md:text-sm font-semibold rounded-full transition-all duration-300 ${
                   isActive
                     ? "bg-white text-black shadow-md scale-105"
-                    : "text-white/80 hover:text-white hover:bg-white/10"
+                    : !item.active 
+                      ? "text-white/40 cursor-not-allowed line-through hover:bg-white/5"
+                      : "text-white/80 hover:text-white hover:bg-white/10"
                 }`}
               >
                 {item.name}
