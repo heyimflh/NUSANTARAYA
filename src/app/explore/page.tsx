@@ -8,12 +8,14 @@ import { ExploreLayerId, ExploreModeId } from "@/data/exploreControls";
 import { provinceMapData } from "@/data/provinces/provinces";
 import { InteractiveIndonesiaMap } from "@/components/explore/interactive-map";
 import { countMatchingProvinces } from "@/lib/provinceMatch";
+import { MapInsightsSection } from "@/components/explore/map-insights";
 import { FlagshipProvincesSection } from "@/components/explore/flagship-provinces/FlagshipProvincesSection";
 import { ExploreByLayerSection } from "@/components/explore/explore-by-layer";
 import { RecommendedJourneySection } from "@/components/explore/recommended-journey";
 import { RegionalExplorerSection } from "@/components/explore/regional-explorer";
 import { PassportProgressSection } from "@/components/explore/passport-progress/PassportProgressSection";
 import { RaniMapAssistantSection } from "@/components/explore/rani-map-assistant";
+import { FinalCtaFooterSection } from '@/components/home/final-cta-footer';
 import { useRouter } from "next/navigation";
 import { usePassport } from "@/context/app-context";
 import { getRegionById } from "@/data/regions/regionProvinceMap";
@@ -101,7 +103,10 @@ export default function ExplorePage() {
   }, []);
 
   return (
-    <main className="relative bg-background min-h-screen">
+    <main className="relative min-h-screen">
+      {/* Static Background for Explore Page */}
+      <div className="fixed inset-0 z-[-40] bg-[url('/assets/background/background-explore-dekstop.webp')] max-md:bg-[url('/assets/background/background-explore-mobile.webp')] bg-cover bg-center bg-no-repeat opacity-100 pointer-events-none w-full h-[100dvh]" />
+      
       <ExploreNavbar />
       <MapHeroSection />
       
@@ -143,6 +148,25 @@ export default function ExplorePage() {
           setActiveRegionFilter(null);
         }}
         onClearRegionFilter={() => setActiveRegionFilter(null)}
+      />
+
+      <MapInsightsSection
+        context={{
+          locale: "id",
+          activeMode,
+          activeLayer,
+          searchQuery,
+          selectedProvinceId,
+          showFlagshipOnly,
+          resultCount,
+          activeRegionId: activeRegionFilter,
+        }}
+        onResetMap={() => {
+          handleReset();
+          setActiveRegionFilter(null);
+        }}
+        onOpenProvinceSummary={handleOpenSummary}
+        onOpenProvinceAtlas={handleOpenAtlas}
       />
 
       <FlagshipProvincesSection 
@@ -193,10 +217,13 @@ export default function ExplorePage() {
         searchQuery={searchQuery}
         showFlagshipOnly={showFlagshipOnly}
         highlightedRegionId={highlightedRegionId}
+        activeJourney={activeJourney}
         onExploreMapRegion={handleExploreMapRegion}
         onOpenSummary={handleOpenSummary}
         onOpenAtlas={handleOpenAtlas}
       />
+
+      <FinalCtaFooterSection />
     </main>
   );
 }

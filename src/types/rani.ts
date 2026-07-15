@@ -169,3 +169,21 @@ export type RaniResponse = {
   confidence: "high" | "medium" | "low";
   limitations?: string[];
 };
+
+export type RaniMessage = {
+  id: string;
+  role: "user" | "rani";
+  text?: string;
+  response?: RaniResponse;
+  timestamp: string;
+};
+
+export type RaniConversationState = {
+  messages: RaniMessage[];
+  status: "idle" | "loading" | "error" | "offline";
+  lastQuery: string | null;
+  lastIntent: RaniIntent | null;
+  exchangeCount: number;
+  generatedBy: "local" | "hybrid" | null;
+  error: string | null;
+};

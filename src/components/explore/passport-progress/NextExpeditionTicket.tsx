@@ -121,13 +121,32 @@ export const NextExpeditionTicket: React.FC<NextExpeditionTicketProps> = ({ summ
                 </div>
               </div>
               
-              <Button 
-                onClick={() => onOpenAtlas && onOpenAtlas(nextMilestone.provinceId)}
-                className="bg-[#2C2118] hover:bg-[#3A281C] text-[#FFF9EC] rounded-none uppercase tracking-[0.2em] text-[11px] font-bold px-8 h-14 w-full md:w-auto shadow-[0_10px_20px_rgba(44,33,24,0.1)] transition-transform hover:scale-105"
-              >
-                {nextMilestone.ctaLabel}
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
+              <div className="flex flex-col sm:flex-row w-full md:w-auto gap-3">
+                <Button 
+                  onClick={() => {
+                    const raniSection = document.getElementById("rani-map-assistant");
+                    const raniHeading = document.getElementById("rani-map-assistant-heading");
+                    if (raniSection && raniHeading) {
+                      raniHeading.focus();
+                      raniSection.scrollIntoView({ 
+                        behavior: shouldReduceMotion ? "auto" : "smooth", 
+                        block: "start" 
+                      });
+                    }
+                  }}
+                  variant="outline"
+                  className="border-[#2C2118] text-[#2C2118] bg-transparent hover:bg-[#2C2118]/5 rounded-none uppercase tracking-[0.2em] text-[11px] font-bold px-6 h-14 w-full sm:w-auto"
+                >
+                  Tanya RANI
+                </Button>
+                <Button 
+                  onClick={() => onOpenAtlas && onOpenAtlas(nextMilestone.provinceId)}
+                  className="bg-[#2C2118] hover:bg-[#3A281C] text-[#FFF9EC] rounded-none uppercase tracking-[0.2em] text-[11px] font-bold px-8 h-14 w-full sm:w-auto shadow-[0_10px_20px_rgba(44,33,24,0.1)] transition-transform hover:scale-105"
+                >
+                  {nextMilestone.ctaLabel}
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </div>
             </div>
           </div>
         </div>

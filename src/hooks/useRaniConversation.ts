@@ -1,9 +1,9 @@
 import { useState, useCallback, useEffect, useRef } from "react";
-import { RaniMapContext, RaniResponse, RaniPrompt } from "@/types/rani";
-import { raniDemoPresets } from "@/data/rani/presets";
+import { RaniMapContext, RaniConversationState, RaniPrompt, RaniMessage, RaniResponse } from "@/types/rani";
 import { classifyRaniIntent } from "@/lib/rani/classifyRaniIntent";
 import { rankRaniRecommendations } from "@/lib/rani/rankRaniRecommendations";
-import { raniKnowledgeBase } from "@/data/rani/knowledge";
+import { retrieveRaniKnowledge } from "@/lib/rani/retrieveRaniKnowledge";
+import { composeLocalRaniResponse } from "@/lib/rani/composeLocalRaniResponse";
 import { ExploreModeId } from "@/data/exploreControls";
 
 type UseRaniConversationParams = {
@@ -11,14 +11,19 @@ type UseRaniConversationParams = {
 };
 
 export function useRaniConversation({ context }: UseRaniConversationParams) {
-  const [currentResponse, setCurrentResponse] = useState<RaniResponse | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isOffline, setIsOffline] = useState(false);
+  const [conversation, setConversation] = useState<RaniConversationState>({
+    messages: [],
+    status: "idle",
+    lastQuery: null,
+    lastIntent: null,
+    exchangeCount: 0,
+    generatedBy: null,
+    error: null
+  });
   
-  // Track previous context to see if it significantly changed to update recommendation
+  const [isOffline, setIsOffline] = useState(false);
   const prevContextRef = useRef(context);
 
-  // Default quick prompts based on mode
   const getQuickPrompts = useCallback((mode: ExploreModeId): RaniPrompt[] => {
     switch (mode) {
       case "tourist":
@@ -33,7 +38,7 @@ export function useRaniConversation({ context }: UseRaniConversationParams) {
           { id: "p1", label: "Jelaskan budaya wilayah ini" },
           { id: "p2", label: "Apa konteks sejarahnya?" },
           { id: "p3", label: "Tampilkan sumber pembelajaran" },
-          { id: "p4", label: "Bandingkan dua wilayah" },
+          { id: "p4", label: "Bandingkan dua wilayah tanpa menentukan yang terbaik" },
         ];
       case "explore":
       default:
@@ -46,113 +51,118 @@ export function useRaniConversation({ context }: UseRaniConversationParams) {
     }
   }, []);
 
-  // Update proactive recommendation when context changes
-  useEffect(() => {
-    // Only update if selected province or active region changed significantly
-    if (
-      context.selectedProvinceId !== prevContextRef.current.selectedProvinceId ||
-      context.activeRegionId !== prevContextRef.current.activeRegionId ||
-      context.nextMilestone?.provinceId !== prevContextRef.current.nextMilestone?.provinceId
-    ) {
-      setIsLoading(true);
+  // Compute a proactive recommendation if there are no messages
+  const computeProactiveRecommendation = useCallback(() => {
+    setConversation(prev => ({ ...prev, status: "loading" }));
+    
+    // Slight delay to mimic processing
+    setTimeout(() => {
+      const candidates = retrieveRaniKnowledge("", "UNKNOWN", context);
+      const ranked = rankRaniRecommendations(candidates, context, "UNKNOWN");
+      const bestCandidate = ranked.length > 0 ? ranked[0] : null;
       
-      // Simulate slight processing delay for proactive recommendation
-      const timer = setTimeout(() => {
-        const rec = rankRaniRecommendations(context);
-        setCurrentResponse(rec);
-        setIsLoading(false);
-      }, 300);
+      const response = composeLocalRaniResponse(bestCandidate, "UNKNOWN", context);
+      const newMsg: RaniMessage = {
+        id: `msg-sys-${Date.now()}`,
+        role: "rani",
+        response,
+        timestamp: new Date().toISOString()
+      };
       
-      prevContextRef.current = context;
-      return () => clearTimeout(timer);
-    }
+      setConversation(prev => ({
+        ...prev,
+        status: "idle",
+        messages: [newMsg],
+        generatedBy: "local"
+      }));
+    }, 250);
   }, [context]);
 
   // Initial load
   useEffect(() => {
-    if (!currentResponse && !isLoading) {
-      const rec = rankRaniRecommendations(context);
-      setCurrentResponse(rec);
+    if (conversation.messages.length === 0 && conversation.status === "idle") {
+      computeProactiveRecommendation();
     }
-  }, [context, currentResponse, isLoading]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Update recommendation when context changes drastically (only if we haven't conversed much)
+  useEffect(() => {
+    if (conversation.exchangeCount === 0) {
+      if (
+        context.selectedProvinceId !== prevContextRef.current.selectedProvinceId ||
+        context.activeRegionId !== prevContextRef.current.activeRegionId ||
+        context.nextMilestone?.provinceId !== prevContextRef.current.nextMilestone?.provinceId ||
+        context.activeLayer !== prevContextRef.current.activeLayer
+      ) {
+        computeProactiveRecommendation();
+      }
+    }
+    prevContextRef.current = context;
+  }, [context, conversation.exchangeCount, computeProactiveRecommendation]);
 
   const submitQuery = useCallback((query: string) => {
     if (!query.trim()) return;
     
-    setIsLoading(true);
+    const userMsg: RaniMessage = {
+      id: `msg-user-${Date.now()}`,
+      role: "user",
+      text: query.trim(),
+      timestamp: new Date().toISOString()
+    };
     
-    // Simulate network delay
+    // We only keep up to 2 exchanges (4 messages). If exceeded, we drop the oldest.
+    setConversation(prev => {
+      const currentMsgs = prev.messages;
+      // If we are at 2 exchanges (4 messages: 1 proactive + 1 user + 1 rani + 1 user? wait. Let's just keep last 3 + the new one)
+      const keptMsgs = currentMsgs.length >= 4 ? currentMsgs.slice(currentMsgs.length - 3) : currentMsgs;
+      return { 
+        ...prev, 
+        status: "loading",
+        messages: [...keptMsgs, userMsg],
+        lastQuery: query,
+        exchangeCount: prev.exchangeCount + 1
+      };
+    });
+    
     setTimeout(() => {
-      const classification = classifyRaniIntent(query, context.activeMode);
+      const { intent } = classifyRaniIntent(query, context.activeMode);
       
-      // 1. Try exact preset match
-      let response = raniDemoPresets.find(p => p.intent === classification.intent);
+      const candidates = retrieveRaniKnowledge(query, intent, context);
+      const ranked = rankRaniRecommendations(candidates, context, intent);
+      const bestCandidate = ranked.length > 0 ? ranked[0] : null;
       
-      // 2. Try knowledge base match
-      if (!response && classification.confidence !== "low") {
-         const kbMatch = raniKnowledgeBase.find(k => 
-           k.keywords.some(kw => query.toLowerCase().includes(kw)) ||
-           (k.type === "culture" && classification.intent === "EXPLAIN_CULTURE") ||
-           (k.type === "culinary" && classification.intent === "RECOMMEND_CULINARY")
-         );
-         
-         if (kbMatch) {
-           response = {
-             id: `resp-${kbMatch.id}`,
-             intent: classification.intent,
-             title: kbMatch.title,
-             summary: kbMatch.summary,
-             bodyBlocks: [{ type: "paragraph", text: kbMatch.summary }],
-             reasonCodes: ["MATCHES_EXPLICIT_QUERY"],
-             sourceIds: kbMatch.sourceIds,
-             primaryAction: kbMatch.actionTargets.length > 0 ? {
-               id: `act-${kbMatch.id}`,
-               type: kbMatch.actionTargets[0].type,
-               label: "Lihat Detail",
-               payload: kbMatch.actionTargets[0].payload
-             } : null,
-             secondaryActions: [],
-             followUpPrompts: [],
-             generatedBy: "local-template",
-             confidence: "high"
-           };
-         }
-      }
+      const response = composeLocalRaniResponse(bestCandidate, intent, context);
       
-      // 3. Fallback to out of scope
-      if (!response) {
-         response = {
-           id: "resp-oos",
-           intent: "OUT_OF_SCOPE",
-           title: "Di Luar Cakupan",
-           summary: "Pertanyaan di luar cakupan RANI.",
-           bodyBlocks: [{
-             type: "warning",
-             text: "Maaf, RANI berfokus pada eksplorasi budaya, provinsi, kuliner, perjalanan, dan fitur NUSANTARAYA. Saya belum memiliki data untuk pertanyaan ini."
-           }],
-           reasonCodes: ["EDITORIAL_FALLBACK"],
-           sourceIds: [],
-           primaryAction: null,
-           secondaryActions: [],
-           followUpPrompts: [],
-           generatedBy: "local-template",
-           confidence: "high"
-         };
-      }
+      const raniMsg: RaniMessage = {
+        id: `msg-rani-${Date.now()}`,
+        role: "rani",
+        response,
+        timestamp: new Date().toISOString()
+      };
       
-      setCurrentResponse(response);
-      setIsLoading(false);
-    }, 400); // 400ms simulated local delay
+      setConversation(prev => ({
+        ...prev,
+        status: "idle",
+        lastIntent: intent,
+        messages: [...prev.messages, raniMsg]
+      }));
+    }, 450); // Simulated delay
     
   }, [context]);
 
   const resetConversation = useCallback(() => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setCurrentResponse(rankRaniRecommendations(context));
-      setIsLoading(false);
-    }, 200);
-  }, [context]);
+    setConversation({
+      messages: [],
+      status: "idle",
+      lastQuery: null,
+      lastIntent: null,
+      exchangeCount: 0,
+      generatedBy: null,
+      error: null
+    });
+    setTimeout(() => computeProactiveRecommendation(), 50);
+  }, [computeProactiveRecommendation]);
 
   useEffect(() => {
     const handleOffline = () => setIsOffline(true);
@@ -173,8 +183,7 @@ export function useRaniConversation({ context }: UseRaniConversationParams) {
   }, []);
 
   return {
-    currentResponse,
-    isLoading,
+    conversation,
     isOffline,
     quickPrompts: getQuickPrompts(context.activeMode),
     submitQuery,
