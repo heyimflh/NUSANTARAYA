@@ -406,7 +406,7 @@ export function MapInsightsSection({
 
   if (!viewModel) {
     return (
-      <section className="w-full py-16 md:py-24 bg-[#F7F0E3] min-h-[400px] flex items-center justify-center" style={insightTheme}>
+      <section className="w-full py-16 md:py-24 bg-[rgba(247,240,227,0.52)] min-h-[400px] flex items-center justify-center" style={insightTheme}>
         <div className="text-[#5E554C] animate-pulse font-medium">Membaca konteks peta…</div>
       </section>
     );
@@ -444,7 +444,7 @@ export function MapInsightsSection({
     <section
       id="map-insights"
       aria-labelledby="map-insights-heading"
-      className={`w-full py-16 md:py-24 bg-[var(--insight-paper)] border-y border-[var(--insight-border)] overflow-hidden scroll-mt-24 ${className}`}
+      className={`w-full py-16 md:py-24 bg-[rgba(247,240,227,0.52)] border-y border-[var(--insight-border)] overflow-hidden scroll-mt-24 ${className}`}
       style={insightTheme}
     >
       <div className="nusa-container flex flex-col">

@@ -56,7 +56,7 @@ export function RegionalExplorerSection({
     <section 
       id="regional-explorer" 
       aria-labelledby="regional-explorer-heading"
-      className="py-20 md:py-28 lg:py-32 relative overflow-hidden bg-[var(--atlas-canvas)]"
+      className="py-20 md:py-28 lg:py-32 relative overflow-hidden bg-[rgba(242,235,221,0.56)]"
       style={{
         "--atlas-canvas": "#F2EBDD",
         "--atlas-paper": "#FFFDF7",

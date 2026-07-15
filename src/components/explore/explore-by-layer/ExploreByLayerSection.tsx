@@ -58,7 +58,7 @@ export const ExploreByLayerSection: React.FC<ExploreByLayerSectionProps> = ({
       id="explore-by-layer" 
       ref={sectionRef}
       aria-labelledby="explore-by-layer-heading"
-      className="relative w-full bg-[#FFFDF8] pt-24 pb-32 overflow-hidden"
+      className="relative w-full bg-[rgba(255,253,248,0.20)] pt-24 pb-32 overflow-hidden"
     >
       <div className="container mx-auto px-4 md:px-8 max-w-[1440px]">
         

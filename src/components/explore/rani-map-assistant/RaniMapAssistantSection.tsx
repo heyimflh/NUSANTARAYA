@@ -107,7 +107,7 @@ export function RaniMapAssistantSection({
     <section 
       id="rani-map-assistant" 
       aria-labelledby="rani-map-assistant-heading"
-      className="relative w-full py-20 md:py-32 bg-[#FBF7EF] overflow-hidden scroll-mt-24 lg:scroll-mt-32 border-t border-[#DED3C3]"
+      className="relative w-full py-20 md:py-32 bg-[rgba(251,247,239,0.68)] overflow-hidden scroll-mt-24 lg:scroll-mt-32 border-t border-[#DED3C3]"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

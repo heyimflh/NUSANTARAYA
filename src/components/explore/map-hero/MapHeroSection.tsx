@@ -5,9 +5,22 @@ import { ArrowRight, Play, ArrowDown, Compass } from "lucide-react";
 
 export const MapHeroSection = () => {
   return (
-    <section className="relative w-full h-screen min-h-[750px] flex items-center overflow-hidden bg-background">
-        {/* Background Video */}
-        <div className="absolute inset-0 z-0 w-full h-full">
+    <section className="relative w-full h-screen min-h-[750px] flex items-center overflow-hidden [--wave-h:80px] md:[--wave-h:120px] lg:[--wave-h:160px]">
+        {/* Masked Container for Video and Overlays */}
+        <div 
+          className="absolute inset-0 z-0 w-full h-full"
+          style={{
+            maskImage: `linear-gradient(black, black), url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 160' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0 L1440,0 L1440,80 C1100,160 800,0 400,60 C200,90 0,60 0,60 L0,60 Z' fill='black'/%3E%3C/svg%3E")`,
+            WebkitMaskImage: `linear-gradient(black, black), url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 160' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0 L1440,0 L1440,80 C1100,160 800,0 400,60 C200,90 0,60 0,60 L0,60 Z' fill='black'/%3E%3C/svg%3E")`,
+            maskSize: "100% calc(100% - var(--wave-h)), 100% var(--wave-h)",
+            WebkitMaskSize: "100% calc(100% - var(--wave-h)), 100% var(--wave-h)",
+            maskPosition: "top left, bottom left",
+            WebkitMaskPosition: "top left, bottom left",
+            maskRepeat: "no-repeat, no-repeat",
+            WebkitMaskRepeat: "no-repeat, no-repeat",
+          }}
+        >
+          {/* Background Video */}
           <video
             autoPlay
             loop
@@ -20,14 +33,13 @@ export const MapHeroSection = () => {
               type="video/webm"
             />
           </video>
+
+          {/* Reduced Gradient Overlay to show more video */}
+          <div className="absolute inset-0 z-10 bg-gradient-to-r from-background via-background/90 to-transparent w-full md:w-[60%] lg:w-[55%]" />
+          
+          {/* Additional gradient for bottom fade for seamless transition */}
+          <div className="absolute inset-0 z-10 bg-gradient-to-t from-background/50 via-transparent to-transparent h-[30%] mt-auto" />
         </div>
-
-
-        {/* Reduced Gradient Overlay to show more video */}
-        <div className="absolute inset-0 z-10 bg-gradient-to-r from-background via-background/90 to-transparent w-full md:w-[60%] lg:w-[55%]" />
-        
-        {/* Additional gradient for bottom fade for seamless transition */}
-        <div className="absolute inset-0 z-10 bg-gradient-to-t from-background/50 via-transparent to-transparent h-[30%] mt-auto" />
 
         {/* Main Content Container */}
         <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-20 h-full flex flex-col justify-center">
@@ -113,53 +125,11 @@ export const MapHeroSection = () => {
           </div>
         </div>
 
-        {/* Ornaments - Elegant Gold Lotus (Bleeding off bottom-left corner to avoid overlap) */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, rotate: -30 }}
-          animate={{ opacity: 1, scale: 1, rotate: 15 }}
-          transition={{ duration: 1.5, delay: 0.8, ease: "easeOut" }}
-          className="absolute -bottom-16 -left-16 md:-bottom-24 md:-left-24 z-10 opacity-30 pointer-events-none w-[300px] h-[300px] md:w-[450px] md:h-[450px]"
-        >
-          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-xl">
-            {/* Center petal */}
-            <path d="M100 40 C 120 70, 130 110, 100 160 C 70 110, 80 70, 100 40 Z" fill="url(#goldGradient)" opacity="0.7"/>
-            <path d="M100 40 C 120 70, 130 110, 100 160 C 70 110, 80 70, 100 40 Z" stroke="#C9A84C" strokeWidth="1.5" opacity="0.9"/>
-            
-            {/* Side petals 1 */}
-            <path d="M100 160 C 80 150, 40 120, 30 80 C 60 70, 80 90, 100 120" fill="url(#goldGradient)" opacity="0.5"/>
-            <path d="M100 160 C 80 150, 40 120, 30 80 C 60 70, 80 90, 100 120" stroke="#C9A84C" strokeWidth="1.5" opacity="0.8"/>
-            <path d="M100 160 C 120 150, 160 120, 170 80 C 140 70, 120 90, 100 120" fill="url(#goldGradient)" opacity="0.5"/>
-            <path d="M100 160 C 120 150, 160 120, 170 80 C 140 70, 120 90, 100 120" stroke="#C9A84C" strokeWidth="1.5" opacity="0.8"/>
-            
-            {/* Side petals 2 */}
-            <path d="M100 160 C 70 165, 20 150, 10 110 C 40 100, 70 130, 90 150" fill="url(#goldGradient)" opacity="0.3"/>
-            <path d="M100 160 C 70 165, 20 150, 10 110 C 40 100, 70 130, 90 150" stroke="#C9A84C" strokeWidth="1" opacity="0.6"/>
-            <path d="M100 160 C 130 165, 180 150, 190 110 C 160 100, 130 130, 110 150" fill="url(#goldGradient)" opacity="0.3"/>
-            <path d="M100 160 C 130 165, 180 150, 190 110 C 160 100, 130 130, 110 150" stroke="#C9A84C" strokeWidth="1" opacity="0.6"/>
 
-            {/* Gradient Definition */}
-            <defs>
-              <linearGradient id="goldGradient" x1="100" y1="40" x2="100" y2="160" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stopColor="#D4B56A"/>
-                <stop offset="100%" stopColor="#8C6D23"/>
-              </linearGradient>
-            </defs>
-          </svg>
-        </motion.div>
 
-        {/* Bottom Wave & Scroll Indicator */}
-        <div className="absolute bottom-0 left-0 w-full z-20 pointer-events-none">
-          {/* Wave SVG matching the image's smooth wave */}
-          <div className="relative w-full h-[80px] md:h-[120px] lg:h-[160px]">
-            <svg
-              viewBox="0 0 1440 160"
-              className="absolute bottom-0 w-full h-full text-background fill-current preserve-3d"
-              preserveAspectRatio="none"
-            >
-              <path d="M0,160 L1440,160 L1440,80 C1100,160 800,0 400,60 C200,90 0,60 0,60 Z" />
-            </svg>
-          </div>
-          
+        {/* Bottom Scroll Indicator */}
+        <div className="absolute bottom-0 left-0 w-full z-20 pointer-events-none h-[80px] md:h-[120px] lg:h-[160px]">
+
           {/* Scroll Indicator */}
           <motion.div
             initial={{ opacity: 0 }}

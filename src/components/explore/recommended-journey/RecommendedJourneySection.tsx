@@ -140,7 +140,7 @@ export function RecommendedJourneySection({
     <section 
       id="recommended-journey" 
       aria-labelledby="recommended-journey-heading"
-      className="py-20 md:py-28 lg:py-32 relative overflow-hidden"
+      className="py-20 md:py-28 lg:py-32 relative overflow-hidden bg-[rgba(248,244,234,0.22)]"
       style={{
         "--journey-canvas": "#F8F4EA",
         "--journey-paper": "#FFFDF8",
@@ -154,7 +154,6 @@ export function RecommendedJourneySection({
         "--journey-coral": "#D4691E",
         "--journey-plum": "#6B3FA0",
         "--journey-line": "#E8E0CE",
-        backgroundColor: "var(--journey-canvas)",
       } as React.CSSProperties}
     >
       <div className="container mx-auto px-5 sm:px-6 md:px-8 lg:px-10 xl:px-12 max-w-[1440px]">
