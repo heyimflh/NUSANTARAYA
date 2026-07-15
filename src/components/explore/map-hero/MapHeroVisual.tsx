@@ -17,6 +17,7 @@ export const MapHeroVisual = () => {
       >
         {/* Map Outline Base */}
         <div className="absolute inset-0 flex items-center justify-center opacity-20">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/assets/map/indonesia-outline.svg"
             alt=""

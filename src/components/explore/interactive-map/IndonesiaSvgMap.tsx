@@ -67,7 +67,6 @@ const provincePaths: Record<string, string> = {
 export const IndonesiaSvgMap = memo(function IndonesiaSvgMap({
   provinces,
   activeLayer,
-  activeMode,
   selectedProvinceId,
   hoveredProvinceId,
   focusedProvinceId,

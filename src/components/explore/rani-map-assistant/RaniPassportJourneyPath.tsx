@@ -8,17 +8,11 @@ type Props = {
 
 export function RaniPassportJourneyPath({ context }: Props) {
   // Derive a narrative from the context
-  let title = "Mulai Ekspedisi Pertamamu";
   let description = "Pilih provinsi atau aktifkan layer budaya untuk memulai jejak di Passport-mu.";
   let startNode = "Awal";
   let endNode = "Pilih Tujuan";
 
   if (context.nextMilestone) {
-    const isCompleted = context.completedProvinceIds.length > 0;
-    
-    // Example narrative: "Kamu telah membuka 1 provinsi. Satu langkah lagi melengkapi Maluku."
-    title = isCompleted ? `Melanjutkan Jejak Nusantara` : `Langkah Pertama`;
-    
     // Get last visited or fallback to "Passport"
     const lastVisitedId = context.completedProvinceIds.length > 0 
       ? context.completedProvinceIds[context.completedProvinceIds.length - 1] 
@@ -47,7 +41,6 @@ export function RaniPassportJourneyPath({ context }: Props) {
       description += ` Layer ${layerMap[context.activeLayer]} sedang aktif.`;
     }
   } else if (context.activeJourneyId) {
-    title = "Menjalani Rute Perjalanan";
     description = `Kamu sedang mengikuti rekomendasi perjalanan. Lanjutkan ke pemberhentian berikutnya.`;
     startNode = "Titik Singgah";
     endNode = "Tujuan Berikutnya";

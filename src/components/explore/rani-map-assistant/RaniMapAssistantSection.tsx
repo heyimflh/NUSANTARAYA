@@ -81,7 +81,6 @@ export function RaniMapAssistantSection({
 
   const {
     conversation,
-    quickPrompts,
     submitQuery,
   } = useRaniConversation({ context });
 
@@ -134,7 +133,6 @@ export function RaniMapAssistantSection({
 
         <div className="max-w-4xl mx-auto">
           <RaniTaskSelector 
-            prompts={quickPrompts} 
             onSelect={submitQuery} 
             disabled={conversation.status === "loading"}
           />

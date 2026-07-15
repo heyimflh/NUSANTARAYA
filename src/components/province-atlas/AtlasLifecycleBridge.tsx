@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { usePassport } from "@/context/app-context";
 
 interface AtlasLifecycleBridgeProps {

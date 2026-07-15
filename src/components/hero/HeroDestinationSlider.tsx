@@ -1,9 +1,9 @@
 "use client";
 
 import { Destination } from "./heroData";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Play } from "lucide-react";
-import { useRef, useEffect } from "react";
+import { motion } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
 
 type HeroDestinationSliderProps = {
   destinations: Destination[];

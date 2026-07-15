@@ -1,14 +1,12 @@
 import React from "react";
-import { RaniPrompt } from "@/types/rani";
 import { ArrowRight, BookOpen, Compass, Map, Trophy } from "lucide-react";
 
 type Props = {
-  prompts: RaniPrompt[];
   onSelect: (query: string) => void;
   disabled?: boolean;
 };
 
-export function RaniTaskSelector({ prompts, onSelect, disabled }: Props) {
+export function RaniTaskSelector({ onSelect, disabled }: Props) {
   // We map the prompts to specific conceptual tasks as requested:
   // 01 Lanjutkan Progress, 02 Temukan Provinsi, 03 Pelajari Ceritanya, 04 Susun Perjalanan
 
@@ -51,7 +49,6 @@ export function RaniTaskSelector({ prompts, onSelect, disabled }: Props) {
       
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {tasks.map((task, idx) => {
-          const Icon = task.icon;
           return (
             <button
               key={task.id}

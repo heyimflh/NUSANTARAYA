@@ -1,5 +1,5 @@
 import { ExploreLayerId, ExploreModeId } from "../exploreControls";
-import { ProvinceRegion } from "@/lib/types";
+
 
 export type JourneyMode = ExploreModeId;
 export type JourneyLayer = ExploreLayerId | "mixed";

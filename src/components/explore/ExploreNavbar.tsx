@@ -24,6 +24,7 @@ export const ExploreNavbar = () => {
       >
         {/* Logo — responsive sizing */}
         <Link href="/">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img 
             src="/assets/branding/NUSANTARAYA_logo-full.png" 
             alt="Nusantaraya" 
@@ -101,6 +102,7 @@ export const ExploreNavbar = () => {
             {/* Header */}
             <div className="flex items-center justify-between px-4 sm:px-6 py-5 sm:py-6 relative z-10 border-b border-[#2D2419]/10">
               <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
                   src="/assets/branding/NUSANTARAYA_logo-full.png" 
                   alt="Nusantaraya" 

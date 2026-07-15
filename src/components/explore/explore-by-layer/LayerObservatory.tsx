@@ -9,7 +9,7 @@ import { provinceMapData } from "@/data/provinces/provinces";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Map, RefreshCcw } from "lucide-react";
 import * as Icons from "lucide-react";
-import { cn } from "@/lib/utils";
+
 
 interface LayerObservatoryProps {
   layerData: ExploreLayerDefinition;

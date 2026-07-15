@@ -129,6 +129,7 @@ export function PillarCard({
               }}
               transition={lightSpring}
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
                 src={pillar.icon} 
                 alt={pillar.name} 

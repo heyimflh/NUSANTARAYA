@@ -1,5 +1,5 @@
 import React from 'react';
-import { ZoomIn, ZoomOut, RefreshCcw, Map as MapIcon } from 'lucide-react';
+import { ZoomIn, ZoomOut, RefreshCcw } from 'lucide-react';
 
 type MapToolbarProps = {
   onZoomIn: () => void;

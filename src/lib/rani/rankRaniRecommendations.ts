@@ -1,5 +1,5 @@
 import { RaniMapContext, RaniIntent, RaniKnowledgeRecord, RaniReasonCode } from "@/types/rani";
-import { raniKnowledgeBase } from "@/data/rani/knowledge";
+
 
 export type RankedCandidate = {
   record: RaniKnowledgeRecord;

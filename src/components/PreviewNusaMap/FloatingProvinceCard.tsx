@@ -95,6 +95,7 @@ export default function FloatingProvinceCard({
                     className="w-20 h-20 md:w-full md:h-[160px] shrink-0 rounded-[1rem] md:rounded-[1.5rem] overflow-hidden relative group cursor-pointer shadow-sm"
                     onClick={() => (window.location.href = province.href)}
                   >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={province.thumbnail}
                       alt={province.name}
@@ -164,6 +165,7 @@ export default function FloatingProvinceCard({
               // COMPACT PILL STATE (Hover)
               <>
                 <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden shrink-0 border-2 border-white shadow-md relative z-10">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={province.thumbnail}
                     alt={province.name}

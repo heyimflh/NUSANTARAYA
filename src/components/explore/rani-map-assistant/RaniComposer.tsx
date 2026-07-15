@@ -1,5 +1,5 @@
 import React, { KeyboardEvent, useState } from "react";
-import { Send } from "lucide-react";
+
 
 type Props = {
   onSend: (query: string) => void;

@@ -47,6 +47,7 @@ export default function ProvinceFlagshipCards({
       {/* Preload images for instant transitions */}
       <div className="hidden">
         {thumbnails.map((src, i) => (
+          // eslint-disable-next-line @next/next/no-img-element
           <img key={i} src={src} alt="" />
         ))}
       </div>
@@ -175,6 +176,7 @@ export default function ProvinceFlagshipCards({
                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }} // smooth apple-like ease
                     className="absolute inset-0"
                   >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={provinces[activeIndex]?.thumbnail}
                       alt={provinces[activeIndex]?.name}
@@ -256,6 +258,7 @@ export default function ProvinceFlagshipCards({
                               className="lg:hidden w-full overflow-hidden shrink-0"
                             >
                               <div className="w-full h-40 sm:h-48 md:h-64 rounded-xl md:rounded-2xl overflow-hidden mb-3 md:mb-5 mt-1 relative shadow-lg md:shadow-[0_10px_30px_rgba(6,43,53,0.5)] border border-white/10">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
                                   src={province.thumbnail}
                                   alt={province.name}

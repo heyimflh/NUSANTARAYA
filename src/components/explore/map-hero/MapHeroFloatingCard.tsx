@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 interface MapHeroFloatingCardProps {
   province: string;
-  region: string;
+
   badge: string;
   highlights: string[];
   image: string;
@@ -13,7 +13,7 @@ interface MapHeroFloatingCardProps {
 
 export const MapHeroFloatingCard = ({
   province,
-  region,
+
   badge,
   highlights,
   image,
@@ -34,6 +34,7 @@ export const MapHeroFloatingCard = ({
     >
       <div className="flex gap-4 items-center">
         <div className="w-[72px] h-[72px] rounded-2xl overflow-hidden shrink-0 border border-[#E8E0CE]/50">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={image}
             alt={imageAlt}

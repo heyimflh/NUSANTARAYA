@@ -100,6 +100,7 @@ export function JourneyDossier({ journey, reasons, onRegenerate }: JourneyDossie
             {/* VISUAL REGION & CARTOGRAPHIC OVERLAY (58%) */}
             <div className="w-full lg:w-[58%] relative min-w-0 border-b lg:border-b-0 lg:border-r border-[var(--journey-line)] bg-[#FDFBF7]">
               <div className="relative w-full aspect-[4/3] md:aspect-[16/9] lg:h-full lg:min-h-[580px] overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
                   src={journey.coverAsset} 
                   alt={`Visual jalur ${journey.title}`}

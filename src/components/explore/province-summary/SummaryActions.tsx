@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import Link from 'next/link';
+
 import { Plus, MessageSquare, ArrowRight } from 'lucide-react';
 import { ProvinceMapItem } from '@/types/province';
 import { usePassport } from '@/context/app-context';

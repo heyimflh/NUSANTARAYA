@@ -37,6 +37,7 @@ export const MapHeroPin = ({
         tabIndex={0}
       >
         <div className="absolute inset-0 bg-[#C9A84C]/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={icon}
           alt=""

@@ -203,7 +203,6 @@ function NodeContent({ stat, isHovered, index }: { stat: MapInsightStat; isHover
 }
 
 function LiveContext({ viewModel, isEn }: { viewModel: MapInsightViewModel; isEn: boolean }) {
-  const isDefault = viewModel.tone === "default" && viewModel.liveValue === 38;
   const isError = viewModel.tone === "empty";
 
   let statusColor = "bg-[var(--insight-moss)] text-white";

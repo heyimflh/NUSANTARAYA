@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { RaniConversationState, RaniAction, RaniResponse } from "@/types/rani";
+import { RaniConversationState, RaniAction } from "@/types/rani";
 import { RaniSourceReference } from "./RaniSourceReference";
 
 type Props = {
@@ -41,7 +41,7 @@ export function RaniConversationJournal({ conversation, onAction }: Props) {
         aria-live="polite"
       >
         <div className="flex flex-col gap-8">
-          {conversation.messages.map((msg, index) => {
+          {conversation.messages.map((msg) => {
             // We skip the very first system message if it's proactive (no preceding user message)
             // But since we only render this component if `hasConversation` is true, we render all.
             

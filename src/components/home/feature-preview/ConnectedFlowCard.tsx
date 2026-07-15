@@ -57,11 +57,12 @@ export default function ConnectedFlowCard() {
           </div>
 
           {/* Nodes (App Icons) */}
-          {mainFeatures.map((feature, idx) => (
+          {mainFeatures.map((feature) => (
             <div key={feature.id} className="relative z-10 flex flex-col items-center gap-6 group/icon cursor-pointer">
               
               {/* App Icon Squircles (Light Theme) */}
               <div className="relative w-[72px] h-[72px] rounded-[22px] overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.06)] transition-all duration-500 ease-out group-hover/icon:scale-110 group-hover/icon:-translate-y-2 border border-gray-100 group-hover/icon:border-gray-200 group-hover/icon:shadow-[0_20px_40px_rgba(0,0,0,0.1)] bg-white">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
                   src={feature.icon} 
                   alt={feature.title} 
@@ -88,6 +89,7 @@ export default function ConnectedFlowCard() {
             <div key={feature.id} className="relative z-10 flex items-center gap-6 group/mobile">
               {/* App Icon */}
               <div className="relative w-16 h-16 rounded-[20px] overflow-hidden shadow-[0_8px_25px_rgba(0,0,0,0.06)] border border-gray-100 shrink-0 bg-white">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
                   src={feature.icon} 
                   alt="" 

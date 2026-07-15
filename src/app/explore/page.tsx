@@ -4,7 +4,7 @@ import { useState, useMemo, useCallback } from "react";
 import { MapHeroSection } from "@/components/explore/map-hero";
 import { ExploreNavbar } from "@/components/explore/ExploreNavbar";
 import { ExploreControlBar } from "@/components/explore/control-bar";
-import { ExploreLayerId, ExploreModeId } from "@/data/exploreControls";
+import { ExploreLayerId } from "@/data/exploreControls";
 import { provinceMapData } from "@/data/provinces/provinces";
 import { InteractiveIndonesiaMap } from "@/components/explore/interactive-map";
 import { countMatchingProvinces } from "@/lib/provinceMatch";
@@ -18,7 +18,7 @@ import { RaniMapAssistantSection } from "@/components/explore/rani-map-assistant
 import { FinalCtaFooterSection } from '@/components/home/final-cta-footer';
 import { useRouter } from "next/navigation";
 import { usePassport, useMode, useLanguage } from "@/context/app-context";
-import { getRegionById } from "@/data/regions/regionProvinceMap";
+
 import { RegionId } from "@/types/region";
 import { RecommendedJourney } from "@/data/journeys/types";
 
@@ -105,7 +105,6 @@ export default function ExplorePage() {
   return (
     <main className="relative min-h-screen isolate">
       <picture
-        aria-hidden="true"
         className="pointer-events-none fixed inset-0 z-0 block h-[100dvh] w-full select-none"
       >
         <source

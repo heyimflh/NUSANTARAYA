@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Map, MapPin, Compass, Medal } from "lucide-react";
+import { Map, Compass, Medal } from "lucide-react";
 import { RegionalProfile } from "@/types/region";
 import { useRegionalPassportProgress } from "@/hooks/useRegionalPassportProgress";
 

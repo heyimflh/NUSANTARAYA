@@ -15,7 +15,7 @@ interface RegionCompareTrayProps {
   onSwap: () => void;
 }
 
-export function RegionCompareTray({ activeRegion, compareRegionId, activeLayer, onSelectCompare, onClose, onSwap }: RegionCompareTrayProps) {
+export function RegionCompareTray({ activeRegion, compareRegionId, onSelectCompare, onClose, onSwap }: RegionCompareTrayProps) {
   
   const compareRegion = compareRegionId ? regions.find(r => r.id === compareRegionId) : null;
 

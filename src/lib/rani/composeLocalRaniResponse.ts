@@ -1,4 +1,4 @@
-import { RaniResponse, RaniIntent, RaniMapContext } from "@/types/rani";
+import { RaniResponse, RaniIntent } from "@/types/rani";
 import { RankedCandidate } from "./rankRaniRecommendations";
 import { raniDemoPresets } from "@/data/rani/presets";
 import { getAvailableAction } from "@/data/rani/actions";
@@ -6,7 +6,6 @@ import { getAvailableAction } from "@/data/rani/actions";
 export function composeLocalRaniResponse(
   candidate: RankedCandidate | null,
   intent: RaniIntent,
-  context: RaniMapContext
 ): RaniResponse {
   
   if (!candidate) {

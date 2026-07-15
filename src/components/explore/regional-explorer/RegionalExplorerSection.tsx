@@ -28,8 +28,6 @@ export function RegionalExplorerSection({
   activeLayer,
   activeMode,
   selectedProvinceId,
-  searchQuery,
-  showFlagshipOnly,
   activeJourney,
   onExploreMap,
   onHighlightRegion,

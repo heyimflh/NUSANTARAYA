@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { mapPreviewLayers, type FeaturedProvince, type MapLayerId } from "@/data/preview-map";
 import FloatingProvinceCard from "./FloatingProvinceCard";
 

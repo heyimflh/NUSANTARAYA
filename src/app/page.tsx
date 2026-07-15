@@ -11,6 +11,7 @@ export default function HomePage() {
     <div className="w-full min-h-screen">
       <Hero />
       <div className="w-full flex justify-center pt-12 pb-4">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/assets/branding/ornamen-divider.svg"
           alt=""

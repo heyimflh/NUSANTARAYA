@@ -114,6 +114,7 @@ export function PastToFutureSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-6 md:mt-8"
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/assets/branding/ornamen-divider.svg"
               alt=""
@@ -224,6 +225,7 @@ export function PastToFutureSection() {
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={phase.icon}
                           className="w-5 h-5 object-contain"
@@ -239,6 +241,7 @@ export function PastToFutureSection() {
                     </div>
 
                     <div className="hidden md:flex items-center gap-3 mb-4 relative z-10">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={phase.icon}
                         className="w-[22px] h-[22px] object-contain"
@@ -276,6 +279,7 @@ export function PastToFutureSection() {
                   {/* Image */}
                   <div className="w-full h-[220px] md:h-[260px] relative overflow-hidden bg-[#F8F4EA]">
                     <div className="absolute inset-0 bg-black/10 z-10 mix-blend-overlay group-hover:opacity-0 transition-opacity duration-500" />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={phase.image}
                       alt={phase.title}

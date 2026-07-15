@@ -67,6 +67,7 @@ export function MobilePillarCard({
               }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
                 src={pillar.icon} 
                 alt={pillar.name} 

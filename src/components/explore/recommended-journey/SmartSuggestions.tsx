@@ -11,7 +11,7 @@ export function SmartSuggestions({ suggestions, onSelect }: SmartSuggestionsProp
   if (suggestions.length === 0) return null;
 
   // Derive contextual strategy labels based on index or properties.
-  const getStrategyLabel = (idx: number, journey: RecommendedJourney) => {
+  const getStrategyLabel = (idx: number) => {
     if (idx === 0) return "Lanjutkan Cerita";
     if (idx === 1) return "Coba Kontras";
     return "Lengkapi Passport";
@@ -41,6 +41,7 @@ export function SmartSuggestions({ suggestions, onSelect }: SmartSuggestionsProp
           >
             {/* Background Image with Dark Base */}
             <div className="absolute inset-0 bg-black">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
                 src={journey.coverAsset} 
                 alt={`Visual untuk ${journey.shortTitle}`}
@@ -60,7 +61,7 @@ export function SmartSuggestions({ suggestions, onSelect }: SmartSuggestionsProp
               {/* Header: Badge & Arrow */}
               <div className="flex items-start justify-between mb-auto">
                 <span className="text-[9px] lg:text-[10px] font-bold tracking-[0.2em] uppercase px-3.5 py-2 rounded-full bg-white/10 backdrop-blur-md text-white border border-white/20 shadow-[0_4px_12px_rgba(0,0,0,0.1)]">
-                  {getStrategyLabel(idx, journey)}
+                  {getStrategyLabel(idx)}
                 </span>
                 
                 <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 ease-out shadow-[0_4px_12px_rgba(0,0,0,0.1)]">

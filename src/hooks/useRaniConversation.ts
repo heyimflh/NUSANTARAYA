@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from "react";
-import { RaniMapContext, RaniConversationState, RaniPrompt, RaniMessage, RaniResponse } from "@/types/rani";
+import { RaniMapContext, RaniConversationState, RaniPrompt, RaniMessage } from "@/types/rani";
 import { classifyRaniIntent } from "@/lib/rani/classifyRaniIntent";
 import { rankRaniRecommendations } from "@/lib/rani/rankRaniRecommendations";
 import { retrieveRaniKnowledge } from "@/lib/rani/retrieveRaniKnowledge";
@@ -68,7 +68,7 @@ export function useRaniConversation({ context }: UseRaniConversationParams) {
       const ranked = rankRaniRecommendations(candidates, context, "UNKNOWN");
       const bestCandidate = ranked.length > 0 ? ranked[0] : null;
       
-      const response = composeLocalRaniResponse(bestCandidate, "UNKNOWN", context);
+      const response = composeLocalRaniResponse(bestCandidate, "UNKNOWN");
       const newMsg: RaniMessage = {
         id: `msg-sys-${Date.now()}`,
         role: "rani",
@@ -141,7 +141,7 @@ export function useRaniConversation({ context }: UseRaniConversationParams) {
       const ranked = rankRaniRecommendations(candidates, context, intent);
       const bestCandidate = ranked.length > 0 ? ranked[0] : null;
       
-      const response = composeLocalRaniResponse(bestCandidate, intent, context);
+      const response = composeLocalRaniResponse(bestCandidate, intent);
       
       const raniMsg: RaniMessage = {
         id: `msg-rani-${Date.now()}`,

@@ -8,8 +8,7 @@ import {
   AtlasChapterNav, 
   EditorialMediaBlock,
   ReferenceList,
-  AtlasStatusBadge,
-  ChapterSourceFooter
+  AtlasStatusBadge
 } from '@/components/province-atlas';
 import { AtlasQuickFacts } from '@/components/province-atlas/AtlasQuickFacts';
 import { AtlasTimeline } from '@/components/province-atlas/AtlasTimeline';

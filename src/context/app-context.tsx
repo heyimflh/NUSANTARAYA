@@ -171,7 +171,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   );
 
   const completeProvince = useCallback(
-    (provinceId: string, source?: "atlas" | "quiz") => {
+    (provinceId: string) => {
       updatePassport((p) => completeProvinceTransition(p, provinceId));
     },
     [updatePassport],

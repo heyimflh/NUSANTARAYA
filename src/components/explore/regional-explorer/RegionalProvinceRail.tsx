@@ -20,7 +20,6 @@ export function RegionalProvinceRail({
   region, 
   selectedProvinceId, 
   activeLayer, 
-  activeMode, 
   onSelectProvince, 
   onOpenAtlas 
 }: RegionalProvinceRailProps) {

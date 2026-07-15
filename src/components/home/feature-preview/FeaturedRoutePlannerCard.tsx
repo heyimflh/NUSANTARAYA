@@ -36,6 +36,7 @@ export default function FeaturedRoutePlannerCard({ feature }: FeaturedRoutePlann
             }}
             className="cursor-pointer"
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img 
               src={feature.icon} 
               alt="" 

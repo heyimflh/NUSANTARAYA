@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ExploreLayerId, ExploreModeId } from "@/data/exploreControls";
 import { useLanguage, usePassport } from "@/context/app-context";
 import { JourneyDossier } from "./JourneyDossier";
 import { SmartSuggestions } from "./SmartSuggestions";
 import { getRecommendedJourneys } from "@/lib/recommendation/engine";
 import { JourneyRecommendationContext, RecommendedJourney } from "@/data/journeys/types";
-import { Map, MapPin, Compass } from "lucide-react";
+import { MapPin, Compass } from "lucide-react";
 
 interface RecommendedJourneySectionProps {
   activeLayer: ExploreLayerId;

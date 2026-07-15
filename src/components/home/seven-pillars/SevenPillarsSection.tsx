@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import { nusantarayaPillars } from "@/data/pillars";
 import { PillarCard } from "./PillarCard";
 import { MobilePillarCard } from "./MobilePillarCard";
@@ -51,6 +51,7 @@ export function SevenPillarsSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-4 md:mt-6"
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img 
               src="/assets/branding/ornamen-divider.svg" 
               alt="" 

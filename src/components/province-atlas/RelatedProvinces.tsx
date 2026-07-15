@@ -34,6 +34,7 @@ export function RelatedProvinces({ currentProvinceId }: RelatedProvincesProps) {
             key={province.id}
             className="group block relative rounded-2xl overflow-hidden aspect-[4/3] md:aspect-auto md:h-64 shadow-md hover:shadow-xl transition-all duration-300"
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img 
               src={province.coverAsset} 
               alt={province.name}

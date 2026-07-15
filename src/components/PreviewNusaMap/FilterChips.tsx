@@ -47,12 +47,15 @@ export default function FilterChips({
               {/* Icon & Label Container */}
               <div className="relative z-10 flex items-center gap-2.5">
                 {layer.id !== "all" && (
-                  <img
-                    src={layer.icon}
-                    alt=""
-                    className={`w-4 h-4 md:w-5 md:h-5 transition-all duration-500 ${isActive ? "drop-shadow-md scale-110" : "opacity-80 group-hover:opacity-100 group-hover:scale-110"}`}
-                    aria-hidden="true"
-                  />
+                  <>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={layer.icon}
+                      alt=""
+                      className={`w-4 h-4 md:w-5 md:h-5 transition-all duration-500 ${isActive ? "drop-shadow-md scale-110" : "opacity-80 group-hover:opacity-100 group-hover:scale-110"}`}
+                      aria-hidden="true"
+                    />
+                  </>
                 )}
                 <span
                   className={`tracking-wide whitespace-nowrap transition-colors duration-500 ${isActive ? "text-white font-bold" : "font-semibold"}`}

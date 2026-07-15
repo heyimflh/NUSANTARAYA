@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { PassportProgressSummary } from "@/hooks/usePassportProgressSummary";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { getStampAsset } from "@/lib/passport/assetMap";
@@ -13,7 +13,7 @@ type LivingStampCanvasProps = {
 };
 
 export const LivingStampCanvas: React.FC<LivingStampCanvasProps> = ({ summary, onOpenAtlas }) => {
-  const shouldReduceMotion = useReducedMotion();
+
 
   // Pick up to 8 random but deterministic stamps to display from completed
   const displayStamps = useMemo(() => {

@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Compass, ArrowUpRight, Search, Menu, Globe } from "lucide-react";
-import { useState } from "react";
+import { Compass, ArrowUpRight, Menu } from "lucide-react";
+
 import { useLanguage } from "@/context/app-context";
 import { isRouteAvailable } from "@/lib/routes";
 

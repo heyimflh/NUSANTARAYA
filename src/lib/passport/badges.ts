@@ -1,4 +1,4 @@
-import { PassportData, BadgeDefinition, PassportAchievement, BadgeWilayah } from "@/lib/types";
+import { PassportData, BadgeDefinition, BadgeWilayah } from "@/lib/types";
 import { provinceMapData } from "@/data/provinces/provinces";
 
 export const BADGE_REGISTRY: BadgeDefinition[] = [

@@ -1,4 +1,4 @@
-import { RaniResponse, RaniSource, RaniKnowledgeRecord } from "@/types/rani";
+import { RaniSource, RaniKnowledgeRecord } from "@/types/rani";
 
 export const raniSources: Record<string, RaniSource> = {
   "src-jalur-rempah": {

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { destinations } from "./heroData";
 import HeroNavbar from "./HeroNavbar";
 import HeroDestinationSlider from "./HeroDestinationSlider";

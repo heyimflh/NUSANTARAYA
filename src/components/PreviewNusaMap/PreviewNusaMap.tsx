@@ -13,6 +13,7 @@ export default function PreviewNusaMap() {
     <>
       <section className="relative overflow-hidden py-16 md:py-24">
         {/* Background Batik Ornament */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/assets/branding/ornamen-batik.svg"
           alt=""

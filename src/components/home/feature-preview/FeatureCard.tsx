@@ -38,6 +38,7 @@ export default function FeatureCard({ feature, layout = 'vertical', className = 
             }}
             className="cursor-pointer"
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img 
               src={feature.icon} 
               alt="" 

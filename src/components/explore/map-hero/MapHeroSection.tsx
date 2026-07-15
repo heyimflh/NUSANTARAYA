@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Play, ArrowDown, Compass } from "lucide-react";
+import { ArrowRight, ArrowDown, Compass } from "lucide-react";
 
 export const MapHeroSection = () => {
   return (

@@ -24,6 +24,7 @@ export const ProvinceTooltip: React.FC<ProvinceTooltipProps> = ({ province, posi
         }}
       >
         <div className="relative w-full h-24 bg-nusaWarm overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={province.assets.thumb}
             alt={province.name}
