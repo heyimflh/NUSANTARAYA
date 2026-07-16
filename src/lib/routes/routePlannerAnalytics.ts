@@ -31,7 +31,18 @@ export type RoutePlannerEvent =
   | "route_generate_succeeded"
   | "route_generate_fallback_used"
   | "route_generate_failed"
-  | "route_result_viewed";
+  | "route_result_viewed"
+  | "preset_routes_viewed"
+  | "preset_routes_filter_selected"
+  | "preset_routes_filter_cleared"
+  | "preset_routes_no_match_viewed"
+  | "preset_route_impression"
+  | "preset_route_opened"
+  | "preset_route_prefill_clicked"
+  | "preset_route_prefill_succeeded"
+  | "preset_route_result_loaded"
+  | "preset_route_fallback_used"
+  | "preset_route_error";
 
 // ─── Safe Payload ────────────────────────────────────────────────────────────
 
@@ -45,6 +56,7 @@ export interface RoutePlannerAnalyticsPayload {
   budgetLevel?: string;
   travelPace?: string;
   journeyId?: string;
+  presetId?: string;
   matchType?: "exact" | "adapted" | "contextual" | "fallback";
   locale?: "id" | "en";
 }
@@ -58,8 +70,8 @@ export interface RoutePlannerAnalyticsPayload {
  * TODO: Connect to analytics platform when available.
  */
 export function trackRoutePlannerEvent(
-  event: RoutePlannerEvent,
-  payload?: RoutePlannerAnalyticsPayload
+  _event: RoutePlannerEvent,
+  _payload?: RoutePlannerAnalyticsPayload
 ): void {
   // No-op in development/MVP
   if (process.env.NODE_ENV === "development") {

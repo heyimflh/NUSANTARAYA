@@ -31,6 +31,13 @@ export interface RoutePresetDefinition {
   paceLabel: string;
   transportSummary: string[];
   etiquetteTips: string[];
+  collections?: string[];
+  badge?: "Pilihan Utama" | "Cocok untuk Pertama Kali" | "Heritage Trail" | "Slow Journey" | "Jalur Rempah" | "Indonesia Timur" | "Demo Pilihan";
+  artworkConfig?: {
+    primaryColor: string;
+    secondaryColor: string;
+    patternType: "batik" | "topographic" | "wave" | "geometric";
+  };
 }
 
 export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
@@ -84,6 +91,13 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
       "Gunakan pakaian sopan saat mengunjungi keraton.",
       "Tanyakan izin sebelum memotret di pasar tradisional.",
     ],
+    collections: ["popular-starter", "heritage", "culinary", "demo-ready"],
+    badge: "Pilihan Utama",
+    artworkConfig: {
+      primaryColor: "#C9A84C", // gold
+      secondaryColor: "#0D1B2A", // navy
+      patternType: "batik"
+    }
   },
 
   // 2. 7 Hari Jawa–Bali Heritage
@@ -142,6 +156,13 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
       "Gunakan selendang di pura.",
       "Hormati upacara keagamaan yang sedang berlangsung.",
     ],
+    collections: ["heritage", "first-journey"],
+    badge: "Heritage Trail",
+    artworkConfig: {
+      primaryColor: "#2D5A27", // forest
+      secondaryColor: "#C9A84C", // gold
+      patternType: "batik"
+    }
   },
 
   // 3. 5 Hari Jalur Rempah Maluku
@@ -186,6 +207,13 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
       "Hormati tradisi pela-gandong antarkelompok.",
       "Tanyakan izin sebelum memasuki area adat.",
     ],
+    collections: ["spice-route", "heritage", "east-indonesia"],
+    badge: "Jalur Rempah",
+    artworkConfig: {
+      primaryColor: "#0D1B2A", // navy
+      secondaryColor: "#C9A84C",
+      patternType: "wave"
+    }
   },
 
   // 4. 7 Hari Sumatra Heritage
@@ -231,6 +259,13 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
       "Hormati adat istiadat Minangkabau dan Batak.",
       "Cicipi rendang dan makanan khas di rumah makan lokal.",
     ],
+    collections: ["heritage", "culinary"],
+    badge: "Heritage Trail",
+    artworkConfig: {
+      primaryColor: "#8B4513", // brown-ish
+      secondaryColor: "#2D5A27",
+      patternType: "topographic"
+    }
   },
 
   // 5. 5 Hari Kalimantan Nature Explorer
@@ -275,6 +310,13 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
       "Ikuti aturan taman nasional dan jaga jarak dari satwa liar.",
       "Bawa obat anti nyamuk dan perlengkapan outdoor.",
     ],
+    collections: ["nature", "popular-starter"],
+    badge: "Pilihan Utama",
+    artworkConfig: {
+      primaryColor: "#2D5A27", // forest
+      secondaryColor: "#E8E0CE", // warm border
+      patternType: "geometric"
+    }
   },
 
   // 6. 7 Hari Sulawesi Culture & Nature
@@ -326,6 +368,13 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
       "Hormati upacara adat Toraja, terutama rambu solo'.",
       "Tanyakan izin sebelum memotret rumah tongkonan.",
     ],
+    collections: ["heritage", "nature"],
+    badge: "Heritage Trail",
+    artworkConfig: {
+      primaryColor: "#A52A2A", // brown-red
+      secondaryColor: "#0D1B2A",
+      patternType: "batik"
+    }
   },
 
   // 7. 7 Hari Papua Wonder
@@ -371,6 +420,13 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
       "Hormati adat dan tanah ulayat masyarakat Papua.",
       "Bayar retribusi masuk kawasan konservasi Raja Ampat.",
     ],
+    collections: ["nature", "east-indonesia"],
+    badge: "Indonesia Timur",
+    artworkConfig: {
+      primaryColor: "#1E90FF", // dodger blue
+      secondaryColor: "#2D5A27",
+      patternType: "topographic"
+    }
   },
 
   // 8. 5 Hari Bali–Nusa Tenggara
@@ -415,6 +471,13 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
       "Gunakan selendang saat memasuki pura di Bali.",
       "Hormati tradisi Sasak di Lombok.",
     ],
+    collections: ["popular-starter", "first-journey", "nature"],
+    badge: "Cocok untuk Pertama Kali",
+    artworkConfig: {
+      primaryColor: "#00CED1", // dark turquoise
+      secondaryColor: "#C9A84C",
+      patternType: "wave"
+    }
   },
 
   // 9. 3 Hari Yogyakarta Cultural Escape
@@ -463,6 +526,13 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
       "Gunakan pakaian sopan di area keraton dan candi.",
       "Coba naik becak untuk pengalaman lokal.",
     ],
+    collections: ["first-journey", "heritage", "culinary"],
+    badge: "Cocok untuk Pertama Kali",
+    artworkConfig: {
+      primaryColor: "#C9A84C",
+      secondaryColor: "#8B4513",
+      patternType: "batik"
+    }
   },
 
   // 10. 3 Hari Bali Slow Journey
@@ -511,6 +581,13 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
       "Gunakan selendang dan kain di pura.",
       "Hindari menyentuh kepala seseorang, itu dianggap tidak sopan.",
     ],
+    collections: ["slow-travel", "first-journey"],
+    badge: "Slow Journey",
+    artworkConfig: {
+      primaryColor: "#3CB371", // medium sea green
+      secondaryColor: "#FFFDF8",
+      patternType: "wave"
+    }
   },
 ] as const;
 

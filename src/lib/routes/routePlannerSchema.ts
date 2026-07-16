@@ -22,7 +22,6 @@ import {
   isBudgetLevel,
   isTravelPace,
   isRoutePlannerSource,
-  ROUTE_INTERESTS,
 } from "@/types/route-planner";
 import { isValidProvinceId } from "@/data/provinces/provinceIds";
 

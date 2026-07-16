@@ -1,4 +1,5 @@
 "use client";
+import { Suspense } from "react";
 
 import { RoutesHeroSection } from "@/components/routes/RoutesHeroSection";
 import { RoutesNavbar } from "@/components/routes/RoutesNavbar";
@@ -24,7 +25,9 @@ export default function RoutesPage() {
       <div className="relative z-10">
         <RoutesNavbar />
         <RoutesHeroSection />
-        <RouteAtelier />
+        <Suspense fallback={<div className="h-screen" />}>
+          <RouteAtelier />
+        </Suspense>
       </div>
     </main>
   );
