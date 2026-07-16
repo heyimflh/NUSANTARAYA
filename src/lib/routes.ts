@@ -10,7 +10,7 @@ export const APP_ROUTES = {
 export const ROUTE_AVAILABILITY = {
   "/": true,
   "/explore": true,
-  "/routes": false,
+  "/routes": true,
   "/archive": false,
   "/rasa": false,
   "/nusarasa": false,

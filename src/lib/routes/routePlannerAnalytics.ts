@@ -1,0 +1,90 @@
+/**
+ * NUSANTARAYA — Route Planner Analytics Adapter
+ * Typed no-op adapter for analytics events.
+ * When an analytics platform is integrated, replace the no-op with real tracking.
+ * Never sends personal data — only preference categories.
+ */
+
+import type {
+  RoutePlannerFormValues,
+  RoutePlannerSource,
+  RouteMatchType,
+} from "@/types/route-planner";
+
+// ─── Event Names ─────────────────────────────────────────────────────────────
+
+export type RoutePlannerEvent =
+  | "route_planner_form_viewed"
+  | "route_planner_started"
+  | "route_duration_selected"
+  | "route_origin_selected"
+  | "route_origin_cleared"
+  | "route_region_selected"
+  | "route_interest_selected"
+  | "route_interest_removed"
+  | "route_budget_selected"
+  | "route_pace_selected"
+  | "route_planner_prefilled"
+  | "route_planner_reset"
+  | "route_generate_clicked"
+  | "route_generate_validation_failed"
+  | "route_generate_started"
+  | "route_generate_succeeded"
+  | "route_generate_fallback_used"
+  | "route_generate_failed"
+  | "route_result_viewed";
+
+// ─── Safe Payload ────────────────────────────────────────────────────────────
+
+export interface RoutePlannerAnalyticsPayload {
+  source?: RoutePlannerSource;
+  durationDays?: number;
+  hasOrigin?: boolean;
+  destinationRegionId?: string | null;
+  interestCount?: number;
+  interests?: string[];
+  budgetLevel?: string;
+  travelPace?: string;
+  matchType?: RouteMatchType;
+  locale?: "id" | "en";
+}
+
+// ─── No-op Tracker ───────────────────────────────────────────────────────────
+
+/**
+ * Track a route planner analytics event.
+ * Currently a no-op — replace with actual analytics integration.
+ * 
+ * TODO: Connect to analytics platform when available.
+ */
+export function trackRoutePlannerEvent(
+  event: RoutePlannerEvent,
+  payload?: RoutePlannerAnalyticsPayload
+): void {
+  // No-op in development/MVP
+  if (process.env.NODE_ENV === "development") {
+    // Uncomment for debugging:
+    // console.debug(`[analytics] ${event}`, payload);
+  }
+}
+
+/**
+ * Build safe analytics payload from form values.
+ * Strips personal data — only sends preference categories.
+ */
+export function buildAnalyticsPayload(
+  values: RoutePlannerFormValues,
+  extra?: Partial<RoutePlannerAnalyticsPayload>
+): RoutePlannerAnalyticsPayload {
+  return {
+    durationDays: values.durationDays,
+    hasOrigin: values.originProvinceId !== null,
+    destinationRegionId: values.destinationRegionId,
+    interestCount: values.interests.length,
+    interests: [...values.interests],
+    budgetLevel: values.budgetLevel,
+    travelPace: values.travelPace,
+    locale: "id",
+    ...extra,
+  };
+}
