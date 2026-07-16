@@ -8,7 +8,6 @@
 import type {
   RoutePlannerFormValues,
   RoutePlannerSource,
-  RouteMatchType,
 } from "@/types/route-planner";
 
 // ─── Event Names ─────────────────────────────────────────────────────────────
@@ -45,7 +44,8 @@ export interface RoutePlannerAnalyticsPayload {
   interests?: string[];
   budgetLevel?: string;
   travelPace?: string;
-  matchType?: RouteMatchType;
+  journeyId?: string;
+  matchType?: "exact" | "adapted" | "contextual" | "fallback";
   locale?: "id" | "en";
 }
 

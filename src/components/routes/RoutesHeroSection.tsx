@@ -67,7 +67,7 @@ export const RoutesHeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-              className="font-playfair text-[48px] md:text-[64px] lg:text-[76px] text-[#0D1B2A] font-semibold leading-[1.05] mb-8"
+              className="font-playfair text-[48px] md:text-[64px] lg:text-[76px] text-[#29221B] font-semibold leading-[1.05] mb-8"
             >
               Rencanakan
               <br />
@@ -91,7 +91,7 @@ export const RoutesHeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-              className="font-inter text-[#0D1B2A]/70 text-[15px] md:text-[17px] leading-[1.7] mb-12 max-w-[480px]"
+              className="font-inter text-[#29221B]/70 text-[15px] md:text-[17px] leading-[1.7] mb-12 max-w-[480px]"
             >
               Susun rute perjalanan impianmu. Temukan destinasi tersembunyi, estimasi waktu, dan buat pengalaman wisata yang tak terlupakan di seluruh Nusantara.
             </motion.p>
@@ -105,16 +105,16 @@ export const RoutesHeroSection = () => {
             >
               <a
                 href="#route-planner"
-                className="bg-[#D4B56A] text-[#0D1B2A] px-8 py-3.5 rounded-full font-inter font-medium text-[15px] flex items-center gap-3 hover:bg-[#C9A84C] transition-colors shadow-sm"
+                className="bg-[#D4B56A] text-[#29221B] px-8 py-3.5 rounded-full font-inter font-medium text-[15px] flex items-center gap-3 hover:bg-[#C9A84C] transition-colors shadow-sm"
               >
                 Buat Rute
                 <ArrowRight className="w-[18px] h-[18px]" />
               </a>
               <a
                 href="#inspirasi-rute"
-                className="flex items-center gap-3 text-[#0D1B2A] font-inter text-[15px] font-medium group transition-colors"
+                className="flex items-center gap-3 text-[#29221B] font-inter text-[15px] font-medium group transition-colors"
               >
-                <div className="w-10 h-10 rounded-full border border-[#0D1B2A]/20 flex items-center justify-center group-hover:bg-[#0D1B2A] group-hover:text-white transition-colors">
+                <div className="w-10 h-10 rounded-full border border-[#29221B]/20 flex items-center justify-center group-hover:bg-[#29221B] group-hover:text-white transition-colors">
                   <Map className="w-[16px] h-[16px]" />
                 </div>
                 Inspirasi Rute
@@ -135,7 +135,7 @@ export const RoutesHeroSection = () => {
             transition={{ delay: 1, duration: 1 }}
             className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center pointer-events-auto"
           >
-            <span className="font-inter text-[#0D1B2A]/50 text-[11px] md:text-xs tracking-wide mb-2">
+            <span className="font-inter text-[#29221B]/50 text-[11px] md:text-xs tracking-wide mb-2">
               Scroll untuk merencanakan
             </span>
             <motion.div

@@ -1,14 +1,15 @@
 /**
  * NUSANTARAYA — Deterministic Preset Matcher
- * Scores and ranks route presets against user form values.
- * Weighted scoring per planning: region 40, duration 25, interest 15, pace 10, budget 5, origin 5.
- * Tie-break: editorial priority (array order), then ID stability.
+ * Scores, ranks, and ADAPTS route presets against user form values.
+ * Duration and Region are hard constraints.
  */
 
 import type {
   RoutePlannerFormValues,
   RouteRecommendation,
   RoutePlannerRegionId,
+  RouteStop,
+  RouteDuration,
 } from "@/types/route-planner";
 import {
   ROUTE_PRESETS,
@@ -18,13 +19,10 @@ import {
 import { getRegionByProvinceId } from "@/data/regions/regionProvinceMap";
 
 // ─── Scoring Weights ─────────────────────────────────────────────────────────
-
-const W_REGION = 40;
-const W_DURATION = 25;
 const W_INTEREST = 15;
 const W_PACE = 10;
 const W_BUDGET = 5;
-const W_ORIGIN = 5;
+const W_ORIGIN = 10;
 
 // ─── Score Calculation ───────────────────────────────────────────────────────
 
@@ -32,26 +30,6 @@ interface ScoredPreset {
   preset: RoutePresetDefinition;
   score: number;
   index: number;
-}
-
-function computeRegionScore(
-  preset: RoutePresetDefinition,
-  regionId: RoutePlannerRegionId | null
-): number {
-  if (!regionId) return 0;
-  if (regionId === "indonesia") return 0.5; // partial match for inspiration mode
-  return preset.regionId === regionId ? 1 : 0;
-}
-
-function computeDurationScore(
-  preset: RoutePresetDefinition,
-  durationDays: number
-): number {
-  if (preset.durationDays === durationDays) return 1;
-  // Partial credit for close durations
-  const diff = Math.abs(preset.durationDays - durationDays);
-  if (diff === 2) return 0.5;
-  return 0.25;
 }
 
 function computeInterestScore(
@@ -85,11 +63,9 @@ function computeOriginScore(
   preset: RoutePresetDefinition,
   originProvinceId: string | null
 ): number {
-  if (!originProvinceId) return 0.5; // Neutral — no penalty for flexible
-  // Check if origin is in the same region as the preset
+  if (!originProvinceId) return 0.5; 
   const originRegion = getRegionByProvinceId(originProvinceId);
   if (originRegion && originRegion.id === preset.regionId) return 1;
-  // Origin in a different region — still valid but lower priority
   return 0.3;
 }
 
@@ -99,8 +75,6 @@ function scorePreset(
   index: number
 ): ScoredPreset {
   const score =
-    computeRegionScore(preset, values.destinationRegionId) * W_REGION +
-    computeDurationScore(preset, values.durationDays) * W_DURATION +
     computeInterestScore(preset, values.interests) * W_INTEREST +
     computePaceScore(preset, values.travelPace) * W_PACE +
     computeBudgetScore(preset, values.budgetLevel) * W_BUDGET +
@@ -108,6 +82,78 @@ function scorePreset(
 
   return { preset, score, index };
 }
+
+// ─── Adaptation ──────────────────────────────────────────────────────────────
+
+/**
+ * Adapt stops to strictly match the requested duration.
+ */
+function adaptStops(stops: RouteStop[], sourceDuration: number, targetDuration: RouteDuration): RouteStop[] {
+  if (sourceDuration === targetDuration) return [...stops];
+
+  const adapted: RouteStop[] = JSON.parse(JSON.stringify(stops));
+  
+  if (targetDuration < sourceDuration) {
+    // Truncate
+    let daysKept = 0;
+    const newStops = [];
+    for (const stop of adapted) {
+      const stopDuration = stop.dayEnd - stop.dayStart + 1;
+      if (daysKept + stopDuration <= targetDuration) {
+        stop.dayStart = daysKept + 1;
+        stop.dayEnd = daysKept + stopDuration;
+        newStops.push(stop);
+        daysKept += stopDuration;
+      } else if (daysKept < targetDuration) {
+        stop.dayStart = daysKept + 1;
+        stop.dayEnd = targetDuration;
+        newStops.push(stop);
+        daysKept = targetDuration;
+        break; // Reached target
+      }
+    }
+    return newStops;
+  } else {
+    // Expand
+    const diff = targetDuration - sourceDuration;
+    // Add extra days to the last stop or distribute
+    if (adapted.length > 0) {
+      adapted[adapted.length - 1].dayEnd += diff;
+    }
+    return adapted;
+  }
+}
+
+function getBudgetExplanation(level: string): string {
+  switch (level) {
+    case "hemat": return "Fokus pada transportasi umum, aktivitas gratis, dan akomodasi terjangkau.";
+    case "premium": return "Kenyamanan ekstra pada transportasi, akomodasi, dan aktivitas.";
+    case "fleksibel": return "Menyesuaikan kebutuhan dengan variasi pengalaman dari lokal hingga premium.";
+    case "menengah":
+    default: return "Keseimbangan antara kenyamanan standar dan pengalaman budaya.";
+  }
+}
+
+function getPaceExplanation(pace: string): string {
+  switch (pace) {
+    case "santai": return "1-2 aktivitas per hari dengan banyak waktu istirahat.";
+    case "eksploratif": return "3-4 aktivitas terkurasi per hari untuk menjelajah lebih banyak tempat.";
+    case "seimbang":
+    default: return "2-3 aktivitas per hari, cukup untuk eksplorasi tanpa terburu-buru.";
+  }
+}
+
+function buildOriginAssumptions(originProvinceId: string | null, regionId: RoutePlannerRegionId): string[] {
+  if (!originProvinceId) {
+    return ["Diasumsikan tiba melalui pintu masuk bandara/pelabuhan utama wilayah ini."];
+  }
+  const originRegion = getRegionByProvinceId(originProvinceId);
+  if (originRegion && originRegion.id === regionId) {
+    return [`Berangkat dari ${originProvinceId.replace(/-/g, ' ').toUpperCase()}, urutan rute diprioritaskan dari akses darat/lokal terdekat.`];
+  }
+  return [`Berangkat dari luar wilayah, pastikan mengecek penerbangan ke gerbang utama ${regionId.toUpperCase()}.`];
+}
+
 
 // ─── Public API ──────────────────────────────────────────────────────────────
 
@@ -117,46 +163,87 @@ export interface MatchResult {
   adjustmentNote: string | null;
 }
 
-/**
- * Match user form values against presets and return the best recommendation.
- * Always returns a result — never a dead end.
- */
 export function matchRoutePreset(
   values: RoutePlannerFormValues
 ): MatchResult {
-  const scored = ROUTE_PRESETS.map((preset, index) =>
+  // 1. Hard Constraint: Region
+  let validPresets = ROUTE_PRESETS.filter(p => p.regionId === values.destinationRegionId);
+  
+  if (validPresets.length === 0) {
+    // Fallback: If absolutely no preset in region, use a generic national preset and adapt it
+    validPresets = [...ROUTE_PRESETS];
+  }
+
+  // 2. Score and Rank
+  const scored = validPresets.map((preset, index) =>
     scorePreset(preset, values, index)
   );
-
-  // Sort by score (desc), then by editorial priority (index asc)
   scored.sort((a, b) => {
     if (b.score !== a.score) return b.score - a.score;
-    return a.index - b.index;
+    return a.index - b.index; // editorial priority
   });
 
-  const best = scored[0];
-  const maxPossibleScore = W_REGION + W_DURATION + W_INTEREST + W_PACE + W_BUDGET + W_ORIGIN;
-  const scoreRatio = best.score / maxPossibleScore;
+  const best = scored[0].preset;
+  
+  // 3. Adapt
+  const isExactDuration = best.durationDays === values.durationDays;
+  const isExactRegion = best.regionId === values.destinationRegionId;
+  const isExact = isExactDuration && isExactRegion && scored[0].score > 15;
 
-  // Determine if it's an exact match (>85%) or adjusted
-  const isExact = scoreRatio > 0.85;
+  let adjustmentNote: string | null = null;
+  let matchType: "exact" | "adapted" | "contextual" | "fallback" = "exact";
 
-  const adjustmentNote = isExact
-    ? null
-    : "Kami menyesuaikan cakupan agar perjalanan tetap realistis. Rute ini paling mendekati wilayah, durasi, dan minat pilihanmu.";
+  if (!isExactRegion) {
+    matchType = "fallback";
+    adjustmentNote = "Wilayah yang kamu pilih belum memiliki rute rekomendasi spesifik. Kami menampilkan rute inspirasi dari wilayah lain.";
+  } else if (!isExactDuration) {
+    matchType = "adapted";
+    adjustmentNote = `Rute ini diadaptasi dari rekomendasi ${best.durationDays} hari menjadi ${values.durationDays} hari agar sesuai dengan ketersediaan waktumu.`;
+  }
 
-  const matchType = isExact ? "preset" : "fallback";
+  // 4. Build output
+  const adaptedStops = adaptStops(best.stops, best.durationDays, values.durationDays);
+  
+  // Clean up province list based on adapted stops
+  const newProvinceIds = Array.from(new Set(adaptedStops.map(s => s.provinceId)));
+
+  const rec: RouteRecommendation = {
+    id: best.id,
+    matchType,
+    title: best.title,
+    summary: best.summary,
+    reason: best.reason,
+    durationDays: values.durationDays, // Strictly respect user input
+    regionId: values.destinationRegionId || best.regionId,
+    provinceIds: newProvinceIds,
+    stops: adaptedStops,
+    interests: values.interests.length > 0 ? values.interests : [...best.interests],
+    budgetLabel: `Estimasi ${values.budgetLevel || 'menengah'}`,
+    paceLabel: values.travelPace.charAt(0).toUpperCase() + values.travelPace.slice(1),
+    transportSummary: best.transportSummary,
+    etiquetteTips: best.etiquetteTips,
+    assumptions: [
+      getBudgetExplanation(values.budgetLevel),
+      getPaceExplanation(values.travelPace),
+      ...buildOriginAssumptions(values.originProvinceId, values.destinationRegionId || best.regionId)
+    ],
+    originalValuesSnapshot: values,
+    sourceRefs: [
+      {
+        id: "ref-atlas-1",
+        title: "Database Destinasi NUSANTARAYA",
+        supports: "Cakupan rekomendasi stop",
+      }
+    ]
+  };
 
   return {
-    recommendation: presetToRecommendation(best.preset, matchType),
+    recommendation: rec,
     isExact,
     adjustmentNote,
   };
 }
 
-/**
- * Get top N preset recommendations for given form values.
- */
 export function getTopPresets(
   values: RoutePlannerFormValues,
   count: number = 3
@@ -172,5 +259,5 @@ export function getTopPresets(
 
   return scored
     .slice(0, count)
-    .map((s) => presetToRecommendation(s.preset, "preset"));
+    .map((s) => presetToRecommendation(s.preset, "exact"));
 }

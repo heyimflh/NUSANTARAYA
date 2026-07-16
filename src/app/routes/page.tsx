@@ -2,7 +2,7 @@
 
 import { RoutesHeroSection } from "@/components/routes/RoutesHeroSection";
 import { RoutesNavbar } from "@/components/routes/RoutesNavbar";
-import { RoutePlannerFormSection } from "@/components/routes/route-planner-form";
+import { RouteAtelier } from "@/components/routes/route-planner-form";
 
 export default function RoutesPage() {
   return (
@@ -24,7 +24,7 @@ export default function RoutesPage() {
       <div className="relative z-10">
         <RoutesNavbar />
         <RoutesHeroSection />
-        <RoutePlannerFormSection />
+        <RouteAtelier />
       </div>
     </main>
   );

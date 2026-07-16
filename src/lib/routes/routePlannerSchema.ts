@@ -118,6 +118,7 @@ export function isFormValid(values: RoutePlannerFormValues): boolean {
 export interface ParsedPlannerQuery {
   values: Partial<RoutePlannerFormValues>;
   source: RoutePlannerSource;
+  journeyId?: string;
 }
 
 export function parsePlannerQuery(
@@ -174,22 +175,26 @@ export function parsePlannerQuery(
     values.travelPace = paceRaw as TravelPace;
   }
 
-  // Source
+  // Source & Context
   const sourceRaw = searchParams.get("source");
   const source: RoutePlannerSource = isRoutePlannerSource(sourceRaw)
     ? (sourceRaw as RoutePlannerSource)
     : "routes-page";
 
-  return { values, source };
+  const journeyId = searchParams.get("journeyId") || undefined;
+
+  return { values, source, journeyId };
 }
 
 export function buildPlannerQueryString(
   values: RoutePlannerFormValues,
-  source: RoutePlannerSource = "routes-page"
+  source: RoutePlannerSource = "routes-page",
+  journeyId?: string
 ): string {
   const params = new URLSearchParams();
 
   if (source !== "routes-page") params.set("source", source);
+  if (journeyId) params.set("journeyId", journeyId);
   if (values.durationDays !== DEFAULT_FORM_VALUES.durationDays) {
     params.set("duration", String(values.durationDays));
   }

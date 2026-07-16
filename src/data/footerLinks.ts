@@ -14,7 +14,7 @@ export const footerLinkGroups = [
       { label: "Provinsi", href: "/provinsi", status: "soon" },
       { label: "Nusa Archive", href: "/archive", status: "soon" },
       { label: "NusaRasa", href: "/rasa", status: "soon" },
-      { label: "Route Planner", href: "/routes", status: "soon" },
+      { label: "Route Planner", href: "/routes", status: "live" },
       { label: "Passport", href: "/explore#passport-progress", status: "live" }
     ] as FooterLink[]
   },
@@ -69,7 +69,7 @@ export const finalCta = {
   secondary: {
     label: "Coba Route Planner",
     href: "/routes",
-    status: "soon"
+    status: "live"
   },
   microcopy: "Mulai dari satu klik. Sisanya biarkan Nusantara bercerita."
 };

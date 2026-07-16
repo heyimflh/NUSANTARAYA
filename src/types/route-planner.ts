@@ -156,8 +156,7 @@ export interface RoutePlannerRequest extends RoutePlannerFormValues {
   locale: "id" | "en";
 }
 
-// ─── Recommendation Result ───────────────────────────────────────────────────
-export type RouteMatchType = "dynamic" | "preset" | "fallback";
+// ─── Route Planner ───────────────────────────────────────────────────────────
 
 export interface RouteStop {
   dayStart: number;
@@ -167,9 +166,20 @@ export interface RouteStop {
   highlights: string[];
 }
 
+export interface RouteSourceReference {
+  id: string;
+  title: string;
+  url?: string;
+  publisher?: string;
+  accessedAt?: string;
+  lastVerifiedAt?: string;
+  supports: string; // e.g., "Jadwal kapal cepat", "Harga tiket masuk"
+  note?: string;
+}
+
 export interface RouteRecommendation {
   id: string;
-  matchType: RouteMatchType;
+  matchType: "exact" | "adapted" | "contextual" | "fallback";
   title: string;
   summary: string;
   reason: string[];
@@ -182,6 +192,9 @@ export interface RouteRecommendation {
   paceLabel: string;
   transportSummary: string[];
   etiquetteTips: string[];
+  assumptions?: string[];
+  sourceRefs?: RouteSourceReference[];
+  originalValuesSnapshot?: RoutePlannerFormValues;
 }
 
 // ─── Form Status ─────────────────────────────────────────────────────────────

@@ -26,7 +26,6 @@ export const mainFeatures: FeatureData[] = [
     image: "/assets/features/route-planner-preview.png",
     color: "#C9A84C",
     href: "/routes",
-    status: "soon",
     featured: true
   },
   {

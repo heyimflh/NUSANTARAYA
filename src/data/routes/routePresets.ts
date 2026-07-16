@@ -152,35 +152,35 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
       "Mengikuti jejak pala dan cengkeh di kepulauan yang pernah mengubah jaringan perdagangan dunia.",
     reason: [
       "Maluku adalah pusat sejarah perdagangan rempah global.",
-      "Kepulauan Banda dan Ternate memiliki warisan maritim yang kaya.",
+      "Ambon dan kepulauan sekitarnya memiliki warisan maritim yang kaya.",
     ],
     durationDays: 5,
     regionId: "maluku",
     interests: ["sejarah", "alam"],
     supportedPaces: ["santai", "seimbang"],
     supportedBudgets: ["menengah", "premium", "fleksibel"],
-    provinceIds: ["maluku", "maluku-utara"],
+    provinceIds: ["maluku"],
     stops: [
       {
         dayStart: 1,
         dayEnd: 2,
         provinceId: "maluku",
-        cityOrCluster: "Ambon & Banda",
-        highlights: ["Benteng Victoria", "Kepulauan Banda", "Pala"],
+        cityOrCluster: "Ambon",
+        highlights: ["Benteng Victoria", "Pantai Natsepa", "Pintu Kota"],
       },
       {
         dayStart: 3,
         dayEnd: 5,
-        provinceId: "maluku-utara",
-        cityOrCluster: "Ternate & Tidore",
-        highlights: ["Benteng Tolukko", "Gunung Gamalama", "Cengkeh"],
+        provinceId: "maluku",
+        cityOrCluster: "Saparua & Banda",
+        highlights: ["Benteng Duurstede", "Pulau Neira", "Perkebunan Pala"],
       },
     ],
     budgetLabel: "Estimasi menengah",
     paceLabel: "Seimbang",
     transportSummary: [
       "Penerbangan menuju Ambon",
-      "Kapal Ambon–Ternate (jadwal lokal)",
+      "Kapal cepat Ambon–Saparua/Banda",
     ],
     etiquetteTips: [
       "Hormati tradisi pela-gandong antarkelompok.",
@@ -280,48 +280,47 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
   // 6. 7 Hari Sulawesi Culture & Nature
   {
     id: "preset-7d-sulawesi-budaya-alam",
-    title: "7 Hari Sulawesi Culture & Nature",
+    title: "7 Hari Sulawesi Selatan Explorer",
     summary:
-      "Dari tradisi pelaut Bugis hingga upacara Toraja dan keajaiban bawah laut Bunaken.",
+      "Dari tradisi pelaut Bugis hingga upacara Toraja dan lanskap karst Maros.",
     reason: [
-      "Sulawesi menghubungkan budaya maritim, dataran tinggi, dan biodiversitas laut.",
-      "Tana Toraja dan Bunaken adalah destinasi ikonik.",
+      "Sulawesi Selatan menghubungkan budaya maritim dan tradisi dataran tinggi.",
+      "Tana Toraja dan Rammang-Rammang adalah destinasi ikonik yang dapat dijangkau dari Makassar.",
     ],
     durationDays: 7,
     regionId: "sulawesi",
     interests: ["budaya", "alam"],
     supportedPaces: ["seimbang", "eksploratif"],
     supportedBudgets: ["menengah", "premium", "fleksibel"],
-    provinceIds: ["sulawesi-selatan", "sulawesi-utara"],
+    provinceIds: ["sulawesi-selatan"],
     stops: [
       {
         dayStart: 1,
         dayEnd: 2,
         provinceId: "sulawesi-selatan",
-        cityOrCluster: "Makassar",
-        highlights: ["Fort Rotterdam", "Pantai Losari", "Coto Makassar"],
+        cityOrCluster: "Makassar & Maros",
+        highlights: ["Fort Rotterdam", "Rammang-Rammang", "Coto Makassar"],
       },
       {
         dayStart: 3,
         dayEnd: 4,
         provinceId: "sulawesi-selatan",
-        cityOrCluster: "Tana Toraja",
-        highlights: ["Tongkonan", "Lemo", "Ke'te Kesu'"],
+        cityOrCluster: "Transit & Parepare",
+        highlights: ["Perjalanan Darat Lintas Provinsi", "Pantai Lumpue"],
       },
       {
         dayStart: 5,
         dayEnd: 7,
-        provinceId: "sulawesi-utara",
-        cityOrCluster: "Manado & Bunaken",
-        highlights: ["TN Bunaken", "Danau Tondano", "Tinutuan"],
+        provinceId: "sulawesi-selatan",
+        cityOrCluster: "Tana Toraja",
+        highlights: ["Tongkonan", "Lemo", "Ke'te Kesu'"],
       },
     ],
-    budgetLabel: "Estimasi menengah–premium",
+    budgetLabel: "Estimasi menengah",
     paceLabel: "Seimbang",
     transportSummary: [
       "Penerbangan menuju Makassar",
       "Transportasi darat Makassar–Toraja (±8 jam)",
-      "Penerbangan Makassar–Manado (±2 jam)",
     ],
     etiquetteTips: [
       "Hormati upacara adat Toraja, terutama rambu solo'.",
@@ -334,7 +333,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     id: "preset-7d-papua-wonder",
     title: "7 Hari Papua Wonder",
     summary:
-      "Menjelajahi keajaiban alam Raja Ampat dan keragaman budaya Papua dari pesisir hingga lembah.",
+      "Menjelajahi keajaiban alam Raja Ampat dan budaya Papua dari pesisir hingga Danau Sentani.",
     reason: [
       "Papua menyimpan biodiversitas laut terkaya di dunia.",
       "Raja Ampat adalah destinasi dunia untuk snorkeling dan diving.",
@@ -358,7 +357,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         dayEnd: 7,
         provinceId: "papua",
         cityOrCluster: "Jayapura & Sentani",
-        highlights: ["Danau Sentani", "Taman Imbi", "Seni Asmat"],
+        highlights: ["Danau Sentani", "Bukit Teletubbies", "Kampung Yoboi"],
       },
     ],
     budgetLabel: "Estimasi premium",
@@ -377,12 +376,12 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
   // 8. 5 Hari Bali–Nusa Tenggara
   {
     id: "preset-5d-bali-nusatenggara",
-    title: "5 Hari Bali–Nusa Tenggara",
+    title: "5 Hari Bali–Lombok",
     summary:
-      "Dari tradisi hidup Bali menuju keindahan alam Lombok dan Komodo.",
+      "Dari tradisi hidup Bali menuju keindahan alam pesisir Lombok.",
     reason: [
-      "Bali dan Nusa Tenggara menawarkan kontras budaya dan lanskap.",
-      "Lombok dan Labuan Bajo terhubung dengan penerbangan langsung.",
+      "Bali dan Lombok menawarkan kontras budaya dan lanskap yang berdekatan.",
+      "Kedua pulau terhubung dengan fastboat yang praktis.",
     ],
     durationDays: 5,
     regionId: "bali-nusa-tenggara",
@@ -421,9 +420,9 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
   // 9. 3 Hari Yogyakarta Cultural Escape
   {
     id: "preset-3d-yogyakarta-budaya",
-    title: "3 Hari Yogyakarta Cultural Escape",
+    title: "3 Hari Yogyakarta & Candi Borobudur",
     summary:
-      "Menyelami warisan keraton, seni, dan kuliner Yogyakarta dalam tiga hari padat makna.",
+      "Menyelami warisan keraton, seni, dan kuliner Yogyakarta dipadukan kemegahan candi di Jawa Tengah.",
     reason: [
       "Yogyakarta adalah pusat budaya Jawa yang paling mudah dijangkau.",
       "Cukup waktu untuk Borobudur, Prambanan, dan keraton.",
@@ -433,7 +432,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     interests: ["budaya", "kuliner", "sejarah"],
     supportedPaces: ["santai", "seimbang", "eksploratif"],
     supportedBudgets: ["hemat", "menengah", "premium", "fleksibel"],
-    provinceIds: ["di-yogyakarta"],
+    provinceIds: ["di-yogyakarta", "jawa-tengah"],
     stops: [
       {
         dayStart: 1,
@@ -445,21 +444,21 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
       {
         dayStart: 2,
         dayEnd: 2,
-        provinceId: "di-yogyakarta",
-        cityOrCluster: "Candi Area",
-        highlights: ["Candi Borobudur", "Candi Prambanan"],
+        provinceId: "jawa-tengah",
+        cityOrCluster: "Candi Area (Magelang)",
+        highlights: ["Candi Borobudur", "Candi Mendut"],
       },
       {
         dayStart: 3,
         dayEnd: 3,
         provinceId: "di-yogyakarta",
-        cityOrCluster: "Kuliner & Seni",
-        highlights: ["Gudeg Pawon", "Batik Workshop", "Kotagede"],
+        cityOrCluster: "Prambanan & Seni",
+        highlights: ["Candi Prambanan", "Batik Workshop", "Kotagede"],
       },
     ],
     budgetLabel: "Estimasi hemat–menengah",
     paceLabel: "Seimbang",
-    transportSummary: ["Transportasi lokal dalam kota Yogyakarta"],
+    transportSummary: ["Transportasi lokal dalam kota Yogyakarta dan Magelang"],
     etiquetteTips: [
       "Gunakan pakaian sopan di area keraton dan candi.",
       "Coba naik becak untuk pengalaman lokal.",
@@ -520,7 +519,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
  */
 export function presetToRecommendation(
   preset: RoutePresetDefinition,
-  matchType: "preset" | "fallback" = "preset"
+  matchType: "exact" | "adapted" | "contextual" | "fallback" = "exact"
 ): RouteRecommendation {
   return {
     id: preset.id,
