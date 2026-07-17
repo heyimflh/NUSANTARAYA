@@ -22,9 +22,6 @@ export type RouteAdjustmentIntent =
   | "OPEN_PLANNER"
   | "UNKNOWN";
 
-import type { RouteDuration, RoutePlannerRegionId } from "@/types/route-planner";
-import type { AppMode } from "@/lib/types";
-
 export interface RouteRaniContext {
   entrySource: "route-save-section";
   routeId: string;
@@ -32,7 +29,7 @@ export interface RouteRaniContext {
   itineraryVersion: string;
   mapVersion?: string;
   readinessVersion?: string;
-  durationDays: RouteDuration; // Replaced 3 | 5 | 7
+  durationDays: 3 | 5 | 7;
   provinceIds: string[];
   stopIds: string[];
   selectedDayNumber?: number;
@@ -47,7 +44,7 @@ export interface RouteRaniContext {
   incompleteChecklistItemIds?: string[];
   passportSaveStatus: "unsaved" | "saved" | "outdated";
   locale: "id" | "en";
-  travelerMode: AppMode; // Replaced "explore" | "tourist" | "learn"
+  travelerMode: "explore" | "tourist" | "learn";
 }
 
 export type RouteAdjustmentChangeType = 

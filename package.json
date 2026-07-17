@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=24.14.1"
+    "node": "24.14.1"
   },
   "packageManager": "npm@11.11.0",
   "scripts": {
@@ -22,7 +22,7 @@
     "test:route-integration": "tsx scripts/test-route-integration.ts",
     "validate:route-contracts": "tsx scripts/validate-route-contracts.ts",
     "qa:route": "npm run validate:route-presets && npm run validate:route-contracts && npm run test:route-engine && npm run test:route-integration && npm run typecheck && npm run lint && npm run build",
-    "baseline:phase0": "node scripts/capture-phase0-baseline.cjs"
+    "baseline:phase0": "node scripts/capture-phase0-baseline.mjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

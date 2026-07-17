@@ -132,8 +132,14 @@ export function isRoutePlannerSource(v: unknown): v is RoutePlannerSource {
 }
 
 // ─── Form Values ─────────────────────────────────────────────────────────────
-// Moved to route-contracts.ts
-import { RoutePlannerFormValues } from "./route-contracts";
+export interface RoutePlannerFormValues {
+  durationDays: RouteDuration;
+  originProvinceId: string | null;
+  destinationRegionId: RoutePlannerRegionId | null;
+  interests: RouteInterest[];
+  budgetLevel: BudgetLevel;
+  travelPace: TravelPace;
+}
 
 export const DEFAULT_FORM_VALUES: RoutePlannerFormValues = {
   durationDays: 5,
@@ -142,7 +148,6 @@ export const DEFAULT_FORM_VALUES: RoutePlannerFormValues = {
   interests: [],
   budgetLevel: "menengah",
   travelPace: "seimbang",
-  travelerMode: "explore",
 };
 
 // ─── Submit Request ──────────────────────────────────────────────────────────
@@ -153,8 +158,44 @@ export interface RoutePlannerRequest extends RoutePlannerFormValues {
 
 // ─── Route Planner ───────────────────────────────────────────────────────────
 
-import type { RouteStop, RouteSourceReference, RouteRecommendation } from "./route-contracts";
-export type { RouteStop, RouteSourceReference, RouteRecommendation, RoutePlannerFormValues };
+export interface RouteStop {
+  dayStart: number;
+  dayEnd: number;
+  provinceId: string;
+  cityOrCluster: string;
+  highlights: string[];
+}
+
+export interface RouteSourceReference {
+  id: string;
+  title: string;
+  url?: string;
+  publisher?: string;
+  accessedAt?: string;
+  lastVerifiedAt?: string;
+  supports: string; // e.g., "Jadwal kapal cepat", "Harga tiket masuk"
+  note?: string;
+}
+
+export interface RouteRecommendation {
+  id: string;
+  matchType: "exact" | "adapted" | "contextual" | "fallback";
+  title: string;
+  summary: string;
+  reason: string[];
+  durationDays: RouteDuration;
+  regionId: RoutePlannerRegionId;
+  provinceIds: string[];
+  stops: RouteStop[];
+  interests: RouteInterest[];
+  budgetLabel: string;
+  paceLabel: string;
+  transportSummary: string[];
+  etiquetteTips: string[];
+  assumptions?: string[];
+  sourceRefs?: RouteSourceReference[];
+  originalValuesSnapshot?: RoutePlannerFormValues;
+}
 
 // ─── Form Status ─────────────────────────────────────────────────────────────
 export type RoutePlannerStatus =

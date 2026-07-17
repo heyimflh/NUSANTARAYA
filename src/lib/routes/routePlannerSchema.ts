@@ -312,12 +312,6 @@ export function sanitizeFormValues(
   const travelPace: TravelPace = isTravelPace(raw.travelPace)
     ? raw.travelPace
     : DEFAULT_FORM_VALUES.travelPace;
-    
-  const travelerMode = (raw.travelerMode === "explore" || raw.travelerMode === "tourist" || raw.travelerMode === "learn") 
-    ? raw.travelerMode 
-    : DEFAULT_FORM_VALUES.travelerMode;
-    
-  const partySize = (typeof raw.partySize === "number" && raw.partySize > 0) ? raw.partySize : undefined;
 
   return {
     durationDays,
@@ -326,7 +320,5 @@ export function sanitizeFormValues(
     interests,
     budgetLevel,
     travelPace,
-    travelerMode,
-    partySize
   };
 }

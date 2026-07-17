@@ -1,0 +1,29 @@
+
+> nusantaraya@0.1.0 test:route-engine
+> tsx scripts/test-route-engine.ts
+
+PASS: Registry berhasil dimuat.
+PASS: Jumlah preset tepat 10.
+PASS: Preset 5 Hari Budaya & Kuliner Jawa has a valid non-empty ID
+PASS: ID jawa-budaya-kuliner-5 is unique
+PASS: Preset 7 Hari Jawa–Bali Heritage has a valid non-empty ID
+PASS: ID jawa-bali-heritage-7 is unique
+PASS: Preset 5 Hari Jalur Rempah Maluku has a valid non-empty ID
+PASS: ID maluku-spice-route-5 is unique
+PASS: Preset 7 Hari Sumatera Heritage has a valid non-empty ID
+PASS: ID sumatra-heritage-7 is unique
+PASS: Preset 5 Hari Kalimantan Nature Explorer has a valid non-empty ID
+PASS: ID kalimantan-nature-future-5 is unique
+PASS: Preset 7 Hari Sulawesi Selatan Explorer has a valid non-empty ID
+PASS: ID sulawesi-culture-nature-7 is unique
+PASS: Preset 7 Hari Papua Wonder has a valid non-empty ID
+PASS: ID papua-wonder-7 is unique
+PASS: Preset 5 Hari Bali–Lombok has a valid non-empty ID
+PASS: ID bali-nusa-tenggara-5 is unique
+PASS: Preset 3 Hari Yogyakarta & Candi Borobudur has a valid non-empty ID
+PASS: ID yogyakarta-cultural-escape-3 is unique
+PASS: Preset 3 Hari Bali Slow Journey has a valid non-empty ID
+PASS: ID bali-slow-journey-3 is unique
+PASS: Matcher tidak crash untuk input valid
+
+FAIL: Matcher menghasilkan recommendation.

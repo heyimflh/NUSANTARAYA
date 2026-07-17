@@ -83,8 +83,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     provinceIds: ["di-yogyakarta", "jawa-tengah", "jawa-timur"],
     stops: [
       {
-        id: "stop-1",
-        regionId: "jawa",
         dayStart: 1,
         dayEnd: 2,
         provinceId: "di-yogyakarta",
@@ -92,8 +90,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Keraton Yogyakarta", "Malioboro", "Gudeg Yu Djum"],
       },
       {
-        id: "stop-2",
-        regionId: "jawa",
         dayStart: 3,
         dayEnd: 3,
         provinceId: "jawa-tengah",
@@ -101,8 +97,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Keraton Surakarta", "Pasar Gede", "Sate Buntel"],
       },
       {
-        id: "stop-3",
-        regionId: "jawa",
         dayStart: 4,
         dayEnd: 5,
         provinceId: "jawa-timur",
@@ -157,8 +151,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     provinceIds: ["di-yogyakarta", "jawa-tengah", "bali"],
     stops: [
       {
-        id: "stop-4",
-        regionId: "jawa",
         dayStart: 1,
         dayEnd: 2,
         provinceId: "di-yogyakarta",
@@ -166,8 +158,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Candi Borobudur", "Candi Prambanan", "Batik Workshop"],
       },
       {
-        id: "stop-5",
-        regionId: "jawa",
         dayStart: 3,
         dayEnd: 3,
         provinceId: "jawa-tengah",
@@ -175,8 +165,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Keraton Surakarta", "Kampung Batik Laweyan"],
       },
       {
-        id: "stop-6",
-        regionId: "jawa",
         dayStart: 4,
         dayEnd: 4,
         provinceId: "di-yogyakarta",
@@ -184,8 +172,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Perjalanan ke Bali"],
       },
       {
-        id: "stop-7",
-        regionId: "bali-nusa-tenggara",
         dayStart: 5,
         dayEnd: 7,
         provinceId: "bali",
@@ -240,8 +226,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     provinceIds: ["maluku"],
     stops: [
       {
-        id: "stop-8",
-        regionId: "maluku",
         dayStart: 1,
         dayEnd: 2,
         provinceId: "maluku",
@@ -249,8 +233,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Benteng Victoria", "Pantai Natsepa", "Pintu Kota"],
       },
       {
-        id: "stop-9",
-        regionId: "maluku",
         dayStart: 3,
         dayEnd: 5,
         provinceId: "maluku",
@@ -305,8 +287,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     provinceIds: ["sumatera-barat", "sumatera-utara"],
     stops: [
       {
-        id: "stop-10",
-        regionId: "sumatera",
         dayStart: 1,
         dayEnd: 3,
         provinceId: "sumatera-barat",
@@ -314,8 +294,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Ngarai Sianok", "Jam Gadang", "Rendang autentik"],
       },
       {
-        id: "stop-11",
-        regionId: "sumatera",
         dayStart: 4,
         dayEnd: 7,
         provinceId: "sumatera-utara",
@@ -371,8 +349,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     provinceIds: ["kalimantan-tengah", "kalimantan-barat"],
     stops: [
       {
-        id: "stop-12",
-        regionId: "kalimantan",
         dayStart: 1,
         dayEnd: 3,
         provinceId: "kalimantan-tengah",
@@ -380,8 +356,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["TN Tanjung Puting", "Klotok cruise", "Orangutan"],
       },
       {
-        id: "stop-13",
-        regionId: "kalimantan",
         dayStart: 4,
         dayEnd: 5,
         provinceId: "kalimantan-barat",
@@ -436,8 +410,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     provinceIds: ["sulawesi-selatan"],
     stops: [
       {
-        id: "stop-14",
-        regionId: "sulawesi",
         dayStart: 1,
         dayEnd: 2,
         provinceId: "sulawesi-selatan",
@@ -445,8 +417,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Fort Rotterdam", "Rammang-Rammang", "Coto Makassar"],
       },
       {
-        id: "stop-15",
-        regionId: "sulawesi",
         dayStart: 3,
         dayEnd: 4,
         provinceId: "sulawesi-selatan",
@@ -454,8 +424,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Perjalanan Darat Lintas Provinsi", "Pantai Lumpue"],
       },
       {
-        id: "stop-16",
-        regionId: "sulawesi",
         dayStart: 5,
         dayEnd: 7,
         provinceId: "sulawesi-selatan",
@@ -510,8 +478,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     provinceIds: ["papua-barat-daya", "papua"],
     stops: [
       {
-        id: "stop-17",
-        regionId: "papua",
         dayStart: 1,
         dayEnd: 4,
         provinceId: "papua-barat-daya",
@@ -519,8 +485,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Raja Ampat", "Wayag", "Piaynemo"],
       },
       {
-        id: "stop-18",
-        regionId: "papua",
         dayStart: 5,
         dayEnd: 7,
         provinceId: "papua",
@@ -576,8 +540,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     provinceIds: ["bali", "nusa-tenggara-barat"],
     stops: [
       {
-        id: "stop-19",
-        regionId: "bali-nusa-tenggara",
         dayStart: 1,
         dayEnd: 2,
         provinceId: "bali",
@@ -585,8 +547,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Tegallalang", "Tirta Empul", "Pasar Seni Ubud"],
       },
       {
-        id: "stop-20",
-        regionId: "bali-nusa-tenggara",
         dayStart: 3,
         dayEnd: 5,
         provinceId: "nusa-tenggara-barat",
@@ -641,8 +601,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     provinceIds: ["di-yogyakarta", "jawa-tengah"],
     stops: [
       {
-        id: "stop-21",
-        regionId: "jawa",
         dayStart: 1,
         dayEnd: 1,
         provinceId: "di-yogyakarta",
@@ -650,8 +608,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Keraton", "Taman Sari", "Malioboro"],
       },
       {
-        id: "stop-22",
-        regionId: "jawa",
         dayStart: 2,
         dayEnd: 2,
         provinceId: "jawa-tengah",
@@ -659,8 +615,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Candi Borobudur", "Candi Mendut"],
       },
       {
-        id: "stop-23",
-        regionId: "jawa",
         dayStart: 3,
         dayEnd: 3,
         provinceId: "di-yogyakarta",
@@ -712,8 +666,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     provinceIds: ["bali"],
     stops: [
       {
-        id: "stop-24",
-        regionId: "bali-nusa-tenggara",
         dayStart: 1,
         dayEnd: 1,
         provinceId: "bali",
@@ -721,8 +673,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Monkey Forest", "Tegallalang", "Yoga & Spa"],
       },
       {
-        id: "stop-25",
-        regionId: "bali-nusa-tenggara",
         dayStart: 2,
         dayEnd: 2,
         provinceId: "bali",
@@ -730,8 +680,6 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Tirta Empul", "Jatiluwih", "Tari tradisional"],
       },
       {
-        id: "stop-26",
-        regionId: "bali-nusa-tenggara",
         dayStart: 3,
         dayEnd: 3,
         provinceId: "bali",

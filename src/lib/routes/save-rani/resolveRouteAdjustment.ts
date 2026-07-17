@@ -1,6 +1,7 @@
 import { RouteAdjustmentIntent, RouteAdjustmentDraft } from "./types";
 import { RouteRecommendation, RoutePlannerFormValues } from "@/types/route-planner";
 import { RouteItinerary } from "@/lib/routes/itinerary/routeItinerarySchema";
+import { presetItineraries } from "@/data/routes/presetItineraries";
 
 const localFallbacks: Record<string, { summary: string, limitations: string[] }> = {
   REDUCE_BUDGET: {

@@ -1,0 +1,118 @@
+{
+  "phase": "phase-0",
+  "runId": "20260717T094451Z-ab12ad5-phase0-final",
+  "createdAt": "2026-07-17T09:51:06.655Z",
+  "git": {
+    "branch": "fix/nusantaraya-root-cause-hardening",
+    "commit": "ab12ad5",
+    "workingTreeDirtyBefore": true,
+    "workingTreeDirtyAfter": true
+  },
+  "environment": {
+    "node": "v24.14.1",
+    "npm": "11.11.0",
+    "next": "16.2.9",
+    "react": "19.2.4",
+    "typescript": "5.9.3"
+  },
+  "commands": [
+    {
+      "name": "validate-foundation",
+      "status": "PASS",
+      "exitCode": 0,
+      "logFile": "reports\\baseline\\phase-0\\20260717T094451Z-ab12ad5-phase0-final\\logs\\validate-foundation.log"
+    },
+    {
+      "name": "test-passport",
+      "status": "PASS",
+      "exitCode": 0,
+      "logFile": "reports\\baseline\\phase-0\\20260717T094451Z-ab12ad5-phase0-final\\logs\\test-passport.log"
+    },
+    {
+      "name": "validate-regions",
+      "status": "PASS",
+      "exitCode": 0,
+      "logFile": "reports\\baseline\\phase-0\\20260717T094451Z-ab12ad5-phase0-final\\logs\\validate-regions.log"
+    },
+    {
+      "name": "validate-atlas",
+      "status": "PASS",
+      "exitCode": 0,
+      "logFile": "reports\\baseline\\phase-0\\20260717T094451Z-ab12ad5-phase0-final\\logs\\validate-atlas.log"
+    },
+    {
+      "name": "validate-route-presets",
+      "status": "PASS",
+      "exitCode": 0,
+      "logFile": "reports\\baseline\\phase-0\\20260717T094451Z-ab12ad5-phase0-final\\logs\\validate-route-presets.log"
+    },
+    {
+      "name": "validate-route-contracts",
+      "status": "FAIL",
+      "exitCode": 1,
+      "logFile": "reports\\baseline\\phase-0\\20260717T094451Z-ab12ad5-phase0-final\\logs\\validate-route-contracts.log"
+    },
+    {
+      "name": "test-route-engine",
+      "status": "FAIL",
+      "exitCode": 1,
+      "logFile": "reports\\baseline\\phase-0\\20260717T094451Z-ab12ad5-phase0-final\\logs\\test-route-engine.log"
+    },
+    {
+      "name": "test-route-integration",
+      "status": "FAIL",
+      "exitCode": 1,
+      "logFile": "reports\\baseline\\phase-0\\20260717T094451Z-ab12ad5-phase0-final\\logs\\test-route-integration.log"
+    },
+    {
+      "name": "lint",
+      "status": "FAIL",
+      "exitCode": 1,
+      "logFile": "reports\\baseline\\phase-0\\20260717T094451Z-ab12ad5-phase0-final\\logs\\lint.log"
+    },
+    {
+      "name": "typecheck",
+      "status": "FAIL",
+      "exitCode": 2,
+      "logFile": "reports\\baseline\\phase-0\\20260717T094451Z-ab12ad5-phase0-final\\logs\\typecheck.log"
+    },
+    {
+      "name": "build",
+      "status": "FAIL",
+      "exitCode": 1,
+      "logFile": "reports\\baseline\\phase-0\\20260717T094451Z-ab12ad5-phase0-final\\logs\\build.log"
+    }
+  ],
+  "counts": {
+    "typescriptErrors": 24,
+    "eslintErrors": 15,
+    "eslintWarnings": 42,
+    "appRoutes": 3,
+    "dynamicRoutes": 1,
+    "internalLinks": 3,
+    "hashLinks": 7,
+    "missingRoutes": 0,
+    "missingAnchors": 3,
+    "duplicateAnchors": 0,
+    "routePresets": 10,
+    "screenshotsExpected": 8,
+    "screenshotsCaptured": 4,
+    "browserConsoleErrors": null,
+    "pageErrors": null,
+    "failedRequests": null
+  },
+  "acceptanceCriteria": {
+    "runtimePinned": true,
+    "cleanInstallRecorded": true,
+    "allCommandsRecorded": true,
+    "routeInventoryComplete": true,
+    "presetSnapshotComplete": true,
+    "passportSnapshotComplete": true,
+    "screenshotsComplete": true,
+    "browserTelemetryComplete": true,
+    "baselineDocumented": true,
+    "noFeatureChanges": true
+  },
+  "blockers": [],
+  "changedFiles": []
+}

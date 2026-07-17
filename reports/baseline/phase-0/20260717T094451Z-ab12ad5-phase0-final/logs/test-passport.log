@@ -1,0 +1,77 @@
+
+> nusantaraya@0.1.0 test:passport
+> tsx scripts/test-passport-logic.ts
+
+Running Comprehensive Passport Logic Tests...
+✅ PASS: Version is 3
+✅ PASS: Initial level is Penjelajah Baru
+✅ PASS: Initial XP is 0
+✅ PASS: Migrated 13 to sumatera-barat
+✅ PASS: Invalid stamp removed
+✅ PASS: Migrated 51 to bali
+✅ PASS: Numeric runtime ID removed from started
+✅ PASS: Migrated 53 to nusa-tenggara-timur
+✅ PASS: Unknown ID removed from planned
+✅ PASS: Valid quiz kept
+✅ PASS: Unknown quiz removed
+✅ PASS: Valid route kept
+✅ PASS: Empty/whitespace routes removed
+✅ PASS: Negative XP becomes 0
+✅ PASS: NaN XP becomes 0
+✅ PASS: Completed bali removed from started
+✅ PASS: Completed jawa-timur removed from planned
+✅ PASS: Started jawa-barat removed from planned
+✅ PASS: Unknown planned ID rejected
+✅ PASS: Numeric ID runtime rejected in start
+✅ PASS: Whitespace ID rejected in complete
+✅ PASS: Unknown quiz ID rejected
+✅ PASS: Unknown chapter province rejected
+✅ PASS: Empty chapter rejected
+✅ PASS: Whitespace chapter rejected
+✅ PASS: Valid chapter accepted
+✅ PASS: Duplicate chapter rejected (returns same ref)
+✅ PASS: Canonical and numeric keys merged
+✅ PASS: Numeric key chapter kept
+✅ PASS: Canonical key chapter kept
+✅ PASS: Empty chapter removed during migration
+✅ PASS: Unknown completedChapters key removed
+✅ PASS: Numeric chapter province key migrated
+✅ PASS: Empty route ID rejected
+✅ PASS: Whitespace route ID rejected
+✅ PASS: Route saved
+✅ PASS: Duplicate stops removed
+✅ PASS: Invalid stops do not enter planned
+✅ PASS: Numeric stops do not enter planned
+✅ PASS: Route existing gives no XP
+✅ PASS: Route existing syncs a new valid stop
+✅ PASS: bali is planned
+✅ PASS: bali is started
+✅ PASS: bali removed from planned
+✅ PASS: bali is completed
+✅ PASS: bali removed from started
+✅ PASS: XP increased by 10
+✅ PASS: Quiz recorded
+✅ PASS: Province completed via quiz
+✅ PASS: XP increased by 30 (20 quiz + 10 province)
+✅ PASS: No duplicate XP for same quiz
+✅ PASS: Level 0
+✅ PASS: Level 5
+✅ PASS: Level 6
+✅ PASS: Level 15
+✅ PASS: Level 16
+✅ PASS: Level 25
+✅ PASS: Level 26
+✅ PASS: Level 35
+✅ PASS: Level 36
+✅ PASS: Level 100
+✅ PASS: Stamps reset
+✅ PASS: XP reset
+✅ PASS: Level reset
+✅ PASS: Routes reset
+✅ PASS: Planned reset
+✅ PASS: Started reset
+✅ PASS: Quizzes reset
+✅ PASS: Chapters reset
+
+Tests finished: 69 passed, 0 failed. Total assertions: 69
+

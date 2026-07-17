@@ -1,0 +1,9 @@
+{
+  "command": "npm run lint",
+  "startedAt": "2026-07-17T09:47:51.257Z",
+  "finishedAt": "2026-07-17T09:49:17.070Z",
+  "durationMs": 85813,
+  "exitCode": 1,
+  "status": "FAIL",
+  "logFile": "logs/lint.log"
+}
