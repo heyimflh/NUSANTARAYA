@@ -1,22 +1,10 @@
 import { PassportData, PassportSavedRoute, MAX_SAVED_ROUTES } from "@/lib/types";
 import { evaluateBadges } from "./badges";
-import { isValidProvinceId } from "@/data/provinces/provinceIds";
+import { isProvinceId, migrateLegacyProvinceId, ProvinceId } from "@/data/provinces/provinceIds";
 
-const LEGACY_PROVINCE_CODE_TO_SLUG: Record<string, string> = {
-  "13": "sumatera-barat",
-  "34": "di-yogyakarta",
-  "51": "bali",
-  "53": "nusa-tenggara-timur",
-  "64": "kalimantan-timur",
-  "73": "sulawesi-selatan",
-  "81": "maluku",
-  "82": "maluku-utara",
-  "96": "papua-barat-daya",
-};
-
-export function migrateIds(ids: string[] | undefined): string[] {
+export function migrateIds(ids: unknown[] | undefined): ProvinceId[] {
   if (!Array.isArray(ids)) return [];
-  const migrated = ids.map(id => LEGACY_PROVINCE_CODE_TO_SLUG[id] || id);
+  const migrated = ids.map(id => migrateLegacyProvinceId(id)).filter((id): id is ProvinceId => id !== null);
   return Array.from(new Set(migrated));
 }
 
@@ -53,8 +41,8 @@ export function normalizeCompletedChapters(input: unknown): Record<string, strin
   }
   const result: Record<string, string[]> = {};
   for (const [key, value] of Object.entries(input)) {
-    const slug = LEGACY_PROVINCE_CODE_TO_SLUG[key] || key;
-    if (!isValidProvinceId(slug)) continue;
+    const slug = migrateLegacyProvinceId(key) || key;
+    if (!isProvinceId(slug)) continue;
     
     if (Array.isArray(value)) {
       const validChapters = value
@@ -72,16 +60,16 @@ export function normalizeCompletedChapters(input: unknown): Record<string, strin
 }
 
 export function normalizePassportData(input: Partial<PassportData>): PassportData {
-  const completed = unique(migrateIds(input.stamps)).filter(isValidProvinceId);
+  const completed = unique(migrateIds(input.stamps)).filter(isProvinceId);
   const completedSet = new Set(completed);
 
   const started = unique(migrateIds(input.startedProvinces))
-    .filter(isValidProvinceId)
+    .filter(isProvinceId)
     .filter(id => !completedSet.has(id));
   const startedSet = new Set(started);
 
   const planned = unique(migrateIds(input.plannedProvinces))
-    .filter(isValidProvinceId)
+    .filter(isProvinceId)
     .filter(id => !completedSet.has(id) && !startedSet.has(id));
 
   const rawXp = input.xp;
@@ -98,14 +86,14 @@ export function normalizePassportData(input: Partial<PassportData>): PassportDat
     badges: input.badges || [],
     xp,
     level: computeLevel(completed.length),
-    completedQuizzes: unique(migrateIds(input.completedQuizzes)).filter(isValidProvinceId),
+    completedQuizzes: unique(migrateIds(input.completedQuizzes)).filter(isProvinceId),
     savedRoutes: unique((input.savedRoutes || []).filter(r => typeof r === "string" && r.trim() !== "")),
     completedChapters: normalizeCompletedChapters(input.completedChapters),
   };
 }
 
 export function planProvinceTransition(passport: PassportData, provinceId: string): PassportData {
-  if (!isValidProvinceId(provinceId)) return passport;
+  if (!isProvinceId(provinceId)) return passport;
   if (passport.stamps.includes(provinceId)) return passport;
   if ((passport.startedProvinces || []).includes(provinceId)) return passport;
   if ((passport.plannedProvinces || []).includes(provinceId)) return passport;
@@ -117,7 +105,7 @@ export function planProvinceTransition(passport: PassportData, provinceId: strin
 }
 
 export function startProvinceTransition(passport: PassportData, provinceId: string): PassportData {
-  if (!isValidProvinceId(provinceId)) return passport;
+  if (!isProvinceId(provinceId)) return passport;
   if (passport.stamps.includes(provinceId)) return passport;
   if ((passport.startedProvinces || []).includes(provinceId)) return passport;
 
@@ -129,7 +117,7 @@ export function startProvinceTransition(passport: PassportData, provinceId: stri
 }
 
 export function completeProvinceTransition(passport: PassportData, provinceId: string): PassportData {
-  if (!isValidProvinceId(provinceId)) return passport;
+  if (!isProvinceId(provinceId)) return passport;
   if (passport.stamps.includes(provinceId)) return passport;
 
   const stamps = [...passport.stamps, provinceId];
@@ -147,7 +135,7 @@ export function completeProvinceTransition(passport: PassportData, provinceId: s
 }
 
 export function completeQuizTransition(passport: PassportData, provinceId: string): PassportData {
-  if (!isValidProvinceId(provinceId)) return passport;
+  if (!isProvinceId(provinceId)) return passport;
   if (passport.completedQuizzes.includes(provinceId)) {
     return passport;
   }
@@ -162,7 +150,7 @@ export function completeQuizTransition(passport: PassportData, provinceId: strin
 }
 
 export function completeChapterTransition(passport: PassportData, provinceId: string, chapterId: string): PassportData {
-  if (!isValidProvinceId(provinceId)) return passport;
+  if (!isProvinceId(provinceId)) return passport;
   
   const normalizedChapterId = typeof chapterId === "string" ? chapterId.trim() : "";
   if (!normalizedChapterId) return passport;
@@ -191,7 +179,7 @@ export function saveRouteTransition(passport: PassportData, routeId: string, pro
   const nextSavedRoutes = isNewRoute ? [...passport.savedRoutes, normalizedRouteId] : passport.savedRoutes;
   const xp = isNewRoute ? passport.xp + 15 : passport.xp;
 
-  const validStops = unique(provinceIds.filter(isValidProvinceId));
+  const validStops = unique(provinceIds.filter(isProvinceId));
   
   const newPlanned = [...(passport.plannedProvinces || [])];
   validStops.forEach(id => {
@@ -225,7 +213,7 @@ export function saveRouteWithDetailsTransition(passport: PassportData, savedRout
   const nextSavedRoutes = isNewRoute ? [...passport.savedRoutes, routeId] : passport.savedRoutes;
   const xp = isNewRoute ? passport.xp + 15 : passport.xp;
 
-  const validStops = unique(savedRoute.provinceIds.filter(isValidProvinceId));
+  const validStops = unique(savedRoute.provinceIds.filter(isProvinceId));
   
   const newPlanned = [...(passport.plannedProvinces || [])];
   validStops.forEach(id => {

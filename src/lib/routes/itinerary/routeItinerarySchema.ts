@@ -1,6 +1,7 @@
 export type DayPart = "morning" | "midday" | "afternoon" | "evening";
 export type ActivityDurationCategory = "short" | "half-day" | "flexible";
 export type TimeConfidence = "none" | "estimated" | "verified";
+import type { ProvinceId } from "@/data/provinces/provinceIds";
 export type ItineraryDayType =
   | "arrival"
   | "exploration"
@@ -31,7 +32,7 @@ export interface ItineraryDay {
   title: string;
   theme: string;
   summary: string;
-  provinceIds: string[];
+  provinceIds: ProvinceId[];
   stopId: string;
   cityOrCluster: string;
   density: "light" | "balanced" | "active" | "transfer";

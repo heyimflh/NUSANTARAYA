@@ -37,8 +37,8 @@ export function RouteReveal({ result, adjustmentNote, values, onEdit }: RouteRev
   const [showNotes, setShowNotes] = useState(false);
   const [imgError, setImgError] = useState(false);
   
-  const isAdapted = result.matchType === "adapted" && adjustmentNote;
-  const isFallback = result.matchType === "fallback" && adjustmentNote;
+  const isAdapted = result.matchType === "adapted-preset" && adjustmentNote;
+  const isFallback = result.matchType === "fallback-preset" && adjustmentNote;
   
   const origin = getProvinceLabel(values.originProvinceId);
   const region = getRegionLabel(values.destinationRegionId);
@@ -334,3 +334,4 @@ export function RouteReveal({ result, adjustmentNote, values, onEdit }: RouteRev
     </motion.div>
   );
 }
+

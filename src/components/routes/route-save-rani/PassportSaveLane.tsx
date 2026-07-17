@@ -5,7 +5,7 @@ import { usePassport } from "@/context/app-context";
 import Link from "next/link";
 
 interface PassportSaveLaneProps {
-  savedRoute: PassportSavedRoute;
+  savedRoute: PassportSavedRoute | null;
   locale: "id" | "en";
 }
 
@@ -13,9 +13,10 @@ export function PassportSaveLane({ savedRoute, locale }: PassportSaveLaneProps) 
   const { passport, saveRouteWithDetails, removeRouteWithDetails } = usePassport();
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  const isSaved = passport.savedRoutes.includes(savedRoute.routeId);
+  const isSaved = savedRoute ? passport.savedRoutes.includes(savedRoute.routeId) : false;
 
   const handleSave = () => {
+    if (!savedRoute) return;
     try {
       setErrorMsg(null);
       if (isSaved) {
@@ -96,3 +97,4 @@ export function PassportSaveLane({ savedRoute, locale }: PassportSaveLaneProps) 
     </div>
   );
 }
+

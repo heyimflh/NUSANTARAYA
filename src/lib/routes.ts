@@ -1,4 +1,4 @@
-import { isValidProvinceId } from "@/data/provinces/provinceIds";
+import { isProvinceId } from "@/data/provinces/provinceIds";
 
 export const APP_ROUTES = {
   home: "/",
@@ -72,7 +72,7 @@ export function isRouteAvailable(href: string): boolean {
 
   if (pathname.startsWith("/provinsi/")) {
     const slug = pathname.slice("/provinsi/".length);
-    return isValidProvinceId(slug);
+    return isProvinceId(slug);
   }
   
   if (pathname.startsWith("/explore#")) return true;

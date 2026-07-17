@@ -23,7 +23,8 @@ import {
   isTravelPace,
   isRoutePlannerSource,
 } from "@/types/route-planner";
-import { isValidProvinceId } from "@/data/provinces/provinceIds";
+import { isProvinceId } from "@/data/provinces/provinceIds";
+import type { ProvinceId } from "@/data/provinces/provinceIds";
 
 // ─── Validation ──────────────────────────────────────────────────────────────
 
@@ -41,7 +42,7 @@ export function validateFormValues(
 
   if (
     values.originProvinceId !== null &&
-    !isValidProvinceId(values.originProvinceId)
+    !isProvinceId(values.originProvinceId)
   ) {
     errors.push({
       field: "originProvinceId",
@@ -136,7 +137,7 @@ export function parsePlannerQuery(
 
   // Origin
   const originRaw = searchParams.get("origin");
-  if (originRaw && isValidProvinceId(originRaw)) {
+  if (originRaw && isProvinceId(originRaw)) {
     values.originProvinceId = originRaw;
   }
 
@@ -287,8 +288,8 @@ export function sanitizeFormValues(
     ? raw.durationDays
     : DEFAULT_FORM_VALUES.durationDays;
 
-  const originProvinceId: string | null =
-    raw.originProvinceId && isValidProvinceId(raw.originProvinceId)
+  const originProvinceId: ProvinceId | null =
+    raw.originProvinceId && isProvinceId(raw.originProvinceId)
       ? raw.originProvinceId
       : null;
 

@@ -26,7 +26,7 @@ export function resolveRouteReadiness(
     itineraryVersion,
     version: "1.0",
     locale,
-    source: result.matchType === "fallback" ? "fallback" : "canonical",
+    source: result.matchType === "fallback-preset" ? "fallback" : "canonical",
     status: itinerary ? "ready" : "partial",
     budget,
     culinaryItems,
@@ -35,3 +35,4 @@ export function resolveRouteReadiness(
     updatedAt: new Date().toISOString(),
   };
 }
+

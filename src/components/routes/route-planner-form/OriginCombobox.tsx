@@ -2,10 +2,11 @@ import React, { useState, useRef, useEffect } from "react";
 import { provinceMapData } from "@/data/provinces/provinces";
 import { X, ChevronDown } from "lucide-react";
 import { announcer } from "./PlannerLiveRegion";
+import type { ProvinceId } from "@/data/provinces/provinceIds";
 
 interface OriginComboboxProps {
-  value: string | null;
-  onChange: (val: string | null) => void;
+  value: ProvinceId | null;
+  onChange: (val: ProvinceId | null) => void;
 }
 
 export function OriginCombobox({ value, onChange }: OriginComboboxProps) {
@@ -60,7 +61,7 @@ export function OriginCombobox({ value, onChange }: OriginComboboxProps) {
       case "Enter":
         e.preventDefault();
         if (activeIndex >= 0 && activeIndex < filtered.length) {
-          onChange(filtered[activeIndex].id);
+          onChange(filtered[activeIndex].id as ProvinceId);
           setSearch("");
           setIsOpen(false);
           inputRef.current?.focus();
@@ -191,7 +192,7 @@ export function OriginCombobox({ value, onChange }: OriginComboboxProps) {
                       role="option"
                       aria-selected={isSelected}
                       onClick={() => {
-                        onChange(p.id);
+                        onChange(p.id as ProvinceId);
                         setSearch("");
                         setIsOpen(false);
                         inputRef.current?.focus();

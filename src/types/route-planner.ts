@@ -7,6 +7,7 @@
  */
 
 import type { RegionId } from "./region";
+import type { ProvinceId } from "@/data/provinces/provinceIds";
 
 // ─── Duration ────────────────────────────────────────────────────────────────
 export type RouteDuration = 3 | 5 | 7;
@@ -134,7 +135,7 @@ export function isRoutePlannerSource(v: unknown): v is RoutePlannerSource {
 // ─── Form Values ─────────────────────────────────────────────────────────────
 export interface RoutePlannerFormValues {
   durationDays: RouteDuration;
-  originProvinceId: string | null;
+  originProvinceId: ProvinceId | null;
   destinationRegionId: RoutePlannerRegionId | null;
   interests: RouteInterest[];
   budgetLevel: BudgetLevel;
@@ -183,7 +184,9 @@ export interface RouteSourceReference {
 export interface RouteRecommendation {
   id: string;
   version: typeof ROUTE_SCHEMA_VERSION;
-  matchType: "exact" | "adapted" | "contextual" | "fallback";
+  matchType: "exact-preset" | "adapted-preset" | "fallback-preset";
+  requestedDuration?: RouteDuration;
+  actualDuration?: RouteDuration;
   title: string;
   summary: string;
   reason: string[];
@@ -224,11 +227,7 @@ export interface RoutePlannerValidationError {
  * - fallback: engine failed or no exact match; nearest preset used
  * - restored: hydrated from URL ?preset= param or local persistence
  */
-export type RouteMatchType =
-  | "dynamic"
-  | "preset"
-  | "fallback"
-  | "restored";
+export type RouteMatchType = "exact-preset" | "adapted-preset" | "fallback-preset" | "restored";
 
 /**
  * Stable, human-readable codes explaining WHY a route was recommended.
@@ -265,3 +264,6 @@ export interface PreferenceMatchChip {
   state: PreferenceMatchState;
   note?: string; // shown for "adjusted" state
 }
+
+
+

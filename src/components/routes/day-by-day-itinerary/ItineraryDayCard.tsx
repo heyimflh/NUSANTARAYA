@@ -1,3 +1,4 @@
+import { navigateToRouteSection } from "@/lib/routes/navigateToRouteSection";
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { clsx } from "clsx";
@@ -193,8 +194,7 @@ export function ItineraryDayCard({ day, isExpanded, onToggle, onViewInMap }: Iti
                       onViewInMap();
                     } else {
                       // Fallback: scroll to map section if callback not provided
-                      const mapSection = document.getElementById("route-map-transport-summary");
-                      if (mapSection) mapSection.scrollIntoView({ behavior: "smooth", block: "start" });
+                      navigateToRouteSection("map");
                     }
                   }}
                   className="flex items-center gap-2 px-6 py-3 rounded-full bg-[#0D1B2A] text-white font-bold text-[14px] hover:bg-[#1a304d] hover:shadow-lg hover:-translate-y-0.5 transition-all focus-visible:outline-2 focus-visible:outline-[#C9A84C] focus-visible:outline-offset-2"
@@ -216,3 +216,5 @@ export function ItineraryDayCard({ day, isExpanded, onToggle, onViewInMap }: Iti
     </article>
   );
 }
+
+

@@ -1,3 +1,5 @@
+import { navigateToRouteSection } from "@/lib/routes/navigateToRouteSection";
+import { ROUTE_SECTION_IDS } from "@/lib/routes/routeSections";
 "use client";
 
 /**
@@ -47,6 +49,7 @@ import type { RouteRecommendation } from "@/types/route-planner";
 import type { RouteItinerary } from "@/lib/routes/itinerary/routeItinerarySchema";
 import type {
   RouteMapModel,
+  
   RouteMapStop,
   RouteMapSegment,
   RouteTransportOption,
@@ -79,8 +82,10 @@ function trackMapEvent(event: string, payload?: Record<string, unknown>): void {
 
 interface RouteMapTransportSectionProps {
   result: RouteRecommendation | null;
-  itinerary: RouteItinerary | null;
-  status: "idle" | "loading" | "success" | "error" | "fallback";
+  mapModel: RouteMapModel | null;
+  transportOptions: RouteTransportOption[];
+  status: "idle" | "resolving" | "ready" | "partial" | "error";
+  activeRouteKey: string | null;
   /** Day selection signal from Section 5 */
   externalDaySelection?: {
     dayNumber: number;
@@ -95,8 +100,11 @@ interface RouteMapTransportSectionProps {
 
 export function RouteMapTransportSection({
   result,
-  itinerary,
+  mapModel,
+  transportOptions,
+  
   status,
+  activeRouteKey,
   externalDaySelection,
   onViewInItinerary,
 }: RouteMapTransportSectionProps) {
@@ -108,61 +116,16 @@ export function RouteMapTransportSection({
   const { mode } = useMode();
   const locale = language as "id" | "en";
 
-  // ─── Map Model State ─────────────────────────────────────────────────────
-
-  const [mapModel, setMapModel] = useState<RouteMapModel | null>(null);
-  const [transportOptions, setTransportOptions] = useState<RouteTransportOption[]>([]);
-  const [isResolving, setIsResolving] = useState(false);
-  const [hasError, setHasError] = useState(false);
-
   // ─── Selection State ─────────────────────────────────────────────────────
 
   const [selection, setSelection] = useState<RouteMapSelection | null>(null);
   const [liveAnnouncement, setLiveAnnouncement] = useState<string | null>(null);
 
-  // ─── Resolve map model when result/itinerary change ──────────────────────
+  // ─── Reset selection when route key changes ─────────────────────────
 
   useEffect(() => {
-    if (status === "loading") {
-      setMapModel(null);
-      setTransportOptions([]);
-      setSelection(null);
-      return;
-    }
-
-    if (!result || !itinerary) {
-      setMapModel(null);
-      setTransportOptions([]);
-      return;
-    }
-
-    setIsResolving(true);
-    setHasError(false);
-
-    try {
-      const resolved = resolveRouteMap(result, itinerary);
-      if (resolved) {
-        setMapModel(resolved.model);
-        setTransportOptions(resolved.transportOptions);
-        // Reset selection to whole-route overview on route change
-        setSelection(null);
-        trackMapEvent("route_map_loaded", {
-          routeId: resolved.model.routeId,
-          stopCount: resolved.model.stops.length,
-          segmentCount: resolved.model.segments.length,
-          geometryConfidence: resolved.model.geometryConfidence,
-        });
-      } else {
-        setMapModel(null);
-        setTransportOptions([]);
-      }
-    } catch {
-      setHasError(true);
-      trackMapEvent("route_map_error", { routeId: result.id });
-    } finally {
-      setIsResolving(false);
-    }
-  }, [result?.id, itinerary?.version, status]); // eslint-disable-line react-hooks/exhaustive-deps
+    setSelection(null);
+  }, [activeRouteKey]);
 
   // ─── Apply external day selection from itinerary ─────────────────────────
 
@@ -236,7 +199,8 @@ export function RouteMapTransportSection({
         stopId,
       });
     },
-    [mapModel, locale]
+    [mapModel,
+   locale]
   );
 
   const handleSegmentSelect = useCallback(
@@ -267,7 +231,8 @@ export function RouteMapTransportSection({
         dayNumber: seg.dayNumber,
       });
     },
-    [mapModel, locale]
+    [mapModel,
+   locale]
   );
 
   const handleResetView = useCallback(() => {
@@ -276,7 +241,8 @@ export function RouteMapTransportSection({
     announcer.announce(msg, "polite");
     setLiveAnnouncement(msg);
     trackMapEvent("route_map_fit_route_clicked", { routeId: mapModel?.routeId });
-  }, [mapModel, locale]);
+  }, [mapModel,
+   locale]);
 
   const handleViewInItinerary = useCallback(
     (dayNumber: number) => {
@@ -294,17 +260,9 @@ export function RouteMapTransportSection({
         dayCard.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     },
-    [mapModel, onViewInItinerary]
+    [mapModel,
+   onViewInItinerary]
   );
-
-  const handleRaniClick = useCallback(() => {
-    trackMapEvent("route_map_rani_clicked", { routeId: mapModel?.routeId });
-    // Navigate to RANI section or scroll — integration point
-    const raniSection = document.getElementById("save-passport-rani");
-    if (raniSection) {
-      raniSection.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, [mapModel]);
 
   // ─── Derived selection values ─────────────────────────────────────────────
 
@@ -318,20 +276,30 @@ export function RouteMapTransportSection({
   if (!result && status === "idle") return null;
 
   // Loading skeleton
-  if (status === "loading" || isResolving) {
+  if (status === "resolving") {
+    return <RouteMapSkeleton />;
+  }
+
+  if (!result) return null;
+
+  if (status === "partial" && !mapModel) {
     return (
-      <section
-        id="route-map-transport-summary"
-        aria-labelledby={titleId}
-        className="w-full mt-12 lg:mt-24 scroll-mt-32"
-      >
-        <RouteMapSkeleton />
+      <section className="w-full mt-12 lg:mt-24 text-center">
+        <h2 className="text-2xl font-bold mb-4" tabIndex={-1} data-route-section-heading>Peta belum tersedia</h2>
+        <p className="text-muted-foreground">Peta rute dinamis ini masih dalam proses penyusunan.</p>
       </section>
     );
   }
 
-  // No map model (no result or resolution failed)
-  if (!result || !mapModel) return null;
+  if (status === "error" && !mapModel) {
+    return (
+      <section className="w-full mt-12 lg:mt-24 text-center">
+        <h2 className="text-2xl font-bold mb-4 text-destructive" tabIndex={-1} data-route-section-heading>Gagal Memuat Peta</h2>
+      </section>
+    );
+  }
+
+  if (!mapModel) return null;
 
   const stops = mapModel.stops;
   const segments = mapModel.segments;
@@ -340,7 +308,7 @@ export function RouteMapTransportSection({
 
   return (
     <motion.section
-      id="route-map-transport-summary"
+      id={ROUTE_SECTION_IDS.map}
       aria-labelledby={titleId}
       className="w-full mt-12 lg:mt-24 scroll-mt-32"
       initial={{ opacity: 0, y: 16 }}
@@ -379,8 +347,7 @@ export function RouteMapTransportSection({
               id={titleId}
               ref={headingRef}
               className="font-playfair text-[32px] md:text-[40px] lg:text-[44px] font-bold text-[#0D1B2A] leading-[1.15] tracking-tight"
-              tabIndex={-1}
-            >
+              tabIndex={-1} data-route-section-heading>
               {locale === "en"
                 ? "See your journey route at a glance."
                 : "Lihat jalur perjalananmu dalam satu pandangan."}
@@ -537,7 +504,7 @@ export function RouteMapTransportSection({
                     ? onViewInItinerary(dayNumber)
                     : handleViewInItinerary(dayNumber)
                 }
-                onRaniClick={handleRaniClick}
+                onRaniClick={() => { navigateToRouteSection("saveRani") }}
                 locale={locale}
               />
             </div>
@@ -559,3 +526,12 @@ export function RouteMapTransportSection({
     </motion.section>
   );
 }
+
+
+
+
+
+
+
+
+

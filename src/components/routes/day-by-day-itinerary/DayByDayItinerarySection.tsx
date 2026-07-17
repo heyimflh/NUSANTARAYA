@@ -1,9 +1,8 @@
+import { ROUTE_SECTION_IDS } from "@/lib/routes/routeSections";
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { RouteRecommendation } from "@/types/route-planner";
-import { RouteItinerary, ItineraryDay } from "@/lib/routes/itinerary/routeItinerarySchema";
-import { resolveRouteItinerary } from "@/lib/routes/itinerary/resolveRouteItinerary";
-import { FALLBACK_ITINERARY_JAWA_5_HARI } from "@/data/routes/presetItineraries";
+import { RouteItinerary } from "@/lib/routes/itinerary/routeItinerarySchema";
+import { resolveRouteItinerary, ItineraryResolution } from "@/lib/routes/itinerary/resolveRouteItinerary";
 import { ItinerarySkeleton } from "./ItinerarySkeleton";
 import { ItinerarySectionHeader } from "./ItinerarySectionHeader";
 import { ItineraryOverviewRail } from "./ItineraryOverviewRail";
@@ -11,53 +10,35 @@ import { ItineraryTimeline } from "./ItineraryTimeline";
 
 interface DayByDayItinerarySectionProps {
   result: RouteRecommendation | null;
-  status: "idle" | "loading" | "success" | "error" | "fallback";
-  /** Called when user clicks "Lihat di Peta" from a day card. */
+  status: "idle" | "resolving" | "ready" | "partial" | "error";
+  itinerary: RouteItinerary | null;
+  activeRouteKey: string | null;
   onViewInMap?: (context: {
     dayNumber: number;
     dayId: string;
     stopId?: string;
     segmentIds?: string[];
   }) => void;
-  /** Called when external day selection should open a specific day card. */
   externalActiveDay?: number | null;
-  /** Called with the resolved itinerary for Section 6 consumption. */
-  onItineraryResolved?: (itinerary: RouteItinerary | null) => void;
 }
 
 export function DayByDayItinerarySection({
   result,
   status,
+  itinerary,
+  activeRouteKey,
   onViewInMap,
   externalActiveDay,
-  onItineraryResolved,
 }: DayByDayItinerarySectionProps) {
-  const [itinerary, setItinerary] = useState<RouteItinerary | null>(null);
   const [activeDay, setActiveDay] = useState<number>(1);
 
-  // Resolve itinerary whenever result changes
   useEffect(() => {
-    if (status === "loading") {
-      setItinerary(null);
-      onItineraryResolved?.(null);
-      return;
-    }
-    if (result) {
-      const resolved = resolveRouteItinerary(result, FALLBACK_ITINERARY_JAWA_5_HARI);
-      setItinerary(resolved);
-      setActiveDay(1); // Default to day 1 open
-      onItineraryResolved?.(resolved);
-    } else {
-      setItinerary(null);
-      onItineraryResolved?.(null);
-    }
-  }, [result, status]); // eslint-disable-line react-hooks/exhaustive-deps
+    setActiveDay(1);
+  }, [activeRouteKey]);
 
-  // Sync external day selection (from Map section)
   useEffect(() => {
     if (externalActiveDay && externalActiveDay >= 1) {
       setActiveDay(externalActiveDay);
-      // Scroll to the specific day card after a brief delay to allow expand animation
       setTimeout(() => {
         const dayEl = document.getElementById(`itinerary-day-${externalActiveDay}`);
         if (dayEl) dayEl.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -65,25 +46,42 @@ export function DayByDayItinerarySection({
     }
   }, [externalActiveDay]);
 
-  if (status === "loading") {
+  if (status === "resolving") {
     return <ItinerarySkeleton durationDays={result?.durationDays || 5} />;
   }
 
-  if (!result || !itinerary) {
-    return null; // Hidden/teaser state
+  if (!result) {
+    return null;
   }
+
+  if (status === "partial" && !itinerary) {
+    return (
+      <section className="w-full mt-12 lg:mt-24 text-center">
+        <h2 className="text-2xl font-bold mb-4" tabIndex={-1} data-route-section-heading>Itinerary sedang dilengkapi</h2>
+        <p className="text-muted-foreground">Itinerary dinamis untuk rute ini belum tersedia.</p>
+      </section>
+    );
+  }
+
+  if (status === "error" && !itinerary) {
+    return (
+      <section className="w-full mt-12 lg:mt-24 text-center">
+        <h2 className="text-2xl font-bold mb-4 text-destructive" tabIndex={-1} data-route-section-heading>Itinerary belum dapat ditampilkan karena data rute tidak konsisten.</h2>
+      </section>
+    );
+  }
+
+  if (!itinerary) return null;
 
   return (
     <section
-      id="day-by-day-itinerary"
+      id={ROUTE_SECTION_IDS.itinerary}
       aria-labelledby="itinerary-title"
       className="w-full mt-12 lg:mt-24 scroll-mt-32"
     >
       <ItinerarySectionHeader durationDays={itinerary.durationDays} />
 
-      {/* Adding items-start ensures flex children don't stretch, which allows the sticky item to behave correctly in its block context */}
       <div className="mt-8 lg:mt-12 flex flex-col lg:flex-row gap-8 lg:gap-16 items-start relative">
-        {/* Sticky side rail for Desktop, top rail for Mobile/Tablet */}
         <div className="lg:w-1/3 xl:w-1/4 w-full sticky top-32 self-start shrink-0 z-10">
           <ItineraryOverviewRail
             days={itinerary.days}
@@ -98,7 +96,6 @@ export function DayByDayItinerarySection({
           />
         </div>
 
-        {/* Timeline Content */}
         <div className="lg:w-2/3 xl:w-3/4 w-full">
           <ItineraryTimeline
             days={itinerary.days}
@@ -121,3 +118,5 @@ export function DayByDayItinerarySection({
     </section>
   );
 }
+
+

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import { RouteSectionLink } from "@/components/routes/RouteSectionLink";
 import { useLanguage } from "@/context/app-context";
 
 export const RoutesNavbar = () => {
@@ -58,9 +59,7 @@ export const RoutesNavbar = () => {
         </div>
 
         {/* Right Button — Full on desktop */}
-        <Link
-          href="#route-planner"
-          className={`hidden lg:flex group items-center gap-3 backdrop-blur-md transition-all duration-300 px-5 py-2.5 rounded-full text-sm font-medium active:scale-95 ${
+        <RouteSectionLink section="planner" className={`hidden lg:flex group items-center gap-3 backdrop-blur-md transition-all duration-300 px-5 py-2.5 rounded-full text-sm font-medium active:scale-95 ${
             isScrolled 
               ? 'bg-[#34291A]/5 border border-[#34291A]/10 text-[#5C4A26] hover:bg-[#34291A]/10' 
               : 'bg-white/10 border border-white/20 text-white hover:bg-white/30'
@@ -73,7 +72,7 @@ export const RoutesNavbar = () => {
           }`}>
             <ArrowUpRight size={16} strokeWidth={2.5} />
           </div>
-        </Link>
+        </RouteSectionLink>
 
         {/* Hamburger Menu Button — Mobile/Tablet */}
         <button 
@@ -168,17 +167,13 @@ export const RoutesNavbar = () => {
                 transition={{ duration: 0.5, delay: 0.6 }}
                 className="flex flex-col gap-8"
               >
-                <Link
-                  href="#route-planner"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="group relative inline-flex items-center justify-between w-full sm:w-max bg-[#1A1A1A] text-white px-6 py-4 rounded-full text-sm font-bold tracking-widest uppercase overflow-hidden active:scale-95 transition-transform shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
-                >
+                <RouteSectionLink section="planner" onNavigate={() => setIsMenuOpen(false)} className="group relative inline-flex items-center justify-between w-full sm:w-max bg-[#1A1A1A] text-white px-6 py-4 rounded-full text-sm font-bold tracking-widest uppercase overflow-hidden active:scale-95 transition-transform shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
                   <span className="relative z-10">Buat Rute</span>
                   <div className="relative z-10 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-[#C9A84C] group-hover:text-black transition-colors">
                     <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </div>
                   <div className="absolute inset-0 bg-[#2D2419] transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out" />
-                </Link>
+                </RouteSectionLink>
 
                 <div className="flex items-center gap-6 text-[#2D2419]/50 text-xs font-medium tracking-widest uppercase">
                   <button 
@@ -203,3 +198,6 @@ export const RoutesNavbar = () => {
     </>
   );
 };
+
+
+

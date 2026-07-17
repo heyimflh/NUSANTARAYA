@@ -1,14 +1,7 @@
-/**
- * NUSANTARAYA — Deterministic Preset Matcher
- * Scores, ranks, and ADAPTS route presets against user form values.
- * Duration and Region are hard constraints.
- */
-
 import type {
   RoutePlannerFormValues,
   RouteRecommendation,
   RoutePlannerRegionId,
-  RouteStop,
   RouteDuration,
 } from "@/types/route-planner";
 import {
@@ -18,14 +11,13 @@ import {
   type RoutePresetDefinition,
 } from "@/data/routes/routePresets";
 import { getRegionByProvinceId } from "@/data/regions/regionProvinceMap";
+import { ROUTE_ADAPTATION_POLICY, SupportedRouteDuration } from "./routeAdaptationPolicy";
+import { resolveRouteItinerary } from "./itinerary/resolveRouteItinerary";
 
-// ─── Scoring Weights ─────────────────────────────────────────────────────────
 const W_INTEREST = 15;
 const W_PACE = 10;
 const W_BUDGET = 5;
 const W_ORIGIN = 10;
-
-// ─── Score Calculation ───────────────────────────────────────────────────────
 
 interface ScoredPreset {
   preset: RoutePresetDefinition;
@@ -33,48 +25,28 @@ interface ScoredPreset {
   index: number;
 }
 
-function computeInterestScore(
-  preset: RoutePresetDefinition,
-  interests: string[]
-): number {
+function computeInterestScore(preset: RoutePresetDefinition, interests: string[]): number {
   if (interests.length === 0) return 0;
   const overlap = preset.interests.filter((i) => interests.includes(i)).length;
   return overlap / Math.max(interests.length, 1);
 }
 
-function computePaceScore(
-  preset: RoutePresetDefinition,
-  pace: string
-): number {
-  return preset.supportedPaces.includes(pace as typeof preset.supportedPaces[number])
-    ? 1
-    : 0.3;
+function computePaceScore(preset: RoutePresetDefinition, pace: string): number {
+  return preset.supportedPaces.includes(pace as typeof preset.supportedPaces[number]) ? 1 : 0.3;
 }
 
-function computeBudgetScore(
-  preset: RoutePresetDefinition,
-  budget: string
-): number {
-  return preset.supportedBudgets.includes(budget as typeof preset.supportedBudgets[number])
-    ? 1
-    : 0.3;
+function computeBudgetScore(preset: RoutePresetDefinition, budget: string): number {
+  return preset.supportedBudgets.includes(budget as typeof preset.supportedBudgets[number]) ? 1 : 0.3;
 }
 
-function computeOriginScore(
-  preset: RoutePresetDefinition,
-  originProvinceId: string | null
-): number {
+function computeOriginScore(preset: RoutePresetDefinition, originProvinceId: string | null): number {
   if (!originProvinceId) return 0.5; 
   const originRegion = getRegionByProvinceId(originProvinceId);
   if (originRegion && originRegion.id === preset.regionId) return 1;
   return 0.3;
 }
 
-function scorePreset(
-  preset: RoutePresetDefinition,
-  values: RoutePlannerFormValues,
-  index: number
-): ScoredPreset {
+function scorePreset(preset: RoutePresetDefinition, values: RoutePlannerFormValues, index: number): ScoredPreset {
   const score =
     computeInterestScore(preset, values.interests) * W_INTEREST +
     computePaceScore(preset, values.travelPace) * W_PACE +
@@ -82,47 +54,6 @@ function scorePreset(
     computeOriginScore(preset, values.originProvinceId) * W_ORIGIN;
 
   return { preset, score, index };
-}
-
-// ─── Adaptation ──────────────────────────────────────────────────────────────
-
-/**
- * Adapt stops to strictly match the requested duration.
- */
-function adaptStops(stops: RouteStop[], sourceDuration: number, targetDuration: RouteDuration): RouteStop[] {
-  if (sourceDuration === targetDuration) return [...stops];
-
-  const adapted: RouteStop[] = JSON.parse(JSON.stringify(stops));
-  
-  if (targetDuration < sourceDuration) {
-    // Truncate
-    let daysKept = 0;
-    const newStops = [];
-    for (const stop of adapted) {
-      const stopDuration = stop.dayEnd - stop.dayStart + 1;
-      if (daysKept + stopDuration <= targetDuration) {
-        stop.dayStart = daysKept + 1;
-        stop.dayEnd = daysKept + stopDuration;
-        newStops.push(stop);
-        daysKept += stopDuration;
-      } else if (daysKept < targetDuration) {
-        stop.dayStart = daysKept + 1;
-        stop.dayEnd = targetDuration;
-        newStops.push(stop);
-        daysKept = targetDuration;
-        break; // Reached target
-      }
-    }
-    return newStops;
-  } else {
-    // Expand
-    const diff = targetDuration - sourceDuration;
-    // Add extra days to the last stop or distribute
-    if (adapted.length > 0) {
-      adapted[adapted.length - 1].dayEnd += diff;
-    }
-    return adapted;
-  }
 }
 
 function getBudgetExplanation(level: string): string {
@@ -155,104 +86,160 @@ function buildOriginAssumptions(originProvinceId: string | null, regionId: Route
   return [`Berangkat dari luar wilayah, pastikan mengecek penerbangan ke gerbang utama ${regionId.toUpperCase()}.`];
 }
 
+export type RouteMatchType = "exact-preset" | "adapted-preset" | "fallback-preset";
 
-// ─── Public API ──────────────────────────────────────────────────────────────
-
-export interface MatchResult {
-  recommendation: RouteRecommendation;
-  isExact: boolean;
-  adjustmentNote: string | null;
+export interface RouteMatchMetadata {
+  matchType: RouteMatchType | null;
+  requestedRegion: RoutePlannerRegionId;
+  requestedDuration: SupportedRouteDuration;
+  actualDuration: SupportedRouteDuration | null;
+  reason: string;
 }
 
-export function matchRoutePreset(
-  values: RoutePlannerFormValues
-): MatchResult {
-  // 1. Hard Constraint: Region
-  let validPresets = ROUTE_PRESETS.filter(p => p.regionId === values.destinationRegionId);
+export type RouteMatchResolution =
+  | {
+      status: "matched";
+      recommendation: RouteRecommendation;
+      metadata: RouteMatchMetadata;
+      alternatives: RouteRecommendation[];
+    }
+  | {
+      status: "alternatives";
+      recommendation: null;
+      metadata: RouteMatchMetadata;
+      alternatives: RouteRecommendation[];
+    }
+  | {
+      status: "unavailable";
+      recommendation: null;
+      metadata: RouteMatchMetadata;
+      alternatives: [];
+    };
+
+export function matchRoutePreset(values: RoutePlannerFormValues): RouteMatchResolution {
+  const reqRegion = values.destinationRegionId;
+  const reqDuration = values.durationDays as SupportedRouteDuration;
   
-  if (validPresets.length === 0) {
-    // Fallback: If absolutely no preset in region, use a generic national preset and adapt it
-    validPresets = [...ROUTE_PRESETS];
+  // 1. Hard Region Filter
+  const validPresets = reqRegion ? ROUTE_PRESETS.filter(p => p.regionId === reqRegion) : [];
+  
+  if (validPresets.length === 0 || !reqRegion) {
+    return {
+      status: "unavailable",
+      recommendation: null,
+      metadata: {
+        matchType: null,
+        requestedRegion: reqRegion as any,
+        requestedDuration: reqDuration,
+        actualDuration: null,
+        reason: "Belum ada preset yang tersedia untuk region ini.",
+      },
+      alternatives: []
+    };
   }
 
-  // 2. Score and Rank
-  const scored = validPresets.map((preset, index) =>
-    scorePreset(preset, values, index)
-  );
-  scored.sort((a, b) => {
-    if (b.score !== a.score) return b.score - a.score;
-    return a.index - b.index; // editorial priority
-  });
-
-  const best = scored[0].preset;
-  
-  // 3. Adapt
-  const isExactDuration = best.durationDays === values.durationDays;
-  const isExactRegion = best.regionId === values.destinationRegionId;
-  const isExact = isExactDuration && isExactRegion && scored[0].score > 15;
-
-  let adjustmentNote: string | null = null;
-  let matchType: "exact" | "adapted" | "contextual" | "fallback" = "exact";
-
-  if (!isExactRegion) {
-    matchType = "fallback";
-    adjustmentNote = "Wilayah yang kamu pilih belum memiliki rute rekomendasi spesifik. Kami menampilkan rute inspirasi dari wilayah lain.";
-  } else if (!isExactDuration) {
-    matchType = "adapted";
-    adjustmentNote = `Rute ini diadaptasi dari rekomendasi ${best.durationDays} hari menjadi ${values.durationDays} hari agar sesuai dengan ketersediaan waktumu.`;
-  }
-
-  // 4. Build output
-  const adaptedStops = adaptStops(best.stops, best.durationDays, values.durationDays);
-  
-  // Clean up province list based on adapted stops
-  const newProvinceIds = Array.from(new Set(adaptedStops.map(s => s.provinceId)));
-
-  const rec: RouteRecommendation = {
-    ...createRouteRecommendation(best, matchType),
-    durationDays: values.durationDays, // Strictly respect user input
-    regionId: values.destinationRegionId || best.regionId,
-    provinceIds: newProvinceIds,
-    stops: adaptedStops,
-    interests: values.interests.length > 0 ? values.interests : [...best.interests],
-    budgetLabel: `Estimasi ${values.budgetLevel || 'menengah'}`,
-    paceLabel: values.travelPace.charAt(0).toUpperCase() + values.travelPace.slice(1),
-    assumptions: [
-      getBudgetExplanation(values.budgetLevel),
-      getPaceExplanation(values.travelPace),
-      ...buildOriginAssumptions(values.originProvinceId, values.destinationRegionId || best.regionId)
-    ],
-    originalValuesSnapshot: values,
-    sourceRefs: [
-      {
-        id: "ref-atlas-1",
-        title: "Database Destinasi NUSANTARAYA",
-        supports: "Cakupan rekomendasi stop",
-      }
-    ]
-  };
-
-  return {
-    recommendation: rec,
-    isExact,
-    adjustmentNote,
-  };
-}
-
-export function getTopPresets(
-  values: RoutePlannerFormValues,
-  count: number = 3
-): RouteRecommendation[] {
-  const scored = ROUTE_PRESETS.map((preset, index) =>
-    scorePreset(preset, values, index)
-  );
-
+  // 2. Score Candidates
+  const scored = validPresets.map((preset, index) => scorePreset(preset, values, index));
   scored.sort((a, b) => {
     if (b.score !== a.score) return b.score - a.score;
     return a.index - b.index;
   });
 
-  return scored
-    .slice(0, count)
-    .map((s) => presetToRecommendation(s.preset, "exact"));
+  const best = scored[0].preset;
+  const policy = (ROUTE_ADAPTATION_POLICY as any)[best.id]?.[reqDuration];
+  
+  const createRec = (preset: RoutePresetDefinition, mType: RouteMatchType): RouteRecommendation => {
+    return {
+      ...createRouteRecommendation(preset, mType),
+      durationDays: preset.durationDays,
+      requestedDuration: reqDuration,
+      actualDuration: preset.durationDays,
+      interests: values.interests.length > 0 ? values.interests : [...preset.interests],
+      budgetLabel: `Estimasi ${values.budgetLevel || 'menengah'}`,
+      paceLabel: values.travelPace.charAt(0).toUpperCase() + values.travelPace.slice(1),
+      assumptions: [
+        getBudgetExplanation(values.budgetLevel),
+        getPaceExplanation(values.travelPace),
+        ...buildOriginAssumptions(values.originProvinceId, preset.regionId)
+      ],
+      originalValuesSnapshot: values,
+      sourceRefs: [
+        {
+          id: "ref-atlas-1",
+          title: "Database Destinasi NUSANTARAYA",
+          supports: "Cakupan rekomendasi stop",
+        }
+      ]
+    };
+  };
+
+  // 3. Resolve matched preset
+  if (policy && (policy.type === "identity" || policy.type === "use-existing-route")) {
+    const targetPreset = ROUTE_PRESETS.find(p => p.id === policy.targetRouteId);
+    if (targetPreset) {
+      const isExact = policy.type === "identity";
+      const mType: RouteMatchType = isExact ? "exact-preset" : "adapted-preset";
+      const rec = createRec(targetPreset, mType);
+      
+      // Verify itinerary Phase 3
+      const itinRes = resolveRouteItinerary(rec);
+      if (itinRes.status === "ready") {
+        return {
+          status: "matched",
+          recommendation: rec,
+          metadata: {
+            matchType: mType,
+            requestedRegion: reqRegion,
+            requestedDuration: reqDuration,
+            actualDuration: targetPreset.durationDays as SupportedRouteDuration,
+            reason: isExact ? "Sesuai dengan preferensi." : (policy as any).reason,
+          },
+          alternatives: []
+        };
+      }
+    }
+  }
+
+  // 4. Fallback (Alternatives in same region)
+  const alts = validPresets.map(p => createRec(p, "fallback-preset"));
+  const fallbackRec = alts.find(a => resolveRouteItinerary(a).status === "ready");
+
+  if (fallbackRec) {
+    // Return as fallback matched if we just want one fallback result
+    // The prompt says: "Jika satu fallback dipilih sebagai recommendation, tampilkan badge: Alternatif preset"
+    return {
+      status: "matched",
+      recommendation: fallbackRec,
+      metadata: {
+        matchType: "fallback-preset",
+        requestedRegion: reqRegion,
+        requestedDuration: reqDuration,
+        actualDuration: fallbackRec.durationDays as SupportedRouteDuration,
+        reason: policy?.type === "unsupported" ? policy.reason : "Durasi yang diminta belum tersedia.",
+      },
+      alternatives: alts.filter(a => a.id !== fallbackRec.id)
+    };
+  }
+
+  return {
+    status: "alternatives",
+    recommendation: null,
+    metadata: {
+      matchType: null,
+      requestedRegion: reqRegion,
+      requestedDuration: reqDuration,
+      actualDuration: null,
+      reason: "Tidak ada rute yang sepenuhnya cocok dengan durasi ini.",
+    },
+    alternatives: alts
+  };
+}
+
+export function getTopPresets(values: RoutePlannerFormValues, count: number = 3): RouteRecommendation[] {
+  const scored = ROUTE_PRESETS.map((preset, index) => scorePreset(preset, values, index));
+  scored.sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return a.index - b.index;
+  });
+  return scored.slice(0, count).map(s => presetToRecommendation(s.preset, "exact-preset"));
 }

@@ -15,6 +15,7 @@ import type {
   RouteStop,
 } from "@/types/route-planner";
 import { ROUTE_SCHEMA_VERSION } from "@/types/route-planner";
+import type { ProvinceId } from "@/data/provinces/provinceIds";
 
 export interface RoutePresetMedia {
   src: string;
@@ -37,7 +38,7 @@ export interface RoutePresetDefinition {
   interests: RouteInterest[];
   supportedPaces: TravelPace[];
   supportedBudgets: BudgetLevel[];
-  provinceIds: string[];
+  provinceIds: ProvinceId[];
   stops: RouteStop[];
   budgetLabel: string;
   paceLabel: string;
@@ -736,7 +737,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
  */
 export function createRouteRecommendation(
   preset: RoutePresetDefinition,
-  matchType: "exact" | "adapted" | "contextual" | "fallback" = "exact"
+  matchType: "exact-preset" | "adapted-preset" | "fallback-preset" = "exact-preset"
 ): RouteRecommendation {
   return {
     id: preset.id,
@@ -759,7 +760,9 @@ export function createRouteRecommendation(
 
 export function presetToRecommendation(
   preset: RoutePresetDefinition,
-  matchType: "exact" | "adapted" | "contextual" | "fallback" = "exact"
+  matchType: "exact-preset" | "adapted-preset" | "fallback-preset" = "exact-preset"
 ): RouteRecommendation {
   return createRouteRecommendation(preset, matchType);
 }
+
+

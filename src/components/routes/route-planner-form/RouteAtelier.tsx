@@ -1,3 +1,5 @@
+import { navigateToRouteSection } from "@/lib/routes/navigateToRouteSection";
+import { ROUTE_SECTION_IDS } from "@/lib/routes/routeSections";
 "use client";
 
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
@@ -97,7 +99,7 @@ export function RouteAtelier() {
     if (presetId) {
       const preset = ROUTE_PRESETS.find(p => p.id === presetId);
       if (preset) {
-        const rec = presetToRecommendation(preset, "exact");
+        const rec = presetToRecommendation(preset, "exact-preset");
         setResult(rec);
         setStatus("success");
         setResultSource("url");
@@ -162,7 +164,7 @@ export function RouteAtelier() {
     router.replace(`/routes${qs}`, { scroll: false });
     
     setTimeout(() => {
-      document.getElementById("route-atelier")?.scrollIntoView({ behavior: "smooth" });
+      navigateToRouteSection("planner");
     }, 50);
   }, [router, activeSource, activeJourneyId]);
 
@@ -184,12 +186,12 @@ export function RouteAtelier() {
 
     announcer.announce(`Preferensi diisi dari rute: ${preset.title}. Anda dapat meninjaunya di form.`);
     setTimeout(() => {
-      document.getElementById("route-atelier")?.scrollIntoView({ behavior: "smooth" });
+      navigateToRouteSection("planner");
     }, 50);
   }, [values, router, activeJourneyId]);
 
   const handleViewRoute = useCallback((preset: RoutePresetDefinition) => {
-    const rec = presetToRecommendation(preset, "exact");
+    const rec = presetToRecommendation(preset, "exact-preset");
     setResult(rec);
     setStatus("success");
     setResultSource("preset");
@@ -207,8 +209,7 @@ export function RouteAtelier() {
     
     announcer.announce(`Membuka rute: ${preset.title}`);
     requestAnimationFrame(() => {
-      const resultSection = document.getElementById("route-recommendation-result");
-      resultSection?.scrollIntoView({ behavior: "smooth", block: "start" });
+      navigateToRouteSection("result");
     });
   }, [values, router, activeSource, activeJourneyId]);
 
@@ -226,28 +227,34 @@ export function RouteAtelier() {
     trackRoutePlannerEvent("route_generate_started", buildAnalyticsPayload(values));
     announcer.announce("Menyusun rute perjalanan Anda. Mohon tunggu.", "polite");
 
-    // Remove artificial delay for better UX
     try {
       const res = matchRoutePreset(values);
-      setStatus(res.recommendation.matchType === "fallback" ? "fallback" : "success");
-      setResult(res.recommendation);
-      setAdjustmentNote(res.adjustmentNote);
-      setResultSource("form");
-      setFocusOnReveal(true);
-      trackRoutePlannerEvent(
-        res.recommendation.matchType === "fallback" ? "route_generate_fallback_used" : "route_generate_succeeded",
-        { ...buildAnalyticsPayload(values), matchType: res.recommendation.matchType }
-      );
-      announcer.announce(`Rute berhasil dibuat: ${res.recommendation.title}`, "polite");
+      if (res.status === "matched") {
+        setStatus(res.metadata.matchType === "fallback-preset" ? "fallback" : "success");
+        setResult(res.recommendation);
+        setAdjustmentNote(res.metadata.reason);
+        setResultSource("form");
+        setFocusOnReveal(true);
+        trackRoutePlannerEvent(
+          res.metadata.matchType === "fallback-preset" ? "route_generate_fallback_used" : "route_generate_succeeded",
+          { ...buildAnalyticsPayload(values), matchType: res.metadata.matchType || undefined }
+        );
+        announcer.announce(`Rute berhasil dibuat: ${res.recommendation.title}`, "polite");
+      } else {
+        setStatus("fallback");
+        setResult(null);
+        setAdjustmentNote(res.metadata.reason);
+        setResultSource("form");
+        setFocusOnReveal(true);
+        announcer.announce("Tidak ada rute yang cocok.", "polite");
+      }
     } catch {
-      // FIX: use actual values for fallback generation, not DEFAULT_FORM_VALUES
-      const fallback = matchRoutePreset(sanitizeFormValues(values));
-      setStatus("fallback");
-      setResult(fallback.recommendation);
-      setAdjustmentNote(fallback.adjustmentNote);
+      setStatus("error");
+      setResult(null);
+      setAdjustmentNote("Terjadi kesalahan sistem saat mencari rute.");
       setResultSource("form");
       setFocusOnReveal(true);
-      announcer.announce("Rute berhasil dibuat dengan penyesuaian fallback.", "polite");
+      announcer.announce("Terjadi kesalahan sistem.", "assertive");
     }
     
     // Remove any preset ID from URL when generating from form
@@ -256,8 +263,7 @@ export function RouteAtelier() {
     
     // Focus management — scroll to result section, focus after animation
     requestAnimationFrame(() => {
-      const resultSection = document.getElementById("route-recommendation-result");
-      resultSection?.scrollIntoView({ behavior: "smooth", block: "start" });
+      navigateToRouteSection("result");
     });
   }, [values, router, activeSource, activeJourneyId]);
 
@@ -290,7 +296,7 @@ export function RouteAtelier() {
 
   return (
     <section 
-      id="route-atelier" 
+      id={ROUTE_SECTION_IDS.planner} 
       style={plannerTokens}
       className="relative w-full pt-32 pb-16 md:pt-40 md:pb-24 bg-[var(--planner-canvas)] font-inter text-[var(--planner-ink)]"
     >
@@ -399,3 +405,7 @@ export function RouteAtelier() {
     </section>
   );
 }
+
+
+
+

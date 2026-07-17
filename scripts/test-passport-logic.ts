@@ -37,7 +37,8 @@ function runTests() {
 
   // 2. Legacy Migration
   const legacyPassport = normalizePassportData({
-    stamps: ["13", "34", "invalid-slug", ""], // Sumatera Barat, DI Yogyakarta, invalid
+    // Test: 13, 34 (legacy strings), 33 (legacy number if supported, passing as unknown), "jawa-timur" (canonical)
+    stamps: ["13", "34", 33 as unknown as string, "jawa-timur", "invalid-slug", ""], 
     startedProvinces: ["51", "123"],
     plannedProvinces: ["53", "not-a-province"],
     completedQuizzes: ["13", "unknown"],
@@ -45,6 +46,9 @@ function runTests() {
     xp: -10
   });
   assert(legacyPassport.stamps.includes("sumatera-barat"), "Migrated 13 to sumatera-barat");
+  assert(legacyPassport.stamps.includes("di-yogyakarta"), "Migrated 34 to di-yogyakarta");
+  assert(legacyPassport.stamps.includes("jawa-tengah"), "Migrated number 33 to jawa-tengah");
+  assert(legacyPassport.stamps.includes("jawa-timur"), "Canonical slug jawa-timur preserved");
   assert(!legacyPassport.stamps.includes("invalid-slug"), "Invalid stamp removed");
   assert(legacyPassport.startedProvinces?.includes("bali") === true, "Migrated 51 to bali");
   assert(legacyPassport.startedProvinces?.includes("123") === false, "Numeric runtime ID removed from started");

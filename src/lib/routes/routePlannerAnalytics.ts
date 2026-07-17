@@ -74,7 +74,7 @@ export interface RoutePlannerAnalyticsPayload {
   travelPace?: string;
   journeyId?: string;
   presetId?: string;
-  matchType?: "exact" | "adapted" | "contextual" | "fallback";
+  matchType?: import("@/types/route-planner").RouteMatchType;
   locale?: "id" | "en";
 }
 
@@ -119,3 +119,4 @@ export function buildAnalyticsPayload(
     ...extra,
   };
 }
+

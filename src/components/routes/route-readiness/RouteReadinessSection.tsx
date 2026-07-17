@@ -1,9 +1,9 @@
+import { ROUTE_SECTION_IDS } from "@/lib/routes/routeSections";
 "use client";
 
 import { useMemo } from "react";
-import type { RouteRecommendation, RoutePlannerStatus } from "@/types/route-planner";
-import type { RouteItinerary } from "@/lib/routes/itinerary/routeItinerarySchema";
-import { resolveRouteReadiness } from "@/lib/routes/readiness/resolveRouteReadiness";
+import type { RouteRecommendation } from "@/types/route-planner";
+import type { RouteReadinessDossier } from "@/lib/routes/readiness/routeReadinessSchema";
 import { useLanguage } from "@/context/app-context";
 
 import { RouteReadinessSkeleton } from "./RouteReadinessSkeleton";
@@ -16,31 +16,15 @@ import { ChecklistModule } from "./ChecklistModule";
 
 interface RouteReadinessSectionProps {
   result: RouteRecommendation | null;
-  itinerary: RouteItinerary | null;
-  status: RoutePlannerStatus;
+  dossier: RouteReadinessDossier | null;
+  status: "idle" | "resolving" | "ready" | "partial" | "error";
 }
 
-export function RouteReadinessSection({ result, itinerary, status }: RouteReadinessSectionProps) {
+export function RouteReadinessSection({ result, dossier, status }: RouteReadinessSectionProps) {
   const { language } = useLanguage();
   const locale = language as "id" | "en";
 
-  const dossier = useMemo(() => {
-    if (!result) return null;
-    
-    // Generating dummy versions since we don't have true versioning on the objects yet
-    const routeVersion = "1.0";
-    const itineraryVersion = itinerary?.version || "1.0";
-
-    return resolveRouteReadiness(
-      result,
-      itinerary,
-      routeVersion,
-      itineraryVersion,
-      locale
-    );
-  }, [result, itinerary, locale]);
-
-  if (status === "loading") {
+  if (status === "resolving") {
     return (
       <section className="w-full mt-12 md:mt-16" aria-labelledby="route-readiness-title">
         <RouteReadinessSkeleton />
@@ -48,11 +32,30 @@ export function RouteReadinessSection({ result, itinerary, status }: RouteReadin
     );
   }
 
-  if (!result || !dossier) return null;
+  if (!result) return null;
+
+  if (status === "partial" && !dossier) {
+    return (
+      <section className="w-full mt-12 lg:mt-24 text-center">
+        <h2 className="text-2xl font-bold mb-4" tabIndex={-1} data-route-section-heading>Persiapan Perjalanan belum tersedia</h2>
+        <p className="text-muted-foreground">Persiapan rute ini sedang diproses.</p>
+      </section>
+    );
+  }
+
+  if (status === "error" && !dossier) {
+    return (
+      <section className="w-full mt-12 lg:mt-24 text-center">
+        <h2 className="text-2xl font-bold mb-4 text-destructive" tabIndex={-1} data-route-section-heading>Gagal Memuat Persiapan Perjalanan</h2>
+      </section>
+    );
+  }
+
+  if (!dossier) return null;
 
   return (
     <section
-      id="route-readiness"
+      id={ROUTE_SECTION_IDS.readiness}
       aria-labelledby="route-readiness-title"
       className="w-full mt-12 md:mt-16 scroll-mt-32"
     >
@@ -70,3 +73,8 @@ export function RouteReadinessSection({ result, itinerary, status }: RouteReadin
     </section>
   );
 }
+
+
+
+
+

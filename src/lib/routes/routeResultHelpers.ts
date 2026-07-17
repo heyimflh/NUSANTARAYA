@@ -56,10 +56,9 @@ export function deriveRouteMatchType(
   source: "form" | "preset" | "url" = "form"
 ): RouteMatchType {
   if (source === "url") return "restored";
-  if (status === "fallback" || recommendation.matchType === "fallback") return "fallback";
-  if (source === "preset" && recommendation.matchType === "exact") return "preset";
-  // "adapted" or "contextual" from form => dynamic
-  return "dynamic";
+  if (status === "fallback" || recommendation.matchType === "fallback-preset") return "fallback-preset";
+  if (source === "preset" && recommendation.matchType === "exact-preset") return "exact-preset";
+  return recommendation.matchType as RouteMatchType;
 }
 
 // ─── Reason Code Derivation ───────────────────────────────────────────────────
@@ -109,12 +108,12 @@ export function deriveReasonCodes(
   }
 
   // Fallback
-  if (result.matchType === "fallback") {
+  if (result.matchType === "fallback-preset") {
     codes.push("FALLBACK_NEAREST");
   }
 
   // Scope reduced (adapted from different duration)
-  if (result.matchType === "adapted") {
+  if (result.matchType === "adapted-preset") {
     codes.push("SCOPE_REDUCED");
   }
 
@@ -381,22 +380,23 @@ export function getMatchTypeLabel(
   locale: "id" | "en" = "id"
 ): string {
   const labels: Record<RouteMatchType, { id: string; en: string }> = {
-    dynamic: {
-      id: "Disusun dari preferensimu",
-      en: "Generated from your preferences",
+    "exact-preset": {
+      id: "Preset paling sesuai",
+      en: "Best matching preset",
     },
-    preset: {
-      id: "Rute terkurasi",
-      en: "Curated route",
+    "adapted-preset": {
+      id: "Preset yang disesuaikan",
+      en: "Adapted preset",
     },
-    fallback: {
-      id: "Rekomendasi terdekat",
-      en: "Nearest recommendation",
+    "fallback-preset": {
+      id: "Alternatif preset",
+      en: "Alternative preset",
     },
     restored: {
       id: "Rute tersimpan dipulihkan",
       en: "Saved route restored",
     },
   };
-  return locale === "en" ? labels[matchType].en : labels[matchType].id;
+  return locale === "en" ? labels[matchType]?.en || labels["exact-preset"].en : labels[matchType]?.id || labels["exact-preset"].id;
 }
+

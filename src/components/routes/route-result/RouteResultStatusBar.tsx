@@ -17,26 +17,26 @@ interface RouteResultStatusBarProps {
 }
 
 const MATCH_TYPE_ICONS: Record<RouteMatchType, React.ReactNode> = {
-  dynamic: <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />,
-  preset: <BookOpen className="w-3.5 h-3.5" aria-hidden="true" />,
-  fallback: <AlertCircle className="w-3.5 h-3.5" aria-hidden="true" />,
+  "exact-preset": <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />,
+  "adapted-preset": <BookOpen className="w-3.5 h-3.5" aria-hidden="true" />,
+  "fallback-preset": <AlertCircle className="w-3.5 h-3.5" aria-hidden="true" />,
   restored: <RefreshCw className="w-3.5 h-3.5" aria-hidden="true" />,
 };
 
 const MATCH_TYPE_COLORS: Record<RouteMatchType, { dot: string; text: string; bg: string; border: string }> = {
-  dynamic: {
+  "exact-preset": {
     dot: "bg-[#2D5A27]",
     text: "text-[#2D5A27]",
     bg: "bg-[#F0F7EF]",
     border: "border-[#2D5A27]/20",
   },
-  preset: {
+  "adapted-preset": {
     dot: "bg-[#C9A84C]",
     text: "text-[#A08A3A]",
     bg: "bg-[#FFFDF8]",
     border: "border-[#C9A84C]/30",
   },
-  fallback: {
+  "fallback-preset": {
     dot: "bg-[#C09A3A]",
     text: "text-[#7A5E1A]",
     bg: "bg-[#FFF8EC]",
@@ -82,3 +82,4 @@ export function RouteResultStatusBar({
     </div>
   );
 }
+

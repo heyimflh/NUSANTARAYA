@@ -1,3 +1,4 @@
+import { ROUTE_SECTION_IDS } from "@/lib/routes/routeSections";
 "use client";
 
 /**
@@ -26,10 +27,10 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { RouteRecommendation, RoutePlannerFormValues, RoutePlannerStatus } from "@/types/route-planner";
-import type { RouteItinerary } from "@/lib/routes/itinerary/routeItinerarySchema";
 import { deriveRouteMatchType } from "@/lib/routes/routeResultHelpers";
 import { trackRoutePlannerEvent } from "@/lib/routes/routePlannerAnalytics";
-import { useLanguage } from "@/context/app-context";
+import { useLanguage, usePassport } from "@/context/app-context";
+import { useActiveRouteWorkspace } from "@/hooks/useActiveRouteWorkspace";
 
 // Sub-components
 import { RouteResultSkeleton } from "./RouteResultSkeleton";
@@ -71,12 +72,20 @@ export function RouteRecommendationResultSection({
   focusOnReveal = false,
 }: RouteRecommendationResultSectionProps) {
   const { language } = useLanguage();
+  const { passport } = usePassport();
   const locale = language as "id" | "en";
   const headingRef = useRef<HTMLHeadingElement>(null);
   const isPresetSource = resultSource === "preset";
 
+  const workspace = useActiveRouteWorkspace(
+    status === "success" || status === "fallback" ? result : null,
+    values,
+    passport,
+    resultSource,
+    locale
+  );
+
   // ── Section 6 state: resolved itinerary + bidirectional selection ──
-  const [resolvedItinerary, setResolvedItinerary] = useState<RouteItinerary | null>(null);
   // Selection from itinerary → map
   const [mapExternalSelection, setMapExternalSelection] = useState<{
     dayNumber: number;
@@ -106,7 +115,7 @@ export function RouteRecommendationResultSection({
   useEffect(() => {
     setMapExternalSelection(null);
     setItineraryExternalDay(null);
-  }, [result?.id]);
+  }, [workspace.activeRouteKey]);
 
   // ── Focus management: only focus after explicit submit ──
   useEffect(() => {
@@ -158,13 +167,13 @@ export function RouteRecommendationResultSection({
 
   // ── Derive match type from status + recommendation ──
   const matchType = deriveRouteMatchType(status, result, resultSource);
-  const isAdjusted = !!adjustmentNote && matchType !== "fallback";
+  const isAdjusted = !!adjustmentNote && matchType !== "fallback-preset";
 
   return (
     <AnimatePresence mode="wait">
       <motion.section
         key={result.id}
-        id="route-recommendation-result"
+        id={ROUTE_SECTION_IDS.result}
         aria-labelledby="route-result-title"
         className="w-full scroll-mt-32"
         initial={{ opacity: 0, y: 16 }}
@@ -242,20 +251,23 @@ export function RouteRecommendationResultSection({
         {/* Day-by-day itinerary section */}
         <div className="w-full">
           <DayByDayItinerarySection
-            result={result}
-            status={status}
+            result={workspace.recommendation}
+            status={workspace.status}
+            itinerary={workspace.itinerary}
+            activeRouteKey={workspace.activeRouteKey}
             onViewInMap={handleViewInMap}
             externalActiveDay={itineraryExternalDay}
-            onItineraryResolved={setResolvedItinerary}
           />
         </div>
 
         {/* Section 6: Route Map + Transport Summary */}
         <div className="w-full">
           <RouteMapTransportSection
-            result={result}
-            itinerary={resolvedItinerary}
-            status={status}
+            result={workspace.recommendation}
+            mapModel={workspace.mapModel}
+            transportOptions={workspace.transportOptions}
+            status={workspace.status}
+            activeRouteKey={workspace.activeRouteKey}
             externalDaySelection={mapExternalSelection}
             onViewInItinerary={handleViewInItinerary}
           />
@@ -264,19 +276,22 @@ export function RouteRecommendationResultSection({
         {/* Section 7: Travel Readiness Dossier (Budget, Culinary, Etiquette, Checklist) */}
         <div className="w-full">
           <RouteReadinessSection
-            result={result}
-            itinerary={resolvedItinerary}
-            status={status}
+            result={workspace.recommendation}
+            dossier={workspace.readiness}
+            status={workspace.status}
           />
         </div>
 
         {/* Section 8: Save to Passport + Ask RANI */}
         <div className="w-full">
           <RouteSaveRaniSection
-            result={result}
-            itinerary={resolvedItinerary}
+            result={workspace.recommendation}
+            itinerary={workspace.itinerary}
             values={values}
-            resultSource={resultSource}
+            savedRouteSnapshot={workspace.saveSnapshot}
+            canSavePassport={workspace.canSavePassport}
+            canUseRani={workspace.canUseRani}
+            activeRouteKey={workspace.activeRouteKey}
             onApplyDraft={(draft) => {
               // Implementation detail for applying a draft. 
               // Since this is MVP, the draft may be a mock. 
@@ -289,3 +304,7 @@ export function RouteRecommendationResultSection({
     </AnimatePresence>
   );
 }
+
+
+
+

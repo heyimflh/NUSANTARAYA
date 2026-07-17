@@ -34,8 +34,8 @@ export function RouteResultDisclosure({
   adjustmentNote,
   locale = "id",
 }: RouteResultDisclosureProps) {
-  const showFallbackNote = matchType === "fallback";
-  const showAdjustmentNote = !!adjustmentNote && matchType !== "fallback";
+  const showFallbackNote = matchType === "fallback-preset";
+  const showAdjustmentNote = !!adjustmentNote && matchType !== "fallback-preset";
 
   return (
     <div className="flex flex-col gap-3">
@@ -80,3 +80,4 @@ export function RouteResultDisclosure({
     </div>
   );
 }
+

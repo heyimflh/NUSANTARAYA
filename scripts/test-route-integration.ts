@@ -1,100 +1,86 @@
 import fs from "fs";
 import path from "node:path";
-import { ROUTE_PRESETS } from "../src/data/routes/routePresets";
+import { ROUTE_PRESETS, presetToRecommendation } from "../src/data/routes/routePresets";
+import { resolveActiveRouteWorkspace } from "../src/lib/routes/workspace/resolveActiveRouteWorkspace";
+import { getRouteSectionHref } from "../src/lib/routes/routeSections";
+import { getRouteScrollBehavior } from "../src/lib/routes/navigateToRouteSection";
+import { DEFAULT_PASSPORT } from "../src/lib/passport/transitions";
+import { RoutePlannerFormValues } from "../src/types/route-planner";
 
-function assertInfra(condition: boolean, message: string): void {
+function assertIntegration(condition: boolean, message: string): void {
   if (!condition) {
-    console.error(`INFRA FAIL: ${message}`);
+    console.error(`INTEGRATION FAIL: ${message}`);
     process.exit(1);
   }
-  console.log(`INFRA PASS: ${message}`);
 }
 
-function recordContract(condition: boolean, message: string): void {
-  if (!condition) {
-    console.warn(`CONTRACT FAIL: ${message}`);
-  } else {
-    console.log(`CONTRACT PASS: ${message}`);
-  }
-}
+const mockValues: RoutePlannerFormValues = {
+  originProvinceId: "jawa-barat",
+  durationDays: 5,
+  destinationRegionId: "jawa",
+  interests: ["budaya"],
+  budgetLevel: "menengah", travelPace: "santai",
+};
 
 async function runIntegration() {
-  console.log("Starting Route Integration Test...");
+  console.log("Testing Navigation Helpers...");
+  assertIntegration(getRouteSectionHref("planner") === "#route-atelier", "planner href correct");
+  assertIntegration(getRouteSectionHref("presets") === "#preset-routes", "presets href correct");
+  assertIntegration(getRouteSectionHref("result") === "#route-recommendation-result", "result href correct");
+  assertIntegration(getRouteSectionHref("itinerary") === "#day-by-day-itinerary", "itinerary href correct");
+  assertIntegration(getRouteSectionHref("map") === "#route-map-transport-summary", "map href correct");
+  assertIntegration(getRouteSectionHref("readiness") === "#route-readiness", "readiness href correct");
+  assertIntegration(getRouteSectionHref("saveRani") === "#route-save-rani-section", "saveRani href correct");
+  assertIntegration(getRouteScrollBehavior(true) === "auto", "reduced motion produces auto");
+  assertIntegration(getRouteScrollBehavior(false) === "smooth", "normal motion produces smooth");
 
-  // 1-5. Resolvers and modules check
-  try {
-    const { presetToRecommendation } = await import("../src/data/routes/routePresets");
-    assertInfra(!!presetToRecommendation, "Recommendation producer tersedia");
+  console.log("Starting Route Integration Test (Phase 5)...");
 
-    // Some of these might not exist in Phase 0, we'll try to import and if they fail, infra fails if we are strictly asserting, but actually phase 0 says infra fails if module cannot be imported, but we only have Phase 0 source.
-    // If they don't exist, we just catch and fail infra.
-    let itineraryResolver, mapResolver, readinessResolver, passportSave;
-    try { 
-      const mod1 = "../src/lib/routes/itinerary/resolveItinerary";
-      itineraryResolver = await import(mod1); 
-    } catch {}
-    try { 
-      const mod2 = "../src/lib/routes/map/resolveRouteMap";
-      mapResolver = await import(mod2); 
-    } catch {}
-    try { 
-      const mod3 = "../src/lib/routes/readiness/resolveReadiness";
-      readinessResolver = await import(mod3); 
-    } catch {}
-    try { 
-      const mod4 = "../src/lib/passport/transitions";
-      passportSave = await import(mod4); 
-    } catch {}
-
-    recordContract(!!itineraryResolver, "Itinerary resolver tersedia");
-    recordContract(!!mapResolver, "Route map resolver tersedia");
-    recordContract(!!readinessResolver, "Readiness resolver tersedia");
-    recordContract(!!passportSave, "Passport save transition tersedia");
-
-  } catch (e) {
-    assertInfra(false, "Module import error: " + (e as Error).message);
-  }
-
-  // File scans
-  const checkFileContent = (relPath: string, regex: RegExp) => {
-    try {
-      const content = fs.readFileSync(path.join(process.cwd(), relPath), "utf8");
-      return regex.test(content);
-    } catch {
-      return false;
-    }
-  };
-
-  recordContract(checkFileContent("src/app/explore/page.tsx", /\/routes/), "Explore mempunyai link/query menuju /routes");
-  recordContract(checkFileContent("src/app/page.tsx", /\/routes/), "Homepage mempunyai link menuju /routes");
-  recordContract(checkFileContent("src/components/routes/route-save-rani/FinalRouteSnapshot.tsx", /\/passport|passport/), "Route mempunyai link menuju Passport");
-  recordContract(checkFileContent("src/components/explore/rani-map-assistant/RaniMapAssistantSection.tsx", /RANI|rani/), "Route mempunyai action RANI");
-
-  // Route & Itinerary matching
-  let missingItineraries = 0;
   for (const preset of ROUTE_PRESETS) {
-    let hasItinerary = false;
-    try {
-      const itins = require("../src/data/routes/presetItineraries").presetItineraries;
-      if (itins && itins[preset.id]) hasItinerary = true;
-    } catch {}
-    
-    if (!hasItinerary) {
-      console.warn(`PRESET CONTRACT: Preset ${preset.id} belum mempunyai itinerary sendiri.`);
-      missingItineraries++;
-    }
-  }
-  recordContract(missingItineraries === 0, "Semua preset memiliki itinerary sendiri");
-  recordContract(true, "Catat penggunaan fallback itinerary Jawa."); // Placeholder for actual logic
-  recordContract(true, "Catat mismatch route ID.");
-  recordContract(true, "Catat mismatch province ID.");
-  recordContract(checkFileContent("src/app/passport/page.tsx", /export default function/), "Catat link /passport yang tidak tersedia.");
-  recordContract(true, "Catat query RANI yang tidak mempunyai consumer.");
-  recordContract(true, "Catat missing anchor.");
+    // 1. Match/preset menghasilkan recommendation
+    const rec = presetToRecommendation(preset);
+    assertIntegration(!!rec, `Recommendation berhasil dibuat untuk ${preset.id}`);
 
-  console.log("Integration Test Complete.");
-  // Exit 0 to simulate success since Phase 1 is fixing the contracts
+    // 2. Resolver menghasilkan workspace ready
+    const workspace = resolveActiveRouteWorkspace(
+      rec,
+      mockValues,
+      DEFAULT_PASSPORT,
+      "preset",
+      "id"
+    );
+    assertIntegration(workspace.status === "ready", `Workspace ready untuk ${preset.id}. Errors: ${JSON.stringify(workspace.errors)}`);
+    assertIntegration(!!workspace.itinerary, "Itinerary valid didapatkan dari workspace");
+
+    // 3. Recommendation ID sama dengan activeRouteKey prefix
+    assertIntegration(workspace.activeRouteKey?.startsWith(rec.id) || false, `ID cocok untuk ${preset.id}`);
+
+    // 4. Recommendation version sama dengan itinerary version
+    assertIntegration(rec.version === workspace.itinerary!.version, `Version cocok untuk ${preset.id}`);
+
+    // 5. Map menggunakan route ID yang sama
+    const mapModel = workspace.mapModel;
+    assertIntegration(!!mapModel && mapModel.routeId === rec.id, `Map ID cocok untuk ${preset.id}`);
+
+    // 6. Map menggunakan stop itinerary yang sesuai
+    const mapStops = mapModel!.stops.map((s: any) => s.id);
+    const itineraryStops = Array.from(new Set(workspace.itinerary!.days.map(d => d.stopId).filter(Boolean)));
+    assertIntegration(mapStops.length === itineraryStops.length, `Jumlah map stops sesuai dengan itinerary untuk ${preset.id}`);
+
+    // 7. Passport snapshot
+    assertIntegration(workspace.canSavePassport, `Passport can save route ${rec.id}`);
+    assertIntegration(workspace.saveSnapshot?.routeId === rec.id, `Passport menyimpan rute ${rec.id} yang benar`);
+
+    console.log(`o. Integration ${preset.id} passed.`);
+  }
+
+  console.log("Route Integration Test Complete. PASS");
   process.exit(0);
 }
 
 runIntegration();
+
+
+
+
+

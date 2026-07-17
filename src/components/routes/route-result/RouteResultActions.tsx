@@ -1,3 +1,4 @@
+import { navigateToRouteSection } from "@/lib/routes/navigateToRouteSection";
 "use client";
 
 /**
@@ -81,10 +82,7 @@ export function RouteResultActions({
   // ── Primary CTA: scroll to itinerary ──
   const handleItinerary = () => {
     trackRoutePlannerEvent("route_result_itinerary_clicked");
-    const target = document.getElementById("day-by-day-itinerary");
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    navigateToRouteSection("itinerary");
   };
 
   // ── Edit preferences ──
@@ -96,10 +94,7 @@ export function RouteResultActions({
   // ── View on map ──
   const handleMap = () => {
     trackRoutePlannerEvent("route_result_map_clicked");
-    const target = document.getElementById("route-map");
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    navigateToRouteSection("map");
   };
 
   // ── Save to Passport ──
@@ -137,10 +132,7 @@ export function RouteResultActions({
   // ── Alternatives ──
   const handleAlternatives = () => {
     trackRoutePlannerEvent("route_result_alternatives_clicked");
-    const target = document.getElementById("preset-routes");
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    navigateToRouteSection("presets");
   };
 
   // ── Share ──
@@ -305,3 +297,5 @@ export function RouteResultActions({
     </div>
   );
 }
+
+

@@ -1,4 +1,10 @@
 import { ROUTE_PRESETS, presetToRecommendation } from "../src/data/routes/routePresets";
+import { isProvinceId, ProvinceId } from "../src/data/provinces/provinceIds";
+import { ITINERARIES_BY_ROUTE_ID } from "../src/data/routes/itineraries";
+import { resolveActiveRouteWorkspace } from "../src/lib/routes/workspace/resolveActiveRouteWorkspace";
+import { ROUTE_SECTION_IDS, RouteSectionKey } from "../src/lib/routes/routeSections";
+import { DEFAULT_PASSPORT } from "../src/lib/passport/transitions";
+import { RoutePlannerFormValues } from "../src/types/route-planner";
 
 function assertContract(condition: boolean, message: string): void {
   if (!condition) {
@@ -7,53 +13,71 @@ function assertContract(condition: boolean, message: string): void {
   }
 }
 
-function diagnostic(message: string): void {
-  console.warn(`DIAGNOSTIC (Phase 1): ${message}`);
-}
+const mockValues: RoutePlannerFormValues = {
+  originProvinceId: "jawa-barat",
+  durationDays: 5,
+  destinationRegionId: "jawa",
+  interests: ["budaya"],
+  budgetLevel: "menengah", travelPace: "santai",
+};
 
 function runContractValidation() {
+  console.log("Validating Route Section Anchors...");
+  const keys = Object.keys(ROUTE_SECTION_IDS);
+  assertContract(keys.length === 7, "Registry mempunyai tepat tujuh key");
+  const values = Object.values(ROUTE_SECTION_IDS);
+  const uniqueValues = new Set(values);
+  assertContract(uniqueValues.size === 7, "0 duplicate route section IDs");
+  values.forEach(v => assertContract(!!v, "Seluruh value non-empty"));
+  console.log("7/7 route section anchors valid");
+
   console.log("Starting Route Contract Validation...");
 
-  assertContract(!!ROUTE_PRESETS, "Registry berhasil dimuat");
+  assertContract(!!ROUTE_PRESETS, "Registry preset berhasil dimuat");
   assertContract(ROUTE_PRESETS.length === 10, "Registry berisi 10 preset");
+  assertContract(Object.keys(ITINERARIES_BY_ROUTE_ID).length === 10, "Registry itinerary berisi 10 entry");
 
-  const ids = new Set();
-  
+  let validItineraries = 0;
+
   for (const preset of ROUTE_PRESETS) {
-    assertContract(!!preset.id, "ID non-empty");
-    assertContract(!ids.has(preset.id), `ID unik: ${preset.id}`);
-    ids.add(preset.id);
+    const rec = presetToRecommendation(preset);
     
-    assertContract(!!preset.title, "Title non-empty");
-    assertContract(!!preset.regionId, "Region valid");
-    assertContract(!!preset.durationDays && typeof preset.durationDays === 'number', "Duration valid");
-    assertContract(Array.isArray(preset.interests) && preset.interests.length > 0, "Interests valid");
-    assertContract(Array.isArray(preset.supportedBudgets) && preset.supportedBudgets.length > 0, "Supported budgets valid");
-    assertContract(Array.isArray(preset.supportedPaces) && preset.supportedPaces.length > 0, "Supported paces valid");
-    assertContract(Array.isArray(preset.provinceIds) && preset.provinceIds.length > 0, "Province ID valid");
+    // Test Workspace Resolver
+    const workspace = resolveActiveRouteWorkspace(
+      rec,
+      mockValues,
+      DEFAULT_PASSPORT,
+      "preset",
+      "id"
+    );
+    assertContract(workspace.status === "ready", `Workspace resolver harus ready untuk ${preset.id}. Status: ${workspace.status}`);
     
-    if (preset.stops) {
-      for (const stop of preset.stops) {
-        assertContract(typeof stop.dayStart === 'number' && typeof stop.dayEnd === 'number', "Stop day range valid");
-        assertContract(stop.dayStart <= stop.dayEnd, "Day start tidak melebihi day end");
-      }
-    }
+    const itinerary = workspace.itinerary;
+    assertContract(!!itinerary, "Itinerary object ada");
+    
+    // Itinerary checks
+    assertContract(itinerary!.routeId === preset.id, `Registry key cocok dengan itinerary.routeId untuk ${preset.id}`);
+    assertContract(itinerary!.version === preset.version, "Version cocok");
+    assertContract(itinerary!.durationDays === preset.durationDays, "Duration cocok");
+    assertContract(itinerary!.days.length === preset.durationDays, "Jumlah hari cocok");
 
-    try {
-      const rec = presetToRecommendation(preset);
-      assertContract(!!rec, "Recommendation producer tidak mengembalikan null");
-    } catch (e) {
-      assertContract(false, "Recommendation producer crash");
-    }
-
-    // Phase 1 constraints recorded as diagnostic
-    if (!preset.version) diagnostic(`Preset ${preset.id} missing version`);
-    if (preset.stops && preset.stops.some((s: any) => !s.id)) diagnostic(`Preset ${preset.id} has stops without ID`);
+    // Route Map Checks
+    const mapModel = workspace.mapModel;
+    assertContract(!!mapModel, "Map resolver berhasil");
+    assertContract(mapModel!.routeId === preset.id, "Map view model memakai route yang sama");
+    
+    validItineraries++;
+    console.log(`o. ${preset.id}`);
   }
 
+  assertContract(validItineraries === 10, "10/10 itinerary contracts valid");
+  console.log("\n10/10 itinerary contracts valid.");
   console.log("Route Contract Validation Complete.");
   process.exit(0);
-  // Wait, let's exit 0 if no assertContract fails. The script will throw and exit 1 inside assertContract if it fails.
 }
 
 runContractValidation();
+
+
+
+

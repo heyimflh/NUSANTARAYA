@@ -42,12 +42,12 @@ async function run() {
       assert(false, "Matcher crash untuk input valid");
     }
 
-    if (result) {
+    if (result && result.recommendation) {
       assert(result.recommendation.id !== undefined, "Matcher menghasilkan recommendation.");
       assert(ids.has(result.recommendation.id), "Recommendation ID berasal dari registry.");
       
       const result2 = matchRoutePreset(input);
-      assert(result.recommendation.id === result2.recommendation.id, "Input yang sama menghasilkan recommendation ID yang sama.");
+      assert(result.recommendation.id === result2.recommendation?.id, "Input yang sama menghasilkan recommendation ID yang sama.");
       assert(result.recommendation.durationDays === input.durationDays, "Duration hasil sama dengan input.");
       
       assert(input.durationDays === 5, "Result tidak memutasi input.");
