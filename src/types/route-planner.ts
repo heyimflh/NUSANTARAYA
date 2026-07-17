@@ -210,3 +210,54 @@ export interface RoutePlannerValidationError {
   field: keyof RoutePlannerFormValues;
   message: string;
 }
+
+// ─── Section 4: Route Recommendation Result Types ────────────────────────────
+
+/**
+ * How the active recommendation was resolved.
+ * - dynamic: matched from form input via matchRoutePreset engine
+ * - preset:  directly opened via "Lihat Rute" from preset card
+ * - fallback: engine failed or no exact match; nearest preset used
+ * - restored: hydrated from URL ?preset= param or local persistence
+ */
+export type RouteMatchType =
+  | "dynamic"
+  | "preset"
+  | "fallback"
+  | "restored";
+
+/**
+ * Stable, human-readable codes explaining WHY a route was recommended.
+ * Used to generate the primary reason sentence and chips.
+ */
+export type RouteReasonCode =
+  | "REGION_EXACT"        // exact region match
+  | "DURATION_EXACT"      // exact duration match
+  | "INTEREST_OVERLAP"    // interests matched
+  | "PACE_COMPATIBLE"     // travel pace supported
+  | "BUDGET_COMPATIBLE"   // budget level supported
+  | "ORIGIN_CONVENIENT"   // origin province is in or near the route region
+  | "CLUSTER_REALISTIC"   // stops form a realistic geographic cluster
+  | "CULTURAL_DEPTH"      // route has cultural experiences
+  | "CULINARY_DEPTH"      // route has culinary experiences
+  | "FALLBACK_NEAREST"    // this is the nearest preset, not an exact match
+  | "SCOPE_REDUCED";      // scope was reduced to fit duration
+
+/**
+ * How a user's preference relates to the recommendation result.
+ * Used to render each preference chip in the match summary.
+ */
+export type PreferenceMatchState =
+  | "exact"           // matched perfectly
+  | "compatible"      // close match / supported
+  | "adjusted"        // system changed it to fit
+  | "not-applicable"; // preference was not set or not relevant
+
+/** A single chip in the preference match summary. */
+export interface PreferenceMatchChip {
+  id: string;
+  label: string;
+  value: string;
+  state: PreferenceMatchState;
+  note?: string; // shown for "adjusted" state
+}

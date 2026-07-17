@@ -1,6 +1,6 @@
 import React from "react";
 import { type PresetRouteFilters as FilterState } from "@/lib/routes/presetRouteHelpers";
-import { ROUTE_PLANNER_REGION_IDS, ROUTE_DURATIONS, ROUTE_INTERESTS } from "@/types/route-planner";
+import { ROUTE_PLANNER_REGION_IDS, ROUTE_DURATIONS, ROUTE_INTERESTS, type RoutePlannerRegionId, type RouteInterest, type RouteDuration } from "@/types/route-planner";
 
 interface PresetRouteFiltersProps {
   filters: FilterState;
@@ -43,7 +43,8 @@ export function PresetRouteFilters({ filters, onChange, resultCount }: PresetRou
       </div>
 
       {/* Main Collection Filter (Chips) */}
-      <fieldset className="flex flex-wrap justify-center gap-2" aria-label="Filter berdasarkan koleksi">
+      <fieldset className="flex flex-wrap justify-center gap-2">
+        <legend className="sr-only">Filter berdasarkan koleksi</legend>
         {COLLECTIONS.map((c) => {
           const isActive = (filters.collection || "") === c.value;
           return (
@@ -53,8 +54,8 @@ export function PresetRouteFilters({ filters, onChange, resultCount }: PresetRou
               aria-pressed={isActive}
               className={`px-4 py-2 text-sm font-medium rounded-full transition-colors border ${
                 isActive
-                  ? "bg-[var(--planner-ink)] text-white border-[var(--planner-ink)] shadow-md"
-                  : "bg-transparent text-[var(--planner-ink)] border-[var(--planner-warm-border)] hover:bg-[var(--planner-paper-raised)]"
+                  ? "bg-[#2A241F] text-white border-[#2A241F] shadow-md"
+                  : "bg-transparent text-[#2A241F] border-[#E8E0CE] hover:bg-[#F4EFE6]"
               }`}
             >
               {c.label}
@@ -65,11 +66,12 @@ export function PresetRouteFilters({ filters, onChange, resultCount }: PresetRou
 
       {/* Secondary Filters */}
       <div className="flex flex-wrap justify-center gap-3 w-full">
-        <fieldset aria-label="Filter berdasarkan wilayah">
+        <fieldset>
+          <legend className="sr-only">Filter berdasarkan wilayah</legend>
           <select
             value={filters.regionId || ""}
-            onChange={(e) => updateFilter("regionId", e.target.value || null)}
-            className="px-4 py-2 text-sm bg-transparent text-[var(--planner-ink)] border border-[var(--planner-warm-border)] rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--planner-saffron)] appearance-none cursor-pointer"
+            onChange={(e) => updateFilter("regionId", (e.target.value as RoutePlannerRegionId) || null)}
+            className="px-4 py-2 text-sm bg-transparent text-[#2A241F] border border-[#E8E0CE] rounded-full focus:outline-none focus:ring-2 focus:ring-[#C89A3D] appearance-none cursor-pointer"
           >
             <option value="">Semua Wilayah</option>
             {ROUTE_PLANNER_REGION_IDS.filter(id => id !== "indonesia").map((id) => (
@@ -80,11 +82,12 @@ export function PresetRouteFilters({ filters, onChange, resultCount }: PresetRou
           </select>
         </fieldset>
 
-        <fieldset aria-label="Filter berdasarkan durasi">
+        <fieldset>
+          <legend className="sr-only">Filter berdasarkan durasi</legend>
           <select
             value={filters.durationDays || ""}
-            onChange={(e) => updateFilter("durationDays", e.target.value ? Number(e.target.value) : null)}
-            className="px-4 py-2 text-sm bg-transparent text-[var(--planner-ink)] border border-[var(--planner-warm-border)] rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--planner-saffron)] appearance-none cursor-pointer"
+            onChange={(e) => updateFilter("durationDays", e.target.value ? (Number(e.target.value) as RouteDuration) : null)}
+            className="px-4 py-2 text-sm bg-transparent text-[#2A241F] border border-[#E8E0CE] rounded-full focus:outline-none focus:ring-2 focus:ring-[#C89A3D] appearance-none cursor-pointer"
           >
             <option value="">Semua Durasi</option>
             {ROUTE_DURATIONS.map((dur) => (
@@ -95,11 +98,12 @@ export function PresetRouteFilters({ filters, onChange, resultCount }: PresetRou
           </select>
         </fieldset>
 
-        <fieldset aria-label="Filter berdasarkan minat">
+        <fieldset>
+          <legend className="sr-only">Filter berdasarkan minat</legend>
           <select
             value={filters.interest || ""}
-            onChange={(e) => updateFilter("interest", e.target.value || null)}
-            className="px-4 py-2 text-sm bg-transparent text-[var(--planner-ink)] border border-[var(--planner-warm-border)] rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--planner-saffron)] appearance-none cursor-pointer"
+            onChange={(e) => updateFilter("interest", (e.target.value as RouteInterest) || null)}
+            className="px-4 py-2 text-sm bg-transparent text-[#2A241F] border border-[#E8E0CE] rounded-full focus:outline-none focus:ring-2 focus:ring-[#C89A3D] appearance-none cursor-pointer"
           >
             <option value="">Semua Minat</option>
             {ROUTE_INTERESTS.map((int) => (
@@ -113,15 +117,15 @@ export function PresetRouteFilters({ filters, onChange, resultCount }: PresetRou
 
       {/* Action Row */}
       <div className="flex items-center gap-4 h-8">
-        <span className="text-sm text-[var(--planner-muted)] font-medium">
+        <span className="text-sm text-[#71675E] font-medium">
           {resultCount} rute ditemukan
         </span>
         {isResetVisible && (
           <>
-            <span className="text-[var(--planner-warm-border)]">|</span>
+            <span className="text-[#E8E0CE]">|</span>
             <button
               onClick={() => onChange({ collection: null, regionId: null, durationDays: null, interest: null })}
-              className="text-sm font-semibold text-[var(--planner-primary)] hover:text-[var(--planner-primary-hover)] focus:outline-none focus:underline"
+              className="text-sm font-semibold text-[#B94C32] hover:text-[#C95A3D] focus:outline-none focus:underline"
             >
               Hapus Filter
             </button>

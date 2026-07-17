@@ -11,8 +11,9 @@
     "validate:foundation": "tsx scripts/validate-foundation.ts",
     "validate:regions": "tsx scripts/validate-regions.ts",
     "validate:atlas": "tsx scripts/validate-atlas.ts",
+    "validate:route-presets": "tsx scripts/validate-route-presets.ts",
     "test:passport": "tsx scripts/test-passport-logic.ts",
-    "qa:sprint2": "npm run validate:foundation && npm run test:passport && npm run validate:regions && npm run validate:atlas && npm run lint && npm run typecheck && npm run build"
+    "qa:sprint2": "npm run validate:foundation && npm run test:passport && npm run validate:regions && npm run validate:atlas && npm run validate:route-presets && npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

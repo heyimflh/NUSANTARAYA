@@ -30,6 +30,22 @@ export interface PresetRankingContext {
   interests?: RouteInterest[];
   travelPace?: TravelPace;
   budgetLevel?: BudgetLevel;
+  hasInteracted?: boolean;
+}
+
+/**
+ * Determines if the current context has meaningful user input 
+ * vs just being default values.
+ */
+export function hasMeaningfulPresetContext(context: PresetRankingContext): boolean {
+  if (context.hasInteracted) return true;
+  if (context.presetId) return true;
+  if (context.regionId) return true;
+  if (context.interests && context.interests.length > 0) return true;
+  if (context.durationDays && context.durationDays !== 5) return true;
+  if (context.travelPace && context.travelPace !== "seimbang") return true;
+  if (context.budgetLevel && context.budgetLevel !== "menengah") return true;
+  return false;
 }
 
 /**
@@ -43,7 +59,7 @@ export function filterPresetRoutes(
     if (filters.collection && (!preset.collections || !preset.collections.includes(filters.collection))) {
       return false;
     }
-    if (filters.regionId && preset.regionId !== filters.regionId) {
+    if (filters.regionId && preset.regionIds && !preset.regionIds.includes(filters.regionId)) {
       return false;
     }
     if (filters.durationDays && preset.durationDays !== filters.durationDays) {
@@ -100,7 +116,13 @@ export function rankPresetRoutes(
     return { preset, score };
   });
 
-  return scored.sort((a, b) => b.score - a.score).map((s) => s.preset);
+  const isMeaningful = hasMeaningfulPresetContext(context);
+
+  return scored.sort((a, b) => {
+    // If context is not meaningful, just use the original order
+    if (!isMeaningful) return 0;
+    return b.score - a.score;
+  }).map((s) => s.preset);
 }
 
 /**
@@ -132,5 +154,5 @@ export function mapPresetToPlannerValues(
  * Safely get published preset routes (can be extended with validation logic if pulling from API)
  */
 export function getPublishedPresetRoutes(): readonly RoutePresetDefinition[] {
-  return ROUTE_PRESETS;
+  return ROUTE_PRESETS.filter(p => p.status === "published");
 }

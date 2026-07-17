@@ -291,6 +291,26 @@ export interface BadgeDefinition {
   asset: string;
 }
 
+export const MAX_SAVED_ROUTES = 20;
+
+export interface PassportSavedRoute {
+  routeId: string;
+  routeVersion: string;
+  itineraryVersion: string;
+  mapVersion?: string;
+  readinessVersion?: string;
+  titleSnapshot: string;
+  provinceIds: string[];
+  regionIds: string[];
+  durationDays: 3 | 5 | 7;
+  status: "planned";
+  source: string;
+  locale: "id" | "en";
+  travelerMode: "explore" | "tourist" | "learn";
+  savedAt: string;
+  updatedAt: string;
+}
+
 export interface PassportData {
   version?: number;
   userId: string;
@@ -302,7 +322,8 @@ export interface PassportData {
   xp: number;
   level: string;
   completedQuizzes: string[];    // province ids
-  savedRoutes: string[];         // route ids
+  savedRoutes: string[];         // route ids (canonical list)
+  savedRouteDetails?: Record<string, PassportSavedRoute>; // metadata map
   completedChapters?: Record<string, string[]>; // provinceId -> chapterIds
 }
 

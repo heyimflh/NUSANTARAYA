@@ -1,4 +1,4 @@
-import { PassportData } from "@/lib/types";
+import { PassportData, PassportSavedRoute, MAX_SAVED_ROUTES } from "@/lib/types";
 import { evaluateBadges } from "./badges";
 import { isValidProvinceId } from "@/data/provinces/provinceIds";
 
@@ -209,6 +209,57 @@ export function saveRouteTransition(passport: PassportData, routeId: string, pro
     savedRoutes: nextSavedRoutes,
     plannedProvinces: newPlanned,
     xp
+  };
+}
+
+export function saveRouteWithDetailsTransition(passport: PassportData, savedRoute: PassportSavedRoute): PassportData {
+  if (!savedRoute || !savedRoute.routeId) return passport;
+  const routeId = savedRoute.routeId;
+
+  const isNewRoute = !passport.savedRoutes.includes(routeId);
+  
+  if (isNewRoute && passport.savedRoutes.length >= MAX_SAVED_ROUTES) {
+    throw new Error("QUOTA_EXCEEDED");
+  }
+
+  const nextSavedRoutes = isNewRoute ? [...passport.savedRoutes, routeId] : passport.savedRoutes;
+  const xp = isNewRoute ? passport.xp + 15 : passport.xp;
+
+  const validStops = unique(savedRoute.provinceIds.filter(isValidProvinceId));
+  
+  const newPlanned = [...(passport.plannedProvinces || [])];
+  validStops.forEach(id => {
+    if (!passport.stamps.includes(id) && !(passport.startedProvinces || []).includes(id) && !newPlanned.includes(id)) {
+      newPlanned.push(id);
+    }
+  });
+
+  const nextDetails = { ...passport.savedRouteDetails };
+  nextDetails[routeId] = savedRoute;
+
+  return {
+    ...passport,
+    savedRoutes: nextSavedRoutes,
+    savedRouteDetails: nextDetails,
+    plannedProvinces: newPlanned,
+    xp
+  };
+}
+
+export function removeRouteWithDetailsTransition(passport: PassportData, routeId: string): PassportData {
+  if (!passport.savedRoutes.includes(routeId)) return passport;
+
+  const nextSavedRoutes = passport.savedRoutes.filter(id => id !== routeId);
+  const nextDetails = { ...passport.savedRouteDetails };
+  delete nextDetails[routeId];
+
+  // Note: we do NOT remove provinces from plannedProvinces because they might be referenced by other routes.
+  // We keep them. It's safer and avoids removing progress if they manually planned it.
+  
+  return {
+    ...passport,
+    savedRoutes: nextSavedRoutes,
+    savedRouteDetails: nextDetails,
   };
 }
 

@@ -15,6 +15,12 @@ import type {
   RouteStop,
 } from "@/types/route-planner";
 
+export interface RoutePresetMedia {
+  src: string;
+  alt: string;
+  focalPosition?: string;
+}
+
 export interface RoutePresetDefinition {
   id: string;
   title: string;
@@ -22,6 +28,11 @@ export interface RoutePresetDefinition {
   reason: string[];
   durationDays: RouteDuration;
   regionId: RoutePlannerRegionId;
+  primaryRegionId: RoutePlannerRegionId;
+  regionIds: RoutePlannerRegionId[];
+  status: "draft" | "review" | "published" | "archived";
+  version: number;
+  legacyIds?: string[];
   interests: RouteInterest[];
   supportedPaces: TravelPace[];
   supportedBudgets: BudgetLevel[];
@@ -33,6 +44,7 @@ export interface RoutePresetDefinition {
   etiquetteTips: string[];
   collections?: string[];
   badge?: "Pilihan Utama" | "Cocok untuk Pertama Kali" | "Heritage Trail" | "Slow Journey" | "Jalur Rempah" | "Indonesia Timur" | "Demo Pilihan";
+  heroImage?: RoutePresetMedia;
   artworkConfig?: {
     primaryColor: string;
     secondaryColor: string;
@@ -43,8 +55,19 @@ export interface RoutePresetDefinition {
 export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
   // 1. 5 Hari Budaya & Kuliner Jawa (DEMO PRIMARY)
   {
-    id: "preset-5d-budaya-kuliner-jawa",
+    id: "jawa-budaya-kuliner-5",
+    legacyIds: ["preset-5d-budaya-kuliner-jawa"],
+    status: "published",
+    version: 1,
+    primaryRegionId: "jawa",
+    regionIds: ["jawa"],
     title: "5 Hari Budaya & Kuliner Jawa",
+    heroImage: {
+      src: "/assets/province/jawa-tengah/culture.webp",
+      alt: "Suasana budaya dan pasar tradisional di Jawa Tengah",
+      focalPosition: "object-center",
+    },
+    
     summary:
       "Menjelajahi warisan budaya Jawa dari keraton hingga pasar tradisional, dengan wisata kuliner autentik di setiap kota.",
     reason: [
@@ -95,15 +118,25 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     badge: "Pilihan Utama",
     artworkConfig: {
       primaryColor: "#C9A84C", // gold
-      secondaryColor: "#0D1B2A", // navy
+      secondaryColor: "#2A241F", // espresso
       patternType: "batik"
     }
   },
 
   // 2. 7 Hari Jawa–Bali Heritage
   {
-    id: "preset-7d-jawa-bali-heritage",
+    id: "jawa-bali-heritage-7",
+    legacyIds: ["preset-7d-jawa-bali-heritage"],
+    status: "published",
+    version: 1,
+    primaryRegionId: "jawa",
+    regionIds: ["jawa", "bali-nusa-tenggara"],
     title: "7 Hari Jawa–Bali Heritage",
+    heroImage: {
+      src: "/assets/province/jawa-timur/destination.webp",
+      alt: "Pemandangan Gunung Bromo dan bentang alam Jawa Timur",
+      focalPosition: "object-center",
+    },
     summary:
       "Perjalanan warisan budaya dari jantung Jawa menuju tradisi hidup di Bali.",
     reason: [
@@ -167,8 +200,18 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
 
   // 3. 5 Hari Jalur Rempah Maluku
   {
-    id: "preset-5d-rempah-maluku",
+    id: "maluku-spice-route-5",
+    legacyIds: ["preset-5d-rempah-maluku"],
+    status: "published",
+    version: 1,
+    primaryRegionId: "maluku",
+    regionIds: ["maluku"],
     title: "5 Hari Jalur Rempah Maluku",
+    heroImage: {
+      src: "/assets/province/maluku/destination.webp",
+      alt: "Kepulauan dan perairan biru jernih jalur rempah Maluku",
+      focalPosition: "object-center",
+    },
     summary:
       "Mengikuti jejak pala dan cengkeh di kepulauan yang pernah mengubah jaringan perdagangan dunia.",
     reason: [
@@ -210,16 +253,26 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     collections: ["spice-route", "heritage", "east-indonesia"],
     badge: "Jalur Rempah",
     artworkConfig: {
-      primaryColor: "#0D1B2A", // navy
-      secondaryColor: "#C9A84C",
+      primaryColor: "#7B5C3A", // warm brown for spice
+      secondaryColor: "#C89A3D",
       patternType: "wave"
     }
   },
 
   // 4. 7 Hari Sumatra Heritage
   {
-    id: "preset-7d-sumatera-heritage",
+    id: "sumatra-heritage-7",
+    legacyIds: ["preset-7d-sumatera-heritage"],
+    status: "published",
+    version: 1,
+    primaryRegionId: "sumatera",
+    regionIds: ["sumatera"],
     title: "7 Hari Sumatera Heritage",
+    heroImage: {
+      src: "/assets/province/sumatera-barat/culture.webp",
+      alt: "Arsitektur Rumah Gadang di Sumatera Barat",
+      focalPosition: "object-center",
+    },
     summary:
       "Perjalanan melintasi warisan budaya Sumatera dari Minangkabau hingga Danau Toba.",
     reason: [
@@ -270,8 +323,18 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
 
   // 5. 5 Hari Kalimantan Nature Explorer
   {
-    id: "preset-5d-kalimantan-alam",
+    id: "kalimantan-nature-future-5",
+    legacyIds: ["preset-5d-kalimantan-alam"],
+    status: "published",
+    version: 1,
+    primaryRegionId: "kalimantan",
+    regionIds: ["kalimantan"],
     title: "5 Hari Kalimantan Nature Explorer",
+    heroImage: {
+      src: "/assets/province/kalimantan-timur/hero.webp",
+      alt: "Hutan hujan dan lanskap sungai Kalimantan Timur",
+      focalPosition: "object-center",
+    },
     summary:
       "Menjelajahi hutan hujan tropis, sungai besar, dan kehidupan orangutan di jantung Borneo.",
     reason: [
@@ -321,8 +384,18 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
 
   // 6. 7 Hari Sulawesi Culture & Nature
   {
-    id: "preset-7d-sulawesi-budaya-alam",
+    id: "sulawesi-culture-nature-7",
+    legacyIds: ["preset-7d-sulawesi-budaya-alam"],
+    status: "published",
+    version: 1,
+    primaryRegionId: "sulawesi",
+    regionIds: ["sulawesi"],
     title: "7 Hari Sulawesi Selatan Explorer",
+    heroImage: {
+      src: "/assets/province/sulawesi-selatan/culture.webp",
+      alt: "Lanskap unik dan warisan budaya Toraja, Sulawesi Selatan",
+      focalPosition: "object-center",
+    },
     summary:
       "Dari tradisi pelaut Bugis hingga upacara Toraja dan lanskap karst Maros.",
     reason: [
@@ -372,15 +445,25 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     badge: "Heritage Trail",
     artworkConfig: {
       primaryColor: "#A52A2A", // brown-red
-      secondaryColor: "#0D1B2A",
+      secondaryColor: "#2A241F",
       patternType: "batik"
     }
   },
 
   // 7. 7 Hari Papua Wonder
   {
-    id: "preset-7d-papua-wonder",
+    id: "papua-wonder-7",
+    legacyIds: ["preset-7d-papua-wonder"],
+    status: "published",
+    version: 1,
+    primaryRegionId: "papua",
+    regionIds: ["papua"],
     title: "7 Hari Papua Wonder",
+    heroImage: {
+      src: "/assets/province/papua-barat-daya/hero.webp",
+      alt: "Keindahan gugusan pulau Raja Ampat, Papua Barat Daya",
+      focalPosition: "object-center",
+    },
     summary:
       "Menjelajahi keajaiban alam Raja Ampat dan budaya Papua dari pesisir hingga Danau Sentani.",
     reason: [
@@ -431,8 +514,18 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
 
   // 8. 5 Hari Bali–Nusa Tenggara
   {
-    id: "preset-5d-bali-nusatenggara",
+    id: "bali-nusa-tenggara-5",
+    legacyIds: ["preset-5d-bali-nusatenggara"],
+    status: "published",
+    version: 1,
+    primaryRegionId: "bali-nusa-tenggara",
+    regionIds: ["bali-nusa-tenggara"],
     title: "5 Hari Bali–Lombok",
+    heroImage: {
+      src: "/assets/province/nusa-tenggara-barat/hero.webp",
+      alt: "Pantai berpasir putih dan lautan biru di Lombok, Nusa Tenggara Barat",
+      focalPosition: "object-center",
+    },
     summary:
       "Dari tradisi hidup Bali menuju keindahan alam pesisir Lombok.",
     reason: [
@@ -482,8 +575,18 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
 
   // 9. 3 Hari Yogyakarta Cultural Escape
   {
-    id: "preset-3d-yogyakarta-budaya",
+    id: "yogyakarta-cultural-escape-3",
+    legacyIds: ["preset-3d-yogyakarta-budaya"],
+    status: "published",
+    version: 1,
+    primaryRegionId: "jawa",
+    regionIds: ["jawa"],
     title: "3 Hari Yogyakarta & Candi Borobudur",
+    heroImage: {
+      src: "/assets/province/di-yogyakarta/destination.webp",
+      alt: "Kemegahan Candi Borobudur di Yogyakarta",
+      focalPosition: "object-center",
+    },
     summary:
       "Menyelami warisan keraton, seni, dan kuliner Yogyakarta dipadukan kemegahan candi di Jawa Tengah.",
     reason: [
@@ -537,8 +640,18 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
 
   // 10. 3 Hari Bali Slow Journey
   {
-    id: "preset-3d-bali-santai",
+    id: "bali-slow-journey-3",
+    legacyIds: ["preset-3d-bali-santai"],
+    status: "published",
+    version: 1,
+    primaryRegionId: "bali-nusa-tenggara",
+    regionIds: ["bali-nusa-tenggara"],
     title: "3 Hari Bali Slow Journey",
+    heroImage: {
+      src: "/assets/province/bali/hero.webp",
+      alt: "Sawah terasering hijau subur dan suasana damai Bali",
+      focalPosition: "object-center",
+    },
     summary:
       "Tiga hari menikmati Bali dengan ritme santai: pura, sawah, dan pantai.",
     reason: [

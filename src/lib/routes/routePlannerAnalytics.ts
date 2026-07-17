@@ -42,7 +42,24 @@ export type RoutePlannerEvent =
   | "preset_route_prefill_succeeded"
   | "preset_route_result_loaded"
   | "preset_route_fallback_used"
-  | "preset_route_error";
+  | "preset_route_error"
+  // Section 4 — Route Recommendation Result events
+  | "route_result_loading_viewed"
+  | "route_result_viewed"
+  | "route_result_dynamic_loaded"
+  | "route_result_preset_loaded"
+  | "route_result_fallback_loaded"
+  | "route_result_adjustment_viewed"
+  | "route_result_reason_expanded"
+  | "route_result_itinerary_clicked"
+  | "route_result_edit_clicked"
+  | "route_result_map_clicked"
+  | "route_result_saved"
+  | "route_result_unsaved"
+  | "route_result_rani_clicked"
+  | "route_result_alternatives_clicked"
+  | "route_result_retry_clicked"
+  | "route_result_error";
 
 // ─── Safe Payload ────────────────────────────────────────────────────────────
 
@@ -70,13 +87,15 @@ export interface RoutePlannerAnalyticsPayload {
  * TODO: Connect to analytics platform when available.
  */
 export function trackRoutePlannerEvent(
-  _event: RoutePlannerEvent,
-  _payload?: RoutePlannerAnalyticsPayload
+  event: RoutePlannerEvent,
+  payload?: RoutePlannerAnalyticsPayload
 ): void {
   // No-op in development/MVP
   if (process.env.NODE_ENV === "development") {
     // Uncomment for debugging:
     // console.debug(`[analytics] ${event}`, payload);
+    void event;
+    void payload;
   }
 }
 

@@ -26,7 +26,8 @@ import {
 } from "@/lib/routes/routePlannerAnalytics";
 import { PresetRoutesSection } from "@/components/routes/preset-routes";
 import { mapPresetToPlannerValues } from "@/lib/routes/presetRouteHelpers";
-import { presetToRecommendation, RoutePresetDefinition } from "@/data/routes/routePresets";
+import { presetToRecommendation, RoutePresetDefinition, ROUTE_PRESETS } from "@/data/routes/routePresets";
+import { RouteRecommendationResultSection } from "@/components/routes/route-result";
 
 // Core UI
 import { PlannerIntroSection } from "./PlannerIntroSection";
@@ -39,7 +40,6 @@ import { PlannerLiveRegion, announcer } from "./PlannerLiveRegion";
 import { PlannerStep1 } from "./PlannerStep1";
 import { PlannerStep2 } from "./PlannerStep2";
 import { PlannerStep3Review } from "./PlannerStep3Review";
-import { RouteReveal } from "./RouteReveal";
 
 export function RouteAtelier() {
   // ─── Form State ───
@@ -56,11 +56,12 @@ export function RouteAtelier() {
   const [activeStep, setActiveStep] = useState<1 | 2 | 3>(1);
   const [result, setResult] = useState<RouteRecommendation | null>(null);
   const [adjustmentNote, setAdjustmentNote] = useState<string | null>(null);
+  const [resultSource, setResultSource] = useState<"form" | "preset" | "url">("form");
+  const [focusOnReveal, setFocusOnReveal] = useState(false);
 
   const draftTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const searchParams = useSearchParams();
   const router = useRouter();
-  const headingRef = useRef<HTMLHeadingElement>(null);
 
   // ─── Hydration ───
   useEffect(() => {
@@ -68,6 +69,7 @@ export function RouteAtelier() {
     const hasUrlParams = Object.keys(urlValues).length > 0;
 
     if (source && source !== activeSource) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setActiveSource(source);
     }
     if (journeyId && journeyId !== activeJourneyId) {
@@ -82,7 +84,6 @@ export function RouteAtelier() {
         journeyId,
         ...buildAnalyticsPayload(merged),
       });
-      // If prefilled heavily, advance to review step
       if (merged.destinationRegionId && merged.interests.length > 0) {
         setActiveStep(3);
       }
@@ -90,6 +91,20 @@ export function RouteAtelier() {
       const draft = loadDraft();
       if (draft) setValues(draft);
     }
+    
+    // Check for preset in URL
+    const presetId = searchParams.get("preset");
+    if (presetId) {
+      const preset = ROUTE_PRESETS.find(p => p.id === presetId);
+      if (preset) {
+        const rec = presetToRecommendation(preset, "exact");
+        setResult(rec);
+        setStatus("success");
+        setResultSource("url");
+        setFocusOnReveal(false); // restored — don't steal focus
+      }
+    }
+
     setHydrated(true);
     trackRoutePlannerEvent("route_planner_form_viewed");
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -134,45 +149,68 @@ export function RouteAtelier() {
     setValues(DEFAULT_FORM_VALUES);
     setStatus("idle");
     setResult(null);
+    setAdjustmentNote(null);
+    setResultSource("form");
+    setFocusOnReveal(false);
     setActiveStep(1);
     clearDraft();
     trackRoutePlannerEvent("route_planner_reset");
     announcer.announce("Perencana rute diatur ulang ke awal.");
+    
+    // Clear preset from URL if exists
+    const qs = buildPlannerQueryString(DEFAULT_FORM_VALUES, activeSource as RoutePlannerSource, activeJourneyId || undefined);
+    router.replace(`/routes${qs}`, { scroll: false });
+    
     setTimeout(() => {
       document.getElementById("route-atelier")?.scrollIntoView({ behavior: "smooth" });
     }, 50);
-  }, []);
+  }, [router, activeSource, activeJourneyId]);
 
   const handlePrefillFromPreset = useCallback((preset: RoutePresetDefinition) => {
     const newValues = mapPresetToPlannerValues(preset, values);
     setValues(newValues);
+    setHasInteracted(true);
+    setResult(null);
     setActiveSource("preset-route");
     trackRoutePlannerEvent("route_planner_prefilled", {
       source: "preset-route",
       presetId: preset.id,
       ...buildAnalyticsPayload(newValues),
     });
+    
+    // Remove preset result from URL since we are now editing the form
+    const qs = buildPlannerQueryString(newValues, "preset-route", activeJourneyId || undefined);
+    router.replace(`/routes${qs}`, { scroll: false });
+
     announcer.announce(`Preferensi diisi dari rute: ${preset.title}. Anda dapat meninjaunya di form.`);
     setTimeout(() => {
       document.getElementById("route-atelier")?.scrollIntoView({ behavior: "smooth" });
     }, 50);
-  }, [values]);
+  }, [values, router, activeJourneyId]);
 
   const handleViewRoute = useCallback((preset: RoutePresetDefinition) => {
     const rec = presetToRecommendation(preset, "exact");
     setResult(rec);
     setStatus("success");
+    setResultSource("preset");
+    setFocusOnReveal(true);
     trackRoutePlannerEvent("preset_route_opened", {
       presetId: preset.id,
       destinationRegionId: preset.regionId,
       durationDays: preset.durationDays,
     });
+    
+    // Update URL to include the preset
+    const qs = buildPlannerQueryString(values, activeSource as RoutePlannerSource, activeJourneyId || undefined);
+    const newQs = qs ? `${qs}&preset=${preset.id}` : `?preset=${preset.id}`;
+    router.push(`/routes${newQs}`, { scroll: false });
+    
     announcer.announce(`Membuka rute: ${preset.title}`);
     requestAnimationFrame(() => {
-      headingRef.current?.focus();
-      headingRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      const resultSection = document.getElementById("route-recommendation-result");
+      resultSection?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
-  }, []);
+  }, [values, router, activeSource, activeJourneyId]);
 
   const handleSubmit = useCallback(() => {
     trackRoutePlannerEvent("route_generate_clicked", buildAnalyticsPayload(values));
@@ -194,6 +232,8 @@ export function RouteAtelier() {
       setStatus(res.recommendation.matchType === "fallback" ? "fallback" : "success");
       setResult(res.recommendation);
       setAdjustmentNote(res.adjustmentNote);
+      setResultSource("form");
+      setFocusOnReveal(true);
       trackRoutePlannerEvent(
         res.recommendation.matchType === "fallback" ? "route_generate_fallback_used" : "route_generate_succeeded",
         { ...buildAnalyticsPayload(values), matchType: res.recommendation.matchType }
@@ -205,15 +245,21 @@ export function RouteAtelier() {
       setStatus("fallback");
       setResult(fallback.recommendation);
       setAdjustmentNote(fallback.adjustmentNote);
+      setResultSource("form");
+      setFocusOnReveal(true);
       announcer.announce("Rute berhasil dibuat dengan penyesuaian fallback.", "polite");
     }
     
-    // Focus management for accessibility
+    // Remove any preset ID from URL when generating from form
+    const qs = buildPlannerQueryString(values, activeSource as RoutePlannerSource, activeJourneyId || undefined);
+    router.push(`/routes${qs}`, { scroll: false });
+    
+    // Focus management — scroll to result section, focus after animation
     requestAnimationFrame(() => {
-      headingRef.current?.focus();
-      headingRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      const resultSection = document.getElementById("route-recommendation-result");
+      resultSection?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
-  }, [values]);
+  }, [values, router, activeSource, activeJourneyId]);
 
   const handleStepChange = useCallback((newStep: 1 | 2 | 3) => {
     if (newStep > activeStep) {
@@ -246,104 +292,109 @@ export function RouteAtelier() {
     <section 
       id="route-atelier" 
       style={plannerTokens}
-      className="relative w-full pt-32 pb-16 md:pt-40 md:pb-24 bg-[var(--planner-canvas)] font-inter text-[var(--planner-ink)] overflow-hidden"
+      className="relative w-full pt-32 pb-16 md:pt-40 md:pb-24 bg-[var(--planner-canvas)] font-inter text-[var(--planner-ink)]"
     >
 
 
       <PlannerLiveRegion />
       
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative min-h-[600px] z-10 scroll-mt-32">
-        {result ? (
-          <div tabIndex={-1} id="route-reveal-heading" className="outline-none scroll-mt-32" ref={headingRef}>
-            <RouteReveal 
-              result={result} 
-              adjustmentNote={adjustmentNote}
-              onEdit={() => {
-                setResult(null);
-                setTimeout(() => document.getElementById("route-atelier")?.scrollIntoView({ behavior: "smooth" }), 50);
-              }}
-              onReset={handleReset} 
-              values={values}
+        <div className="flex flex-col animate-in fade-in duration-500">
+          <PlannerIntroSection />
+
+          {(activeJourneyId || activeSource === "rani") && (
+            <div className="mb-10 p-5 bg-[var(--planner-saffron-soft)]/50 border border-[var(--planner-saffron)]/40 flex items-start gap-4 max-w-4xl mx-auto w-full relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:bg-[var(--planner-saffron)]">
+              <Info className="w-5 h-5 text-[var(--planner-saffron)] shrink-0 mt-0.5" />
+              <div>
+                <h4 className="text-[var(--planner-ink)] text-[14px] font-bold tracking-wide uppercase mb-1">
+                  {activeSource === "rani" ? "Melanjutkan dari RANI" : "Melanjutkan Journey"}
+                </h4>
+                <p className="text-[var(--planner-earth)] text-[14px] leading-relaxed">
+                  Kerangka perjalananmu telah disusun dari eksplorasi sebelumnya. Silakan periksa atau ubah jika perlu.
+                </p>
+              </div>
+            </div>
+          )}
+
+          <div className="w-full max-w-5xl mx-auto flex flex-col gap-8">
+            <RoutePlannerStepper 
+              currentStep={activeStep} 
+              onStepChange={handleStepChange} 
+              isStep1Valid={isStep1Valid}
+              isStep2Valid={isStep2Valid}
             />
-          </div>
-        ) : (
-          <div className="flex flex-col animate-in fade-in duration-500">
-            <PlannerIntroSection />
 
-            {(activeJourneyId || activeSource === "rani") && (
-              <div className="mb-10 p-5 bg-[var(--planner-saffron-soft)]/50 border border-[var(--planner-saffron)]/40 flex items-start gap-4 max-w-4xl mx-auto w-full relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:bg-[var(--planner-saffron)]">
-                <Info className="w-5 h-5 text-[var(--planner-saffron)] shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="text-[var(--planner-ink)] text-[14px] font-bold tracking-wide uppercase mb-1">
-                    {activeSource === "rani" ? "Melanjutkan dari RANI" : "Melanjutkan Journey"}
-                  </h4>
-                  <p className="text-[var(--planner-earth)] text-[14px] leading-relaxed">
-                    Kerangka perjalananmu telah disusun dari eksplorasi sebelumnya. Silakan periksa atau ubah jika perlu.
-                  </p>
-                </div>
-              </div>
-            )}
-
-            <div className="w-full max-w-5xl mx-auto flex flex-col gap-8">
-              <RoutePlannerStepper 
-                currentStep={activeStep} 
-                onStepChange={handleStepChange} 
-                isStep1Valid={isStep1Valid}
-                isStep2Valid={isStep2Valid}
-              />
-
-              {/* Main Form Surface */}
-              <div className="flex flex-col lg:flex-row items-start relative gap-8 xl:gap-10">
-                
-                {/* Form Content Panel */}
-                <div className="flex-1 w-full flex flex-col bg-[var(--planner-paper)] border border-[var(--planner-warm-border)] rounded-3xl shadow-[0_8px_32px_rgba(58,43,34,0.03)] overflow-hidden min-h-[500px]">
-                  <div className="flex-1 p-6 sm:p-8 lg:p-10">
-                    {activeStep === 1 && (
-                      <PlannerStep1 values={values} updateField={updateField} />
-                    )}
-                    {activeStep === 2 && (
-                      <PlannerStep2 values={values} updateField={updateField} />
-                    )}
-                    {activeStep === 3 && (
-                      <PlannerStep3Review values={values} onEditStep={setActiveStep} />
-                    )}
-                  </div>
-
-                  <div className="mt-auto pt-6 sm:pt-8 sm:border-t sm:border-[var(--planner-warm-border)]/60 px-6 sm:px-8 lg:px-10 pb-6 sm:pb-8 lg:pb-10">
-                    <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md p-4 border-t border-[var(--planner-warm-border)] sm:static sm:bg-transparent sm:backdrop-blur-none sm:p-0 sm:border-none shadow-[0_-4px_24px_rgba(0,0,0,0.06)] sm:shadow-none transition-all">
-                      <StepNavigation 
-                        currentStep={activeStep}
-                        onNext={() => handleStepChange((activeStep + 1) as 2 | 3)}
-                        onBack={() => handleStepChange((activeStep - 1) as 1 | 2)}
-                        onSubmit={handleSubmit}
-                        isStepValid={activeStep === 1 ? isStep1Valid : activeStep === 2 ? isStep2Valid : formIsValid}
-                        validationReason={currentStepValidationReason}
-                        isLoading={status === "loading"}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Dynamic Preview Panel */}
-                <div className="hidden lg:block w-[320px] xl:w-[340px] shrink-0 sticky top-32">
-                  <RouteImpactPreview values={values} activeStep={activeStep} />
-                </div>
-              </div>
+            {/* Main Form Surface */}
+            <div className="flex flex-col lg:flex-row items-start relative gap-8 xl:gap-10">
               
-              {/* Mobile Dynamic Preview */}
-              <div className="lg:hidden w-full mt-4">
+              {/* Form Content Panel */}
+              <div className="flex-1 w-full flex flex-col bg-[var(--planner-paper)] border border-[var(--planner-warm-border)] rounded-3xl shadow-[0_8px_32px_rgba(58,43,34,0.03)] overflow-hidden min-h-[500px]">
+                <div className="flex-1 p-6 sm:p-8 lg:p-10">
+                  {activeStep === 1 && (
+                    <PlannerStep1 values={values} updateField={updateField} />
+                  )}
+                  {activeStep === 2 && (
+                    <PlannerStep2 values={values} updateField={updateField} />
+                  )}
+                  {activeStep === 3 && (
+                    <PlannerStep3Review values={values} onEditStep={setActiveStep} />
+                  )}
+                </div>
+
+                <div className="mt-auto pt-6 sm:pt-8 sm:border-t sm:border-[var(--planner-warm-border)]/60 px-6 sm:px-8 lg:px-10 pb-6 sm:pb-8 lg:pb-10">
+                  <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md p-4 border-t border-[var(--planner-warm-border)] sm:static sm:bg-transparent sm:backdrop-blur-none sm:p-0 sm:border-none shadow-[0_-4px_24px_rgba(0,0,0,0.06)] sm:shadow-none transition-all">
+                    <StepNavigation 
+                      currentStep={activeStep}
+                      onNext={() => handleStepChange((activeStep + 1) as 2 | 3)}
+                      onBack={() => handleStepChange((activeStep - 1) as 1 | 2)}
+                      onSubmit={handleSubmit}
+                      isStepValid={activeStep === 1 ? isStep1Valid : activeStep === 2 ? isStep2Valid : formIsValid}
+                      validationReason={currentStepValidationReason}
+                      isLoading={status === "loading"}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Dynamic Preview Panel */}
+              <div className="hidden lg:block w-[320px] xl:w-[340px] shrink-0 sticky top-32">
                 <RouteImpactPreview values={values} activeStep={activeStep} />
               </div>
             </div>
+            
+            {/* Mobile Dynamic Preview */}
+            <div className="lg:hidden w-full mt-4">
+              <RouteImpactPreview values={values} activeStep={activeStep} />
+            </div>
+          </div>
 
-            {/* Section 3: Popular / Preset Routes */}
-            <PresetRoutesSection 
-              currentFormValues={values}
-              onViewRoute={handleViewRoute}
-              onPrefill={handlePrefillFromPreset}
+          {/* Section 3: Popular / Preset Routes */}
+          <PresetRoutesSection 
+            currentFormValues={values}
+            onViewRoute={handleViewRoute}
+            onPrefill={handlePrefillFromPreset}
+            activePresetId={result?.id}
+          />
+          
+          {/* Section 4: Route Recommendation Result */}
+          <div className="w-full max-w-7xl mx-auto pt-16 mt-8">
+            <RouteRecommendationResultSection
+              result={result}
+              status={status}
+              adjustmentNote={adjustmentNote}
+              values={values}
+              resultSource={resultSource}
+              onEdit={() => {
+                setFocusOnReveal(false);
+                const qs = buildPlannerQueryString(values, activeSource as RoutePlannerSource, activeJourneyId || undefined);
+                router.replace(`/routes${qs}`, { scroll: false });
+                setTimeout(() => document.getElementById("route-atelier")?.scrollIntoView({ behavior: "smooth" }), 50);
+              }}
+              onReset={handleReset}
+              focusOnReveal={focusOnReveal}
             />
           </div>
-        )}
+        </div>
       </div>
     </section>
   );

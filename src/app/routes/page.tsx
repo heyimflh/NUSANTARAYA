@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { RoutesHeroSection } from "@/components/routes/RoutesHeroSection";
 import { RoutesNavbar } from "@/components/routes/RoutesNavbar";
 import { RouteAtelier } from "@/components/routes/route-planner-form";
+import { FinalCtaFooterSection } from '@/components/home/final-cta-footer';
 
 export default function RoutesPage() {
   return (
@@ -28,6 +29,7 @@ export default function RoutesPage() {
         <Suspense fallback={<div className="h-screen" />}>
           <RouteAtelier />
         </Suspense>
+        <FinalCtaFooterSection />
       </div>
     </main>
   );

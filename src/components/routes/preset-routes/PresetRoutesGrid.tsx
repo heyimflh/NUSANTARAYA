@@ -4,11 +4,12 @@ import { PresetRouteCard } from "./PresetRouteCard";
 
 interface PresetRoutesGridProps {
   routes: RoutePresetDefinition[];
+  activePresetId?: string;
   onViewRoute: (route: RoutePresetDefinition) => void;
   onPrefill: (route: RoutePresetDefinition) => void;
 }
 
-export function PresetRoutesGrid({ routes, onViewRoute, onPrefill }: PresetRoutesGridProps) {
+export function PresetRoutesGrid({ routes, activePresetId, onViewRoute, onPrefill }: PresetRoutesGridProps) {
   if (routes.length === 0) return null;
 
   return (
@@ -19,6 +20,7 @@ export function PresetRoutesGrid({ routes, onViewRoute, onPrefill }: PresetRoute
           route={route}
           onViewRoute={onViewRoute}
           onPrefill={onPrefill}
+          isActive={route.id === activePresetId}
         />
       ))}
     </div>

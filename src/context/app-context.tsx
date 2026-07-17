@@ -20,6 +20,8 @@ import {
   completeQuizTransition,
   completeChapterTransition,
   saveRouteTransition,
+  saveRouteWithDetailsTransition,
+  removeRouteWithDetailsTransition,
   resetPassportTransition,
 } from "@/lib/passport/transitions";
 
@@ -61,6 +63,8 @@ interface AppContextType {
   completeQuiz: (provinceId: string) => void;
   completeChapter: (provinceId: string, chapterId: string) => void;
   saveRoute: (routeId: string, provinceIds?: string[]) => void;
+  saveRouteWithDetails: (savedRoute: import("@/lib/types").PassportSavedRoute) => void;
+  removeRouteWithDetails: (routeId: string) => void;
   resetPassport: () => void;
 
   // Audio
@@ -239,6 +243,20 @@ export function AppProvider({ children }: { children: ReactNode }) {
     [updatePassport],
   );
 
+  const saveRouteWithDetails = useCallback(
+    (savedRoute: import("@/lib/types").PassportSavedRoute) => {
+      updatePassport((p) => saveRouteWithDetailsTransition(p, savedRoute));
+    },
+    [updatePassport]
+  );
+
+  const removeRouteWithDetails = useCallback(
+    (routeId: string) => {
+      updatePassport((p) => removeRouteWithDetailsTransition(p, routeId));
+    },
+    [updatePassport]
+  );
+
   const resetPassport = useCallback(() => {
     const fresh = resetPassportTransition();
     setPassport(fresh);
@@ -265,6 +283,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
           completeQuiz,
           completeChapter,
           saveRoute,
+          saveRouteWithDetails,
+          removeRouteWithDetails,
           resetPassport,
           audioEnabled: false,
           setAudioEnabled,
@@ -293,6 +313,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         completeQuiz,
         completeChapter,
         saveRoute,
+        saveRouteWithDetails,
+        removeRouteWithDetails,
         resetPassport,
         audioEnabled,
         setAudioEnabled,
@@ -338,6 +360,8 @@ export function usePassport() {
     completeQuiz,
     completeChapter,
     saveRoute,
+    saveRouteWithDetails,
+    removeRouteWithDetails,
     resetPassport,
   } = useAppContext();
   return {
@@ -351,6 +375,8 @@ export function usePassport() {
     completeQuiz,
     completeChapter,
     saveRoute,
+    saveRouteWithDetails,
+    removeRouteWithDetails,
     resetPassport,
   };
 }
