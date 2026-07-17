@@ -8,16 +8,18 @@ export type ItineraryDayType =
   | "slow-day"
   | "departure";
 
+import type { RouteDuration, TravelPace } from "@/types/route-contracts";
+
 export interface RouteItinerary {
   id: string;
   routeId: string;
   routeVersion: string;
   version: string;
   locale: "id" | "en";
-  durationDays: 3 | 5 | 7;
+  durationDays: RouteDuration; // Replaced literal
   status: "published" | "adjusted" | "stale";
   source: "preset" | "dynamic" | "fallback";
-  travelPace: "santai" | "seimbang" | "eksploratif";
+  travelPace: TravelPace; // Replaced literal
   days: ItineraryDay[];
   disclosureIds: string[];
   sourceRefs?: string[];

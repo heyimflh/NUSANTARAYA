@@ -15,7 +15,7 @@ export function buildRouteSaveSnapshot(
   const provinceIds = Array.from(new Set(result.stops.map(stop => stop.provinceId)));
   const regionIds = Array.from(new Set(result.stops.map(stop => stop.regionId)));
 
-  const titleSnapshot = result.title[locale] || result.title["id"];
+  const titleSnapshot = result.title;
   
   return {
     routeId: result.id,

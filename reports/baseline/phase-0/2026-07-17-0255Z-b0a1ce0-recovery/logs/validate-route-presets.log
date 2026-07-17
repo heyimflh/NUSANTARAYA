@@ -1,0 +1,10 @@
+STDOUT:
+
+> nusantaraya@0.1.0 validate:route-presets
+> tsx scripts/validate-route-presets.ts
+
+Validating 10 Presets...
+✅ Route Presets Validation Passed.
+
+
+STDERR:

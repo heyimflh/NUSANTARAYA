@@ -1,0 +1,9 @@
+{
+  "command": "npm run validate:route-presets",
+  "startedAt": "2026-07-17T02:56:13.238Z",
+  "finishedAt": "2026-07-17T02:56:15.785Z",
+  "durationMs": 2547,
+  "exitCode": 0,
+  "logFile": "logs/validate-route-presets.log",
+  "status": "PASS"
+}

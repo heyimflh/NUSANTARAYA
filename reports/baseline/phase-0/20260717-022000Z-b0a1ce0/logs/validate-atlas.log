@@ -1,0 +1,10 @@
+STDOUT:
+
+> nusantaraya@0.1.0 validate:atlas
+> tsx scripts/validate-atlas.ts
+
+
+
+STDERR:
+'tsx' is not recognized as an internal or external command,
+operable program or batch file.

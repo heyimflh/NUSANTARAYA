@@ -1,0 +1,26 @@
+STDOUT:
+
+> nusantaraya@0.1.0 build
+> next build
+
+▲ Next.js 16.2.9 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 112s
+  Running TypeScript ...
+
+
+STDERR:
+Failed to type check.
+
+./src/components/routes/route-save-rani/FinalRouteSnapshot.tsx:9:30
+Type error: Element implicitly has an 'any' type because index expression is not of type 'number'.
+
+  [90m 7 |[0m
+  [90m 8 |[0m [36mexport[0m [36mfunction[0m [33mFinalRouteSnapshot[0m({ result, locale }: [33mFinalRouteSnapshotProps[0m) {
+[31m[1m>[0m [90m 9 |[0m   [36mconst[0m title = result.title[locale] || result.title[[32m"id"[0m];
+  [90m   |[0m                              [31m[1m^[0m
+  [90m10 |[0m   
+  [90m11 |[0m   [36mreturn[0m (
+  [90m12 |[0m     <div className=[32m"bg-[#FAF8F5] border border-[#E8E0CE] rounded-2xl p-5 mb-6 flex flex-co...[0m
+Next.js build worker exited with code: 1 and signal: null

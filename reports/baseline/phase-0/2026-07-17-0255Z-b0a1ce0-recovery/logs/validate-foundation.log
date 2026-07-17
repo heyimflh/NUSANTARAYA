@@ -1,0 +1,10 @@
+STDOUT:
+
+> nusantaraya@0.1.0 validate:foundation
+> tsx scripts/validate-foundation.ts
+
+Validating foundation...
+✅ Foundation validation passed.
+
+
+STDERR:

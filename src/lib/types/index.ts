@@ -293,6 +293,8 @@ export interface BadgeDefinition {
 
 export const MAX_SAVED_ROUTES = 20;
 
+import type { RouteDuration, RoutePlannerRegionId } from "@/types/route-planner";
+
 export interface PassportSavedRoute {
   routeId: string;
   routeVersion: string;
@@ -301,8 +303,8 @@ export interface PassportSavedRoute {
   readinessVersion?: string;
   titleSnapshot: string;
   provinceIds: string[];
-  regionIds: string[];
-  durationDays: 3 | 5 | 7;
+  regionIds: RoutePlannerRegionId[]; // From string[] to canonical type
+  durationDays: RouteDuration; // From literal to canonical type
   status: "planned";
   source: string;
   locale: "id" | "en";

@@ -1,0 +1,9 @@
+{
+  "command": "npm run validate:foundation",
+  "startedAt": "2026-07-17T02:55:54.688Z",
+  "finishedAt": "2026-07-17T02:56:07.093Z",
+  "durationMs": 12405,
+  "exitCode": 0,
+  "logFile": "logs/validate-foundation.log",
+  "status": "PASS"
+}

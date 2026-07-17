@@ -1,0 +1,9 @@
+STDOUT:
+
+> nusantaraya@0.1.0 validate:route-contracts
+> tsx scripts/validate-route-contracts.ts
+
+Validating route contracts...
+
+
+STDERR:
