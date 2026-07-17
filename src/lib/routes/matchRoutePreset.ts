@@ -13,6 +13,7 @@ import type {
 } from "@/types/route-planner";
 import {
   ROUTE_PRESETS,
+  createRouteRecommendation,
   presetToRecommendation,
   type RoutePresetDefinition,
 } from "@/data/routes/routePresets";
@@ -208,11 +209,7 @@ export function matchRoutePreset(
   const newProvinceIds = Array.from(new Set(adaptedStops.map(s => s.provinceId)));
 
   const rec: RouteRecommendation = {
-    id: best.id,
-    matchType,
-    title: best.title,
-    summary: best.summary,
-    reason: best.reason,
+    ...createRouteRecommendation(best, matchType),
     durationDays: values.durationDays, // Strictly respect user input
     regionId: values.destinationRegionId || best.regionId,
     provinceIds: newProvinceIds,
@@ -220,8 +217,6 @@ export function matchRoutePreset(
     interests: values.interests.length > 0 ? values.interests : [...best.interests],
     budgetLabel: `Estimasi ${values.budgetLevel || 'menengah'}`,
     paceLabel: values.travelPace.charAt(0).toUpperCase() + values.travelPace.slice(1),
-    transportSummary: best.transportSummary,
-    etiquetteTips: best.etiquetteTips,
     assumptions: [
       getBudgetExplanation(values.budgetLevel),
       getPaceExplanation(values.travelPace),

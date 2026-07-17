@@ -44,7 +44,7 @@ export interface RouteRaniContext {
   incompleteChecklistItemIds?: string[];
   passportSaveStatus: "unsaved" | "saved" | "outdated";
   locale: "id" | "en";
-  travelerMode: "explore" | "tourist" | "learn";
+  travelerMode?: "explore" | "tourist" | "learn";
 }
 
 export type RouteAdjustmentChangeType = 

@@ -158,7 +158,10 @@ export interface RoutePlannerRequest extends RoutePlannerFormValues {
 
 // ─── Route Planner ───────────────────────────────────────────────────────────
 
+export const ROUTE_SCHEMA_VERSION = "1.0.0" as const;
+
 export interface RouteStop {
+  id: string;
   dayStart: number;
   dayEnd: number;
   provinceId: string;
@@ -179,6 +182,7 @@ export interface RouteSourceReference {
 
 export interface RouteRecommendation {
   id: string;
+  version: typeof ROUTE_SCHEMA_VERSION;
   matchType: "exact" | "adapted" | "contextual" | "fallback";
   title: string;
   summary: string;

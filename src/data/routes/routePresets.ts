@@ -14,6 +14,7 @@ import type {
   RouteRecommendation,
   RouteStop,
 } from "@/types/route-planner";
+import { ROUTE_SCHEMA_VERSION } from "@/types/route-planner";
 
 export interface RoutePresetMedia {
   src: string;
@@ -31,7 +32,7 @@ export interface RoutePresetDefinition {
   primaryRegionId: RoutePlannerRegionId;
   regionIds: RoutePlannerRegionId[];
   status: "draft" | "review" | "published" | "archived";
-  version: number;
+  version: typeof ROUTE_SCHEMA_VERSION;
   legacyIds?: string[];
   interests: RouteInterest[];
   supportedPaces: TravelPace[];
@@ -58,7 +59,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     id: "jawa-budaya-kuliner-5",
     legacyIds: ["preset-5d-budaya-kuliner-jawa"],
     status: "published",
-    version: 1,
+    version: ROUTE_SCHEMA_VERSION,
     primaryRegionId: "jawa",
     regionIds: ["jawa"],
     title: "5 Hari Budaya & Kuliner Jawa",
@@ -83,6 +84,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     provinceIds: ["di-yogyakarta", "jawa-tengah", "jawa-timur"],
     stops: [
       {
+        id: "jawa-budaya-kuliner-5-stop-01",
         dayStart: 1,
         dayEnd: 2,
         provinceId: "di-yogyakarta",
@@ -90,6 +92,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Keraton Yogyakarta", "Malioboro", "Gudeg Yu Djum"],
       },
       {
+        id: "jawa-budaya-kuliner-5-stop-02",
         dayStart: 3,
         dayEnd: 3,
         provinceId: "jawa-tengah",
@@ -97,6 +100,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Keraton Surakarta", "Pasar Gede", "Sate Buntel"],
       },
       {
+        id: "jawa-budaya-kuliner-5-stop-03",
         dayStart: 4,
         dayEnd: 5,
         provinceId: "jawa-timur",
@@ -128,7 +132,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     id: "jawa-bali-heritage-7",
     legacyIds: ["preset-7d-jawa-bali-heritage"],
     status: "published",
-    version: 1,
+    version: ROUTE_SCHEMA_VERSION,
     primaryRegionId: "jawa",
     regionIds: ["jawa", "bali-nusa-tenggara"],
     title: "7 Hari Jawa–Bali Heritage",
@@ -151,6 +155,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     provinceIds: ["di-yogyakarta", "jawa-tengah", "bali"],
     stops: [
       {
+        id: "jawa-bali-heritage-7-stop-01",
         dayStart: 1,
         dayEnd: 2,
         provinceId: "di-yogyakarta",
@@ -158,6 +163,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Candi Borobudur", "Candi Prambanan", "Batik Workshop"],
       },
       {
+        id: "jawa-bali-heritage-7-stop-02",
         dayStart: 3,
         dayEnd: 3,
         provinceId: "jawa-tengah",
@@ -165,6 +171,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Keraton Surakarta", "Kampung Batik Laweyan"],
       },
       {
+        id: "jawa-bali-heritage-7-stop-03",
         dayStart: 4,
         dayEnd: 4,
         provinceId: "di-yogyakarta",
@@ -172,6 +179,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Perjalanan ke Bali"],
       },
       {
+        id: "jawa-bali-heritage-7-stop-04",
         dayStart: 5,
         dayEnd: 7,
         provinceId: "bali",
@@ -203,7 +211,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     id: "maluku-spice-route-5",
     legacyIds: ["preset-5d-rempah-maluku"],
     status: "published",
-    version: 1,
+    version: ROUTE_SCHEMA_VERSION,
     primaryRegionId: "maluku",
     regionIds: ["maluku"],
     title: "5 Hari Jalur Rempah Maluku",
@@ -226,6 +234,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     provinceIds: ["maluku"],
     stops: [
       {
+        id: "maluku-spice-route-5-stop-01",
         dayStart: 1,
         dayEnd: 2,
         provinceId: "maluku",
@@ -233,6 +242,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Benteng Victoria", "Pantai Natsepa", "Pintu Kota"],
       },
       {
+        id: "maluku-spice-route-5-stop-02",
         dayStart: 3,
         dayEnd: 5,
         provinceId: "maluku",
@@ -264,7 +274,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     id: "sumatra-heritage-7",
     legacyIds: ["preset-7d-sumatera-heritage"],
     status: "published",
-    version: 1,
+    version: ROUTE_SCHEMA_VERSION,
     primaryRegionId: "sumatera",
     regionIds: ["sumatera"],
     title: "7 Hari Sumatera Heritage",
@@ -287,6 +297,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     provinceIds: ["sumatera-barat", "sumatera-utara"],
     stops: [
       {
+        id: "sumatra-heritage-7-stop-01",
         dayStart: 1,
         dayEnd: 3,
         provinceId: "sumatera-barat",
@@ -294,6 +305,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Ngarai Sianok", "Jam Gadang", "Rendang autentik"],
       },
       {
+        id: "sumatra-heritage-7-stop-02",
         dayStart: 4,
         dayEnd: 7,
         provinceId: "sumatera-utara",
@@ -326,7 +338,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     id: "kalimantan-nature-future-5",
     legacyIds: ["preset-5d-kalimantan-alam"],
     status: "published",
-    version: 1,
+    version: ROUTE_SCHEMA_VERSION,
     primaryRegionId: "kalimantan",
     regionIds: ["kalimantan"],
     title: "5 Hari Kalimantan Nature Explorer",
@@ -349,6 +361,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     provinceIds: ["kalimantan-tengah", "kalimantan-barat"],
     stops: [
       {
+        id: "kalimantan-nature-future-5-stop-01",
         dayStart: 1,
         dayEnd: 3,
         provinceId: "kalimantan-tengah",
@@ -356,6 +369,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["TN Tanjung Puting", "Klotok cruise", "Orangutan"],
       },
       {
+        id: "kalimantan-nature-future-5-stop-02",
         dayStart: 4,
         dayEnd: 5,
         provinceId: "kalimantan-barat",
@@ -387,7 +401,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     id: "sulawesi-culture-nature-7",
     legacyIds: ["preset-7d-sulawesi-budaya-alam"],
     status: "published",
-    version: 1,
+    version: ROUTE_SCHEMA_VERSION,
     primaryRegionId: "sulawesi",
     regionIds: ["sulawesi"],
     title: "7 Hari Sulawesi Selatan Explorer",
@@ -410,6 +424,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     provinceIds: ["sulawesi-selatan"],
     stops: [
       {
+        id: "sulawesi-culture-nature-7-stop-01",
         dayStart: 1,
         dayEnd: 2,
         provinceId: "sulawesi-selatan",
@@ -417,6 +432,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Fort Rotterdam", "Rammang-Rammang", "Coto Makassar"],
       },
       {
+        id: "sulawesi-culture-nature-7-stop-02",
         dayStart: 3,
         dayEnd: 4,
         provinceId: "sulawesi-selatan",
@@ -424,6 +440,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Perjalanan Darat Lintas Provinsi", "Pantai Lumpue"],
       },
       {
+        id: "sulawesi-culture-nature-7-stop-03",
         dayStart: 5,
         dayEnd: 7,
         provinceId: "sulawesi-selatan",
@@ -455,7 +472,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     id: "papua-wonder-7",
     legacyIds: ["preset-7d-papua-wonder"],
     status: "published",
-    version: 1,
+    version: ROUTE_SCHEMA_VERSION,
     primaryRegionId: "papua",
     regionIds: ["papua"],
     title: "7 Hari Papua Wonder",
@@ -478,6 +495,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     provinceIds: ["papua-barat-daya", "papua"],
     stops: [
       {
+        id: "papua-wonder-7-stop-01",
         dayStart: 1,
         dayEnd: 4,
         provinceId: "papua-barat-daya",
@@ -485,6 +503,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Raja Ampat", "Wayag", "Piaynemo"],
       },
       {
+        id: "papua-wonder-7-stop-02",
         dayStart: 5,
         dayEnd: 7,
         provinceId: "papua",
@@ -517,7 +536,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     id: "bali-nusa-tenggara-5",
     legacyIds: ["preset-5d-bali-nusatenggara"],
     status: "published",
-    version: 1,
+    version: ROUTE_SCHEMA_VERSION,
     primaryRegionId: "bali-nusa-tenggara",
     regionIds: ["bali-nusa-tenggara"],
     title: "5 Hari Bali–Lombok",
@@ -540,6 +559,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     provinceIds: ["bali", "nusa-tenggara-barat"],
     stops: [
       {
+        id: "bali-nusa-tenggara-5-stop-01",
         dayStart: 1,
         dayEnd: 2,
         provinceId: "bali",
@@ -547,6 +567,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Tegallalang", "Tirta Empul", "Pasar Seni Ubud"],
       },
       {
+        id: "bali-nusa-tenggara-5-stop-02",
         dayStart: 3,
         dayEnd: 5,
         provinceId: "nusa-tenggara-barat",
@@ -578,7 +599,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     id: "yogyakarta-cultural-escape-3",
     legacyIds: ["preset-3d-yogyakarta-budaya"],
     status: "published",
-    version: 1,
+    version: ROUTE_SCHEMA_VERSION,
     primaryRegionId: "jawa",
     regionIds: ["jawa"],
     title: "3 Hari Yogyakarta & Candi Borobudur",
@@ -601,6 +622,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     provinceIds: ["di-yogyakarta", "jawa-tengah"],
     stops: [
       {
+        id: "yogyakarta-cultural-escape-3-stop-01",
         dayStart: 1,
         dayEnd: 1,
         provinceId: "di-yogyakarta",
@@ -608,6 +630,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Keraton", "Taman Sari", "Malioboro"],
       },
       {
+        id: "yogyakarta-cultural-escape-3-stop-02",
         dayStart: 2,
         dayEnd: 2,
         provinceId: "jawa-tengah",
@@ -615,6 +638,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Candi Borobudur", "Candi Mendut"],
       },
       {
+        id: "yogyakarta-cultural-escape-3-stop-03",
         dayStart: 3,
         dayEnd: 3,
         provinceId: "di-yogyakarta",
@@ -643,7 +667,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     id: "bali-slow-journey-3",
     legacyIds: ["preset-3d-bali-santai"],
     status: "published",
-    version: 1,
+    version: ROUTE_SCHEMA_VERSION,
     primaryRegionId: "bali-nusa-tenggara",
     regionIds: ["bali-nusa-tenggara"],
     title: "3 Hari Bali Slow Journey",
@@ -666,6 +690,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
     provinceIds: ["bali"],
     stops: [
       {
+        id: "bali-slow-journey-3-stop-01",
         dayStart: 1,
         dayEnd: 1,
         provinceId: "bali",
@@ -673,6 +698,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Monkey Forest", "Tegallalang", "Yoga & Spa"],
       },
       {
+        id: "bali-slow-journey-3-stop-02",
         dayStart: 2,
         dayEnd: 2,
         provinceId: "bali",
@@ -680,6 +706,7 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
         highlights: ["Tirta Empul", "Jatiluwih", "Tari tradisional"],
       },
       {
+        id: "bali-slow-journey-3-stop-03",
         dayStart: 3,
         dayEnd: 3,
         provinceId: "bali",
@@ -707,12 +734,13 @@ export const ROUTE_PRESETS: readonly RoutePresetDefinition[] = [
 /**
  * Convert a preset definition to a RouteRecommendation result.
  */
-export function presetToRecommendation(
+export function createRouteRecommendation(
   preset: RoutePresetDefinition,
   matchType: "exact" | "adapted" | "contextual" | "fallback" = "exact"
 ): RouteRecommendation {
   return {
     id: preset.id,
+    version: ROUTE_SCHEMA_VERSION,
     matchType,
     title: preset.title,
     summary: preset.summary,
@@ -727,4 +755,11 @@ export function presetToRecommendation(
     transportSummary: preset.transportSummary,
     etiquetteTips: preset.etiquetteTips,
   };
+}
+
+export function presetToRecommendation(
+  preset: RoutePresetDefinition,
+  matchType: "exact" | "adapted" | "contextual" | "fallback" = "exact"
+): RouteRecommendation {
+  return createRouteRecommendation(preset, matchType);
 }

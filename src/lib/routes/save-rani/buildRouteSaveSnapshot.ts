@@ -1,4 +1,5 @@
 import { PassportSavedRoute } from "@/lib/types";
+import { getRouteProvinceIds, getRouteRegionIds } from "@/lib/routes/routeResultHelpers";
 import { RouteRecommendation, RoutePlannerFormValues } from "@/types/route-planner";
 import { RouteItinerary } from "@/lib/routes/itinerary/routeItinerarySchema";
 import { PassportData } from "@/lib/types";
@@ -10,25 +11,21 @@ export function buildRouteSaveSnapshot(
   source: string,
   locale: "id" | "en"
 ): PassportSavedRoute {
-  
   // Extract provinces and regions
-  const provinceIds = Array.from(new Set(result.stops.map(stop => stop.provinceId)));
-  const regionIds = Array.from(new Set(result.stops.map(stop => stop.regionId)));
+  const provinceIds = getRouteProvinceIds(result);
+  const regionIds = getRouteRegionIds(result);
 
-  const titleSnapshot = result.title[locale] || result.title["id"];
-  
   return {
     routeId: result.id,
-    routeVersion: result.version || "1.0",
+    routeVersion: result.version,
     itineraryVersion: "1.0",
-    titleSnapshot,
+    titleSnapshot: result.title,
     provinceIds,
     regionIds,
     durationDays: result.durationDays,
     status: "planned",
     source,
     locale,
-    travelerMode: values.travelerMode,
     savedAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   };

@@ -26,7 +26,7 @@ function runContractValidation() {
     
     assertContract(!!preset.title, "Title non-empty");
     assertContract(!!preset.regionId, "Region valid");
-    assertContract(!!preset.duration && typeof preset.duration === 'number', "Duration valid");
+    assertContract(!!preset.durationDays && typeof preset.durationDays === 'number', "Duration valid");
     assertContract(Array.isArray(preset.interests) && preset.interests.length > 0, "Interests valid");
     assertContract(Array.isArray(preset.supportedBudgets) && preset.supportedBudgets.length > 0, "Supported budgets valid");
     assertContract(Array.isArray(preset.supportedPaces) && preset.supportedPaces.length > 0, "Supported paces valid");
@@ -52,7 +52,7 @@ function runContractValidation() {
   }
 
   console.log("Route Contract Validation Complete.");
-  process.exit(1); // Fail to record baseline as instructed if known issues exist? Actually if it passes the assertContracts it should just exit normally.
+  process.exit(0);
   // Wait, let's exit 0 if no assertContract fails. The script will throw and exit 1 inside assertContract if it fails.
 }
 

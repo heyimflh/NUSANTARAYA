@@ -1,6 +1,7 @@
 import { RouteRaniContext } from "./types";
 import { RouteRecommendation, RoutePlannerFormValues } from "@/types/route-planner";
 import { PassportData } from "@/lib/types";
+import { getRouteProvinceIds } from "@/lib/routes/routeResultHelpers";
 
 export function buildRouteRaniContext(
   result: RouteRecommendation,
@@ -8,7 +9,7 @@ export function buildRouteRaniContext(
   passportData: PassportData,
   locale: "id" | "en"
 ): RouteRaniContext {
-  const provinceIds = Array.from(new Set(result.stops.map(s => s.provinceId)));
+  const provinceIds = getRouteProvinceIds(result);
   const routeId = result.id;
   const isSaved = passportData.savedRoutes.includes(routeId);
   const passportSaveStatus = isSaved ? "saved" : "unsaved";
@@ -22,11 +23,9 @@ export function buildRouteRaniContext(
     provinceIds,
     stopIds: result.stops.map(s => s.id),
     interests: values.interests || [],
-    budgetLevel: values.budgetLevel || "medium",
-    travelPace: values.travelPace || "balanced",
-    partySize: values.partySize,
+    budgetLevel: values.budgetLevel,
+    travelPace: values.travelPace,
     passportSaveStatus,
     locale,
-    travelerMode: values.travelerMode,
   };
 }

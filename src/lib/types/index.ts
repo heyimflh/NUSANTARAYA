@@ -306,7 +306,7 @@ export interface PassportSavedRoute {
   status: "planned";
   source: string;
   locale: "id" | "en";
-  travelerMode: "explore" | "tourist" | "learn";
+  travelerMode?: "explore" | "tourist" | "learn";
   savedAt: string;
   updatedAt: string;
 }

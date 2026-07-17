@@ -6,7 +6,7 @@ interface FinalRouteSnapshotProps {
 }
 
 export function FinalRouteSnapshot({ result, locale }: FinalRouteSnapshotProps) {
-  const title = result.title[locale] || result.title["id"];
+  const title = result.title;
   
   return (
     <div className="bg-[#FAF8F5] border border-[#E8E0CE] rounded-2xl p-5 mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">

@@ -27,7 +27,7 @@ async function run() {
     const input: RoutePlannerFormValues = {
       ...DEFAULT_FORM_VALUES,
       durationDays: 5,
-      destinationRegionId: "bali-nusa",
+      destinationRegionId: "bali-nusa-tenggara",
       originProvinceId: null,
       interests: ["alam", "budaya"],
       budgetLevel: "menengah",
@@ -43,12 +43,12 @@ async function run() {
     }
 
     if (result) {
-      assert(result.id !== undefined, "Matcher menghasilkan recommendation.");
-      assert(ids.has(result.id), "Recommendation ID berasal dari registry.");
+      assert(result.recommendation.id !== undefined, "Matcher menghasilkan recommendation.");
+      assert(ids.has(result.recommendation.id), "Recommendation ID berasal dari registry.");
       
       const result2 = matchRoutePreset(input);
-      assert(result.id === result2.id, "Input yang sama menghasilkan recommendation ID yang sama.");
-      assert(result.durationDays === input.durationDays, "Duration hasil sama dengan input.");
+      assert(result.recommendation.id === result2.recommendation.id, "Input yang sama menghasilkan recommendation ID yang sama.");
+      assert(result.recommendation.durationDays === input.durationDays, "Duration hasil sama dengan input.");
       
       assert(input.durationDays === 5, "Result tidak memutasi input.");
     } else {
