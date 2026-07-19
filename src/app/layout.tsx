@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter, Montserrat, Outfit, Pacifico, Philosopher } from "next/font/google";
+import { Playfair_Display, Inter, Montserrat, Outfit, Philosopher } from "next/font/google";
 import { AppProvider } from "@/context/app-context";
 import { DocumentPreferenceSync } from "@/components/system/DocumentPreferenceSync";
+import { WebVitalsMonitor } from "@/components/system/WebVitalsMonitor";
 import "./globals.css";
 
 /**
@@ -15,35 +16,28 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
 });
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
   display: "swap",
-  weight: ["100", "200", "300", "400", "500", "700", "800", "900"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
   display: "swap",
-  weight: ["100", "200", "300", "400", "500", "600"],
-});
-
-const pacifico = Pacifico({
-  variable: "--font-pacifico",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400"],
+  weight: ["400", "500", "600"],
 });
 
 const philosopher = Philosopher({
@@ -88,10 +82,11 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${playfair.variable} ${inter.variable} ${montserrat.variable} ${outfit.variable} ${pacifico.variable} ${philosopher.variable} h-full`}
+      className={`${playfair.variable} ${inter.variable} ${montserrat.variable} ${outfit.variable} ${philosopher.variable} h-full`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col antialiased" suppressHydrationWarning>
+        <WebVitalsMonitor />
         <AppProvider>
           <DocumentPreferenceSync />
           {/* Global Fixed Background for seamless masking and mobile performance */}

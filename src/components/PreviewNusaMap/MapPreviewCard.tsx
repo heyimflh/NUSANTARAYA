@@ -20,15 +20,23 @@ export default function MapPreviewCard({
     useState<FeaturedProvince | null>(null);
   const [svgContent, setSvgContent] = useState<string>("");
   const [hoveredMapKode, setHoveredMapKode] = useState<string | null>(null);
+  const [error, setError] = useState(false);
   const svgContainerRef = useRef<HTMLDivElement>(null);
   const mainContainerRef = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
 
   // Fetch SVG Content
   useEffect(() => {
-    fetch("/assets/map/indonesia-fill.svg")
-      .then((res) => res.text())
+    const controller = new AbortController();
+    fetch("/assets/map/indonesia-fill.svg", { signal: controller.signal })
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+        return res.text();
+      })
       .then((text) => {
+        if (!text.includes("<svg") || text.includes("<script") || text.includes("javascript:")) {
+           throw new Error("Invalid SVG content");
+        }
         // Fix gradient units so it maps continuously across all paths
         const modifiedSvg = text.replace(
           '<linearGradient id="fillGradient" x1="0%" y1="0%" x2="100%" y2="100%">',
@@ -36,7 +44,12 @@ export default function MapPreviewCard({
         );
         setSvgContent(modifiedSvg);
       })
-      .catch((err) => console.error("Failed to load map SVG:", err));
+      .catch((err) => {
+        if (err.name === "AbortError") return;
+        console.error("Failed to load map SVG:", err);
+        setError(true);
+      });
+    return () => controller.abort();
   }, []);
 
   const displayProvince =
@@ -123,6 +136,17 @@ export default function MapPreviewCard({
   const handleMapClick = () => {
     setSelectedProvince(null);
   };
+
+  if (error) {
+    return (
+      <div className="relative w-full h-[350px] sm:h-[420px] md:h-[500px] md:aspect-auto bg-white/40 backdrop-blur-sm border border-white/50 rounded-3xl flex flex-col items-center justify-center shadow-2xl shadow-[#10233F]/5">
+        <div className="w-12 h-12 rounded-full bg-red-50 text-red-500 flex items-center justify-center mb-2">
+          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+        </div>
+        <p className="font-bold text-[#10233F]">Peta Gagal Dimuat</p>
+      </div>
+    );
+  }
 
   return (
     <div 

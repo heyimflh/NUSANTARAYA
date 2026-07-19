@@ -1,5 +1,5 @@
-import { ROUTE_SECTION_IDS } from "@/lib/routes/routeSections";
 "use client";
+import { ROUTE_SECTION_IDS } from "@/lib/routes/routeSections";
 
 /**
  * RouteRecommendationResultSection — Section 4
@@ -45,12 +45,14 @@ import { RouteResultMetadata } from "./RouteResultMetadata";
 import { RouteResultActions } from "./RouteResultActions";
 import { RouteResultDisclosure } from "./RouteResultDisclosure";
 import { DayByDayItinerarySection } from "@/components/routes/day-by-day-itinerary/DayByDayItinerarySection";
-import { RouteMapTransportSection } from "@/components/routes/route-map-transport";
+import dynamic from "next/dynamic";
+const RouteMapTransportSection = dynamic(() => import("@/components/routes/route-map-transport").then(m => m.RouteMapTransportSection), { ssr: false, loading: () => <div className="min-h-[500px] w-full bg-surface-50 animate-pulse flex items-center justify-center rounded-2xl border border-surface-200"><p className="text-surface-500 font-medium font-sans">Memuat Peta Perjalanan...</p></div> });
 import { RouteReadinessSection } from "@/components/routes/route-readiness";
-import { RouteSaveRaniSection } from "@/components/routes/route-save-rani";
+const RouteSaveRaniSection = dynamic(() => import("@/components/routes/route-save-rani").then(m => m.RouteSaveRaniSection), { ssr: true, loading: () => <div className="min-h-[200px] w-full bg-surface-50 animate-pulse flex items-center justify-center rounded-2xl border border-surface-200"><p className="text-surface-500 font-medium font-sans">Menyiapkan Asisten RANI...</p></div> });
 
 interface RouteRecommendationResultSectionProps {
   result: RouteRecommendation | null;
+  activeItinerary: import("@/lib/routes/itinerary/routeItinerarySchema").RouteItinerary | null;
   status: RoutePlannerStatus;
   adjustmentNote: string | null;
   values: RoutePlannerFormValues;
@@ -59,10 +61,14 @@ interface RouteRecommendationResultSectionProps {
   onReset: () => void;
   /** When true, this was an explicit user submit (focus heading) */
   focusOnReveal?: boolean;
+  onApplyDraft?: (draft: any) => void;
+  onUndoDraft?: () => void;
+  canUndo?: boolean;
 }
 
 export function RouteRecommendationResultSection({
   result,
+  activeItinerary,
   status,
   adjustmentNote,
   values,
@@ -70,6 +76,9 @@ export function RouteRecommendationResultSection({
   onEdit,
   onReset,
   focusOnReveal = false,
+  onApplyDraft,
+  onUndoDraft,
+  canUndo = false,
 }: RouteRecommendationResultSectionProps) {
   const { language } = useLanguage();
   const { passport } = usePassport();
@@ -79,6 +88,7 @@ export function RouteRecommendationResultSection({
 
   const workspace = useActiveRouteWorkspace(
     status === "success" || status === "fallback" ? result : null,
+    activeItinerary,
     values,
     passport,
     resultSource,
@@ -292,12 +302,9 @@ export function RouteRecommendationResultSection({
             canSavePassport={workspace.canSavePassport}
             canUseRani={workspace.canUseRani}
             activeRouteKey={workspace.activeRouteKey}
-            onApplyDraft={(draft) => {
-              // Implementation detail for applying a draft. 
-              // Since this is MVP, the draft may be a mock. 
-              // A real implementation would lift this state to `RouteAtelier` or `page.tsx`.
-              console.log("Applying draft", draft);
-            }}
+            onApplyDraft={onApplyDraft ?? (() => {})}
+            onUndoDraft={onUndoDraft ?? (() => {})}
+            canUndo={canUndo}
           />
         </div>
       </motion.section>

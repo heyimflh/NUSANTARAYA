@@ -89,8 +89,9 @@ function safeSetItem(key: string, value: unknown): void {
   if (typeof window === "undefined") return;
   try {
     localStorage.setItem(key, JSON.stringify(value));
-  } catch {
-    // localStorage might be full or unavailable
+  } catch (err) {
+    console.error(`Failed to save ${key} to localStorage`, err);
+    throw new Error(`QUOTA_EXCEEDED`);
   }
 }
 
@@ -164,14 +165,16 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // Passport mutations (all auto-persist)
   const updatePassport = useCallback(
     (updater: (prev: PassportData) => PassportData) => {
-      setPassport((prev) => {
-        let next = updater(prev);
-        next = evaluateBadges(next); // Automatically evaluate badges on every mutation
-        safeSetItem(PASSPORT_KEY, next);
-        return next;
-      });
+      // Execute the updater synchronously on the current state to catch quota errors early
+      const nextPassport = evaluateBadges(updater(passport));
+      
+      // Attempt to persist. This will throw if quota is exceeded
+      safeSetItem(PASSPORT_KEY, nextPassport);
+      
+      // If persistence didn't throw, update the state
+      setPassport(nextPassport);
     },
-    [],
+    [passport],
   );
 
   const completeProvince = useCallback(

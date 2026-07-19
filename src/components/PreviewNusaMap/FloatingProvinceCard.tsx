@@ -2,6 +2,7 @@
 
 import { FeaturedProvince } from "@/data/preview-map";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 interface FloatingProvinceCardProps {
   province: FeaturedProvince | null;
@@ -14,6 +15,7 @@ export default function FloatingProvinceCard({
   isZoomed,
   onClose,
 }: FloatingProvinceCardProps) {
+  const router = useRouter();
   return (
     <div
       className={`absolute z-30 transition-all duration-500 ${isZoomed ? "bottom-6 left-1/2 -translate-x-1/2 md:translate-x-0 md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:left-8 pointer-events-auto" : "bottom-6 left-1/2 -translate-x-1/2 md:bottom-8 md:left-8 md:translate-x-0 pointer-events-none"}`}
@@ -93,7 +95,7 @@ export default function FloatingProvinceCard({
                   {/* Image Header */}
                   <div
                     className="w-20 h-20 md:w-full md:h-[160px] shrink-0 rounded-[1rem] md:rounded-[1.5rem] overflow-hidden relative group cursor-pointer shadow-sm"
-                    onClick={() => (window.location.href = province.href)}
+                    onClick={() => router.push(province.href)}
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
@@ -197,3 +199,5 @@ export default function FloatingProvinceCard({
     </div>
   );
 }
+
+

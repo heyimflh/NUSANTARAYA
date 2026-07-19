@@ -8,10 +8,11 @@ interface AtlasLifecycleBridgeProps {
 }
 
 export function AtlasLifecycleBridge({ provinceId }: AtlasLifecycleBridgeProps) {
-  const { startProvince } = usePassport();
+  const { planProvince } = usePassport();
   useEffect(() => {
-    startProvince(provinceId);
-  }, [provinceId, startProvince]);
+    planProvince(provinceId);
+  }, [provinceId, planProvince]);
 
   return null;
 }
+

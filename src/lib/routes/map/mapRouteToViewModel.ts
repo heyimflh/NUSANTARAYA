@@ -276,7 +276,7 @@ export function getTransportConfidenceLabel(
   const map = {
     verified: locale === "en" ? "Verified" : "Tervalidasi",
     estimated: locale === "en" ? "Estimated" : "Estimasi",
-    unverified: locale === "en" ? "Unverified" : "Belum terverifikasi",
+    editorial: locale === "en" ? "Editorial" : "Kurasi Internal", unavailable: locale === "en" ? "Unavailable" : "Belum tersedia",
   };
   return map[confidence];
 }
@@ -298,3 +298,7 @@ export function getComplexityLabel(
 ): string {
   return LABELS[locale].complexity[complexity];
 }
+
+
+
+

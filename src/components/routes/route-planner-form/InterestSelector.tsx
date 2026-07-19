@@ -62,7 +62,7 @@ export function InterestSelector({ value, onChange }: InterestSelectorProps) {
               aria-checked={isSelected}
               disabled={isDisabled}
               onClick={() => toggleInterest(opt.value)}
-              className={`group flex flex-col items-center justify-center p-4 min-h-[110px] text-center border transition-all duration-300 relative rounded-xl ${
+              className={`group flex flex-col items-center justify-center p-4 min-h-[110px] text-center border focus-visible:ring-2 focus-visible:ring-[var(--planner-primary)] focus-visible:outline-none transition-all duration-300 relative rounded-xl ${
                 isSelected 
                   ? "bg-[var(--planner-primary-soft)]/20 border-[var(--planner-primary)]" 
                   : isDisabled

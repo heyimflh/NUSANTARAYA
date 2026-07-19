@@ -1,3 +1,4 @@
+import { APP_ROUTES } from "@/lib/routes";
 export type LinkStatus = "live" | "soon" | "anchor";
 
 export type FooterLink = {
@@ -14,7 +15,7 @@ export const footerLinkGroups = [
       { label: "Provinsi", href: "/provinsi", status: "soon" },
       { label: "Nusa Archive", href: "/archive", status: "soon" },
       { label: "NusaRasa", href: "/rasa", status: "soon" },
-      { label: "Route Planner", href: "/routes", status: "live" },
+      { label: "Route Planner", href: APP_ROUTES.routes + "?source=home-feature", status: "live" },
       { label: "Passport", href: "/explore#passport-progress", status: "live" }
     ] as FooterLink[]
   },
@@ -68,8 +69,10 @@ export const finalCta = {
   },
   secondary: {
     label: "Coba Route Planner",
-    href: "/routes",
+    href: APP_ROUTES.routes + "?source=home-feature",
     status: "live"
   },
   microcopy: "Mulai dari satu klik. Sisanya biarkan Nusantara bercerita."
 };
+
+

@@ -53,7 +53,7 @@ export function TransferRow({
   locale = "id",
 }: TransferRowProps) {
   const [expanded, setExpanded] = useState(false);
-  const confidence = transportOption?.confidence ?? "unverified";
+  const confidence = transportOption?.confidence ?? "unavailable";
   const modeIcon = MODE_ICONS[transportOption?.mode ?? "unspecified"] ?? "🚐";
 
   return (
@@ -105,7 +105,7 @@ export function TransferRow({
             <span className="text-[12px] text-[#8A94A6] font-medium">
               {locale === "en" ? `Day ${segment.dayNumber}` : `Hari ${segment.dayNumber}`}
             </span>
-            {transportOption && confidence !== "unverified" && (
+            {transportOption && confidence !== "unavailable" && (
               <>
                 <span className="w-1 h-1 rounded-full bg-[#E8E0CE]" aria-hidden="true" />
                 <span className="text-[12px] text-[#5C6470] font-medium">
@@ -185,7 +185,7 @@ export function TransferRow({
                 </div>
               )}
 
-              {confidence === "unverified" && (
+              {confidence === "unavailable" && (
                 <div className="flex items-start gap-2.5 pt-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#8A94A6] mt-1.5 flex-shrink-0" aria-hidden="true" />
                   <p className="text-[13px] text-[#5C6470] leading-relaxed">
@@ -213,3 +213,4 @@ export function TransferRow({
     </div>
   );
 }
+

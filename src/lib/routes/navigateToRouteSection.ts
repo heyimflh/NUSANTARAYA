@@ -1,3 +1,4 @@
+import { scrollElementIntoView } from "@/lib/utils/scroll";
 import { ROUTE_SECTION_IDS, RouteSectionKey } from "./routeSections";
 
 export function getRouteScrollBehavior(prefersReducedMotion: boolean): ScrollBehavior {
@@ -33,3 +34,4 @@ export function navigateToRouteSection(key: RouteSectionKey): boolean {
 
   return true;
 }
+

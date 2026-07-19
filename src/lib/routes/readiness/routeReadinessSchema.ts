@@ -3,12 +3,12 @@
  * Planning: Section 7 Budget, Culinary, Etiquette, and Checklist
  */
 
-export type DataConfidence = "verified" | "estimated" | "partial" | "unknown";
+export type DataConfidence = "verified" | "editorial" | "estimated" | "unavailable";
 
 export interface MoneyRange {
-  currency: "IDR";
-  min: number;
-  max: number;
+  currency: string | null;
+  min: number | null;
+  max: number | null;
 }
 
 export type BudgetCategoryType =

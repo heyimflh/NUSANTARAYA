@@ -1,4 +1,5 @@
 "use client";
+import { scrollElementIntoView } from "@/lib/utils/scroll";
 
 import { useCallback } from "react";
 import { Wallet, Utensils, BookOpen, ListTodo } from "lucide-react";
@@ -14,7 +15,7 @@ export function RouteReadinessNavigation() {
   const scrollToSection = useCallback((id: string) => {
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      scrollElementIntoView(el, { block: "start" });
     }
   }, []);
 
@@ -33,4 +34,7 @@ export function RouteReadinessNavigation() {
     </nav>
   );
 }
+
+
+
 

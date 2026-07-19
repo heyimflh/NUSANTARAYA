@@ -16,7 +16,7 @@ export function resolveRouteReadiness(
 ): RouteReadinessDossier {
   const budget = resolveRouteBudget(result);
   const culinaryItems = resolveRouteCulinary(result, itinerary);
-  const etiquetteItems = resolveRouteEtiquette(result);
+  const etiquetteItems = resolveRouteEtiquette(result, itinerary);
   const checklistTemplate = buildRouteChecklist(result, routeVersion, itineraryVersion);
 
   return {
@@ -24,7 +24,7 @@ export function resolveRouteReadiness(
     routeId: result.id,
     routeVersion,
     itineraryVersion,
-    version: "1.0",
+    version: `${routeVersion}-${itineraryVersion}`,
     locale,
     source: result.matchType === "fallback-preset" ? "fallback" : "canonical",
     status: itinerary ? "ready" : "partial",

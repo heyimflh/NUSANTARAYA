@@ -1,5 +1,5 @@
-import { navigateToRouteSection } from "@/lib/routes/navigateToRouteSection";
 "use client";
+import { navigateToRouteSection } from "@/lib/routes/navigateToRouteSection";
 
 /**
  * RouteResultActions — Section 4 CTA Hierarchy
@@ -36,6 +36,7 @@ import { buildRaniContext } from "@/lib/routes/routeResultHelpers";
 import { announcer } from "@/components/routes/route-planner-form/PlannerLiveRegion";
 import { usePassport } from "@/context/app-context";
 import { useMode, useLanguage } from "@/context/app-context";
+import { useShare } from "@/hooks/useShare";
 
 interface RouteResultActionsProps {
   result: RouteRecommendation;
@@ -58,7 +59,7 @@ export function RouteResultActions({
   const [saveState, setSaveState] = useState<"idle" | "saving" | "saved" | "error">(
     isSaved ? "saved" : "idle"
   );
-  const [isCopied, setIsCopied] = useState(false);
+  const { share, isSharing, hasCopied } = useShare();
   const [showOverflow, setShowOverflow] = useState(false);
   const overflowRef = useRef<HTMLDivElement>(null);
 
@@ -126,7 +127,7 @@ export function RouteResultActions({
     // Build structured context (ready for RANI integration)
     buildRaniContext(result, values, language as "id" | "en", mode);
     // Navigate to RANI on Explore page with context
-    window.location.href = `/?rani=true&routeId=${result.id}`;
+    navigateToRouteSection("saveRani");
   };
 
   // ── Alternatives ──
@@ -137,20 +138,18 @@ export function RouteResultActions({
 
   // ── Share ──
   const handleShare = async () => {
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      setIsCopied(true);
-      announcer.announce(
-        locale === "en" ? "Route link copied to clipboard." : "Tautan rute disalin.",
-        "polite"
-      );
-      setTimeout(() => setIsCopied(false), 2000);
-    } catch {
-      // Clipboard not available — silently ignore, button won't show if not available
-    }
+    await share({
+      title: "NUSANTARAYA Route",
+      text: "Lihat rekomendasi rute ini di NUSANTARAYA",
+      url: window.location.href,
+    });
+    announcer.announce(
+      locale === "en" ? "Route link copied to clipboard." : "Tautan rute disalin.",
+      "polite"
+    );
   };
 
-  const canShare = typeof navigator !== "undefined" && !!navigator.clipboard;
+  const canShare = true; // useShare handles fallback
 
   const savedButtonClass =
     saveState === "saved" || isSaved
@@ -263,11 +262,11 @@ export function RouteResultActions({
                   onClick={() => { setShowOverflow(false); handleShare(); }}
                   className="w-full flex items-center gap-2 px-3 py-2.5 rounded-xl font-inter text-[13px] font-semibold text-[#0D1B2A] hover:bg-[#F8F4EA] transition-colors text-left min-h-[44px]"
                 >
-                  {isCopied
+                  {hasCopied
                     ? <CheckCircle2 className="w-3.5 h-3.5 text-[#2D5A27]" aria-hidden="true" />
-                    : <Share2 className="w-3.5 h-3.5 text-[#C9A84C]" aria-hidden="true" />
+                    : <Share2 className={`w-3.5 h-3.5 text-[#C9A84C] ${isSharing ? "animate-pulse" : ""}`} aria-hidden="true" />
                   }
-                  {isCopied ? t.copied : t.share}
+                  {hasCopied ? t.copied : t.share}
                 </button>
               )}
               <button
@@ -297,5 +296,8 @@ export function RouteResultActions({
     </div>
   );
 }
+
+
+
 
 

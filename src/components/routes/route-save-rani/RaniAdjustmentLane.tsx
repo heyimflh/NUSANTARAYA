@@ -12,9 +12,11 @@ interface RaniAdjustmentLaneProps {
   values: RoutePlannerFormValues;
   locale: "id" | "en";
   onApplyDraft: (draft: RouteAdjustmentDraft) => void;
+  onUndoDraft?: () => void;
+  canUndo?: boolean;
 }
 
-export function RaniAdjustmentLane({ result, itinerary, values, locale, onApplyDraft }: RaniAdjustmentLaneProps) {
+export function RaniAdjustmentLane({ result, itinerary, values, locale, onApplyDraft, onUndoDraft, canUndo }: RaniAdjustmentLaneProps) {
   const [isResolving, setIsResolving] = useState(false);
   const [activeDraft, setActiveDraft] = useState<RouteAdjustmentDraft | null>(null);
 

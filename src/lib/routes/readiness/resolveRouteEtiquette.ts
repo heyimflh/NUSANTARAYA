@@ -1,7 +1,9 @@
 import type { RouteEtiquetteItem } from "./routeReadinessSchema";
 import type { RouteRecommendation } from "@/types/route-planner";
 
-export function resolveRouteEtiquette(result: RouteRecommendation): RouteEtiquetteItem[] {
+import { RouteItinerary } from "@/lib/routes/itinerary/routeItinerarySchema";
+
+export function resolveRouteEtiquette(result: RouteRecommendation, itinerary: RouteItinerary | null): RouteEtiquetteItem[] {
   const items: RouteEtiquetteItem[] = [];
 
   // Fallback / dynamic generation based on interests and provinces
@@ -10,11 +12,11 @@ export function resolveRouteEtiquette(result: RouteRecommendation): RouteEtiquet
     items.push({
       id: "etq-sacred",
       contextType: "sacred-place",
-      provinceIds: result.provinceIds,
+      provinceIds: (itinerary ? Array.from(new Set(itinerary.days.flatMap(d => d.provinceIds))) : result.provinceIds),
       guidanceId: "Gunakan pakaian sopan dan tertutup saat memasuki area suci/keraton.",
       whyItMattersId: "Menghormati norma kesopanan lokal dan menjaga kesucian tempat.",
       priority: "essential",
-      confidence: "verified",
+      confidence: "editorial",
       sourceRefs: ["Panduan Wisata Budaya"],
       updatedAt: new Date().toISOString(),
     });
@@ -24,11 +26,11 @@ export function resolveRouteEtiquette(result: RouteRecommendation): RouteEtiquet
     items.push({
       id: "etq-env",
       contextType: "environment",
-      provinceIds: result.provinceIds,
+      provinceIds: (itinerary ? Array.from(new Set(itinerary.days.flatMap(d => d.provinceIds))) : result.provinceIds),
       guidanceId: "Bawa botol minum sendiri dan jangan tinggalkan sampah di alam.",
       whyItMattersId: "Menjaga kebersihan dan kelestarian destinasi alam.",
       priority: "essential",
-      confidence: "verified",
+      confidence: "editorial",
       sourceRefs: ["Prinsip Leave No Trace"],
       updatedAt: new Date().toISOString(),
     });
@@ -37,7 +39,7 @@ export function resolveRouteEtiquette(result: RouteRecommendation): RouteEtiquet
   items.push({
     id: "etq-photo",
     contextType: "photography",
-    provinceIds: result.provinceIds,
+    provinceIds: (itinerary ? Array.from(new Set(itinerary.days.flatMap(d => d.provinceIds))) : result.provinceIds),
     guidanceId: "Tanyakan izin sebelum memotret penduduk lokal atau kegiatan upacara adat.",
     whyItMattersId: "Menghargai privasi dan kenyamanan masyarakat setempat.",
     priority: "recommended",

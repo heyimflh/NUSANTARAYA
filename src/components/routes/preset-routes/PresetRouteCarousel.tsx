@@ -96,13 +96,12 @@ export function PresetRouteCarousel({ routes, activePresetId, onViewRoute, onPre
       </div>
 
       {/* CSS to hide scrollbar for webkit */}
-      <style dangerouslySetInnerHTML={{
-        __html: `
+      <style>{`
           .hide-scrollbar::-webkit-scrollbar {
             display: none;
           }
-        `
-      }} />
+        `}</style>
     </div>
   );
 }
+

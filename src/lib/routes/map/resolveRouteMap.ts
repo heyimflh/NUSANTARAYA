@@ -113,7 +113,7 @@ export function resolveRouteMap(
         segmentId: mapSegId,
         mode: inferModeFromLabel(transferSeg.modeLabel),
         label: transferSeg.modeLabel ?? "Perjalanan",
-        confidence: transferSeg.isValidated ? "verified" : "unverified",
+        confidence: transferSeg.isValidated ? "editorial" : "unavailable",
         durationLabel: undefined, // Only show if canonically sourced
         sourceRefs: transferSeg.isValidated ? ["itinerary-preset"] : undefined,
         verifiedAt: transferSeg.isValidated ? itinerary.updatedAt : undefined,
@@ -125,9 +125,9 @@ export function resolveRouteMap(
 
   const model: RouteMapModel = {
     routeId: result.id,
-    routeVersion: "v1",
+    routeVersion: result.version,
     itineraryVersion: itinerary.version,
-    mapVersion: "v1",
+    mapVersion: `${result.version}-${itinerary.version}`,
     source: "derived",
     geometryConfidence,
     stops,
@@ -177,3 +177,4 @@ export function getSchematicPosition(
   const y = 50 + (stopIndex % 2 === 0 ? -5 : 5); // slight zigzag for readability
   return [x, y];
 }
+

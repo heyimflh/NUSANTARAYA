@@ -173,23 +173,15 @@ export function getAtlasIds(): string[] {
 export async function getAtlasData(slug: string): Promise<ProvinceAtlas | null> {
   const loader = atlasRegistry[slug];
   if (!loader) return null;
-  try {
-    const { atlas } = await loader();
-    return atlas;
-  } catch {
-    return null;
-  }
+  const { atlas } = await loader();
+  return atlas;
 }
 
 export async function getAtlasReferences(slug: string): Promise<ScientificReference[]> {
   const loader = atlasRegistry[slug];
   if (!loader) return [];
-  try {
-    const { references } = await loader();
-    return references;
-  } catch {
-    return [];
-  }
+  const { references } = await loader();
+  return references;
 }
 
 export function getReferenceById(references: ScientificReference[], id: string): ScientificReference | undefined {

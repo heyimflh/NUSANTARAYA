@@ -21,6 +21,8 @@ interface RouteSaveRaniSectionProps {
   canUseRani: boolean;
   activeRouteKey: string | null;
   onApplyDraft: (draft: RouteAdjustmentDraft) => void;
+  onUndoDraft?: () => void;
+  canUndo?: boolean;
 }
 
 export function RouteSaveRaniSection({
@@ -32,6 +34,8 @@ export function RouteSaveRaniSection({
   canUseRani,
   activeRouteKey,
   onApplyDraft,
+  onUndoDraft,
+  canUndo,
 }: RouteSaveRaniSectionProps) {
   const { language } = useLanguage();
   const locale = language as "id" | "en";
@@ -72,13 +76,15 @@ export function RouteSaveRaniSection({
 
           {/* Right: RANI Adjustment */}
           {canUseRani && (
-            <RaniAdjustmentLane 
+                        <RaniAdjustmentLane 
               key={activeRouteKey ?? "idle"}
               result={result} 
               itinerary={itinerary} 
               values={values} 
               locale={locale} 
-              onApplyDraft={onApplyDraft} 
+              onApplyDraft={onApplyDraft}
+              onUndoDraft={onUndoDraft}
+              canUndo={canUndo}
             />
           )}
         </div>

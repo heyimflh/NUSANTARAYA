@@ -1,0 +1,696 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: smoke.spec.ts >> NUSANTARAYA Smoke Test: Core E2E Flow
+- Location: e2e\smoke.spec.ts:3:5
+
+# Error details
+
+```
+Test timeout of 30000ms exceeded.
+```
+
+```
+Error: locator.click: Test timeout of 30000ms exceeded.
+Call log:
+  - waiting for getByRole('button', { name: /Buat Rencana/i })
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - main [ref=e3]:
+      - generic [ref=e4]:
+        - navigation [ref=e5]:
+          - link "Nusantaraya" [ref=e6] [cursor=pointer]:
+            - /url: /
+            - img "Nusantaraya" [ref=e7]
+          - generic [ref=e8]:
+            - link "Beranda" [ref=e9] [cursor=pointer]:
+              - /url: /
+            - link "Eksplorasi" [ref=e10] [cursor=pointer]:
+              - /url: /explore
+            - link "Rute" [ref=e11] [cursor=pointer]:
+              - /url: /routes
+            - link "Kuliner" [ref=e12] [cursor=pointer]:
+              - /url: "#"
+            - link "Tentang" [ref=e13] [cursor=pointer]:
+              - /url: "#"
+          - link "Buat Rute" [ref=e14] [cursor=pointer]:
+            - /url: "#route-atelier"
+            - generic [ref=e15]: Buat Rute
+            - img [ref=e17]
+        - generic [ref=e20]:
+          - generic [ref=e26]:
+            - generic [ref=e27]: Nusa Route Planner
+            - heading "Rencanakan Petualanganmu" [level=1] [ref=e33]:
+              - text: Rencanakan
+              - text: Petualanganmu
+            - paragraph [ref=e37]: Susun rute perjalanan impianmu. Temukan destinasi tersembunyi, estimasi waktu, dan buat pengalaman wisata yang tak terlupakan di seluruh Nusantara.
+            - generic [ref=e38]:
+              - link "Buat Rute" [ref=e39] [cursor=pointer]:
+                - /url: "#route-planner"
+                - text: Buat Rute
+                - img [ref=e40]
+              - link "Inspirasi Rute" [ref=e42] [cursor=pointer]:
+                - /url: "#inspirasi-rute"
+                - img [ref=e44]
+                - text: Inspirasi Rute
+          - generic [ref=e46]:
+            - generic [ref=e47]: Scroll untuk merencanakan
+            - img [ref=e49]
+        - generic [ref=e54]:
+          - generic [ref=e55]:
+            - generic [ref=e56]:
+              - generic [ref=e57]: Nusa Route Planner
+              - heading "Buat rute yang menyesuaikan waktu, minat, dan ritmemu." [level=1] [ref=e58]
+              - paragraph [ref=e59]: Jawab beberapa pertanyaan singkat. Kami akan menyusun urutan destinasi, pembagian hari, dan catatan perjalanan.
+            - generic [ref=e60]:
+              - generic [ref=e61]:
+                - img [ref=e62]
+                - generic [ref=e65]: Selesai sekitar 1 menit
+              - list [ref=e66]:
+                - listitem [ref=e67]: Urutan destinasi
+                - listitem [ref=e68]: Itinerary harian
+                - listitem [ref=e69]: Catatan perjalanan
+          - generic [ref=e70]:
+            - navigation "Progress" [ref=e71]:
+              - list [ref=e72]:
+                - listitem [ref=e73]:
+                  - button "Rencana dasar" [ref=e74]:
+                    - img [ref=e77]
+                    - generic [ref=e80]: Rencana dasar
+                - listitem [ref=e81]
+                - listitem [ref=e83]:
+                  - button "Preferensi" [ref=e84]:
+                    - img [ref=e87]
+                    - generic [ref=e90]: Preferensi
+                - listitem [ref=e91]
+                - listitem [ref=e93]:
+                  - button "3 Tinjau Sedang Diisi" [ref=e94]:
+                    - generic [ref=e97]: "3"
+                    - generic [ref=e98]:
+                      - generic [ref=e99]: Tinjau
+                      - generic [ref=e100]: Sedang Diisi
+            - generic [ref=e101]:
+              - generic [ref=e102]:
+                - generic [ref=e104]:
+                  - generic [ref=e105]: "Langkah 3 dari 3: Tinjau dan buat rute"
+                  - generic [ref=e106]:
+                    - heading "Tinjauan Spesifikasi" [level=2] [ref=e107]
+                    - paragraph [ref=e108]: Periksa kembali parameter perjalananmu. Rute akan disusun berdasarkan konfigurasi ini.
+                  - generic [ref=e109]:
+                    - generic [ref=e110]:
+                      - generic [ref=e111]: Rencana Dasar
+                      - generic [ref=e112]:
+                        - generic [ref=e113]: 5 Hari
+                        - generic [ref=e114]: Jawa
+                      - button "Ubah" [ref=e115]
+                    - generic [ref=e116]:
+                      - generic [ref=e117]: Preferensi
+                      - generic [ref=e118]:
+                        - generic [ref=e119]: Budaya
+                        - generic [ref=e120]:
+                          - generic [ref=e121]:
+                            - strong [ref=e122]: "Anggaran:"
+                            - text: Menengah
+                          - generic [ref=e123]:
+                            - strong [ref=e124]: "Ritme:"
+                            - text: Seimbang
+                      - button "Ubah" [ref=e125]
+                - generic [ref=e128]:
+                  - button "Kembali" [ref=e130]:
+                    - img [ref=e131]
+                    - text: Kembali
+                  - button "Buat Rute Perjalanan" [ref=e134]:
+                    - generic [ref=e135]: Buat Rute Perjalanan
+              - generic [ref=e137]:
+                - generic [ref=e138]:
+                  - heading "Preview rute" [level=3] [ref=e139]
+                  - generic [ref=e140]: Diperbarui otomatis
+                - generic [ref=e141]:
+                  - generic [ref=e142]:
+                    - generic [ref=e143]:
+                      - generic [ref=e144]: "05"
+                      - generic [ref=e145]: Hari
+                    - generic [ref=e148]:
+                      - generic [ref=e151]:
+                        - generic [ref=e152]: Asal Keberangkatan
+                        - generic [ref=e153]: Belum dipilih
+                      - generic [ref=e157]: Jawa
+                  - generic [ref=e159]:
+                    - heading "PERKIRAAN STRUKTUR" [level=4] [ref=e160]
+                    - list [ref=e161]:
+                      - listitem [ref=e162]: 02–03 area utama
+                      - listitem [ref=e164]: 2–3 aktivitas per hari
+                      - listitem [ref=e166]: Menengah · Seimbang
+                  - generic [ref=e168]:
+                    - heading "FOKUS RUTE" [level=4] [ref=e169]
+                    - generic [ref=e171]: Budaya
+                - generic [ref=e172]: Rute final dibuat setelah kamu meninjau semua pilihan.
+          - region "Mulai dari perjalanan yang sudah kami pilihkan." [ref=e173]:
+            - generic [ref=e174]:
+              - generic [ref=e175]: Rute Terkurasi Nusantara
+              - heading "Mulai dari perjalanan yang sudah kami pilihkan." [level=2] [ref=e176]
+              - paragraph [ref=e177]: Jelajahi rute siap pakai berdasarkan wilayah, durasi, dan pengalaman. Buka detailnya sekarang atau gunakan preferensinya sebagai titik awal untuk rute versimu sendiri.
+              - generic [ref=e178]:
+                - img [ref=e179]
+                - generic [ref=e182]: Dikurasi dari data lokal
+                - generic [ref=e183]: ·
+                - generic [ref=e184]: Dapat disesuaikan
+                - generic [ref=e185]: ·
+                - generic [ref=e186]: Tetap tersedia tanpa generator AI
+            - generic [ref=e187]:
+              - generic [ref=e188]: Menampilkan 10 rute terkurasi.
+              - group "Filter berdasarkan koleksi" [ref=e189]:
+                - generic [ref=e190]: Filter berdasarkan koleksi
+                - button "Semua" [pressed] [ref=e191]
+                - button "Untuk Pertama Kali" [ref=e192]
+                - button "Heritage" [ref=e193]
+                - button "Alam" [ref=e194]
+                - button "Kuliner" [ref=e195]
+                - button "Slow Travel" [ref=e196]
+              - generic [ref=e197]:
+                - group "Filter berdasarkan wilayah" [ref=e198]:
+                  - generic [ref=e199]: Filter berdasarkan wilayah
+                  - combobox [ref=e200] [cursor=pointer]:
+                    - option "Semua Wilayah" [selected]
+                    - option "Sumatera"
+                    - option "Jawa"
+                    - option "Kalimantan"
+                    - option "Sulawesi"
+                    - option "Bali Nusa Tenggara"
+                    - option "Maluku"
+                    - option "Papua"
+                - group "Filter berdasarkan durasi" [ref=e201]:
+                  - generic [ref=e202]: Filter berdasarkan durasi
+                  - combobox [ref=e203] [cursor=pointer]:
+                    - option "Semua Durasi" [selected]
+                    - option "3 Hari"
+                    - option "5 Hari"
+                    - option "7 Hari"
+                - group "Filter berdasarkan minat" [ref=e204]:
+                  - generic [ref=e205]: Filter berdasarkan minat
+                  - combobox [ref=e206] [cursor=pointer]:
+                    - option "Semua Minat" [selected]
+                    - option "Budaya"
+                    - option "Alam"
+                    - option "Kuliner"
+                    - option "Sejarah"
+                    - option "Petualangan"
+                    - option "Relaksasi"
+                    - option "Hidden Gems"
+                    - option "Kota Kreatif"
+              - generic [ref=e208]: 10 rute ditemukan
+            - generic [ref=e209]:
+              - generic [ref=e210]:
+                - article [ref=e212]:
+                  - img "Suasana budaya dan pasar tradisional di Jawa Tengah" [ref=e214]
+                  - generic [ref=e216]:
+                    - generic [ref=e217]:
+                      - generic [ref=e218]: jawa
+                      - generic [ref=e219]: •
+                      - generic [ref=e220]: 5 Hari
+                      - generic [ref=e221]: •
+                      - generic [ref=e222]: budaya, kuliner
+                    - heading "5 Hari Budaya & Kuliner Jawa" [level=3] [ref=e223]:
+                      - link "5 Hari Budaya & Kuliner Jawa" [ref=e224] [cursor=pointer]:
+                        - /url: "#jawa-budaya-kuliner-5"
+                    - paragraph [ref=e225]: Menjelajahi warisan budaya Jawa dari keraton hingga pasar tradisional, dengan wisata kuliner autentik di setiap kota.
+                    - generic [ref=e227]:
+                      - generic [ref=e228]: "Rute perjalanan: 1. Yogyakarta, 2. Solo, 3. Surabaya & Malang"
+                      - generic [ref=e232]:
+                        - generic [ref=e235]: Yogyakarta
+                        - generic [ref=e238]: Solo
+                        - generic [ref=e241]: Surabaya
+                    - generic [ref=e243]:
+                      - generic [ref=e244]:
+                        - generic [ref=e245]: "Ritme:"
+                        - text: Seimbang
+                      - generic [ref=e246]:
+                        - generic [ref=e247]: "Budget:"
+                        - text: Estimasi menengah
+                    - generic [ref=e248]:
+                      - button "Lihat detail rute 5 Hari Budaya & Kuliner Jawa" [ref=e249]:
+                        - generic [ref=e250]: Lihat Rute
+                        - img [ref=e251]
+                      - button "Gunakan preferensi dari rute 5 Hari Budaya & Kuliner Jawa ke form" [ref=e253]:
+                        - img [ref=e254]
+                        - generic [ref=e255]: Gunakan Preferensi Ini
+                - article [ref=e257]:
+                  - generic [ref=e258]:
+                    - img "Pemandangan Gunung Bromo dan bentang alam Jawa Timur" [ref=e260]
+                    - generic [ref=e261]: Heritage Trail
+                    - generic [ref=e262]: 7 Hari
+                  - generic [ref=e263]:
+                    - generic [ref=e264]:
+                      - generic [ref=e265]: jawa
+                      - generic [ref=e266]: •
+                      - generic [ref=e267]: budaya, sejarah
+                    - heading "7 Hari Jawa–Bali Heritage" [level=3] [ref=e268]:
+                      - link "7 Hari Jawa–Bali Heritage" [ref=e269] [cursor=pointer]:
+                        - /url: "#jawa-bali-heritage-7"
+                    - paragraph [ref=e270]: Perjalanan warisan budaya dari jantung Jawa menuju tradisi hidup di Bali.
+                    - generic [ref=e272]:
+                      - generic [ref=e273]: "Rute perjalanan: 1. Yogyakarta, 2. Solo, 3. Transit, 4. Ubud & Denpasar"
+                      - generic [ref=e277]:
+                        - generic [ref=e280]: Yogyakarta
+                        - generic [ref=e283]: Solo
+                        - generic [ref=e286]: Transit
+                        - generic [ref=e289]: Ubud
+                    - generic [ref=e291]:
+                      - generic [ref=e292]: "Ritme: Seimbang"
+                      - generic [ref=e293]: "Budget: Estimasi menengah–premium"
+                    - generic [ref=e294]:
+                      - button "Lihat detail rute 7 Hari Jawa–Bali Heritage" [ref=e295]:
+                        - generic [ref=e296]: Lihat Rute
+                      - button "Gunakan preferensi dari rute 7 Hari Jawa–Bali Heritage ke form" [ref=e297]:
+                        - img [ref=e298]
+                        - generic [ref=e299]: Gunakan
+                - article [ref=e301]:
+                  - generic [ref=e302]:
+                    - img "Kemegahan Candi Borobudur di Yogyakarta" [ref=e304]
+                    - generic [ref=e305]: Cocok untuk Pertama Kali
+                    - generic [ref=e306]: 3 Hari
+                  - generic [ref=e307]:
+                    - generic [ref=e308]:
+                      - generic [ref=e309]: jawa
+                      - generic [ref=e310]: •
+                      - generic [ref=e311]: budaya, kuliner
+                    - heading "3 Hari Yogyakarta & Candi Borobudur" [level=3] [ref=e312]:
+                      - link "3 Hari Yogyakarta & Candi Borobudur" [ref=e313] [cursor=pointer]:
+                        - /url: "#yogyakarta-cultural-escape-3"
+                    - paragraph [ref=e314]: Menyelami warisan keraton, seni, dan kuliner Yogyakarta dipadukan kemegahan candi di Jawa Tengah.
+                    - generic [ref=e316]:
+                      - generic [ref=e317]: "Rute perjalanan: 1. Yogyakarta Kota, 2. Candi Area (Magelang), 3. Prambanan & Seni"
+                      - generic [ref=e321]:
+                        - generic [ref=e324]: Yogyakarta Kota
+                        - generic [ref=e327]: Candi Area
+                        - generic [ref=e330]: Prambanan
+                    - generic [ref=e332]:
+                      - generic [ref=e333]: "Ritme: Seimbang"
+                      - generic [ref=e334]: "Budget: Estimasi hemat–menengah"
+                    - generic [ref=e335]:
+                      - button "Lihat detail rute 3 Hari Yogyakarta & Candi Borobudur" [ref=e336]:
+                        - generic [ref=e337]: Lihat Rute
+                      - button "Gunakan preferensi dari rute 3 Hari Yogyakarta & Candi Borobudur ke form" [ref=e338]:
+                        - img [ref=e339]
+                        - generic [ref=e340]: Gunakan
+              - generic [ref=e341]:
+                - generic [ref=e342]:
+                  - generic [ref=e343]:
+                    - heading "Eksplorasi Rute Lainnya" [level=4] [ref=e344]
+                    - paragraph [ref=e345]: Geser untuk melihat inspirasi perjalanan tambahan.
+                  - generic [ref=e346]:
+                    - button "Geser ke kiri" [ref=e347]:
+                      - img [ref=e348]
+                    - button "Geser ke kanan" [ref=e350]:
+                      - img [ref=e351]
+                - generic [ref=e353]:
+                  - article [ref=e355]:
+                    - generic [ref=e356]:
+                      - img "Pantai berpasir putih dan lautan biru di Lombok, Nusa Tenggara Barat" [ref=e358]
+                      - generic [ref=e359]: Cocok untuk Pertama Kali
+                      - generic [ref=e360]: 5 Hari
+                    - generic [ref=e361]:
+                      - generic [ref=e362]:
+                        - generic [ref=e363]: bali nusa tenggara
+                        - generic [ref=e364]: •
+                        - generic [ref=e365]: alam, budaya
+                      - heading "5 Hari Bali–Lombok" [level=3] [ref=e366]:
+                        - link "5 Hari Bali–Lombok" [ref=e367] [cursor=pointer]:
+                          - /url: "#bali-nusa-tenggara-5"
+                      - paragraph [ref=e368]: Dari tradisi hidup Bali menuju keindahan alam pesisir Lombok.
+                      - generic [ref=e370]:
+                        - generic [ref=e371]: "Rute perjalanan: 1. Ubud & Sanur, 2. Lombok & Gili"
+                        - generic [ref=e375]:
+                          - generic [ref=e378]: Ubud
+                          - generic [ref=e381]: Lombok
+                      - generic [ref=e383]:
+                        - generic [ref=e384]: "Ritme: Seimbang"
+                        - generic [ref=e385]: "Budget: Estimasi menengah"
+                      - generic [ref=e386]:
+                        - button "Lihat detail rute 5 Hari Bali–Lombok" [ref=e387]:
+                          - generic [ref=e388]: Lihat Rute
+                        - button "Gunakan preferensi dari rute 5 Hari Bali–Lombok ke form" [ref=e389]:
+                          - img [ref=e390]
+                          - generic [ref=e391]: Gunakan
+                  - article [ref=e393]:
+                    - generic [ref=e394]:
+                      - img "Kepulauan dan perairan biru jernih jalur rempah Maluku" [ref=e396]
+                      - generic [ref=e397]: Jalur Rempah
+                      - generic [ref=e398]: 5 Hari
+                    - generic [ref=e399]:
+                      - generic [ref=e400]:
+                        - generic [ref=e401]: maluku
+                        - generic [ref=e402]: •
+                        - generic [ref=e403]: sejarah, alam
+                      - heading "5 Hari Jalur Rempah Maluku" [level=3] [ref=e404]:
+                        - link "5 Hari Jalur Rempah Maluku" [ref=e405] [cursor=pointer]:
+                          - /url: "#maluku-spice-route-5"
+                      - paragraph [ref=e406]: Mengikuti jejak pala dan cengkeh di kepulauan yang pernah mengubah jaringan perdagangan dunia.
+                      - generic [ref=e408]:
+                        - generic [ref=e409]: "Rute perjalanan: 1. Ambon, 2. Saparua & Banda"
+                        - generic [ref=e413]:
+                          - generic [ref=e416]: Ambon
+                          - generic [ref=e419]: Saparua
+                      - generic [ref=e421]:
+                        - generic [ref=e422]: "Ritme: Seimbang"
+                        - generic [ref=e423]: "Budget: Estimasi menengah"
+                      - generic [ref=e424]:
+                        - button "Lihat detail rute 5 Hari Jalur Rempah Maluku" [ref=e425]:
+                          - generic [ref=e426]: Lihat Rute
+                        - button "Gunakan preferensi dari rute 5 Hari Jalur Rempah Maluku ke form" [ref=e427]:
+                          - img [ref=e428]
+                          - generic [ref=e429]: Gunakan
+                  - article [ref=e431]:
+                    - generic [ref=e432]:
+                      - img "Hutan hujan dan lanskap sungai Kalimantan Timur" [ref=e434]
+                      - generic [ref=e435]: Pilihan Utama
+                      - generic [ref=e436]: 5 Hari
+                    - generic [ref=e437]:
+                      - generic [ref=e438]:
+                        - generic [ref=e439]: kalimantan
+                        - generic [ref=e440]: •
+                        - generic [ref=e441]: alam, petualangan
+                      - heading "5 Hari Kalimantan Nature Explorer" [level=3] [ref=e442]:
+                        - link "5 Hari Kalimantan Nature Explorer" [ref=e443] [cursor=pointer]:
+                          - /url: "#kalimantan-nature-future-5"
+                      - paragraph [ref=e444]: Menjelajahi hutan hujan tropis, sungai besar, dan kehidupan orangutan di jantung Borneo.
+                      - generic [ref=e446]:
+                        - generic [ref=e447]: "Rute perjalanan: 1. Pangkalan Bun & Tanjung Puting, 2. Pontianak"
+                        - generic [ref=e451]:
+                          - generic [ref=e454]: Pangkalan Bun
+                          - generic [ref=e457]: Pontianak
+                      - generic [ref=e459]:
+                        - generic [ref=e460]: "Ritme: Seimbang"
+                        - generic [ref=e461]: "Budget: Estimasi menengah"
+                      - generic [ref=e462]:
+                        - button "Lihat detail rute 5 Hari Kalimantan Nature Explorer" [ref=e463]:
+                          - generic [ref=e464]: Lihat Rute
+                        - button "Gunakan preferensi dari rute 5 Hari Kalimantan Nature Explorer ke form" [ref=e465]:
+                          - img [ref=e466]
+                          - generic [ref=e467]: Gunakan
+                  - article [ref=e469]:
+                    - generic [ref=e470]:
+                      - img "Arsitektur Rumah Gadang di Sumatera Barat" [ref=e472]
+                      - generic [ref=e473]: Heritage Trail
+                      - generic [ref=e474]: 7 Hari
+                    - generic [ref=e475]:
+                      - generic [ref=e476]:
+                        - generic [ref=e477]: sumatera
+                        - generic [ref=e478]: •
+                        - generic [ref=e479]: budaya, kuliner
+                      - heading "7 Hari Sumatera Heritage" [level=3] [ref=e480]:
+                        - link "7 Hari Sumatera Heritage" [ref=e481] [cursor=pointer]:
+                          - /url: "#sumatra-heritage-7"
+                      - paragraph [ref=e482]: Perjalanan melintasi warisan budaya Sumatera dari Minangkabau hingga Danau Toba.
+                      - generic [ref=e484]:
+                        - generic [ref=e485]: "Rute perjalanan: 1. Padang & Bukittinggi, 2. Medan & Danau Toba"
+                        - generic [ref=e489]:
+                          - generic [ref=e492]: Padang
+                          - generic [ref=e495]: Medan
+                      - generic [ref=e497]:
+                        - generic [ref=e498]: "Ritme: Seimbang"
+                        - generic [ref=e499]: "Budget: Estimasi menengah"
+                      - generic [ref=e500]:
+                        - button "Lihat detail rute 7 Hari Sumatera Heritage" [ref=e501]:
+                          - generic [ref=e502]: Lihat Rute
+                        - button "Gunakan preferensi dari rute 7 Hari Sumatera Heritage ke form" [ref=e503]:
+                          - img [ref=e504]
+                          - generic [ref=e505]: Gunakan
+                  - article [ref=e507]:
+                    - generic [ref=e508]:
+                      - img "Lanskap unik dan warisan budaya Toraja, Sulawesi Selatan" [ref=e510]
+                      - generic [ref=e511]: Heritage Trail
+                      - generic [ref=e512]: 7 Hari
+                    - generic [ref=e513]:
+                      - generic [ref=e514]:
+                        - generic [ref=e515]: sulawesi
+                        - generic [ref=e516]: •
+                        - generic [ref=e517]: budaya, alam
+                      - heading "7 Hari Sulawesi Selatan Explorer" [level=3] [ref=e518]:
+                        - link "7 Hari Sulawesi Selatan Explorer" [ref=e519] [cursor=pointer]:
+                          - /url: "#sulawesi-culture-nature-7"
+                      - paragraph [ref=e520]: Dari tradisi pelaut Bugis hingga upacara Toraja dan lanskap karst Maros.
+                      - generic [ref=e522]:
+                        - generic [ref=e523]: "Rute perjalanan: 1. Makassar & Maros, 2. Transit & Parepare, 3. Tana Toraja"
+                        - generic [ref=e527]:
+                          - generic [ref=e530]: Makassar
+                          - generic [ref=e533]: Transit
+                          - generic [ref=e536]: Tana Toraja
+                      - generic [ref=e538]:
+                        - generic [ref=e539]: "Ritme: Seimbang"
+                        - generic [ref=e540]: "Budget: Estimasi menengah"
+                      - generic [ref=e541]:
+                        - button "Lihat detail rute 7 Hari Sulawesi Selatan Explorer" [ref=e542]:
+                          - generic [ref=e543]: Lihat Rute
+                        - button "Gunakan preferensi dari rute 7 Hari Sulawesi Selatan Explorer ke form" [ref=e544]:
+                          - img [ref=e545]
+                          - generic [ref=e546]: Gunakan
+                  - article [ref=e548]:
+                    - generic [ref=e549]:
+                      - img "Keindahan gugusan pulau Raja Ampat, Papua Barat Daya" [ref=e551]
+                      - generic [ref=e552]: Indonesia Timur
+                      - generic [ref=e553]: 7 Hari
+                    - generic [ref=e554]:
+                      - generic [ref=e555]:
+                        - generic [ref=e556]: papua
+                        - generic [ref=e557]: •
+                        - generic [ref=e558]: alam, budaya
+                      - heading "7 Hari Papua Wonder" [level=3] [ref=e559]:
+                        - link "7 Hari Papua Wonder" [ref=e560] [cursor=pointer]:
+                          - /url: "#papua-wonder-7"
+                      - paragraph [ref=e561]: Menjelajahi keajaiban alam Raja Ampat dan budaya Papua dari pesisir hingga Danau Sentani.
+                      - generic [ref=e563]:
+                        - generic [ref=e564]: "Rute perjalanan: 1. Sorong & Raja Ampat, 2. Jayapura & Sentani"
+                        - generic [ref=e568]:
+                          - generic [ref=e571]: Sorong
+                          - generic [ref=e574]: Jayapura
+                      - generic [ref=e576]:
+                        - generic [ref=e577]: "Ritme: Santai"
+                        - generic [ref=e578]: "Budget: Estimasi premium"
+                      - generic [ref=e579]:
+                        - button "Lihat detail rute 7 Hari Papua Wonder" [ref=e580]:
+                          - generic [ref=e581]: Lihat Rute
+                        - button "Gunakan preferensi dari rute 7 Hari Papua Wonder ke form" [ref=e582]:
+                          - img [ref=e583]
+                          - generic [ref=e584]: Gunakan
+                  - article [ref=e586]:
+                    - generic [ref=e587]:
+                      - img "Sawah terasering hijau subur dan suasana damai Bali" [ref=e589]
+                      - generic [ref=e590]: Slow Journey
+                      - generic [ref=e591]: 3 Hari
+                    - generic [ref=e592]:
+                      - generic [ref=e593]:
+                        - generic [ref=e594]: bali nusa tenggara
+                        - generic [ref=e595]: •
+                        - generic [ref=e596]: relaksasi, budaya
+                      - heading "3 Hari Bali Slow Journey" [level=3] [ref=e597]:
+                        - link "3 Hari Bali Slow Journey" [ref=e598] [cursor=pointer]:
+                          - /url: "#bali-slow-journey-3"
+                      - paragraph [ref=e599]: "Tiga hari menikmati Bali dengan ritme santai: pura, sawah, dan pantai."
+                      - generic [ref=e601]:
+                        - generic [ref=e602]: "Rute perjalanan: 1. Ubud, 2. Pura & Sawah, 3. Pantai Selatan"
+                        - generic [ref=e606]:
+                          - generic [ref=e609]: Ubud
+                          - generic [ref=e612]: Pura
+                          - generic [ref=e615]: Pantai Selatan
+                      - generic [ref=e617]:
+                        - generic [ref=e618]: "Ritme: Santai"
+                        - generic [ref=e619]: "Budget: Estimasi menengah–premium"
+                      - generic [ref=e620]:
+                        - button "Lihat detail rute 3 Hari Bali Slow Journey" [ref=e621]:
+                          - generic [ref=e622]: Lihat Rute
+                        - button "Gunakan preferensi dari rute 3 Hari Bali Slow Journey ke form" [ref=e623]:
+                          - img [ref=e624]
+                          - generic [ref=e625]: Gunakan
+        - region "Satu Peta, Ribuan Cerita Menunggumu" [ref=e627]:
+          - generic [ref=e628]:
+            - paragraph [ref=e629]: Mulai Jelajah
+            - heading "Satu Peta, Ribuan Cerita Menunggumu" [level=2] [ref=e630]
+            - paragraph [ref=e631]: Mulai dari satu provinsi, lalu biarkan ceritanya membawamu ke budaya, rasa, perjalanan, dan masa depan digital Nusantara.
+            - generic [ref=e632]:
+              - link "Buka Nusa Map" [ref=e633] [cursor=pointer]:
+                - /url: /explore
+              - link "Coba Route Planner" [ref=e634] [cursor=pointer]:
+                - /url: /routes?source=home-feature
+            - paragraph [ref=e635]: Mulai dari satu klik. Sisanya biarkan Nusantara bercerita.
+        - generic [ref=e638]:
+          - generic [ref=e639]:
+            - generic [ref=e640]:
+              - img "NUSANTARAYA" [ref=e642]
+              - generic [ref=e643]:
+                - paragraph [ref=e644]: Satu Peta, Ribuan Cerita
+                - paragraph [ref=e645]: Web app eksplorasi digital Indonesia yang menghubungkan peta, budaya, rasa, rute perjalanan, passport, AI guide, dan masa depan digital Nusantara.
+            - navigation "Footer navigation" [ref=e646]:
+              - generic [ref=e647]:
+                - heading "Jelajahi" [level=3] [ref=e648]
+                - list [ref=e649]:
+                  - listitem [ref=e650]:
+                    - link "Nusa Map" [ref=e651] [cursor=pointer]:
+                      - /url: /explore
+                  - listitem [ref=e652]:
+                    - generic "Segera Hadir" [ref=e653]:
+                      - text: Provinsi
+                      - generic [ref=e654]: Soon
+                  - listitem [ref=e655]:
+                    - generic "Segera Hadir" [ref=e656]:
+                      - text: Nusa Archive
+                      - generic [ref=e657]: Soon
+                  - listitem [ref=e658]:
+                    - generic "Segera Hadir" [ref=e659]:
+                      - text: NusaRasa
+                      - generic [ref=e660]: Soon
+                  - listitem [ref=e661]:
+                    - link "Route Planner" [ref=e662] [cursor=pointer]:
+                      - /url: /routes?source=home-feature
+                  - listitem [ref=e663]:
+                    - link "Passport" [ref=e664] [cursor=pointer]:
+                      - /url: /explore#passport-progress
+              - generic [ref=e665]:
+                - heading "Fitur" [level=3] [ref=e666]
+                - list [ref=e667]:
+                  - listitem [ref=e668]:
+                    - generic "Segera Hadir" [ref=e669]:
+                      - text: RANI AI Guide
+                      - generic [ref=e670]: Soon
+                  - listitem [ref=e671]:
+                    - generic "Segera Hadir" [ref=e672]:
+                      - text: Nusa Future
+                      - generic [ref=e673]: Soon
+                  - listitem [ref=e674]:
+                    - generic "Segera Hadir" [ref=e675]:
+                      - text: Aksara Lab
+                      - generic [ref=e676]: Soon
+                  - listitem [ref=e677]:
+                    - generic "Segera Hadir" [ref=e678]:
+                      - text: Jalur Rempah
+                      - generic [ref=e679]: Soon
+                  - listitem [ref=e680]:
+                    - generic "Segera Hadir" [ref=e681]:
+                      - text: Event Calendar
+                      - generic [ref=e682]: Soon
+                  - listitem [ref=e683]:
+                    - generic "Segera Hadir" [ref=e684]:
+                      - text: Tourist Mode
+                      - generic [ref=e685]: Soon
+              - generic [ref=e686]:
+                - heading "Tentang" [level=3] [ref=e687]
+                - list [ref=e688]:
+                  - listitem [ref=e689]:
+                    - generic "Segera Hadir" [ref=e690]:
+                      - text: Tentang NUSANTARAYA
+                      - generic [ref=e691]: Soon
+                  - listitem [ref=e692]:
+                    - generic "Segera Hadir" [ref=e693]:
+                      - text: Sumber Data
+                      - generic [ref=e694]: Soon
+                  - listitem [ref=e695]:
+                    - generic "Segera Hadir" [ref=e696]:
+                      - text: Roadmap
+                      - generic [ref=e697]: Soon
+                  - listitem [ref=e698]:
+                    - generic "Segera Hadir" [ref=e699]:
+                      - text: Credits
+                      - generic [ref=e700]: Soon
+                  - listitem [ref=e701]:
+                    - generic "Segera Hadir" [ref=e702]:
+                      - text: Kontak
+                      - generic [ref=e703]: Soon
+            - generic [ref=e704]:
+              - paragraph [ref=e705]: Gabung Nusa Club
+              - paragraph [ref=e706]: Terima cerita, itinerary budaya, dan rilis fitur baru dari NUSANTARAYA. Gratis untuk penjelajah awal.
+              - generic [ref=e707]:
+                - generic [ref=e708]: Email untuk Nusa Club
+                - textbox "Email untuk Nusa Club" [ref=e709]:
+                  - /placeholder: Email
+                - button "Submit" [ref=e710]
+              - paragraph [ref=e711]: Dengan bergabung, kamu setuju menerima update pilihan dari NUSANTARAYA.
+          - generic [ref=e712]:
+            - paragraph [ref=e714]:
+              - generic [ref=e715]: "N"
+              - generic [ref=e716]: U
+              - generic [ref=e717]: S
+              - generic [ref=e718]: A
+              - generic [ref=e719]: "N"
+              - generic [ref=e720]: T
+              - generic [ref=e721]: A
+              - generic [ref=e722]: R
+              - generic [ref=e723]: A
+              - generic [ref=e724]: "Y"
+              - generic [ref=e725]: A
+            - generic [ref=e726]:
+              - generic [ref=e727]:
+                - paragraph [ref=e728]: © 2026 NUSANTARAYA. Dibuat untuk Nusantara Digital City — Mufalah Code.
+                - paragraph [ref=e729]: Data budaya, peta, dan konten digunakan untuk demo eksplorasi digital. v1.0 • Homepage MVP
+              - generic [ref=e730]:
+                - generic [ref=e731]:
+                  - link "Instagram" [ref=e732] [cursor=pointer]:
+                    - /url: https://instagram.com/nusantaraya
+                    - img [ref=e733]
+                  - link "GitHub" [ref=e736] [cursor=pointer]:
+                    - /url: https://github.com/mufalah
+                    - img [ref=e737]
+                  - link "Email" [ref=e740] [cursor=pointer]:
+                    - /url: mailto:mufalahcode@gmail.com
+                    - img [ref=e741]
+                  - button "Kembali ke atas" [ref=e744]: ↑
+                - generic [ref=e745]:
+                  - link "Privasi" [disabled] [ref=e746]:
+                    - /url: "#"
+                  - link "Ketentuan" [disabled] [ref=e747]:
+                    - /url: "#"
+  - button "Open Next.js Dev Tools" [ref=e753] [cursor=pointer]:
+    - img [ref=e754]
+  - alert [ref=e757]
+```
+
+# Test source
+
+```ts
+  1  | import { test, expect } from '@playwright/test';
+  2  | 
+  3  | test('NUSANTARAYA Smoke Test: Core E2E Flow', async ({ page }) => {
+  4  |   // 1. Kunjungi Homepage
+  5  |   await page.goto('/');
+  6  |   await expect(page).toHaveTitle(/NUSANTARAYA/i);
+  7  | 
+  8  |   // 2. Navigasi ke Nusa Route Planner dengan context (prefill)
+  9  |   await page.goto('/routes?region=jawa&duration=5&interests=budaya');
+  10 |   await expect(page.getByRole('heading', { name: /Rencanakan Petualanganmu/i, level: 1 })).toBeVisible();
+  11 | 
+  12 |   // 3. Langsung klik Buat Rencana (form valid otomatis dari prefill)
+> 13 |   await page.getByRole('button', { name: /Buat Rencana/i }).click();
+     |                                                             ^ Error: locator.click: Test timeout of 30000ms exceeded.
+  14 | 
+  15 |   // 4. Verifikasi Hasil Muncul (Itinerary Section)
+  16 |   await expect(page.locator('#itinerary')).toBeVisible({ timeout: 10000 });
+  17 |   await expect(page.getByRole('heading', { name: /Hari ke-/i }).first()).toBeVisible();
+  18 | 
+  19 |   // 5. Verifikasi Route Map & Transport
+  20 |   await expect(page.locator('#route-map')).toBeVisible();
+  21 |   
+  22 |   // 6. Verifikasi Readiness & Save to Passport
+  23 |   await expect(page.locator('#readiness')).toBeVisible();
+  24 |   const saveButton = page.getByRole('button', { name: /Simpan Rute|Save to Passport/i }).first();
+  25 |   await expect(saveButton).toBeVisible();
+  26 |   
+  27 |   await saveButton.click();
+  28 |   
+  29 |   // 7. Navigasi ke Passport dan verifikasi
+  30 |   await page.goto('/passport');
+  31 |   await expect(page.getByRole('heading', { name: /Passport/i, level: 1 })).toBeVisible();
+  32 |   // Verifikasi rute tersimpan (bisa pakai selector card atau generic text)
+  33 |   await expect(page.getByText(/Hari/i).first()).toBeVisible();
+  34 | });
+  35 | 
+```

@@ -23,6 +23,7 @@ export function hasMatchingRouteIdentity(
 
 export function resolveActiveRouteWorkspace(
   recommendation: RouteRecommendation | null,
+  activeItinerary: import("@/lib/routes/itinerary/routeItinerarySchema").RouteItinerary | null,
   values: RoutePlannerFormValues,
   passport: PassportData,
   source: string,
@@ -50,7 +51,7 @@ export function resolveActiveRouteWorkspace(
   let status: RouteWorkspaceStatus = "ready";
 
   // 1. Resolve Itinerary
-  const itineraryRes = resolveRouteItinerary(recommendation);
+  const itineraryRes = activeItinerary ? { status: "ready" as const, itinerary: activeItinerary } : resolveRouteItinerary(recommendation);
   if (itineraryRes.status === "partial") {
     status = "partial";
     errors.push({ code: "ITINERARY_PARTIAL", message: "Itinerary is partial", section: "itinerary" });

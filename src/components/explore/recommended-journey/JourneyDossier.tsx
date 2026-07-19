@@ -1,3 +1,4 @@
+import { buildJourneyRouteHref } from "@/lib/routes/mapJourneyToPlannerValues";
 import React from "react";
 import { RecommendedJourney } from "@/data/journeys/types";
 import { REASON_COPY_ID } from "@/lib/recommendation/engine";
@@ -26,7 +27,7 @@ export function JourneyDossier({ journey, reasons, onRegenerate }: JourneyDossie
         router.push(journey.primaryAction.href);
       }
     } else if (journey.primaryAction.type === "route-planner") {
-      const routePlannerHref = `/routes?journeyId=${encodeURIComponent(journey.id)}`;
+      const routePlannerHref = buildJourneyRouteHref(journey);
       if (isRouteAvailable(routePlannerHref)) {
         router.push(routePlannerHref);
       }
@@ -313,3 +314,4 @@ export function JourneyDossier({ journey, reasons, onRegenerate }: JourneyDossie
     </div>
   );
 }
+

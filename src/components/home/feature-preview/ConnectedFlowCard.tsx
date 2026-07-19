@@ -128,7 +128,7 @@ export default function ConnectedFlowCard() {
         </Link>
       </div>
 
-      <style dangerouslySetInnerHTML={{__html: `
+      <style>{`
         @keyframes flow-particle {
           0% { left: -150px; opacity: 0; }
           20% { opacity: 1; }
@@ -138,7 +138,8 @@ export default function ConnectedFlowCard() {
         @keyframes shine {
           100% { transform: translateX(100%); }
         }
-      `}} />
+      `}</style>
     </div>
   );
 }
+

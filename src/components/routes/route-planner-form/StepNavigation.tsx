@@ -67,8 +67,7 @@ export function StepNavigation({
           </button>
         ) : (
           <button
-            type="button"
-            onClick={onSubmit}
+            type="submit"
             disabled={isLoading || !isStepValid}
             className={`group flex items-center justify-center gap-2 px-8 py-3 rounded-full font-inter text-[14px] font-semibold transition-all w-full sm:w-auto relative overflow-hidden ${
               isLoading || !isStepValid

@@ -18,7 +18,7 @@ export function ChecklistModule({ template }: ChecklistModuleProps) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const saved = loadChecklistProgress(template.routeId);
+    const saved = loadChecklistProgress(template.routeId, template.routeVersion, template.itineraryVersion);
     if (saved && saved.templateVersion === template.version) {
       setCompletedIds(new Set(saved.completedItemIds));
     }
@@ -41,7 +41,7 @@ export function ChecklistModule({ template }: ChecklistModuleProps) {
         routeVersion: template.routeVersion,
         completedItemIds: Array.from(next),
         updatedAt: new Date().toISOString(),
-      });
+      }, template.itineraryVersion);
       
       return next;
     });
@@ -50,7 +50,7 @@ export function ChecklistModule({ template }: ChecklistModuleProps) {
   const handleReset = () => {
     if (window.confirm("Apakah Anda yakin ingin mengatur ulang checklist?")) {
       setCompletedIds(new Set());
-      clearChecklistProgress(template.routeId);
+      clearChecklistProgress(template.routeId, template.routeVersion, template.itineraryVersion);
     }
   };
 

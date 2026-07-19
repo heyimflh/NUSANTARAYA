@@ -25,12 +25,13 @@ export function BudgetModule({ budget, locale }: BudgetModuleProps) {
   const multiplier = basis === "party" ? budget.partySize : 1;
   const formatter = new Intl.NumberFormat(locale === "id" ? "id-ID" : "en-US", {
     style: "currency",
-    currency: budget.total.currency,
+    currency: budget.total.currency || "IDR",
     maximumFractionDigits: 0,
   });
 
-  const displayMin = formatter.format(budget.total.min * multiplier);
-  const displayMax = formatter.format(budget.total.max * multiplier);
+  const isUnavailable = budget.confidence === "unavailable" || budget.total.min === null || budget.total.max === null;
+  const displayMin = !isUnavailable && budget.total.min !== null ? formatter.format(budget.total.min * multiplier) : "";
+  const displayMax = !isUnavailable && budget.total.max !== null ? formatter.format(budget.total.max * multiplier) : "";
 
   return (
     <div id="readiness-budget" className="py-8 scroll-mt-24 border-b border-[#E8E0CE]">
@@ -41,11 +42,11 @@ export function BudgetModule({ budget, locale }: BudgetModuleProps) {
             <div className="flex flex-col">
               <span className="text-sm font-semibold text-[#5C6470] uppercase tracking-wider mb-1">Total Kisaran</span>
               <span className="text-3xl font-bold text-[#27211C]">
-                {displayMin} – {displayMax}
+                {isUnavailable ? "Belum tersedia" : `${displayMin} - ${displayMax}`}
               </span>
               <span className="text-sm text-[#5C6470] mt-1">
                 {basis === "per-person" ? "Per orang" : `Total rombongan (${budget.partySize} orang)`}
-                {budget.confidence === "estimated" && " · Estimasi"}
+                {budget.confidence === "estimated" ? " • Estimasi" : (budget.confidence === "verified" ? " • Terverifikasi" : "")}
               </span>
             </div>
           </div>
@@ -89,18 +90,30 @@ export function BudgetModule({ budget, locale }: BudgetModuleProps) {
               <div>
                 <h4 className="text-sm font-bold text-[#0D1B2A] uppercase tracking-wider mb-4">Rincian Kategori</h4>
                 <div className="flex flex-col gap-3">
-                  {budget.categories.map((cat) => (
-                    <div key={cat.id} className="flex justify-between items-center py-2 border-b border-[#E8E0CE]/50 last:border-0">
-                      <span className="text-sm text-[#5C6470]">{cat.label}</span>
-                      <span className="text-sm font-semibold text-[#27211C]">
-                        {cat.amount ? (
-                          `${formatter.format(cat.amount.min * multiplier)} – ${formatter.format(cat.amount.max * multiplier)}`
-                        ) : (
-                          "Belum tersedia"
-                        )}
-                      </span>
-                    </div>
-                  ))}
+                  {budget.categories.map((cat) => {
+                    const Icon = Info;
+                    return (
+                      <div key={cat.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-[#F8F4EA] rounded-2xl gap-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0 border border-[#E8E0CE]">
+                            {Icon && <Icon className="w-5 h-5 text-[#C75B3C]" />}
+                          </div>
+                          <div>
+                            <p className="font-bold text-[#0D1B2A]">{cat.label}</p>
+                            <p className="text-xs text-[#5C6470]">{cat.confidence === "estimated" ? "Estimasi" : (cat.confidence === "verified" ? "Terverifikasi" : "")}</p>
+                          </div>
+                        </div>
+                        <div className="sm:text-right">
+                          {(() => {
+                            const catIsUnavailable = cat.confidence === "unavailable" || cat.amount?.min === null || cat.amount?.max === null;
+                            const catMin = !catIsUnavailable && cat.amount?.min != null ? formatter.format(cat.amount.min * multiplier) : "";
+                            const catMax = !catIsUnavailable && cat.amount?.max != null ? formatter.format(cat.amount.max * multiplier) : "";
+                            return <span className="font-bold text-[#0D1B2A]">{catIsUnavailable ? "Belum tersedia" : `${catMin} - ${catMax}`}</span>;
+                          })()}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -143,3 +156,4 @@ export function BudgetModule({ budget, locale }: BudgetModuleProps) {
     </div>
   );
 }
+

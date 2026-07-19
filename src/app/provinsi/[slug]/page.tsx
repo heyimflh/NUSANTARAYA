@@ -22,6 +22,17 @@ import { AtlasLifecycleBridge } from '@/components/province-atlas/AtlasLifecycle
 import { AtlasCompletionAction } from '@/components/province-atlas/AtlasCompletionAction';
 import { RelatedProvinces } from '@/components/province-atlas/RelatedProvinces';
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const provinceData = provinceMapData.find((p) => p.id === slug);
+  if (!provinceData) return { title: "Provinsi Tidak Ditemukan" };
+  return {
+    title: provinceData.name,
+    description: `Jelajahi kebudayaan, kuliner, dan destinasi wisata di ${provinceData.name} melalui Atlas Nusantara.`,
+    alternates: { canonical: `/provinsi/${slug}` }
+  };
+}
+
 export default async function ProvinceAtlasPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   const province = provinceMapData.find(p => p.id === resolvedParams.slug);

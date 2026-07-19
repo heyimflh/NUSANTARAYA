@@ -1,6 +1,6 @@
+"use client";
 import { navigateToRouteSection } from "@/lib/routes/navigateToRouteSection";
 import { ROUTE_SECTION_IDS } from "@/lib/routes/routeSections";
-"use client";
 
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
@@ -49,6 +49,7 @@ export function RouteAtelier() {
   const [status, setStatus] = useState<RoutePlannerStatus>("idle");
   const [hasInteracted, setHasInteracted] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+    const [prefillMessage, setPrefillMessage] = useState<string | null>(null);
   
   // ─── Journey/RANI Context ───
   const [activeJourneyId, setActiveJourneyId] = useState<string | null>(null);
@@ -57,6 +58,8 @@ export function RouteAtelier() {
   // ─── Atelier State (Unified 3 steps) ───
   const [activeStep, setActiveStep] = useState<1 | 2 | 3>(1);
   const [result, setResult] = useState<RouteRecommendation | null>(null);
+    const [activeItinerary, setActiveItinerary] = useState<import("@/lib/routes/itinerary/routeItinerarySchema").RouteItinerary | null>(null);
+    const [previousState, setPreviousState] = useState<{ result: RouteRecommendation, itinerary: import("@/lib/routes/itinerary/routeItinerarySchema").RouteItinerary | null } | null>(null);
   const [adjustmentNote, setAdjustmentNote] = useState<string | null>(null);
   const [resultSource, setResultSource] = useState<"form" | "preset" | "url">("form");
   const [focusOnReveal, setFocusOnReveal] = useState(false);
@@ -151,6 +154,8 @@ export function RouteAtelier() {
     setValues(DEFAULT_FORM_VALUES);
     setStatus("idle");
     setResult(null);
+      setActiveItinerary(null);
+      setPreviousState(null);
     setAdjustmentNote(null);
     setResultSource("form");
     setFocusOnReveal(false);
@@ -173,6 +178,8 @@ export function RouteAtelier() {
     setValues(newValues);
     setHasInteracted(true);
     setResult(null);
+      setActiveItinerary(null);
+      setPreviousState(null);
     setActiveSource("preset-route");
     trackRoutePlannerEvent("route_planner_prefilled", {
       source: "preset-route",
@@ -213,7 +220,8 @@ export function RouteAtelier() {
     });
   }, [values, router, activeSource, activeJourneyId]);
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = useCallback((e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     trackRoutePlannerEvent("route_generate_clicked", buildAnalyticsPayload(values));
     const validationErrors = validateFormValues(values);
     if (validationErrors.length > 0) {
@@ -243,6 +251,8 @@ export function RouteAtelier() {
       } else {
         setStatus("fallback");
         setResult(null);
+      setActiveItinerary(null);
+      setPreviousState(null);
         setAdjustmentNote(res.metadata.reason);
         setResultSource("form");
         setFocusOnReveal(true);
@@ -251,6 +261,8 @@ export function RouteAtelier() {
     } catch {
       setStatus("error");
       setResult(null);
+      setActiveItinerary(null);
+      setPreviousState(null);
       setAdjustmentNote("Terjadi kesalahan sistem saat mencari rute.");
       setResultSource("form");
       setFocusOnReveal(true);
@@ -306,6 +318,12 @@ export function RouteAtelier() {
       
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative min-h-[600px] z-10 scroll-mt-32">
         <div className="flex flex-col animate-in fade-in duration-500">
+                    {prefillMessage && (
+            <div className="mb-6 p-4 rounded-xl bg-[var(--planner-saffron)]/10 border border-[var(--planner-saffron)]/30 text-[var(--planner-primary)] font-medium text-sm flex items-center gap-3 animate-in fade-in">
+              <Info className="w-5 h-5 shrink-0" />
+              <span>{prefillMessage}</span>
+            </div>
+          )}
           <PlannerIntroSection />
 
           {(activeJourneyId || activeSource === "rani") && (
@@ -322,7 +340,11 @@ export function RouteAtelier() {
             </div>
           )}
 
-          <div className="w-full max-w-5xl mx-auto flex flex-col gap-8">
+          <form 
+            className="w-full max-w-5xl mx-auto flex flex-col gap-8"
+            onSubmit={handleSubmit}
+            noValidate
+          >
             <RoutePlannerStepper 
               currentStep={activeStep} 
               onStepChange={handleStepChange} 
@@ -331,7 +353,7 @@ export function RouteAtelier() {
             />
 
             {/* Main Form Surface */}
-            <div className="flex flex-col lg:flex-row items-start relative gap-8 xl:gap-10">
+            <div className="flex flex-col lg:flex-row flex-wrap items-start relative gap-8 xl:gap-10">
               
               {/* Form Content Panel */}
               <div className="flex-1 w-full flex flex-col bg-[var(--planner-paper)] border border-[var(--planner-warm-border)] rounded-3xl shadow-[0_8px_32px_rgba(58,43,34,0.03)] overflow-hidden min-h-[500px]">
@@ -372,7 +394,7 @@ export function RouteAtelier() {
             <div className="lg:hidden w-full mt-4">
               <RouteImpactPreview values={values} activeStep={activeStep} />
             </div>
-          </div>
+          </form>
 
           {/* Section 3: Popular / Preset Routes */}
           <PresetRoutesSection 
@@ -384,27 +406,41 @@ export function RouteAtelier() {
           
           {/* Section 4: Route Recommendation Result */}
           <div className="w-full max-w-7xl mx-auto pt-16 mt-8">
-            <RouteRecommendationResultSection
-              result={result}
-              status={status}
-              adjustmentNote={adjustmentNote}
-              values={values}
-              resultSource={resultSource}
-              onEdit={() => {
-                setFocusOnReveal(false);
-                const qs = buildPlannerQueryString(values, activeSource as RoutePlannerSource, activeJourneyId || undefined);
-                router.replace(`/routes${qs}`, { scroll: false });
-                setTimeout(() => document.getElementById("route-atelier")?.scrollIntoView({ behavior: "smooth" }), 50);
-              }}
-              onReset={handleReset}
-              focusOnReveal={focusOnReveal}
-            />
+                      <RouteRecommendationResultSection
+            result={result}
+            activeItinerary={activeItinerary}
+            status={status}
+            adjustmentNote={adjustmentNote}
+            values={values}
+            resultSource={resultSource}
+            onEdit={() => setActiveStep(1)}
+            onReset={handleReset}
+            focusOnReveal={focusOnReveal}
+            onApplyDraft={(draft) => {
+              setPreviousState({ result: result as RouteRecommendation, itinerary: activeItinerary });
+              setResult(draft.proposedRoute);
+              setActiveItinerary(draft.proposedItinerary);
+              setStatus("success");
+              setResultSource("preset"); // or form, this dictates if it uses preset logic, maybe keep it as is
+              setAdjustmentNote(`Rute disesuaikan: ${draft.summary}`);
+            }}
+            onUndoDraft={() => {
+              if (previousState) {
+                setResult(previousState.result);
+                setActiveItinerary(previousState.itinerary);
+                setPreviousState(null);
+                setAdjustmentNote("Perubahan rute dibatalkan.");
+              }
+            }}
+            canUndo={!!previousState}
+          />
           </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 
 

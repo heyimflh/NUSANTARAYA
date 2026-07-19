@@ -1,3 +1,4 @@
+import { scrollElementIntoView } from "@/lib/utils/scroll";
 import { RaniAction } from "@/types/rani";
 
 type ActionResolverParams = {
@@ -46,7 +47,7 @@ export function resolveRaniAction({
       } else {
         const pSection = document.getElementById("passport-progress-heading");
         if (pSection) {
-          pSection.scrollIntoView({ behavior: "smooth" });
+          scrollElementIntoView(pSection, { });
         }
       }
       break;
@@ -54,3 +55,4 @@ export function resolveRaniAction({
       console.warn("Unresolved RANI action:", action);
   }
 }
+

@@ -183,7 +183,7 @@ export interface RouteSourceReference {
 
 export interface RouteRecommendation {
   id: string;
-  version: typeof ROUTE_SCHEMA_VERSION;
+  version: string; // typeof ROUTE_SCHEMA_VERSION or string for adjustments
   matchType: "exact-preset" | "adapted-preset" | "fallback-preset";
   requestedDuration?: RouteDuration;
   actualDuration?: RouteDuration;
@@ -264,6 +264,8 @@ export interface PreferenceMatchChip {
   state: PreferenceMatchState;
   note?: string; // shown for "adjusted" state
 }
+
+
 
 
 

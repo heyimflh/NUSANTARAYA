@@ -1,4 +1,5 @@
 "use client";
+import { scrollElementIntoView } from "@/lib/utils/scroll";
 
 import { useState, useMemo, useCallback } from "react";
 import { MapHeroSection } from "@/components/explore/map-hero";
@@ -75,7 +76,7 @@ export default function ExplorePage() {
     // or we can just scroll to the map heading.
     const mapHeading = document.getElementById("interactive-map-heading");
     if (mapHeading) {
-      mapHeading.scrollIntoView({ behavior: "smooth", block: "start" });
+      scrollElementIntoView(mapHeading, { block: "start" });
     }
   }, []);
 
@@ -85,7 +86,7 @@ export default function ExplorePage() {
     
     const mapHeading = document.getElementById("interactive-map-heading") || document.getElementById("interactive-map");
     if (mapHeading) {
-      mapHeading.scrollIntoView({ behavior: "smooth", block: "start" });
+      scrollElementIntoView(mapHeading, { block: "start" });
     }
   }, []);
 
@@ -240,3 +241,6 @@ export default function ExplorePage() {
     </main>
   );
 }
+
+
+

@@ -1,4 +1,5 @@
 "use client";
+import { scrollElementIntoView } from "@/lib/utils/scroll";
 
 import React from 'react';
 
@@ -62,3 +63,5 @@ export const SummaryActions = ({ province }: { province: ProvinceMapItem }) => {
     </div>
   );
 };
+
+

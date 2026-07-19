@@ -12,7 +12,7 @@
     "ringkasan": "Daerah Istimewa Yogyakarta adalah salah satu wilayah dengan warisan budaya paling kaya di Indonesia, tempat tradisi keraton bersanding harmonis dengan denyut kehidupan modern dan semangat pendidikan.",
     "bahasa": ["Jawa"],
     "aksara": ["Aksara Jawa"],
-    "heroImage": "/assets/placeholder-jogja.jpg",
+    "heroImage": "/assets/province/di-yogyakarta/hero.webp",
     "sejarah": [
       {
         "tahun": "1755",
@@ -113,7 +113,6 @@
     "provinsiTerkait": [
       { "id": "jawa-tengah", "alasan": "Serumpun budaya Jawa Mataraman" }
     ],
-    "soundscape": "/assets/audio/jogja-gamelan.mp3",
     "sumber": ["Dinas Kebudayaan DIY", "BPS DIY"]
   },
   {
@@ -155,3 +154,4 @@
     "sumber": []
   }
 ]
+

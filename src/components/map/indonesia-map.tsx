@@ -28,19 +28,30 @@ export function IndonesiaMap() {
   const [tooltip, setTooltip] = useState<ProvinceTooltip | null>(null);
   const [hoveredKode, setHoveredKode] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   // Load SVG content
   useEffect(() => {
-    fetch("/assets/map/indonesia-fill.svg")
-      .then((res) => res.text())
+    const controller = new AbortController();
+    fetch("/assets/map/indonesia-fill.svg", { signal: controller.signal })
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+        return res.text();
+      })
       .then((text) => {
+        if (!text.includes("<svg") || text.includes("<script") || text.includes("javascript:")) {
+           throw new Error("Invalid SVG content");
+        }
         setSvgContent(text);
         setLoading(false);
       })
       .catch((err) => {
+        if (err.name === "AbortError") return;
         console.error("Failed to load map SVG:", err);
+        setError(true);
         setLoading(false);
       });
+    return () => controller.abort();
   }, []);
 
   // Handle province hover
@@ -135,6 +146,19 @@ export function IndonesiaMap() {
       }
     });
   }, [hoveredKode]);
+
+  if (error) {
+    return (
+      <div className="nusa-container py-12 flex flex-col items-center justify-center min-h-[50vh] text-center space-y-4">
+        <div className="w-16 h-16 rounded-full bg-red-50 text-red-500 flex items-center justify-center mb-2">
+          <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+        </div>
+        <h3 className="text-xl font-playfair font-bold text-text-primary">Peta Belum Dapat Dimuat</h3>
+        <p className="text-text-secondary max-w-md">Terjadi kendala saat memuat aset peta interaktif Indonesia. Silakan coba lagi.</p>
+        <button onClick={() => window.location.reload()} className="mt-4 px-6 py-2 bg-[#2B4C8C] text-white rounded-full font-medium hover:bg-[#1E3663] transition-colors">Muat Ulang Halaman</button>
+      </div>
+    );
+  }
 
   if (loading) {
     return (

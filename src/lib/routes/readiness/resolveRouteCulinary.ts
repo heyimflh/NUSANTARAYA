@@ -11,14 +11,14 @@ const FALLBACK_CULINARY_DB: Record<string, Omit<RouteCulinaryItem, "id" | "stopI
       contextNoteId: "Ikon kuliner Yogyakarta yang dimasak lambat dengan krecek.",
       dietaryTags: ["bisa-vegetarian"],
       allergenRefs: ["kacang-tanah"],
-      confidence: "verified",
+      confidence: "editorial",
     },
     {
       culinaryId: "cul-kopi-jos",
       category: "drink",
       tasteProfileIds: ["pahit", "unik"],
       contextNoteId: "Kopi hitam panas yang disajikan dengan arang membara.",
-      confidence: "verified",
+      confidence: "editorial",
     }
   ],
   "jawa-tengah": [
@@ -28,7 +28,7 @@ const FALLBACK_CULINARY_DB: Record<string, Omit<RouteCulinaryItem, "id" | "stopI
       tasteProfileIds: ["gurih", "manis"],
       contextNoteId: "Sate kambing cincang khas Solo yang dibungkus lemak.",
       dietaryTags: ["daging-kambing"],
-      confidence: "verified",
+      confidence: "editorial",
     }
   ],
   "jawa-timur": [
@@ -38,7 +38,7 @@ const FALLBACK_CULINARY_DB: Record<string, Omit<RouteCulinaryItem, "id" | "stopI
       tasteProfileIds: ["gurih", "kaya-rempah"],
       contextNoteId: "Sup daging berkuah hitam legam dari kluwek khas Jawa Timur.",
       dietaryTags: ["daging-sapi"],
-      confidence: "verified",
+      confidence: "editorial",
     }
   ]
 };

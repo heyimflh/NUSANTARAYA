@@ -1,19 +1,36 @@
 import { navigateToRouteSection } from "@/lib/routes/navigateToRouteSection";
+import { buildProvinceAtlasHref } from "@/lib/routes/buildProvinceAtlasHref";
+import { useRouter } from "next/navigation";
+import { usePassport } from "@/context/app-context";
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { clsx } from "clsx";
-import { Map, Settings2, Clock, Utensils, Navigation } from "lucide-react";
+import { Map, Settings2, Clock, Utensils, Navigation, BookOpen } from "lucide-react";
 import { ItineraryDay } from "@/lib/routes/itinerary/routeItinerarySchema";
 
 interface ItineraryDayCardProps {
   day: ItineraryDay;
   isExpanded: boolean;
-  onToggle: () => void;
-  /** Called when user clicks "Lihat Rute di Peta" */
+  onToggle: () => void;  /** Called when user clicks "Lihat Rute di Peta" */
   onViewInMap?: () => void;
+  routeId: string;
 }
 
-export function ItineraryDayCard({ day, isExpanded, onToggle, onViewInMap }: ItineraryDayCardProps) {
+export function ItineraryDayCard({ day, isExpanded, onToggle, onViewInMap, routeId }: ItineraryDayCardProps) {
+  const router = useRouter();
+  const { planProvince } = usePassport();
+
+  const handleOpenAtlas = async (provinceId: string) => {
+    planProvince(provinceId);
+    const href = buildProvinceAtlasHref({
+      provinceId,
+      routeId,
+      day: day.dayNumber,
+      returnTo: window.location.pathname + window.location.search
+    });
+    router.push(href);
+  };
+
   return (
     <article
       id={`itinerary-day-${day.dayNumber}`}
@@ -216,5 +233,7 @@ export function ItineraryDayCard({ day, isExpanded, onToggle, onViewInMap }: Iti
     </article>
   );
 }
+
+
 
 

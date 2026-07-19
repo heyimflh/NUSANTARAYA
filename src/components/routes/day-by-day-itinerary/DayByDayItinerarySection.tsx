@@ -1,3 +1,4 @@
+import { scrollElementIntoView } from "@/lib/utils/scroll";
 import { ROUTE_SECTION_IDS } from "@/lib/routes/routeSections";
 import React, { useState, useEffect } from "react";
 import { RouteRecommendation } from "@/types/route-planner";
@@ -41,7 +42,7 @@ export function DayByDayItinerarySection({
       setActiveDay(externalActiveDay);
       setTimeout(() => {
         const dayEl = document.getElementById(`itinerary-day-${externalActiveDay}`);
-        if (dayEl) dayEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (dayEl) scrollElementIntoView(dayEl, { block: "start" });
       }, 100);
     }
   }, [externalActiveDay]);
@@ -90,7 +91,7 @@ export function DayByDayItinerarySection({
               setActiveDay(dayNumber);
               const el = document.getElementById(`itinerary-day-${dayNumber}`);
               if (el) {
-                el.scrollIntoView({ behavior: "smooth", block: "start" });
+                scrollElementIntoView(el, { block: "start" });
               }
             }}
           />
@@ -98,6 +99,7 @@ export function DayByDayItinerarySection({
 
         <div className="lg:w-2/3 xl:w-3/4 w-full">
           <ItineraryTimeline
+            routeId={itinerary.routeId}
             days={itinerary.days}
             activeDay={activeDay}
             onToggleDay={(dayNum) => setActiveDay(dayNum === activeDay ? 0 : dayNum)}
@@ -118,5 +120,8 @@ export function DayByDayItinerarySection({
     </section>
   );
 }
+
+
+
 
 

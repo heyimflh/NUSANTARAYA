@@ -1,3 +1,4 @@
+import { APP_ROUTES } from "@/lib/routes";
 import { useState } from "react";
 import { Bookmark, CheckCircle, ExternalLink, AlertTriangle } from "lucide-react";
 import { PassportSavedRoute } from "@/lib/types";
@@ -86,7 +87,7 @@ export function PassportSaveLane({ savedRoute, locale }: PassportSaveLaneProps) 
 
         {isSaved && (
           <Link
-            href="/passport"
+            href={APP_ROUTES.passportSection}
             className="w-full py-3 px-4 rounded-xl font-medium text-[#2C3E50] border border-[#E8E0CE] hover:bg-[#FAF8F5] transition-colors flex items-center justify-center gap-2"
           >
             {locale === "en" ? "Open Passport" : "Buka Passport"}
@@ -97,4 +98,5 @@ export function PassportSaveLane({ savedRoute, locale }: PassportSaveLaneProps) 
     </div>
   );
 }
+
 

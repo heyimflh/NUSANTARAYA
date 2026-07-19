@@ -42,7 +42,7 @@ export function PaceSelector({ value, onChange }: PaceSelectorProps) {
               role="radio"
               aria-checked={isSelected}
               onClick={() => onChange(opt.value)}
-              className={`text-left p-5 flex flex-col min-h-[140px] relative transition-all duration-300 rounded-xl ${
+              className={`text-left p-5 flex flex-col min-h-[140px] relative focus-visible:ring-2 focus-visible:ring-[var(--planner-primary)] focus-visible:outline-none transition-all duration-300 rounded-xl ${
                 isSelected 
                   ? "bg-[var(--planner-primary-soft)]/20 border border-[var(--planner-primary)]" 
                   : "bg-[var(--planner-paper)] border border-[var(--planner-warm-border)] hover:border-[var(--planner-primary)]/40 hover:bg-[var(--planner-primary-soft)]/5"
@@ -53,7 +53,7 @@ export function PaceSelector({ value, onChange }: PaceSelectorProps) {
                   <span className={`font-inter text-[16px] font-bold tracking-wide leading-tight ${isSelected ? "text-[var(--planner-primary)]" : "text-[var(--planner-ink)]"}`}>
                     {opt.label}
                   </span>
-                  <div className={`w-5 h-5 rounded-full flex items-center justify-center border transition-all duration-300 shrink-0 ${
+                  <div className={`w-5 h-5 rounded-full flex items-center justify-center border focus-visible:ring-2 focus-visible:ring-[var(--planner-primary)] focus-visible:outline-none transition-all duration-300 shrink-0 ${
                     isSelected ? "bg-[var(--planner-primary)] border-[var(--planner-primary)]" : "border-[var(--planner-warm-border)]"
                   }`}>
                     {isSelected && (

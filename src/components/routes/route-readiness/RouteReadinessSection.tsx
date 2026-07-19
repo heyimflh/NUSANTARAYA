@@ -1,5 +1,5 @@
-import { ROUTE_SECTION_IDS } from "@/lib/routes/routeSections";
 "use client";
+import { ROUTE_SECTION_IDS } from "@/lib/routes/routeSections";
 
 import { useMemo } from "react";
 import type { RouteRecommendation } from "@/types/route-planner";
@@ -73,6 +73,7 @@ export function RouteReadinessSection({ result, dossier, status }: RouteReadines
     </section>
   );
 }
+
 
 
 

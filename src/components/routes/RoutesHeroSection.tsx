@@ -26,6 +26,8 @@ export const RoutesHeroSection = () => {
             loop
             muted
             playsInline
+            preload="metadata"
+            poster="/assets/background-primary.png"
             className="w-full h-full object-cover object-[center_30%]"
           >
             <source

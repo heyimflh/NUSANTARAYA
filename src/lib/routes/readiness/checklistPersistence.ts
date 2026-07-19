@@ -2,26 +2,26 @@ import type { RouteChecklistProgress } from "./routeReadinessSchema";
 
 const CHECKLIST_STORAGE_KEY_PREFIX = "nusantaraya.routeReadiness.checklist.";
 
-export function getChecklistStorageKey(routeId: string): string {
-  return `${CHECKLIST_STORAGE_KEY_PREFIX}${routeId}`;
+export function getChecklistStorageKey(routeId: string, routeVersion: string, itineraryVersion: string): string {
+  return `${CHECKLIST_STORAGE_KEY_PREFIX}${routeId}_${routeVersion}_${itineraryVersion}`;
 }
 
-export function saveChecklistProgress(progress: RouteChecklistProgress): void {
+export function saveChecklistProgress(progress: RouteChecklistProgress, itineraryVersion: string): void {
   if (typeof window === "undefined") return;
   
   try {
-    const key = getChecklistStorageKey(progress.routeId);
+    const key = getChecklistStorageKey(progress.routeId, progress.routeVersion, itineraryVersion);
     window.localStorage.setItem(key, JSON.stringify(progress));
   } catch (error) {
     console.error("Failed to save checklist progress to localStorage", error);
   }
 }
 
-export function loadChecklistProgress(routeId: string): RouteChecklistProgress | null {
+export function loadChecklistProgress(routeId: string, routeVersion: string, itineraryVersion: string): RouteChecklistProgress | null {
   if (typeof window === "undefined") return null;
 
   try {
-    const key = getChecklistStorageKey(routeId);
+    const key = getChecklistStorageKey(routeId, routeVersion, itineraryVersion);
     const data = window.localStorage.getItem(key);
     if (!data) return null;
 
@@ -39,11 +39,11 @@ export function loadChecklistProgress(routeId: string): RouteChecklistProgress |
   }
 }
 
-export function clearChecklistProgress(routeId: string): void {
+export function clearChecklistProgress(routeId: string, routeVersion: string, itineraryVersion: string): void {
   if (typeof window === "undefined") return;
 
   try {
-    const key = getChecklistStorageKey(routeId);
+    const key = getChecklistStorageKey(routeId, routeVersion, itineraryVersion);
     window.localStorage.removeItem(key);
   } catch (error) {
     console.error("Failed to clear checklist progress from localStorage", error);

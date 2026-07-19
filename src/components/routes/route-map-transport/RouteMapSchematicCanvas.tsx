@@ -202,7 +202,7 @@ export function RouteMapSchematicCanvas({
               />
 
               {/* Transfer mode label on connector */}
-              {transport && transport.confidence !== "unverified" && (
+              {transport && transport.confidence !== "unavailable" && (
                 <text
                   x={mx}
                   y={my - 8}
@@ -385,3 +385,4 @@ export function RouteMapSchematicCanvas({
     </div>
   );
 }
+

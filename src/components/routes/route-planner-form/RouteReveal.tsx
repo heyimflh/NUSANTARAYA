@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { usePassport } from "@/context/app-context";
 import { announcer } from "./PlannerLiveRegion";
+import { useShare } from "@/hooks/useShare";
 
 interface RouteRevealProps {
   result: RouteRecommendation;
@@ -33,7 +34,7 @@ interface RouteRevealProps {
 export function RouteReveal({ result, adjustmentNote, values, onEdit }: RouteRevealProps) {
   const { saveRoute, passport } = usePassport();
   const isSaved = passport.savedRoutes.includes(result.id);
-  const [isCopied, setIsCopied] = useState(false);
+  const { share, isSharing, hasCopied } = useShare();
   const [showNotes, setShowNotes] = useState(false);
   const [imgError, setImgError] = useState(false);
   
@@ -49,14 +50,12 @@ export function RouteReveal({ result, adjustmentNote, values, onEdit }: RouteRev
   const fallbackImage = `/assets/province/bali/hero.webp`;
 
   const handleShare = async () => {
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      setIsCopied(true);
-      announcer.announce("Tautan rute disalin ke clipboard", "polite");
-      setTimeout(() => setIsCopied(false), 2000);
-    } catch (err) {
-      console.error("Failed to copy", err);
-    }
+    await share({
+      title: "NUSANTARAYA Route",
+      text: "Lihat rekomendasi rute ini di NUSANTARAYA",
+      url: window.location.href,
+    });
+    announcer.announce("Tautan rute disalin ke clipboard", "polite");
   };
 
   const handleSave = () => {
@@ -230,7 +229,7 @@ export function RouteReveal({ result, adjustmentNote, values, onEdit }: RouteRev
 
       {/* Practical Layer (Accordion) */}
       <div className="bg-white border border-[#E8E0CE] rounded-[24px] overflow-hidden mt-8 shadow-sm">
-        <button 
+        <button type="button" 
           onClick={() => setShowNotes(!showNotes)}
           className="w-full flex items-center justify-between p-6 md:p-8 hover:bg-[#FFFDF8] transition-colors outline-none focus-visible:bg-[#FFFDF8]"
           aria-expanded={showNotes}
@@ -299,7 +298,7 @@ export function RouteReveal({ result, adjustmentNote, values, onEdit }: RouteRev
 
       {/* Action Dock */}
       <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 bg-white p-6 border border-[#E8E0CE] rounded-full shadow-[0_8px_30px_rgba(42,36,31,0.04)] w-full max-w-fit mx-auto">
-        <button 
+        <button type="button" 
           onClick={onEdit} 
           className="flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-inter text-[15px] font-bold text-[#2A241F] hover:bg-[#F4EFE6] border border-transparent hover:border-[#E8E0CE] transition-all w-full sm:w-auto hover:scale-105"
         >
@@ -308,17 +307,17 @@ export function RouteReveal({ result, adjustmentNote, values, onEdit }: RouteRev
         
         <div className="hidden sm:block w-px h-8 bg-[#E8E0CE]" />
         
-        <button 
+        <button type="button" 
           onClick={handleShare}
           className="flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-inter text-[15px] font-bold text-[#2A241F] hover:bg-[#F4EFE6] border border-transparent hover:border-[#E8E0CE] transition-all w-full sm:w-auto hover:scale-105"
         >
-          {isCopied ? <CheckCircle2 className="w-4 h-4 text-[#2D5A27]" /> : <Share2 className="w-4 h-4" />}
-          {isCopied ? "Tersalin!" : "Bagikan"}
+          {hasCopied ? <CheckCircle2 className="w-4 h-4 text-[#2D5A27]" /> : <Share2 className={`w-4 h-4 ${isSharing ? "animate-pulse" : ""}`} />}
+          {hasCopied ? "Tersalin!" : "Bagikan"}
         </button>
 
         <div className="hidden sm:block w-px h-8 bg-[#E8E0CE]" />
         
-        <button 
+        <button type="button" 
           onClick={handleSave}
           className={`group flex items-center justify-center gap-2 px-10 py-3.5 rounded-full font-inter text-[15px] font-bold transition-all w-full sm:w-auto hover:scale-105 ${
             isSaved 

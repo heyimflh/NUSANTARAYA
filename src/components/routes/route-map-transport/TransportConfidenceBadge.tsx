@@ -7,13 +7,13 @@
  * Visual badge for transport confidence level.
  * - verified: green, explicit source
  * - estimated: amber, clearly labeled as estimation
- * - unverified: gray, no facts claimed
+ * - Unavailable: gray, no facts claimed
  *
  * IMPORTANT: Status never communicated by color alone (WCAG 1.4.1).
  */
 
 import React from "react";
-import { CheckCircle2, Clock, HelpCircle } from "lucide-react";
+import { CheckCircle2, Clock, HelpCircle, Info } from "lucide-react";
 import { clsx } from "clsx";
 import type { TransportConfidence } from "@/types/route-map";
 
@@ -38,9 +38,16 @@ const BADGE_CONFIG = {
     className: "bg-[#C9A84C]/10 text-[#8B6B1A] border-[#C9A84C]/25",
     iconClass: "text-[#C9A84C]",
   },
-  unverified: {
+  editorial: {
+    id: "Kurasi Internal",
+    en: "Editorial",
+    icon: Info,
+    className: "bg-[#F8F4EA] text-[#5C6470] border-[#E8E0CE]",
+    iconClass: "text-[#5C6470]",
+  },
+  unavailable: {
     id: "Perlu dicek",
-    en: "Unverified",
+    en: "Unavailable",
     icon: HelpCircle,
     className: "bg-[#8A94A6]/10 text-[#5C6470] border-[#8A94A6]/20",
     iconClass: "text-[#8A94A6]",
@@ -74,3 +81,5 @@ export function TransportConfidenceBadge({
     </span>
   );
 }
+
+

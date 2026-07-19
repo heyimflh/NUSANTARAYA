@@ -87,10 +87,7 @@ export interface RouteMapSegment {
  * - estimated: estimasi label required; no certainty claim.
  * - unverified: note only; no duration/operator as fact.
  */
-export type TransportConfidence =
-  | "verified"
-  | "estimated"
-  | "unverified";
+export type TransportConfidence = import("@/lib/routes/readiness/routeReadinessSchema").DataConfidence;
 
 // ─── Transport Mode ───────────────────────────────────────────────────────────
 
@@ -196,3 +193,4 @@ export interface RouteMapViewModel {
   attributionLines: string[];
   updatedAt: string;
 }
+

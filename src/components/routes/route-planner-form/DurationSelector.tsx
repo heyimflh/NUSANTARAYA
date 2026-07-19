@@ -23,7 +23,7 @@ export function DurationSelector({ value, onChange }: DurationSelectorProps) {
               role="radio"
               aria-checked={isSelected}
               onClick={() => onChange(opt.value)}
-              className={`text-left p-5 relative transition-all duration-300 rounded-xl ${
+              className={`text-left p-5 relative focus-visible:ring-2 focus-visible:ring-[var(--planner-primary)] focus-visible:outline-none transition-all duration-300 rounded-xl ${
                 isSelected 
                   ? "bg-[var(--planner-primary-soft)]/20 border border-[var(--planner-primary)]" 
                   : "bg-[var(--planner-paper)] border border-[var(--planner-warm-border)] hover:border-[var(--planner-primary)]/40 hover:bg-[var(--planner-primary-soft)]/5"
@@ -39,7 +39,7 @@ export function DurationSelector({ value, onChange }: DurationSelectorProps) {
                       Hari
                     </span>
                   </div>
-                  <div className={`w-5 h-5 rounded-full flex items-center justify-center border transition-all duration-300 shrink-0 ${
+                  <div className={`w-5 h-5 rounded-full flex items-center justify-center border focus-visible:ring-2 focus-visible:ring-[var(--planner-primary)] focus-visible:outline-none transition-all duration-300 shrink-0 ${
                     isSelected ? "bg-[var(--planner-primary)] border-[var(--planner-primary)]" : "border-[var(--planner-warm-border)]"
                   }`}>
                     {isSelected && (

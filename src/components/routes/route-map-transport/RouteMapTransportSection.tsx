@@ -1,6 +1,7 @@
+"use client";
+import { scrollElementIntoView } from "@/lib/utils/scroll";
 import { navigateToRouteSection } from "@/lib/routes/navigateToRouteSection";
 import { ROUTE_SECTION_IDS } from "@/lib/routes/routeSections";
-"use client";
 
 /**
  * NUSANTARAYA — Route Map + Transport Summary Section
@@ -148,7 +149,7 @@ export function RouteMapTransportSection({
     // Scroll to map section
     const mapSection = document.getElementById("route-map-transport-summary");
     if (mapSection) {
-      mapSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      scrollElementIntoView(mapSection, { block: "start" });
     }
 
     // Announce selection after brief delay to let scroll settle
@@ -257,7 +258,7 @@ export function RouteMapTransportSection({
       // Default: scroll to the itinerary day card
       const dayCard = document.getElementById(`itinerary-day-${dayNumber}`);
       if (dayCard) {
-        dayCard.scrollIntoView({ behavior: "smooth", block: "start" });
+        scrollElementIntoView(dayCard, { block: "start" });
       }
     },
     [mapModel,
@@ -526,6 +527,10 @@ export function RouteMapTransportSection({
     </motion.section>
   );
 }
+
+
+
+
 
 
 
