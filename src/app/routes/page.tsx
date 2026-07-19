@@ -8,7 +8,7 @@ import { FinalCtaFooterSection } from '@/components/home/final-cta-footer';
 
 export default function RoutesPage() {
   return (
-    <main className="relative min-h-screen isolate">
+    <main className="relative min-h-screen isolate overflow-x-clip max-w-full">
       <picture
         className="pointer-events-none fixed inset-0 z-0 block h-[100dvh] w-full select-none"
       >
@@ -23,7 +23,7 @@ export default function RoutesPage() {
         />
       </picture>
 
-      <div className="relative z-10">
+      <div className="relative z-10 overflow-x-clip max-w-full">
         <RoutesNavbar />
         <RoutesHeroSection />
         <Suspense fallback={<div className="h-screen" />}>

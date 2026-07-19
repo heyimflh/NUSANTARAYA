@@ -1,8 +1,8 @@
 import type { RouteRecommendation, RoutePlannerFormValues } from "@/types/route-planner";
-import type { PassportData, PassportSavedRoute } from "@/lib/types";
+import type { PassportData } from "@/lib/types";
 import type { ActiveRouteWorkspace, RouteWorkspaceError, RouteWorkspaceStatus } from "@/types/route-workspace";
 
-import { resolveRouteItinerary } from "@/lib/routes/itinerary/resolveRouteItinerary";
+import { resolveRouteItinerary, validateItineraryAgainstRecommendation } from "@/lib/routes/itinerary/resolveRouteItinerary";
 import { resolveRouteMap } from "@/lib/routes/map/resolveRouteMap";
 import { resolveRouteReadiness } from "@/lib/routes/readiness/resolveRouteReadiness";
 import { buildRouteSaveSnapshot } from "@/lib/routes/save-rani/buildRouteSaveSnapshot";
@@ -51,7 +51,29 @@ export function resolveActiveRouteWorkspace(
   let status: RouteWorkspaceStatus = "ready";
 
   // 1. Resolve Itinerary
-  const itineraryRes = activeItinerary ? { status: "ready" as const, itinerary: activeItinerary } : resolveRouteItinerary(recommendation);
+  let itineraryRes;
+  
+  if (activeItinerary) {
+    // Active itinerary provided (e.g., from RANI adjustment)
+    // MUST validate it against recommendation
+    const validationErrors = validateItineraryAgainstRecommendation(activeItinerary, recommendation);
+    
+    if (validationErrors.length > 0) {
+      // Active itinerary is invalid
+      status = "error";
+      errors.push({ 
+        code: "ITINERARY_INVALID", 
+        message: `Active itinerary validation failed: ${validationErrors.join(", ")}`, 
+        section: "itinerary" 
+      });
+      return createPartialWorkspace(activeRouteKey, recommendation, status, errors);
+    }
+    
+    itineraryRes = { status: "ready" as const, itinerary: activeItinerary };
+  } else {
+    itineraryRes = resolveRouteItinerary(recommendation);
+  }
+  
   if (itineraryRes.status === "partial") {
     status = "partial";
     errors.push({ code: "ITINERARY_PARTIAL", message: "Itinerary is partial", section: "itinerary" });

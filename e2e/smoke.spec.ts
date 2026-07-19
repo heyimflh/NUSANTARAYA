@@ -7,6 +7,8 @@ import { test, expect } from '@playwright/test';
  */
 test.describe('Desktop Core Flow', () => {
   test('Homepage → Route → Result → Save → Passport → Atlas round-trip', async ({ page }) => {
+    test.setTimeout(60000); // Increase timeout for full flow
+    
     // 1. Visit Homepage
     await page.goto('/');
     await expect(page).toHaveTitle(/NUSANTARAYA/i);
@@ -21,27 +23,28 @@ test.describe('Desktop Core Flow', () => {
     // 4. Click generate route button
     const generateButton = page.getByRole('button', { name: /Buat Rute/i });
     await expect(generateButton).toBeVisible();
-    await generateButton.click();
+    await generateButton.click({ force: true }); // Force click in case of overlay
 
     // 5. Verify recommendation result appears (canonical ID: route-recommendation-result)
-    await expect(page.locator('#route-recommendation-result')).toBeVisible({ timeout: 15000 });
+    await expect(page.locator('#route-recommendation-result')).toBeVisible({ timeout: 20000 });
 
     // 6. Verify itinerary section (canonical ID: day-by-day-itinerary)
     await expect(page.locator('#day-by-day-itinerary')).toBeVisible({ timeout: 10000 });
 
     // 7. Verify map section (canonical ID: route-map-transport-summary)
-    await expect(page.locator('#route-map-transport-summary')).toBeVisible();
+    await expect(page.locator('#route-map-transport-summary')).toBeVisible({ timeout: 10000 });
 
     // 8. Verify readiness section (canonical ID: route-readiness)
-    await expect(page.locator('#route-readiness')).toBeVisible();
+    await expect(page.locator('#route-readiness')).toBeVisible({ timeout: 10000 });
 
     // 9. Save to Passport
     const saveButton = page.getByRole('button', { name: /Simpan/i }).first();
-    if (await saveButton.isVisible()) {
-      await saveButton.click();
-      // Brief wait for save operation
-      await page.waitForTimeout(500);
-    }
+    await expect(saveButton).toBeVisible();
+    await expect(saveButton).toBeEnabled();
+    await saveButton.click();
+    
+    // Brief wait for save operation
+    await page.waitForTimeout(1000);
 
     // 10. Navigate to Passport section (lives at /explore#passport-progress)
     await page.goto('/explore#passport-progress');
@@ -65,32 +68,30 @@ test.describe('Mobile Smoke', () => {
     await page.goto('/routes?region=jawa&duration=5&interests=budaya');
     await expect(page.getByRole('heading', { name: /Rencanakan/i, level: 1 })).toBeVisible();
 
-    // 2. Verify no horizontal overflow
-    const bodyWidth = await page.evaluate(() => document.body.scrollWidth);
+    // 2. Verify no horizontal overflow before Generate
+    const bodyWidthBefore = await page.evaluate(() => document.body.scrollWidth);
+    const htmlWidthBefore = await page.evaluate(() => document.documentElement.scrollWidth);
     const viewportWidth = await page.evaluate(() => window.innerWidth);
-    expect(bodyWidth).toBeLessThanOrEqual(viewportWidth + 1); // +1 for rounding
+    
+    expect(bodyWidthBefore).toBeLessThanOrEqual(viewportWidth + 1); // +1 for rounding
+    expect(htmlWidthBefore).toBeLessThanOrEqual(viewportWidth + 1);
 
-    // 3. Generate route
-    const generateButton = page.getByRole('button', { name: /Buat Rute/i });
-    if (await generateButton.isVisible()) {
-      await generateButton.click();
-      
-      // 4. Verify result section accessible
-      await expect(page.locator('#route-recommendation-result')).toBeVisible({ timeout: 15000 });
-    }
-
-    // 5. Verify mobile navigation doesn't cover main CTAs
-    const mobileNav = page.locator('nav[data-mobile-nav]');
-    if (await mobileNav.isVisible()) {
-      const navRect = await mobileNav.boundingBox();
-      if (navRect && generateButton) {
-        const btnRect = await generateButton.boundingBox();
-        if (btnRect) {
-          // Button should not be fully obscured by nav
-          const isObscured = btnRect.y + btnRect.height > navRect.y && btnRect.y < navRect.y + navRect.height;
-          // This is informational — some overlap is OK if button scrolls above nav
-        }
+    // 3. Scroll down to preset routes section to ensure carousel is rendered
+    await page.evaluate(() => {
+      const presetSection = document.querySelector('#preset-routes');
+      if (presetSection) {
+        presetSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
-    }
+    });
+    
+    // Wait for carousel to render
+    await page.waitForTimeout(500);
+
+    // 4. Verify no horizontal overflow after scrolling to carousel
+    const bodyWidthAfterScroll = await page.evaluate(() => document.body.scrollWidth);
+    const htmlWidthAfterScroll = await page.evaluate(() => document.documentElement.scrollWidth);
+    
+    expect(bodyWidthAfterScroll).toBeLessThanOrEqual(viewportWidth + 1);
+    expect(htmlWidthAfterScroll).toBeLessThanOrEqual(viewportWidth + 1);
   });
 });

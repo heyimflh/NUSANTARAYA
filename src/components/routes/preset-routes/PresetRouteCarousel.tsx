@@ -72,17 +72,17 @@ export function PresetRouteCarousel({ routes, activePresetId, onViewRoute, onPre
         </div>
       </div>
 
-      {/* Carousel Track */}
+      {/* Carousel Track - Break out of parent padding on mobile */}
       <div 
         ref={scrollContainerRef}
         onScroll={checkScroll}
-        className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 md:gap-6 pb-8 px-4 md:px-0"
+        className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 md:gap-6 pb-8 -mx-4 px-4 md:mx-0 md:px-0"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {routes.map((route, index) => (
           <div 
             key={route.id} 
-            className={`snap-start snap-always shrink-0 w-[85vw] sm:w-[320px] md:w-[340px] lg:w-[360px] ${index < hiddenOnDesktopCount ? "lg:hidden" : ""}`}
+            className={`snap-start snap-always shrink-0 w-[280px] sm:w-[320px] md:w-[340px] lg:w-[360px] ${index < hiddenOnDesktopCount ? "lg:hidden" : ""}`}
           >
             <PresetRouteCard 
               route={route}
