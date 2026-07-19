@@ -1,6 +1,7 @@
-import type { RouteRecommendation } from "@/types/route-planner";
+import type { RouteRecommendation, RouteDuration } from "@/types/route-planner";
 import type { RouteItinerary } from "@/lib/routes/itinerary/routeItinerarySchema";
 import type { PassportSavedRoute } from "@/lib/types";
+import type { ProvinceId } from "@/data/provinces/provinceIds";
 
 export type RouteAdjustmentIntent =
   | "REDUCE_BUDGET"
@@ -29,8 +30,8 @@ export interface RouteRaniContext {
   itineraryVersion: string;
   mapVersion?: string;
   readinessVersion?: string;
-  durationDays: 3 | 5 | 7;
-  provinceIds: string[];
+  durationDays: RouteDuration;
+  provinceIds: ProvinceId[];
   stopIds: string[];
   selectedDayNumber?: number;
   selectedStopId?: string;
@@ -38,13 +39,11 @@ export interface RouteRaniContext {
   interests: string[];
   budgetLevel: string;
   travelPace: string;
-  partySize?: number;
   readinessStatus?: "ready" | "partial" | "stale";
   budgetConfidence?: "verified" | "estimated" | "partial" | "unknown";
   incompleteChecklistItemIds?: string[];
   passportSaveStatus: "unsaved" | "saved" | "outdated";
   locale: "id" | "en";
-  travelerMode?: "explore" | "tourist" | "learn";
 }
 
 export type RouteAdjustmentChangeType = 

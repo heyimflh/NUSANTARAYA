@@ -21,6 +21,7 @@ import {
   getBudgetLabel,
   getPaceLabel,
 } from "@/lib/routes/composePreferenceSummary";
+import type { ProvinceId } from "@/data/provinces/provinceIds";
 import { getRegionByProvinceId } from "@/data/regions/regionProvinceMap";
 
 // ─── Route Field Derivations ──────────────────────────────────────────────────
@@ -28,7 +29,7 @@ import { getRegionByProvinceId } from "@/data/regions/regionProvinceMap";
 /**
  * Derives unique province IDs from a route recommendation's stops.
  */
-export function getRouteProvinceIds(result: RouteRecommendation): string[] {
+export function getRouteProvinceIds(result: RouteRecommendation): ProvinceId[] {
   const ids = result.stops.map(stop => stop.provinceId);
   return [...new Set(ids)];
 }

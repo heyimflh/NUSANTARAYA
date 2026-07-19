@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowDown, Map } from "lucide-react";
+import { getRouteSectionHref } from "@/lib/routes/routeSections";
 
 export const RoutesHeroSection = () => {
   return (
@@ -106,14 +107,14 @@ export const RoutesHeroSection = () => {
               className="flex flex-col sm:flex-row items-start sm:items-center gap-6"
             >
               <a
-                href="#route-planner"
+                href={getRouteSectionHref("planner")}
                 className="bg-[#D4B56A] text-[#29221B] px-8 py-3.5 rounded-full font-inter font-medium text-[15px] flex items-center gap-3 hover:bg-[#C9A84C] transition-colors shadow-sm"
               >
                 Buat Rute
                 <ArrowRight className="w-[18px] h-[18px]" />
               </a>
               <a
-                href="#inspirasi-rute"
+                href={getRouteSectionHref("presets")}
                 className="flex items-center gap-3 text-[#29221B] font-inter text-[15px] font-medium group transition-colors"
               >
                 <div className="w-10 h-10 rounded-full border border-[#29221B]/20 flex items-center justify-center group-hover:bg-[#29221B] group-hover:text-white transition-colors">

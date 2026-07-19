@@ -71,8 +71,8 @@ export function resolveActiveRouteWorkspace(
     errors.push({ code: "ROUTE_ID_MISMATCH", message: "Itinerary route ID mismatch", section: "itinerary" });
     return createPartialWorkspace(activeRouteKey, recommendation, "error", errors);
   }
-  if (itinerary.version !== recommendation.version) {
-    errors.push({ code: "VERSION_MISMATCH", message: "Itinerary version mismatch", section: "itinerary" });
+  if (itinerary.routeVersion !== recommendation.version) {
+    errors.push({ code: "VERSION_MISMATCH", message: "Itinerary route version mismatch", section: "itinerary" });
     return createPartialWorkspace(activeRouteKey, recommendation, "error", errors);
   }
 

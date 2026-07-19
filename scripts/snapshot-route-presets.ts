@@ -16,19 +16,19 @@ function snapshotRoutePresets() {
   const sortedPresets = [...ROUTE_PRESETS].sort((a, b) => a.id.localeCompare(b.id));
 
   const snapshot = sortedPresets.map(preset => ({
-    id: preset.id || null,
-    title: preset.title || null,
-    regionId: preset.regionId || null,
-    duration: preset.duration || null,
-    interests: preset.interests || null,
-    supportedBudgets: preset.supportedBudgets || null,
-    supportedPaces: preset.supportedPaces || null,
-    provinceIds: preset.provinceIds || null,
-    stops: preset.stops || null,
-    transportSummary: preset.transportSummary || null,
-    etiquette: preset.etiquette || null,
-    media: preset.media || null,
-    sourceReferences: preset.sourceReferences || null
+    id: preset.id,
+    title: preset.title,
+    regionId: preset.regionId,
+    durationDays: preset.durationDays,
+    interests: preset.interests,
+    supportedBudgets: preset.supportedBudgets,
+    supportedPaces: preset.supportedPaces,
+    provinceIds: preset.provinceIds,
+    stops: preset.stops,
+    transportSummary: preset.transportSummary,
+    etiquetteTips: preset.etiquetteTips,
+    heroImage: preset.heroImage ?? null,
+    collections: preset.collections ?? null,
   }));
 
   const jsonStr = JSON.stringify(snapshot, null, 2);

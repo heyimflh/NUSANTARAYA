@@ -10,15 +10,15 @@ interface ItineraryOverviewRailProps {
 
 export function ItineraryOverviewRail({ days, activeDay, onDayClick }: ItineraryOverviewRailProps) {
   return (
-    <div className="flex flex-col gap-2 relative mt-2">
+    <div className="flex flex-col gap-2 relative mt-2 -mx-4 px-4 lg:mx-0 lg:px-0">
       {/* Decorative vertical line */}
       <div className="absolute left-[31px] top-6 bottom-6 w-[2px] bg-gradient-to-b from-[#E8E0CE] via-[#E8E0CE] to-transparent aria-hidden='true' z-0 hidden lg:block" />
 
-      <ol className="relative z-10 flex lg:flex-col gap-4 lg:gap-6 overflow-x-auto lg:overflow-x-visible pb-6 lg:pb-0 snap-x">
+      <ol className="relative z-10 flex lg:flex-col gap-4 lg:gap-6 overflow-x-auto lg:overflow-x-visible pb-6 lg:pb-0 snap-x hide-scrollbar">
         {days.map((day) => {
           const isActive = day.dayNumber === activeDay;
           return (
-            <li key={day.id} className="snap-start min-w-[280px] lg:min-w-0">
+            <li key={day.id} className="snap-start min-w-[240px] sm:min-w-[280px] lg:min-w-0 shrink-0">
               <button
                 onClick={() => onDayClick(day.dayNumber)}
                 className={clsx(

@@ -62,7 +62,7 @@ export const NAV_ITEMS = [
   { label: "Beranda", labelEn: "Home", href: "/", icon: "home" },
   { label: "Jelajahi", labelEn: "Explore", href: "/explore", icon: "map" },
   { label: "Rute", labelEn: "Routes", href: "/routes", icon: "route" },
-  { label: "Passport", labelEn: "Passport", href: "/passport", icon: "stamp" },
+  { label: "Passport", labelEn: "Passport", href: "/explore#passport-progress", icon: "stamp" },
   { label: "Menu", labelEn: "Menu", href: "#menu", icon: "menu" },
 ] as const;
 
@@ -74,7 +74,7 @@ export const DESKTOP_NAV_ITEMS = [
   { label: "Budaya", labelEn: "Culture", href: "/archive" },
   { label: "Kuliner", labelEn: "Culinary", href: "/nusarasa" },
   { label: "Wisata", labelEn: "Travel", href: "/routes" },
-  { label: "Passport", labelEn: "Passport", href: "/passport" },
+  { label: "Passport", labelEn: "Passport", href: "/explore#passport-progress" },
 ] as const;
 
 // ─── Wilayah Mapping ─────────────────────────────────────────────────────────

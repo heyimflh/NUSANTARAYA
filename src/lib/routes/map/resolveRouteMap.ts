@@ -90,8 +90,15 @@ export function resolveRouteMap(
       const fromStop = stopsMap.get(transferSeg.fromStopId);
       const toStop = stopsMap.get(transferSeg.toStopId);
 
-      // Only build segment if both stops exist
-      if (!fromStop || !toStop) continue;
+      // Validate transfer references — don't silently drop
+      if (!fromStop || !toStop) {
+        console.warn(
+          `[resolveRouteMap] Transfer segment "${transferSeg.id}" references invalid stop(s):` +
+          `${!fromStop ? ` fromStopId="${transferSeg.fromStopId}" not found` : ""}` +
+          `${!toStop ? ` toStopId="${transferSeg.toStopId}" not found` : ""}`
+        );
+        continue;
+      }
       if (fromStop.id === toStop.id) continue;
 
       const transportId = `transport-${mapSegId}`;

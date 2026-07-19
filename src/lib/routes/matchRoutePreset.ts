@@ -11,7 +11,7 @@ import {
   type RoutePresetDefinition,
 } from "@/data/routes/routePresets";
 import { getRegionByProvinceId } from "@/data/regions/regionProvinceMap";
-import { ROUTE_ADAPTATION_POLICY, SupportedRouteDuration } from "./routeAdaptationPolicy";
+import { ROUTE_ADAPTATION_POLICY, type SupportedRouteDuration, type RouteDurationAdaptation } from "./routeAdaptationPolicy";
 import { resolveRouteItinerary } from "./itinerary/resolveRouteItinerary";
 
 const W_INTEREST = 15;
@@ -90,7 +90,7 @@ export type RouteMatchType = "exact-preset" | "adapted-preset" | "fallback-prese
 
 export interface RouteMatchMetadata {
   matchType: RouteMatchType | null;
-  requestedRegion: RoutePlannerRegionId;
+  requestedRegion: RoutePlannerRegionId | null;
   requestedDuration: SupportedRouteDuration;
   actualDuration: SupportedRouteDuration | null;
   reason: string;
@@ -116,9 +116,22 @@ export type RouteMatchResolution =
       alternatives: [];
     };
 
+/**
+ * Look up adaptation policy for a given route ID and duration.
+ * Returns undefined if no policy exists for this combination.
+ */
+function lookupAdaptationPolicy(
+  routeId: string,
+  duration: SupportedRouteDuration
+): RouteDurationAdaptation | undefined {
+  const routePolicy = ROUTE_ADAPTATION_POLICY[routeId];
+  if (!routePolicy) return undefined;
+  return routePolicy[duration];
+}
+
 export function matchRoutePreset(values: RoutePlannerFormValues): RouteMatchResolution {
   const reqRegion = values.destinationRegionId;
-  const reqDuration = values.durationDays as SupportedRouteDuration;
+  const reqDuration = values.durationDays;
   
   // 1. Hard Region Filter
   const validPresets = reqRegion ? ROUTE_PRESETS.filter(p => p.regionId === reqRegion) : [];
@@ -129,7 +142,7 @@ export function matchRoutePreset(values: RoutePlannerFormValues): RouteMatchReso
       recommendation: null,
       metadata: {
         matchType: null,
-        requestedRegion: reqRegion as any,
+        requestedRegion: reqRegion,
         requestedDuration: reqDuration,
         actualDuration: null,
         reason: "Belum ada preset yang tersedia untuk region ini.",
@@ -146,7 +159,7 @@ export function matchRoutePreset(values: RoutePlannerFormValues): RouteMatchReso
   });
 
   const best = scored[0].preset;
-  const policy = (ROUTE_ADAPTATION_POLICY as any)[best.id]?.[reqDuration];
+  const policy = lookupAdaptationPolicy(best.id, reqDuration);
   
   const createRec = (preset: RoutePresetDefinition, mType: RouteMatchType): RouteRecommendation => {
     return {
@@ -181,9 +194,14 @@ export function matchRoutePreset(values: RoutePlannerFormValues): RouteMatchReso
       const mType: RouteMatchType = isExact ? "exact-preset" : "adapted-preset";
       const rec = createRec(targetPreset, mType);
       
-      // Verify itinerary Phase 3
+      // Verify itinerary
       const itinRes = resolveRouteItinerary(rec);
       if (itinRes.status === "ready") {
+        const reason = isExact
+          ? "Sesuai dengan preferensi."
+          : policy.type === "use-existing-route"
+            ? policy.reason
+            : "Sesuai dengan preferensi.";
         return {
           status: "matched",
           recommendation: rec,
@@ -191,8 +209,8 @@ export function matchRoutePreset(values: RoutePlannerFormValues): RouteMatchReso
             matchType: mType,
             requestedRegion: reqRegion,
             requestedDuration: reqDuration,
-            actualDuration: targetPreset.durationDays as SupportedRouteDuration,
-            reason: isExact ? "Sesuai dengan preferensi." : (policy as any).reason,
+            actualDuration: targetPreset.durationDays,
+            reason,
           },
           alternatives: []
         };
@@ -205,8 +223,7 @@ export function matchRoutePreset(values: RoutePlannerFormValues): RouteMatchReso
   const fallbackRec = alts.find(a => resolveRouteItinerary(a).status === "ready");
 
   if (fallbackRec) {
-    // Return as fallback matched if we just want one fallback result
-    // The prompt says: "Jika satu fallback dipilih sebagai recommendation, tampilkan badge: Alternatif preset"
+    const unsupportedReason = policy?.type === "unsupported" ? policy.reason : undefined;
     return {
       status: "matched",
       recommendation: fallbackRec,
@@ -214,8 +231,8 @@ export function matchRoutePreset(values: RoutePlannerFormValues): RouteMatchReso
         matchType: "fallback-preset",
         requestedRegion: reqRegion,
         requestedDuration: reqDuration,
-        actualDuration: fallbackRec.durationDays as SupportedRouteDuration,
-        reason: policy?.type === "unsupported" ? policy.reason : "Durasi yang diminta belum tersedia.",
+        actualDuration: fallbackRec.durationDays,
+        reason: unsupportedReason ?? "Durasi yang diminta belum tersedia.",
       },
       alternatives: alts.filter(a => a.id !== fallbackRec.id)
     };

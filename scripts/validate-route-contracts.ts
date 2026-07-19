@@ -40,7 +40,7 @@ function runContractValidation() {
       if (day.provinceIds && day.provinceIds.length > 0) {
         for (const provId of day.provinceIds) {
           assertContract(isProvinceId(provId), `Province ID valid: ${provId} di ${preset.id}`);
-          assertContract(rec.provinceIds.includes(provId as any), `Province itinerary ⊆ recommendation province: ${provId} di ${preset.id}`);
+          assertContract(rec.provinceIds.includes(provId), `Province itinerary ⊆ recommendation province: ${provId} di ${preset.id}`);
         }
       }
     }

@@ -161,11 +161,21 @@ export interface RoutePlannerRequest extends RoutePlannerFormValues {
 
 export const ROUTE_SCHEMA_VERSION = "1.0.0" as const;
 
+// ─── Activity Cost Model ─────────────────────────────────────────────────────
+export type ActivityCostClass =
+  | "free"
+  | "low"
+  | "moderate"
+  | "premium"
+  | "unknown";
+
+export type DataConfidence = "verified" | "editorial" | "estimated" | "unavailable";
+
 export interface RouteStop {
   id: string;
   dayStart: number;
   dayEnd: number;
-  provinceId: string;
+  provinceId: ProvinceId;
   cityOrCluster: string;
   highlights: string[];
 }
@@ -192,7 +202,7 @@ export interface RouteRecommendation {
   reason: string[];
   durationDays: RouteDuration;
   regionId: RoutePlannerRegionId;
-  provinceIds: string[];
+  provinceIds: ProvinceId[];
   stops: RouteStop[];
   interests: RouteInterest[];
   budgetLabel: string;
@@ -264,8 +274,3 @@ export interface PreferenceMatchChip {
   state: PreferenceMatchState;
   note?: string; // shown for "adjusted" state
 }
-
-
-
-
-
