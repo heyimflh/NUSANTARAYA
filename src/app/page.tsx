@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Hero from '@/components/Hero';
 import PreviewNusaMap from '@/components/PreviewNusaMap/PreviewNusaMap';
 import { SevenPillarsSection } from '@/components/home/seven-pillars';
@@ -11,12 +12,14 @@ export default function HomePage() {
     <div className="w-full min-h-screen">
       <Hero />
       <div className="w-full flex justify-center pt-12 pb-4">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src="/assets/branding/ornamen-divider.svg"
           alt=""
-          aria-hidden="true"
+          aria-hidden
+          width={800}
+          height={32}
           className="h-8 w-full max-w-[800px] opacity-80"
+          unoptimized
         />
       </div>
       <PreviewNusaMap />

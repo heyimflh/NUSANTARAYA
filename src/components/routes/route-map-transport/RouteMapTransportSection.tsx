@@ -166,7 +166,7 @@ export function RouteMapTransportSection({
 
     announcer.announce(announcement, "polite");
     setLiveAnnouncement(announcement);
-  }, [externalDaySelection, mapModel]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [externalDaySelection, mapModel, locale, announcer]);
 
   // ─── Selection Handlers ───────────────────────────────────────────────────
 

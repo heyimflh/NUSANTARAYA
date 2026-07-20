@@ -70,17 +70,20 @@ export function RouteAtelier() {
   const draftTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const searchParams = useSearchParams();
   const router = useRouter();
-
+  const hydratedRef = useRef(false);
+  
   // ─── Hydration ───
   useEffect(() => {
+    if (hydratedRef.current) return;
+    hydratedRef.current = true;
     const { values: urlValues, source, journeyId } = parsePlannerQuery(searchParams);
     const hasUrlParams = Object.keys(urlValues).length > 0;
-
     if (source && source !== activeSource) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setActiveSource(source);
     }
     if (journeyId && journeyId !== activeJourneyId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setActiveJourneyId(journeyId);
     }
 
@@ -115,7 +118,7 @@ export function RouteAtelier() {
 
     setHydrated(true);
     trackRoutePlannerEvent("route_planner_form_viewed");
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [searchParams, activeSource, activeJourneyId]);
 
   // ─── URL Sync ───
   useEffect(() => {

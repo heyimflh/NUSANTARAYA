@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { mapHeroPins, mapHeroFeaturedCard } from "@/data/mapHero";
 import { MapHeroPin } from "./MapHeroPin";
 import { MapHeroFloatingCard } from "./MapHeroFloatingCard";
+import Image from "next/image";
 
 export const MapHeroVisual = () => {
   return (
@@ -17,13 +18,16 @@ export const MapHeroVisual = () => {
       >
         {/* Map Outline Base */}
         <div className="absolute inset-0 flex items-center justify-center opacity-20">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/assets/map/indonesia-outline.svg"
+          <Image
+              src="/assets/map/indonesia-outline.svg"
             alt=""
             aria-hidden="true"
             className="w-full h-auto object-contain drop-shadow-[0_0_15px_rgba(201,168,76,0.3)]"
-          />
+              width={0}
+              height={0}
+              sizes="100vw"
+              unoptimized
+            />
         </div>
 
         {/* Route Line (Decorative SVG) */}

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useLanguage } from "@/context/app-context";
+import Image from "next/image";
 
 export const ExploreNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,14 +25,16 @@ export const ExploreNavbar = () => {
       >
         {/* Logo — responsive sizing */}
         <Link href="/">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img 
-            src="/assets/branding/NUSANTARAYA_logo-full.png" 
+          <Image
+              src="/assets/branding/NUSANTARAYA_logo-full.webp" 
             alt="Nusantaraya" 
             className={`h-8 sm:h-9 md:h-10 lg:h-12 w-auto object-contain opacity-90 hover:opacity-100 transition-all duration-300 ${
               isScrolled ? '' : 'brightness-0 invert'
-            }`} 
-          />
+            }`}
+              width={0}
+              height={0}
+              sizes="100vw"
+            />
         </Link>
 
         {/* Nav Links - Center Pill — Only visible on desktop (lg+) */}
@@ -94,7 +97,7 @@ export const ExploreNavbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-[100000] flex flex-col bg-[#F8F4EA] bg-[url('/assets/background-primary-mobile.png')] bg-cover bg-center bg-no-repeat lg:hidden overflow-hidden"
+            className="fixed inset-0 z-[100000] flex flex-col bg-[#F8F4EA] bg-[url('/assets/background-primary-mobile.webp')] bg-cover bg-center bg-no-repeat lg:hidden overflow-hidden"
           >
             {/* Glassmorphism overlay */}
             <div className="absolute inset-0 bg-white/40 backdrop-blur-[2px] pointer-events-none" />
@@ -102,12 +105,14 @@ export const ExploreNavbar = () => {
             {/* Header */}
             <div className="flex items-center justify-between px-4 sm:px-6 py-5 sm:py-6 relative z-10 border-b border-[#2D2419]/10">
               <Link href="/" onClick={() => setIsMenuOpen(false)}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img 
-                  src="/assets/branding/NUSANTARAYA_logo-full.png" 
+                <Image
+              src="/assets/branding/NUSANTARAYA_logo-full.webp" 
                   alt="Nusantaraya" 
-                  className="h-8 sm:h-9 w-auto object-contain drop-shadow-sm" 
-                />
+                  className="h-8 sm:h-9 w-auto object-contain drop-shadow-sm"
+              width={0}
+              height={0}
+              sizes="100vw"
+            />
               </Link>
               <button
                 className="p-2 text-[#2D2419] bg-[#2D2419]/5 hover:bg-[#2D2419]/10 border border-[#2D2419]/10 rounded-full active:scale-95 transition-all"

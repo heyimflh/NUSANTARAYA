@@ -8,7 +8,7 @@ export function FooterBrand() {
     <div className="flex flex-col gap-4">
       <div className="flex items-center">
         <Image
-          src="/assets/branding/NUSANTARAYA_logo-full.png"
+          src="/assets/branding/NUSANTARAYA_logo-full.webp"
           alt="NUSANTARAYA"
           width={190}
           height={48}

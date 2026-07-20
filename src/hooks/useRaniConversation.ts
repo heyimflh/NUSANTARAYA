@@ -91,8 +91,7 @@ export function useRaniConversation({ context }: UseRaniConversationParams) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       computeProactiveRecommendation();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [conversation.messages.length, conversation.status, computeProactiveRecommendation]);
 
   // Update recommendation when context changes drastically (only if we haven't conversed much)
   useEffect(() => {

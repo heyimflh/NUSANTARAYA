@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import React from "react";
+import Image from "next/image";
 
 const phases = [
   {
@@ -114,11 +115,14 @@ export function PastToFutureSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-6 md:mt-8"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/assets/branding/ornamen-divider.svg"
               alt=""
               className="h-6 md:h-8 w-auto opacity-50"
+              width={0}
+              height={0}
+              sizes="100vw"
+              unoptimized
             />
           </motion.div>
         </div>
@@ -225,12 +229,14 @@ export function PastToFutureSection() {
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={phase.icon}
+                        <Image
+              src={phase.icon}
                           className="w-5 h-5 object-contain"
                           alt=""
-                        />
+              width={0}
+              height={0}
+              sizes="100vw"
+            />
                         <span
                           className="text-[11px] font-bold tracking-widest uppercase"
                           style={{ color: phase.accentColor }}
@@ -241,12 +247,14 @@ export function PastToFutureSection() {
                     </div>
 
                     <div className="hidden md:flex items-center gap-3 mb-4 relative z-10">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={phase.icon}
+                      <Image
+              src={phase.icon}
                         className="w-[22px] h-[22px] object-contain"
                         alt=""
-                      />
+              width={0}
+              height={0}
+              sizes="100vw"
+            />
                       <span
                         className="text-[12px] font-bold tracking-widest uppercase"
                         style={{ color: phase.accentColor }}
@@ -279,13 +287,15 @@ export function PastToFutureSection() {
                   {/* Image */}
                   <div className="w-full h-[220px] md:h-[260px] relative overflow-hidden bg-[#F8F4EA]">
                     <div className="absolute inset-0 bg-black/10 z-10 mix-blend-overlay group-hover:opacity-0 transition-opacity duration-500" />
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={phase.image}
+                    <Image
+              src={phase.image}
                       alt={phase.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       loading="lazy"
-                    />
+              width={0}
+              height={0}
+              sizes="100vw"
+            />
 
                     {/* Overlay Glow based on accentColor */}
                     <div

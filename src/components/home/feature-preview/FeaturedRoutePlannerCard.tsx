@@ -36,11 +36,13 @@ export default function FeaturedRoutePlannerCard({ feature }: FeaturedRoutePlann
             }}
             className="cursor-pointer"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img 
+            <Image
               src={feature.icon} 
               alt="" 
-              className="w-8 h-8" 
+              className="w-8 h-8"
+              width={0}
+              height={0}
+              sizes="100vw"
             />
           </motion.div>
           <span className="text-[13px] font-bold tracking-[0.15em] uppercase text-gray-400">

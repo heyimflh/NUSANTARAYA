@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { KODE_TO_ID, getRegionFromKode, getRegionFill } from "@/lib/map-utils";
+import { reportAppError } from "@/lib/errorMonitor";
 
 /**
  * IndonesiaMap — Peta SVG Interaktif 38 Provinsi
@@ -47,7 +48,7 @@ export function IndonesiaMap() {
       })
       .catch((err) => {
         if (err.name === "AbortError") return;
-        console.error("Failed to load map SVG:", err);
+        reportAppError(err instanceof Error ? err : new Error("Failed to load map SVG"), { source: "IndonesiaMap" });
         setError(true);
         setLoading(false);
       });

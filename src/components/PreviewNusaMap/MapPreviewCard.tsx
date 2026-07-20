@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { mapPreviewLayers, type FeaturedProvince, type MapLayerId } from "@/data/preview-map";
 import FloatingProvinceCard from "./FloatingProvinceCard";
+import { reportAppError } from "@/lib/errorMonitor";
 
 interface MapPreviewCardProps {
   provinces: FeaturedProvince[];
@@ -46,7 +47,7 @@ export default function MapPreviewCard({
       })
       .catch((err) => {
         if (err.name === "AbortError") return;
-        console.error("Failed to load map SVG:", err);
+        reportAppError(err instanceof Error ? err : new Error("Failed to load map SVG"), { source: "MapPreviewCard" });
         setError(true);
       });
     return () => controller.abort();

@@ -1,5 +1,6 @@
 import { scrollElementIntoView } from "@/lib/utils/scroll";
 import { RaniAction } from "@/types/rani";
+import { reportAppWarning } from "@/lib/errorMonitor";
 
 type ActionResolverParams = {
   action: RaniAction;
@@ -52,7 +53,7 @@ export function resolveRaniAction({
       }
       break;
     default:
-      console.warn("Unresolved RANI action:", action);
+      reportAppWarning("Unresolved RANI action", { action: action.type, source: "resolveRaniActions" });
   }
 }
 

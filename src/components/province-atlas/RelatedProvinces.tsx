@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight, MapPin } from "lucide-react";
 import { getRelatedProvinces } from "@/lib/recommendation/relatedProvinces";
+import Image from "next/image";
 
 interface RelatedProvincesProps {
   currentProvinceId: string;
@@ -34,11 +35,13 @@ export function RelatedProvinces({ currentProvinceId }: RelatedProvincesProps) {
             key={province.id}
             className="group block relative rounded-2xl overflow-hidden aspect-[4/3] md:aspect-auto md:h-64 shadow-md hover:shadow-xl transition-all duration-300"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img 
+            <Image
               src={province.coverAsset} 
               alt={province.name}
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              width={0}
+              height={0}
+              sizes="100vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
             

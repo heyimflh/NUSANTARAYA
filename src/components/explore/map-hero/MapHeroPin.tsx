@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface MapHeroPinProps {
   id: string;
@@ -37,13 +38,15 @@ export const MapHeroPin = ({
         tabIndex={0}
       >
         <div className="absolute inset-0 bg-[#C9A84C]/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={icon}
+        <Image
+              src={icon}
           alt=""
           aria-hidden="true"
           className="w-8 h-8 md:w-10 md:h-10 relative z-10 drop-shadow-md"
-        />
+              width={0}
+              height={0}
+              sizes="100vw"
+            />
         
         {/* Tooltip */}
         <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">

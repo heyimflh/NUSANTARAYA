@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Pillar } from "@/data/pillars";
 import { useMemo } from "react";
+import Image from "next/image";
 
 type PillarCardProps = {
   pillar: Pillar;
@@ -129,15 +130,17 @@ export function PillarCard({
               }}
               transition={lightSpring}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img 
-                src={pillar.icon} 
+              <Image
+              src={pillar.icon} 
                 alt={pillar.name} 
                 className="w-10 h-10 md:w-12 md:h-12 object-contain"
                 style={{ 
                   filter: "drop-shadow(0px 4px 12px rgba(0,0,0,0.6)) drop-shadow(0px 1px 3px rgba(0,0,0,0.8))" 
                 }}
-              />
+              width={0}
+              height={0}
+              sizes="100vw"
+            />
             </motion.div>
 
             {/* Tagline */}

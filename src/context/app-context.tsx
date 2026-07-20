@@ -11,6 +11,7 @@ import React, {
 import type { Language, AppMode, PassportData } from "@/lib/types";
 import { evaluateBadges } from "@/lib/passport/badges";
 
+import { reportAppError } from "@/lib/errorMonitor";
 import {
   DEFAULT_PASSPORT,
   normalizePassportData,
@@ -90,7 +91,7 @@ function safeSetItem(key: string, value: unknown): void {
   try {
     localStorage.setItem(key, JSON.stringify(value));
   } catch (err) {
-    console.error(`Failed to save ${key} to localStorage`, err);
+    reportAppError(err instanceof Error ? err : new Error(`Failed to save ${key} to localStorage`), { source: "app-context" });
     throw new Error(`QUOTA_EXCEEDED`);
   }
 }

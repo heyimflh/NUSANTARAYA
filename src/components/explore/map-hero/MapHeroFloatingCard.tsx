@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface MapHeroFloatingCardProps {
   province: string;
@@ -34,12 +35,14 @@ export const MapHeroFloatingCard = ({
     >
       <div className="flex gap-4 items-center">
         <div className="w-[72px] h-[72px] rounded-2xl overflow-hidden shrink-0 border border-[#E8E0CE]/50">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={image}
+          <Image
+              src={image}
             alt={imageAlt}
             className="w-full h-full object-cover"
-          />
+              width={0}
+              height={0}
+              sizes="100vw"
+            />
         </div>
         <div className="flex flex-col">
           <span className="text-[10px] font-bold text-[#C9A84C] uppercase tracking-wider mb-0.5">

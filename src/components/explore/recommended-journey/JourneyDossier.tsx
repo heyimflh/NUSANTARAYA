@@ -7,6 +7,7 @@ import { usePassport } from "@/context/app-context";
 import { useRouter } from "next/navigation";
 import { isRouteAvailable } from "@/lib/routes";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 
 interface JourneyDossierProps {
   journey: RecommendedJourney;
@@ -101,14 +102,12 @@ export function JourneyDossier({ journey, reasons, onRegenerate }: JourneyDossie
             {/* VISUAL REGION & CARTOGRAPHIC OVERLAY (58%) */}
             <div className="w-full lg:w-[58%] relative min-w-0 border-b lg:border-b-0 lg:border-r border-[var(--journey-line)] bg-[#FDFBF7]">
               <div className="relative w-full aspect-[4/3] md:aspect-[16/9] lg:h-full lg:min-h-[580px] overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img 
-                  src={journey.coverAsset} 
+                <Image
+                  src={journey.coverAsset}
                   alt={`Visual jalur ${journey.title}`}
-                  className="absolute inset-0 w-full h-full object-cover"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100%" height="100%" fill="%23e8ddc8" /></svg>';
-                  }}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 58vw"
+                  className="object-cover"
                 />
                 
                 {/* Cartographic Gradient Overlay */}

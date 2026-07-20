@@ -38,11 +38,13 @@ export default function FeatureCard({ feature, layout = 'vertical', className = 
             }}
             className="cursor-pointer"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img 
+            <Image
               src={feature.icon} 
               alt="" 
-              className="w-6 h-6" 
+              className="w-6 h-6"
+              width={0}
+              height={0}
+              sizes="100vw"
             />
           </motion.div>
           <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-gray-400">

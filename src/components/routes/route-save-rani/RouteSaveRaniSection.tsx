@@ -1,9 +1,8 @@
 import { ROUTE_SECTION_IDS } from "@/lib/routes/routeSections";
-import { useMemo } from "react";
+
 import { RouteRecommendation, RoutePlannerFormValues } from "@/types/route-planner";
 import { RouteItinerary } from "@/lib/routes/itinerary/routeItinerarySchema";
-import { useLanguage, usePassport } from "@/context/app-context";
-import { buildRouteSaveSnapshot } from "@/lib/routes/save-rani/buildRouteSaveSnapshot";
+import { useLanguage } from "@/context/app-context";
 import { FinalRouteSnapshot } from "./FinalRouteSnapshot";
 import { PassportSaveLane } from "./PassportSaveLane";
 import { RaniAdjustmentLane } from "./RaniAdjustmentLane";

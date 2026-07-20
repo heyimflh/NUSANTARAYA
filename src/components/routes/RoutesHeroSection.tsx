@@ -28,7 +28,7 @@ export const RoutesHeroSection = () => {
             muted
             playsInline
             preload="metadata"
-            poster="/assets/background-primary.png"
+            poster="/assets/background-primary.webp"
             className="w-full h-full object-cover object-[center_30%]"
           >
             <source

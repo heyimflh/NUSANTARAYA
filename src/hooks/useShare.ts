@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
+import { reportAppError } from "@/lib/errorMonitor";
 
 interface ShareOptions {
   title: string;
@@ -66,7 +67,7 @@ export function useShare() {
     } catch (err: unknown) {
       const errorObj = toError(err);
       if (errorObj.name !== 'AbortError') {
-        console.error('Error sharing:', errorObj);
+        reportAppError(errorObj, { source: 'useShare' });
         setError(errorObj);
       }
     } finally {

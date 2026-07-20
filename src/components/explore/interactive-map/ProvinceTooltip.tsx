@@ -1,6 +1,7 @@
 import React from 'react';
 import { ProvinceMapItem } from '@/types/province';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from "next/image";
 
 type ProvinceTooltipProps = {
   province: ProvinceMapItem | null;
@@ -24,13 +25,15 @@ export const ProvinceTooltip: React.FC<ProvinceTooltipProps> = ({ province, posi
         }}
       >
         <div className="relative w-full h-24 bg-nusaWarm overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={province.assets.thumb}
+          <Image
+              src={province.assets.thumb}
             alt={province.name}
             className="w-full h-full object-cover"
             loading="lazy"
-          />
+              width={0}
+              height={0}
+              sizes="100vw"
+            />
           {province.isFlagship && (
             <div className="absolute top-2 right-2 bg-nusaGold text-nusaNavy text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider shadow-sm">
               Flagship

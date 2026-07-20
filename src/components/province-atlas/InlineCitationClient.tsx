@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useId, useRef, useState } from "react";
 import type { ScientificReference } from "@/types/atlas";
+import { reportAppWarning } from "@/lib/errorMonitor";
 
 type MinimalRef = ScientificReference & { _indexNumber: number };
 
@@ -43,9 +44,7 @@ export const InlineCitationClient = ({
 
   useEffect(() => {
     if (process.env.NODE_ENV !== "production" && missingIdsKey) {
-      console.error(
-        `[Atlas citation] ID referensi tidak ditemukan: ${missingIdsKey}`,
-      );
+      reportAppWarning("Atlas citation: missing reference IDs", { missingIdsKey, source: "InlineCitationClient" });
     }
   }, [missingIdsKey]);
 

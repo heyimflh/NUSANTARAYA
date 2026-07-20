@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { mainFeatures } from '@/data/features';
 import { isRouteAvailable } from '@/lib/routes';
+import Image from "next/image";
 
 export default function ConnectedFlowCard() {
   return (
@@ -62,12 +63,14 @@ export default function ConnectedFlowCard() {
               
               {/* App Icon Squircles (Light Theme) */}
               <div className="relative w-[72px] h-[72px] rounded-[22px] overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.06)] transition-all duration-500 ease-out group-hover/icon:scale-110 group-hover/icon:-translate-y-2 border border-gray-100 group-hover/icon:border-gray-200 group-hover/icon:shadow-[0_20px_40px_rgba(0,0,0,0.1)] bg-white">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img 
-                  src={feature.icon} 
+                <Image
+              src={feature.icon} 
                   alt={feature.title} 
                   className="w-full h-full object-cover"
-                />
+              width={0}
+              height={0}
+              sizes="100vw"
+            />
                 {/* Subtle glass reflection overlay */}
                 <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-transparent to-transparent opacity-0 group-hover/icon:opacity-100 transition-opacity duration-500 pointer-events-none" />
               </div>
@@ -89,12 +92,14 @@ export default function ConnectedFlowCard() {
             <div key={feature.id} className="relative z-10 flex items-center gap-6 group/mobile">
               {/* App Icon */}
               <div className="relative w-16 h-16 rounded-[20px] overflow-hidden shadow-[0_8px_25px_rgba(0,0,0,0.06)] border border-gray-100 shrink-0 bg-white">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img 
-                  src={feature.icon} 
+                <Image
+              src={feature.icon} 
                   alt="" 
                   className="w-full h-full object-cover"
-                />
+              width={0}
+              height={0}
+              sizes="100vw"
+            />
               </div>
               
               <div className="flex flex-col text-left">

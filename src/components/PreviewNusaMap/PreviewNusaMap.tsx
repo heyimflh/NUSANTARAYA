@@ -5,6 +5,7 @@ import { featuredProvinces, type MapLayerId } from "@/data/preview-map";
 import FilterChips from "./FilterChips";
 import MapPreviewCard from "./MapPreviewCard";
 import ProvinceFlagshipCards from "./ProvinceFlagshipCards";
+import Image from "next/image";
 
 export default function PreviewNusaMap() {
   const [activeLayer, setActiveLayer] = useState<MapLayerId>("all");
@@ -13,13 +14,16 @@ export default function PreviewNusaMap() {
     <>
       <section className="relative overflow-hidden py-16 md:py-24">
         {/* Background Batik Ornament */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/assets/branding/ornamen-batik.svg"
+        <Image
+              src="/assets/branding/ornamen-batik.svg"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.06] mix-blend-multiply"
-        />
+              width={0}
+              height={0}
+              sizes="100vw"
+              unoptimized
+            />
 
         <div className="relative z-10 container mx-auto max-w-7xl px-4 md:px-8">
           {/* Split Layout Header and Map */}
@@ -114,7 +118,7 @@ export default function PreviewNusaMap() {
       <ProvinceFlagshipCards provinces={featuredProvinces} />
 
       {/* Mini Stats */}
-      <section className="bg-[#F8F4EA] bg-[url('/assets/background-primary.png')] max-md:bg-[url('/assets/background-primary-mobile.png')] bg-cover bg-center bg-fixed bg-no-repeat relative pt-16 pb-12 md:pt-20 md:pb-16 overflow-hidden -mt-6 md:-mt-10 rounded-t-[2.5rem] md:rounded-t-[3.5rem] shadow-[0_-20px_40px_rgba(0,0,0,0.15)] z-30">
+      <section className="bg-[#F8F4EA] bg-[url('/assets/background-primary.webp')] max-md:bg-[url('/assets/background-primary-mobile.webp')] bg-cover bg-center bg-fixed bg-no-repeat relative pt-16 pb-12 md:pt-20 md:pb-16 overflow-hidden -mt-6 md:-mt-10 rounded-t-[2.5rem] md:rounded-t-[3.5rem] shadow-[0_-20px_40px_rgba(0,0,0,0.15)] z-30">
         {/* Subtle Background Pattern - Matched with SevenPillars for seamless transition */}
         <div 
           className="absolute inset-0 opacity-[0.04] mix-blend-multiply pointer-events-none"

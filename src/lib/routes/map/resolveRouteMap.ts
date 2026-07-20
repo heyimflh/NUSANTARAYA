@@ -15,6 +15,7 @@
 
 import type { RouteRecommendation } from "@/types/route-planner";
 import type { RouteItinerary, ItinerarySegment } from "@/lib/routes/itinerary/routeItinerarySchema";
+import { reportAppWarning } from "@/lib/errorMonitor";
 import type {
   RouteMapModel,
   RouteMapStop,
@@ -92,10 +93,11 @@ export function resolveRouteMap(
 
       // Validate transfer references — don't silently drop
       if (!fromStop || !toStop) {
-        console.warn(
-          `[resolveRouteMap] Transfer segment "${transferSeg.id}" references invalid stop(s):` +
+        reportAppWarning(
+          `Transfer segment "${transferSeg.id}" references invalid stop(s):` +
           `${!fromStop ? ` fromStopId="${transferSeg.fromStopId}" not found` : ""}` +
-          `${!toStop ? ` toStopId="${transferSeg.toStopId}" not found` : ""}`
+          `${!toStop ? ` toStopId="${transferSeg.toStopId}" not found` : ""}`,
+          { source: "resolveRouteMap" }
         );
         continue;
       }

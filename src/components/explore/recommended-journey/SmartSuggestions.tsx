@@ -1,6 +1,7 @@
 import React from "react";
 import { RecommendedJourney } from "@/data/journeys/types";
 import { ArrowRight, Sparkles } from "lucide-react";
+import Image from "next/image";
 
 interface SmartSuggestionsProps {
   suggestions: RecommendedJourney[];
@@ -41,14 +42,12 @@ export function SmartSuggestions({ suggestions, onSelect }: SmartSuggestionsProp
           >
             {/* Background Image with Dark Base */}
             <div className="absolute inset-0 bg-black">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img 
-                src={journey.coverAsset} 
+              <Image
+                src={journey.coverAsset}
                 alt={`Visual untuk ${journey.shortTitle}`}
-                className="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-110 transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100%" height="100%" fill="%232D3748" /></svg>';
-                }}
+                fill
+                sizes="(max-width: 640px) 280px, (max-width: 1024px) 320px, 33vw"
+                className="object-cover opacity-60 group-hover:opacity-80 group-hover:scale-110 transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
               />
             </div>
             

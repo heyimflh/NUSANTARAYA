@@ -1,6 +1,7 @@
 "use client";
 
 import { mapPreviewLayers, type MapLayerId } from "@/data/preview-map";
+import Image from "next/image";
 
 interface FilterChipsProps {
   activeLayer: MapLayerId;
@@ -48,13 +49,15 @@ export default function FilterChips({
               <div className="relative z-10 flex items-center gap-2.5">
                 {layer.id !== "all" && (
                   <>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={layer.icon}
+                    <Image
+              src={layer.icon}
                       alt=""
                       className={`w-4 h-4 md:w-5 md:h-5 transition-all duration-500 ${isActive ? "drop-shadow-md scale-110" : "opacity-80 group-hover:opacity-100 group-hover:scale-110"}`}
                       aria-hidden="true"
-                    />
+              width={0}
+              height={0}
+              sizes="100vw"
+            />
                   </>
                 )}
                 <span

@@ -48,6 +48,7 @@ const philosopher = Philosopher({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://nusantaraya.vercel.app"),
   title: {
     default: "NUSANTARAYA — Satu Peta, Ribuan Cerita",
     template: "%s | NUSANTARAYA",
@@ -71,6 +72,20 @@ export const metadata: Metadata = {
     type: "website",
     locale: "id_ID",
     siteName: "NUSANTARAYA",
+    images: [
+      {
+        url: "/assets/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "NUSANTARAYA — Satu Peta, Ribuan Cerita",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "NUSANTARAYA — Satu Peta, Ribuan Cerita",
+    description: "Platform eksplorasi digital Indonesia — 38 provinsi dalam satu pengalaman interaktif.",
+    images: ["/assets/og-image.png"],
   },
 };
 
@@ -90,7 +105,7 @@ export default function RootLayout({
         <AppProvider>
           <DocumentPreferenceSync />
           {/* Global Fixed Background for seamless masking and mobile performance */}
-          <div className="fixed inset-0 z-[-50] bg-[url('/assets/background-primary.png')] max-md:bg-[url('/assets/background-primary-mobile.png')] bg-cover bg-center bg-no-repeat opacity-100 pointer-events-none w-full h-[100dvh]" />
+          <div className="fixed inset-0 z-[-50] bg-[url('/assets/background-primary.webp')] max-md:bg-[url('/assets/background-primary-mobile.webp')] bg-cover bg-center bg-no-repeat opacity-100 pointer-events-none w-full h-[100dvh]" />
           
           {/* Main Content */}
           <main className="flex-1 pb-safe max-md:pb-20">

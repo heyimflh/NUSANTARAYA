@@ -124,7 +124,9 @@ export function RouteRecommendationResultSection({
 
   // Reset section 6 state when result changes
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMapExternalSelection(null);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setItineraryExternalDay(null);
   }, [workspace.activeRouteKey]);
 
@@ -150,7 +152,7 @@ export function RouteRecommendationResultSection({
     } else {
       trackRoutePlannerEvent("route_result_dynamic_loaded");
     }
-  }, [result?.id, status]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [result, status, resultSource]);
 
   // ── PRISTINE: return null — no fake personal recommendation ──
   if (!result && status === "idle") {

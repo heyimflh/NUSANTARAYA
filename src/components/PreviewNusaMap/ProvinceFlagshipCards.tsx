@@ -8,6 +8,7 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "framer-motion";
+import Image from "next/image";
 
 interface ProvinceFlagshipCardsProps {
   provinces: FeaturedProvince[];
@@ -47,8 +48,12 @@ export default function ProvinceFlagshipCards({
       {/* Preload images for instant transitions */}
       <div className="hidden">
         {thumbnails.map((src, i) => (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img key={i} src={src} alt="" />
+          <Image
+              key={i} src={src} alt=""
+              width={0}
+              height={0}
+              sizes="100vw"
+            />
         ))}
       </div>
 
@@ -176,13 +181,15 @@ export default function ProvinceFlagshipCards({
                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }} // smooth apple-like ease
                     className="absolute inset-0"
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={provinces[activeIndex]?.thumbnail}
+                    <Image
+              src={provinces[activeIndex]?.thumbnail}
                       alt={provinces[activeIndex]?.name}
                       className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
                       loading="eager"
-                    />
+              width={0}
+              height={0}
+              sizes="100vw"
+            />
                     {/* Gradient overlay on image to make text pop */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent pointer-events-none transition-opacity duration-700 group-hover:opacity-0" />
 
@@ -258,12 +265,14 @@ export default function ProvinceFlagshipCards({
                               className="lg:hidden w-full overflow-hidden shrink-0"
                             >
                               <div className="w-full h-40 sm:h-48 md:h-64 rounded-xl md:rounded-2xl overflow-hidden mb-3 md:mb-5 mt-1 relative shadow-lg md:shadow-[0_10px_30px_rgba(6,43,53,0.5)] border border-white/10">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                  src={province.thumbnail}
+                                <Image
+              src={province.thumbnail}
                                   alt={province.name}
                                   className="w-full h-full object-cover object-center"
-                                />
+              width={0}
+              height={0}
+              sizes="100vw"
+            />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#062B35]/70 to-transparent pointer-events-none" />
                               </div>
                             </motion.div>

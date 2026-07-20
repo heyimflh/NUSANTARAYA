@@ -41,7 +41,7 @@ export function RaniEditorialHeader() {
         
         <div className="relative w-full h-full drop-shadow-[0_20px_30px_rgba(200,90,62,0.1)]">
           <Image 
-            src="/assets/rani/rani-sapa.png"
+            src="/assets/rani/rani-sapa.webp"
             alt="RANI Assistant"
             fill
             className="object-contain object-bottom"

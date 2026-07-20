@@ -5,6 +5,7 @@ import { RouteRecommendation, RoutePlannerFormValues } from "@/types/route-plann
 import { RouteItinerary } from "@/lib/routes/itinerary/routeItinerarySchema";
 import { resolveRouteAdjustment, isDraftStale } from "@/lib/routes/save-rani/resolveRouteAdjustment";
 import { RouteAdjustmentDiff } from "./RouteAdjustmentDiff";
+import { reportAppError } from "@/lib/errorMonitor";
 
 interface RaniAdjustmentLaneProps {
   result: RouteRecommendation;
@@ -64,7 +65,7 @@ export function RaniAdjustmentLane({ result, itinerary, values, locale, onApplyD
         return;
       }
       
-      console.error("[RANI_ADJUSTMENT_FAILED]", error);
+      reportAppError(error instanceof Error ? error : new Error("RANI adjustment failed"), { source: "RaniAdjustmentLane" });
       setActiveDraft(null);
       setUIState("error");
       setErrorMessage(

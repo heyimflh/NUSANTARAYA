@@ -3,6 +3,7 @@
 import { FeaturedProvince } from "@/data/preview-map";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface FloatingProvinceCardProps {
   province: FeaturedProvince | null;
@@ -97,12 +98,14 @@ export default function FloatingProvinceCard({
                     className="w-20 h-20 md:w-full md:h-[160px] shrink-0 rounded-[1rem] md:rounded-[1.5rem] overflow-hidden relative group cursor-pointer shadow-sm"
                     onClick={() => router.push(province.href)}
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={province.thumbnail}
+                    <Image
+              src={province.thumbnail}
                       alt={province.name}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
+              width={0}
+              height={0}
+              sizes="100vw"
+            />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent hidden md:block pointer-events-none rounded-[1rem] md:rounded-[1.5rem]"></div>
                     <div className="absolute bottom-3 left-4 right-4 hidden md:block pointer-events-none">
                       <p className="text-[9px] font-bold text-white/90 uppercase tracking-[0.2em] drop-shadow-sm mb-0.5" style={{ color: '#ffffff' }}>
@@ -167,12 +170,14 @@ export default function FloatingProvinceCard({
               // COMPACT PILL STATE (Hover)
               <>
                 <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden shrink-0 border-2 border-white shadow-md relative z-10">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={province.thumbnail}
+                  <Image
+              src={province.thumbnail}
                     alt={province.name}
                     className="w-full h-full object-cover"
-                  />
+              width={0}
+              height={0}
+              sizes="100vw"
+            />
                 </div>
 
                 <div className="flex flex-col justify-center py-1 relative z-10 pr-2">

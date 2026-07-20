@@ -6,6 +6,7 @@ import { nusantarayaPillars } from "@/data/pillars";
 import { PillarCard } from "./PillarCard";
 import { MobilePillarCard } from "./MobilePillarCard";
 import { PillarClosingCard } from "./PillarClosingCard";
+import Image from "next/image";
 
 export function SevenPillarsSection() {
   const [activeDesktopIndex, setActiveDesktopIndex] = useState<number>(3);
@@ -51,11 +52,14 @@ export function SevenPillarsSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-4 md:mt-6"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img 
+            <Image
               src="/assets/branding/ornamen-divider.svg" 
               alt="" 
-              className="w-24 md:w-32 h-auto opacity-60" 
+              className="w-24 md:w-32 h-auto opacity-60"
+              width={0}
+              height={0}
+              sizes="100vw"
+              unoptimized
             />
           </motion.div>
         </div>

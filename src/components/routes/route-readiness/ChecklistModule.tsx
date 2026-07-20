@@ -20,10 +20,12 @@ export function ChecklistModule({ template }: ChecklistModuleProps) {
   useEffect(() => {
     const saved = loadChecklistProgress(template.routeId, template.routeVersion, template.itineraryVersion);
     if (saved && saved.templateVersion === template.version) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setCompletedIds(new Set(saved.completedItemIds));
     }
+     
     setMounted(true);
-  }, [template.routeId, template.version]);
+  }, [template.routeId, template.version, template.routeVersion, template.itineraryVersion]);
 
   const toggleItem = (id: string) => {
     setCompletedIds((prev) => {

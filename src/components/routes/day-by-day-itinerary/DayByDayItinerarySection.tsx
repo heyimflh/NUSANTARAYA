@@ -34,7 +34,6 @@ function DayByDayItinerarySectionContent({
   // This is a valid use case for setState in effect because we're synchronizing with 
   // an external system (map interaction). The map component triggers day selection 
   // and we need to respond to it.
-  // eslint-disable-next-line react-hooks/set-state-in-effect, react-hooks/exhaustive-deps
   React.useEffect(() => {
     if (externalActiveDay && externalActiveDay >= 1 && externalActiveDay !== activeDay) {
       setActiveDay(externalActiveDay);
@@ -45,7 +44,7 @@ function DayByDayItinerarySectionContent({
         }
       });
     }
-  }, [externalActiveDay]); // Only depend on externalActiveDay
+  }, [externalActiveDay, activeDay]); // Only depend on externalActiveDay
 
   const handleDayClick = useCallback((dayNumber: number) => {
     setActiveDay(dayNumber);

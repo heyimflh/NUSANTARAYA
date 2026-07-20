@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { reportAppError } from "@/lib/errorMonitor";
 
 export default function GlobalError({
   error,
@@ -14,7 +15,7 @@ export default function GlobalError({
 
   useEffect(() => {
     // Log the error to an error reporting service
-    console.error("Global Route Error:", error);
+    reportAppError(error, { source: "GlobalErrorBoundary" });
   }, [error]);
 
   return (

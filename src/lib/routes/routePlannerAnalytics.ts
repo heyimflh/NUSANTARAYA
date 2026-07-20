@@ -78,25 +78,20 @@ export interface RoutePlannerAnalyticsPayload {
   locale?: "id" | "en";
 }
 
-// ─── No-op Tracker ───────────────────────────────────────────────────────────
+// ─── Analytics Tracker ──────────────────────────────────────────────────────
+
+import { trackEvent } from "@/lib/analytics";
 
 /**
  * Track a route planner analytics event.
- * Currently a no-op — replace with actual analytics integration.
- * 
- * TODO: Connect to analytics platform when available.
+ * Delegates to the central analytics abstraction which handles
+ * dev logging and production event dispatch.
  */
 export function trackRoutePlannerEvent(
   event: RoutePlannerEvent,
   payload?: RoutePlannerAnalyticsPayload
 ): void {
-  // No-op in development/MVP
-  if (process.env.NODE_ENV === "development") {
-    // Uncomment for debugging:
-    // console.debug(`[analytics] ${event}`, payload);
-    void event;
-    void payload;
-  }
+  trackEvent(event, payload as Record<string, string | number | boolean | null | undefined | string[]>);
 }
 
 /**

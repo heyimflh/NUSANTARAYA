@@ -1,4 +1,5 @@
 import type { RouteChecklistProgress } from "./routeReadinessSchema";
+import { reportAppError } from "@/lib/errorMonitor";
 
 const CHECKLIST_STORAGE_KEY_PREFIX = "nusantaraya.routeReadiness.checklist.";
 
@@ -13,7 +14,7 @@ export function saveChecklistProgress(progress: RouteChecklistProgress, itinerar
     const key = getChecklistStorageKey(progress.routeId, progress.routeVersion, itineraryVersion);
     window.localStorage.setItem(key, JSON.stringify(progress));
   } catch (error) {
-    console.error("Failed to save checklist progress to localStorage", error);
+    reportAppError(error instanceof Error ? error : new Error("Failed to save checklist progress"), { source: "checklistPersistence" });
   }
 }
 
@@ -34,7 +35,7 @@ export function loadChecklistProgress(routeId: string, routeVersion: string, iti
     
     return parsed;
   } catch (error) {
-    console.error("Failed to parse checklist progress from localStorage", error);
+    reportAppError(error instanceof Error ? error : new Error("Failed to parse checklist progress"), { source: "checklistPersistence" });
     return null;
   }
 }
@@ -46,7 +47,7 @@ export function clearChecklistProgress(routeId: string, routeVersion: string, it
     const key = getChecklistStorageKey(routeId, routeVersion, itineraryVersion);
     window.localStorage.removeItem(key);
   } catch (error) {
-    console.error("Failed to clear checklist progress from localStorage", error);
+    reportAppError(error instanceof Error ? error : new Error("Failed to clear checklist progress"), { source: "checklistPersistence" });
   }
 }
 
