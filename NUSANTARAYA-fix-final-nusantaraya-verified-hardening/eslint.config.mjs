@@ -16,9 +16,6 @@ const eslintConfig = defineConfig([
     "patch.py",
     "patch.ps1",
     "next-env.d.ts",
-    // CommonJS scripts (using require is expected):
-    "scripts/**/*.cjs",
-    "**/*.cjs",
   ]),
 ]);
 

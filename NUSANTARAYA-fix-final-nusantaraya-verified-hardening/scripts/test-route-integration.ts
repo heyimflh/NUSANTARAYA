@@ -6,8 +6,7 @@ import { resolveRouteReadiness } from "../src/lib/routes/readiness/resolveRouteR
 import { saveRouteTransition, DEFAULT_PASSPORT } from "../src/lib/passport/transitions";
 import { buildProvinceAtlasHref } from "../src/lib/routes/buildProvinceAtlasHref";
 import { resolveActiveRouteWorkspace } from "../src/lib/routes/workspace/resolveActiveRouteWorkspace";
-import type { RoutePlannerFormValues } from "../src/types/route-planner";
-import type { RecommendedJourney } from "../src/data/journeys/types";
+import { ROUTE_PRESETS, presetToRecommendation } from "../src/data/routes/routePresets";
 
 function assertIntegration(condition: boolean, message: string): void {
   if (!condition) {
@@ -23,13 +22,13 @@ async function runIntegration() {
 
   // Scenario A: Explore Journey -> Route prefill
   console.log("--- A. Explore Journey -> Route Prefill ---");
-  const dummyJourney = {
+  const dummyJourney: any = {
     id: "journey-1",
     durationDays: [5],
     primaryLayer: "budaya",
     intensity: "seimbang",
     stops: [{ provinceId: "jawa-tengah" }, { provinceId: "di-yogyakarta" }]
-  } as unknown as RecommendedJourney;
+  };
   const mapping = mapJourneyToPlannerValues(dummyJourney);
   assertIntegration(mapping.status === "complete", "Journey mapping menghasilkan status complete");
   assertIntegration(mapping.values.destinationRegionId === "jawa", "Province ID Jawa otomatis di-map ke region Jawa");
@@ -46,8 +45,8 @@ async function runIntegration() {
     travelMonth: null,
     accommodationType: "hotel",
     language: "id"
-  } as RoutePlannerFormValues;
-  const match = matchRoutePreset(form);
+  };
+  const match = matchRoutePreset(form as any);
   assertIntegration(match.status === "matched", "Matcher menghasilkan route");
   
   const rec = match.recommendation!;
@@ -76,7 +75,8 @@ async function runIntegration() {
   console.log("--- E. RANI Apply -> Workspace State ---");
   // Simulasikan pembuatan draft
   const draftPassport = { ...DEFAULT_PASSPORT, savedRoutes: [rec.id], routeAdjustments: { [rec.id]: { id: "intent-1", type: "replace-stop", timestamp: "now", status: "applied", description: "test" } } };
-  const workspace = resolveActiveRouteWorkspace(rec, null, form, draftPassport, "form", "id");
+  const mockSearchParams = new URLSearchParams();
+  const workspace = resolveActiveRouteWorkspace(rec, null, form as any, draftPassport, "form", "id");
   
   // Karena resolveActiveRouteWorkspace mengeksekusi applyRaniAdjustment/reduceRouteBudget, kita verifikasi versioning-nya.
   assertIntegration(workspace !== null, "Workspace tidak null");

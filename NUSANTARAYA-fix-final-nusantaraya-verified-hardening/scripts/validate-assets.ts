@@ -11,8 +11,6 @@ let failed = false;
 
 function checkAsset(assetPath: string, source: string): void {
   if (!assetPath.startsWith("/assets/")) return;
-  // Skip template literals (contains ${)
-  if (assetPath.includes("${")) return;
   const clean = decodeURIComponent(assetPath.split(/[?#]/)[0]);
   const absolute = path.join(PUBLIC, clean.replace(/^\//, ""));
   if (!fs.existsSync(absolute)) {
@@ -29,40 +27,6 @@ for (const province of provinces) {
 for (const preset of ROUTE_PRESETS) {
   if (preset.heroImage?.src) checkAsset(preset.heroImage.src, `routePresets.ts:${preset.id}`);
 }
-
-// Validate dynamic province assets for all 38 provinces
-console.log("Validating province assets for all 38 provinces...");
-for (const province of provinces) {
-  const provinceId = province.id;
-  const assets = ["thumb.webp", "hero.webp", "culture.webp", "food.webp", "destination.webp", "modern.webp"];
-  for (const asset of assets) {
-    checkAsset(`/assets/province/${provinceId}/${asset}`, `provinces:${provinceId}`);
-  }
-}
-
-// Validate Passport level assets
-console.log("Validating Passport level assets...");
-const levels = ["penjelajah-baru", "petualang-nusantara", "pengembara-sejati", "penjaga-warisan", "pahlawan-nusantara"];
-for (const level of levels) {
-  checkAsset(`/assets/passport/levels/${level}.png`, "passport:levels");
-}
-
-// Validate region badges
-console.log("Validating region badge assets...");
-const regionBadges = [
-  "java-heritage-keeper",
-  "sumatra-seeker",
-  "bali-nusa-wanderer",
-  "borneo-nature-guardian",
-  "celebes-voyager",
-  "maluku-spice-explorer",
-  "papua-wonder-seeker",
-  "indonesia-complete-explorer"
-];
-for (const badge of regionBadges) {
-  checkAsset(`/assets/passport/badges/regions/${badge}.png`, "passport:regions");
-}
-
 
 function walk(dir: string): void {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {

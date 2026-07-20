@@ -30,11 +30,11 @@ async function run() {
     const validated = validateFormValues(validForm);
     assert(validated.length === 0, "Valid input diloloskan schema.");
     
-    const invalidForm = {
+    const invalidForm: any = {
       ...validForm,
       originProvinceId: "fake-province-id",
       hackerField: "malicious"
-    } as unknown as RoutePlannerFormValues;
+    };
     const validatedInvalid = validateFormValues(invalidForm);
     assert(validatedInvalid.length > 0, "Unknown province ID ditolak.");
 
@@ -55,7 +55,7 @@ async function run() {
 
     console.log("--- 3. Duration Adaptation ---");
     const matchDuration3 = matchRoutePreset({ ...validForm, durationDays: 3 });
-    const matchDuration4 = matchRoutePreset({ ...validForm, durationDays: 4 as 3 | 5 | 7 });
+    const matchDuration4 = matchRoutePreset({ ...validForm, durationDays: 4 as any });
     assert(matchDuration3.status === "matched", "Durasi 3 hari didukung secara resmi");
     assert(matchDuration4.metadata.matchType === "fallback-preset", "Durasi 4 hari tidak didukung (menghasilkan status jujur)");
 

@@ -1,3 +1,4 @@
+import { scrollElementIntoView } from "@/lib/utils/scroll";
 import React from "react";
 import { PassportProgressSummary } from "@/hooks/usePassportProgressSummary";
 import { motion, useReducedMotion } from "framer-motion";
