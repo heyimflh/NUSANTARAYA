@@ -108,25 +108,51 @@ export function ArchiveMosaic({
           </div>
         </div>
 
-        {/* Grid */}
+        {/* Bento Grid */}
         <div className={
           viewMode === "editorial" 
-            ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10"
+            ? "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 grid-flow-row-dense gap-4 md:gap-5 lg:gap-6 auto-rows-[280px] lg:auto-rows-[320px]"
             : "flex flex-col gap-4"
         }>
           {items.map((item, index) => {
-            // In editorial mode, make the first item larger if it's the very first page
-            const isFeatured = viewMode === "editorial" && index === 0 && filter.page === 1 && !isSearchActive;
+            
+            // Abstract Bento Grid Mapping Logic
+            // We create a perfectly tileable 6-item block for 4 columns
+            let layoutType: "large" | "tall" | "wide" | "standard" = "standard";
+            let spanClass = "";
+            
+            if (viewMode === "editorial") {
+              const pos = index % 6;
+              if (pos === 0) {
+                layoutType = "large";
+                spanClass = "md:col-span-2 md:row-span-2";
+              } else if (pos === 1) {
+                layoutType = "tall";
+                spanClass = "md:col-span-1 md:row-span-2";
+              } else if (pos === 2) {
+                layoutType = "standard";
+                spanClass = "md:col-span-1 md:row-span-1";
+              } else if (pos === 3) {
+                layoutType = "standard";
+                spanClass = "md:col-span-1 md:row-span-1";
+              } else if (pos === 4) {
+                layoutType = "wide";
+                spanClass = "md:col-span-2 md:row-span-1";
+              } else if (pos === 5) {
+                layoutType = "wide";
+                spanClass = "md:col-span-2 md:row-span-1";
+              }
+            }
             
             return (
               <div 
                 key={item.id} 
-                className={isFeatured ? "sm:col-span-2 lg:col-span-2 row-span-2" : ""}
+                className={spanClass}
               >
                 <ArchiveItemCard
                   item={item}
                   viewMode={viewMode}
-                  isFeatured={isFeatured}
+                  layoutType={layoutType}
                   onOpenQuickView={() => onOpenQuickView(item.id)}
                   t={t}
                   language={language}
@@ -136,7 +162,7 @@ export function ArchiveMosaic({
           })}
         </div>
 
-        {/* Pagination / Load More */}
+        
         {hasMore && (
           <div className="mt-12 flex justify-center">
             <button

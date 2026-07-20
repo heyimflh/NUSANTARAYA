@@ -1,4 +1,9 @@
-import React from "react";
+const fs = require('fs');
+const path = require('path');
+
+const targetPath = path.resolve('src/components/archive/ArchiveItemCard.tsx');
+
+const content = `import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArchiveItem, ArchiveViewMode } from "@/types/archive";
@@ -35,7 +40,7 @@ export function ArchiveItemCard({
   const mainMedia = item.media[0];
   
   // Format catalog number e.g. "ARC-ID-34-01"
-  const catalogNumber = `ARC-${primaryProvinceId.substring(0, 3).toUpperCase()}-${category?.index.toString().padStart(2, '0')}`;
+  const catalogNumber = \`ARC-\${primaryProvinceId.substring(0, 3).toUpperCase()}-\${category?.index.toString().padStart(2, '0')}\`;
 
   if (viewMode === "compact") {
     return (
@@ -76,7 +81,7 @@ export function ArchiveItemCard({
           </div>
           
           <h3 className="font-playfair font-bold text-lg text-[var(--archive-ink)] mb-1 group-hover:text-[var(--archive-saffron)] transition-colors line-clamp-1">
-            <Link href={`/archive/${item.slug}`} className="focus:outline-none" onClick={(e) => e.preventDefault()}>
+            <Link href={\`/archive/\${item.slug}\`} className="focus:outline-none" onClick={(e) => e.preventDefault()}>
               {content.title}
             </Link>
           </h3>
@@ -159,14 +164,14 @@ export function ArchiveItemCard({
           </span>
           
           {/* Title */}
-          <h3 className={`font-playfair font-bold !text-[#F3EBDD] drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] leading-tight mb-3 ${titleSize}`}>
+          <h3 className={\`font-playfair font-bold text-white drop-shadow-lg leading-tight mb-3 \${titleSize}\`}>
             {content.title}
           </h3>
           
           {/* Summary (Hidden on standard size until hovered, or always visible on large sizes) */}
           <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out">
             <div className="overflow-hidden">
-              <p className="!text-[#F3EBDD]/90 text-sm leading-relaxed mb-4 line-clamp-2 md:line-clamp-3">
+              <p className="text-white/80 text-sm leading-relaxed mb-4 line-clamp-2 md:line-clamp-3">
                 {content.summary}
               </p>
             </div>
@@ -185,3 +190,7 @@ export function ArchiveItemCard({
     </div>
   );
 }
+`;
+
+fs.writeFileSync(targetPath, content);
+console.log('ArchiveItemCard.tsx successfully rewritten for Bento Grid Full-Cover Image layout!');

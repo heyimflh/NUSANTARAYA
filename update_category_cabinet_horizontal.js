@@ -1,4 +1,9 @@
-import React, { useRef } from "react";
+const fs = require('fs');
+const path = require('path');
+
+const targetPath = path.resolve('src/components/archive/CategoryCabinet.tsx');
+
+const content = `import React, { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArchiveCategoryDefinition, ArchiveCategoryId, ArchiveItem } from "@/types/archive";
@@ -41,7 +46,6 @@ export function CategoryCabinet({
   // We use Framer Motion's useScroll to track progress through the tall container
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end end"]
   });
 
   // Calculate total items per category
@@ -60,18 +64,25 @@ export function CategoryCabinet({
   }, [categories, allItems]);
 
   // Translate horizontal track from 0 to negative equivalent of its full overflow width.
-  // Instead of percentage which depends on computed element width, we use exact vw units.
-  const maxScrollVw = (categories.length - 1) * 100;
-  const xTransform = useTransform(scrollYProgress, [0, 1], ["0vw", `-${maxScrollVw}vw`]);
+  // There are 12 items. If each item takes 100vw, the track is 1200vw wide.
+  // We want to translate it by -(1200vw - 100vw) = -1100vw or ~ -91.666%.
+  // A formula for N items: ((N - 1) / N) * 100
+  // Note: we'll use a gap and padding, so calculating exact percentage might be tricky,
+  // Using "-90%" as a rough estimate for 10-12 items. We'll fine-tune it based on the exact DOM structure.
+  
+  // Actually, a robust way is to just scroll the exact width of (number of cards * card width).
+  // With 12 categories, let's make each panel 100vw. So 1200vw total width.
+  // We need to move from 0 to -1100vw.
+  const xTransform = useTransform(scrollYProgress, [0, 1], ["0%", "-91.6666%"]);
 
   return (
-    <section ref={containerRef} className="relative h-[600vh] bg-[#E3D6C5]" id="category-cabinet">
+    <section ref={containerRef} className="relative h-[600vh] bg-[#161616]" id="category-cabinet">
       {/* Sticky Inner Container */}
-      <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center bg-[#E3D6C5] pt-16 md:pt-24">
+      <div className="sticky top-0 h-screen overflow-hidden flex items-center bg-[#111111]">
         
         {/* Header / Intro pinned at the top left */}
-        <div className="absolute top-20 md:top-24 left-8 md:left-20 z-50 pointer-events-none">
-          <h2 className="font-playfair text-lg md:text-xl text-[#29221B]/40 uppercase tracking-[0.3em] font-bold">
+        <div className="absolute top-10 left-10 md:top-14 md:left-20 z-50 pointer-events-none">
+          <h2 className="font-playfair text-xl md:text-2xl text-white/40 uppercase tracking-[0.2em] mb-2">
             {t("Kabinet Kategori", "Category Cabinet")}
           </h2>
           <div className="w-12 h-[1px] bg-[#D4B56A]/50" />
@@ -90,12 +101,12 @@ export function CategoryCabinet({
             return (
               <div 
                 key={category.id} 
-                className="w-screen h-full flex-shrink-0 flex items-center justify-center p-6 md:p-12 lg:p-24"
+                className="w-screen h-screen flex-shrink-0 flex items-center justify-center p-6 md:p-12 lg:p-24"
               >
-                <div className={`w-full max-w-7xl h-[65vh] md:h-[70vh] flex flex-col mt-12 md:mt-16 ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12 lg:gap-24`}>
+                <div className={\`w-full max-w-7xl h-[85vh] flex flex-col \${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12 lg:gap-24\`}>
                   
                   {/* Image Side */}
-                  <div className="w-full md:w-1/2 h-[35vh] md:h-full relative rounded-[2rem] overflow-hidden shadow-xl group cursor-pointer" onClick={() => onCategorySelect(category.id)}>
+                  <div className="w-full md:w-1/2 h-[40vh] md:h-full relative rounded-3xl overflow-hidden shadow-2xl group cursor-pointer" onClick={() => onCategorySelect(category.id)}>
                     <Image
                       src={imageUrl}
                       alt={t(category.name, category.nameEn)}
@@ -114,12 +125,12 @@ export function CategoryCabinet({
                       <div className="flex-1 h-[1px] bg-[#D4B56A]/30" />
                     </div>
 
-                    <h3 className="font-playfair text-[3rem] md:text-[5rem] lg:text-[6.5rem] leading-[1.1] text-[#29221B] font-bold mb-8">
+                    <h3 className="font-playfair text-[3rem] md:text-[5rem] lg:text-[6.5rem] leading-[1.1] text-white font-bold mb-8">
                       {t(category.name, category.nameEn)}
                     </h3>
 
                     <div className="border-l-2 border-[#D4B56A]/50 pl-6 md:pl-8 mb-10">
-                      <p className="text-[#3A332D] text-lg md:text-xl lg:text-2xl font-medium italic leading-relaxed">
+                      <p className="text-[#E8E1D3] text-lg md:text-xl lg:text-2xl font-light italic leading-relaxed">
                         "{t(category.promise, category.promiseEn)}"
                       </p>
                     </div>
@@ -127,13 +138,13 @@ export function CategoryCabinet({
                     <ul className="space-y-4 mb-12">
                       <li className="flex items-center gap-4">
                         <div className="w-1.5 h-1.5 rotate-45 bg-[#D4B56A]" />
-                        <span className="text-[#29221B]/80 font-medium text-sm md:text-base tracking-wide">
+                        <span className="text-white/70 text-sm md:text-base tracking-wide">
                           {count} {t("Koleksi Arsip", "Archive Collections")}
                         </span>
                       </li>
                       <li className="flex items-center gap-4">
                         <div className="w-1.5 h-1.5 rotate-45 bg-[#D4B56A]" />
-                        <span className="text-[#29221B]/80 font-medium text-sm md:text-base tracking-wide">
+                        <span className="text-white/70 text-sm md:text-base tracking-wide">
                           {t("Tersebar di berbagai provinsi", "Spread across various provinces")}
                         </span>
                       </li>
@@ -142,7 +153,7 @@ export function CategoryCabinet({
                     <div>
                       <button
                         onClick={() => onCategorySelect(category.id)}
-                        className="group flex items-center gap-4 px-8 py-4 bg-transparent border border-[#D4B56A] rounded-full hover:bg-[#D4B56A] hover:border-[#D4B56A] hover:text-white transition-all duration-300 text-[#29221B] font-bold tracking-widest text-xs md:text-sm uppercase"
+                        className="group flex items-center gap-4 px-8 py-4 bg-transparent border border-[#D4B56A]/40 rounded-full hover:bg-[#D4B56A]/10 hover:border-[#D4B56A] transition-all duration-300 text-white font-medium tracking-widest text-xs md:text-sm uppercase"
                       >
                         {t("Telusuri Tradisi", "Explore Tradition")}
                         <ChevronRight size={16} className="text-[#D4B56A] group-hover:translate-x-1 transition-transform" />
@@ -159,3 +170,7 @@ export function CategoryCabinet({
     </section>
   );
 }
+`;
+
+fs.writeFileSync(targetPath, content);
+console.log('CategoryCabinet.tsx rewritten with Horizontal Scroll Taksu Bali Style!');

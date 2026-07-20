@@ -185,6 +185,14 @@ export function ArchivePage() {
       trackEvent("archive_category_selected", {
         categoryId: categoryId ?? "all",
       });
+      
+      // Smooth scroll to the results section
+      setTimeout(() => {
+        const resultsSection = document.getElementById("archive-results");
+        if (resultsSection) {
+          resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 100);
     },
     [updateFilter]
   );

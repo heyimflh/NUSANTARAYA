@@ -1,4 +1,9 @@
-import React from "react";
+const fs = require('fs');
+const path = require('path');
+
+const targetPath = path.resolve('src/components/archive/CuratorSelection.tsx');
+
+const content = `import React from "react";
 import Image from "next/image";
 import { ArchiveCollection, ArchiveCategoryId } from "@/types/archive";
 
@@ -54,7 +59,7 @@ export function CuratorSelection({ collections, activeMode, activeCategoryId, on
             return (
               <div 
                 key={col.id} 
-                className={`relative overflow-hidden rounded-[2rem] group cursor-pointer ${colSpan} ${rowSpan} shadow-sm hover:shadow-2xl transition-all duration-500`}
+                className={\`relative overflow-hidden rounded-[2rem] group cursor-pointer \${colSpan} \${rowSpan} shadow-sm hover:shadow-2xl transition-all duration-500\`}
                 onClick={() => onOpenCollection(col.id)}
               >
                 {/* Background Image */}
@@ -77,12 +82,12 @@ export function CuratorSelection({ collections, activeMode, activeCategoryId, on
                 {/* Content */}
                 <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
                   <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                    <h3 className="font-playfair text-2xl md:text-3xl !text-white font-medium mb-3 leading-tight drop-shadow-lg">
+                    <h3 className="font-playfair text-2xl md:text-3xl text-white font-medium mb-3 leading-tight drop-shadow-md">
                       {t(col.title, col.titleEn || col.title)}
                     </h3>
                     <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out">
                       <div className="overflow-hidden">
-                        <p className="!text-[#F8F4EA] text-sm md:text-[15px] leading-relaxed mb-4 line-clamp-2 md:line-clamp-3">
+                        <p className="text-[#F8F4EA]/90 text-sm md:text-[15px] leading-relaxed mb-4 line-clamp-2 md:line-clamp-3">
                           {t(col.promise, col.promiseEn || col.promise)}
                         </p>
                       </div>
@@ -107,3 +112,7 @@ export function CuratorSelection({ collections, activeMode, activeCategoryId, on
     </section>
   );
 }
+`;
+
+fs.writeFileSync(targetPath, content);
+console.log('CuratorSelection.tsx has been updated with Bento Grid layout!');

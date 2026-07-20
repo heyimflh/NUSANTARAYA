@@ -1,4 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+const fs = require('fs');
+const path = require('path');
+
+const targetPath = path.resolve('src/components/archive/DiscoveryDesk.tsx');
+
+const content = `import React, { useState, useEffect, useRef } from "react";
 import { Search, X, Filter } from "lucide-react";
 import type { ArchiveFilterState } from "@/types/archive";
 import type { ArchiveCategoryDefinition } from "@/types/archive";
@@ -66,11 +71,8 @@ export function DiscoveryDesk({
   // Scroll detection for floating mode
   useEffect(() => {
     const handleScroll = () => {
-      if (!containerRef.current) return;
-      // Transform into FAB when the container reaches the navbar (around 100px from top)
-      const rect = containerRef.current.getBoundingClientRect();
-      
-      if (rect.top <= 100) {
+      // Threshold where the search bar would normally leave the viewport
+      if (window.scrollY > 800) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
@@ -78,9 +80,7 @@ export function DiscoveryDesk({
       }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
-    
-    // Initial check after a slight delay to ensure layout is computed
-    setTimeout(handleScroll, 100);
+    handleScroll(); // Check initial
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -92,7 +92,7 @@ export function DiscoveryDesk({
   };
 
   // Reusable Search UI block
-  const renderSearchInterface = (isFloatingMode: boolean) => (
+  const SearchInterface = ({ isFloatingMode }: { isFloatingMode: boolean }) => (
     <div className="pointer-events-auto relative w-full max-w-3xl" ref={isFloatingMode ? dropdownRef : undefined}>
       <div className="bg-[var(--archive-paper)]/95 backdrop-blur-2xl border border-[var(--archive-line)] rounded-full shadow-[0_8px_32px_rgb(0,0,0,0.08)] p-1.5 flex flex-col sm:flex-row items-center gap-1 transition-all duration-300">
         <form 
@@ -108,7 +108,7 @@ export function DiscoveryDesk({
             value={localQuery}
             onChange={(e) => setLocalQuery(e.target.value)}
             placeholder={t("Cari arsip, daerah, atau kata kunci...", "Search archives, regions, or keywords...")}
-            className="w-full bg-transparent border-none !border-transparent !outline-none !ring-0 focus:!ring-0 focus:!border-transparent focus:!outline-none h-10 sm:h-12 pl-12 pr-10 text-[var(--archive-ink)] placeholder-[var(--archive-muted)] text-[14px] font-medium transition-colors"
+            className="w-full bg-transparent h-10 sm:h-12 pl-12 pr-10 text-[var(--archive-ink)] placeholder-[var(--archive-muted)] text-[14px] font-medium focus:outline-none transition-colors"
             aria-label={t("Cari arsip budaya", "Search cultural archives")}
             autoFocus={isFloatingMode}
           />
@@ -131,11 +131,11 @@ export function DiscoveryDesk({
 
         <button
           onClick={() => setIsFilterOpen(!isFilterOpen)}
-          className={`flex items-center justify-center gap-2 h-10 sm:h-12 px-6 rounded-full font-medium text-[13px] transition-all duration-300 w-full sm:w-auto ${
+          className={\`flex items-center justify-center gap-2 h-10 sm:h-12 px-6 rounded-full font-medium text-[13px] transition-all duration-300 w-full sm:w-auto \${
             activeFilterCount > 0 
               ? "bg-[var(--archive-saffron)] text-white shadow-md shadow-[#C9A84C]/30" 
               : "bg-transparent hover:bg-[var(--archive-line)] text-[var(--archive-charcoal)]"
-          }`}
+          }\`}
           aria-expanded={isFilterOpen}
         >
           <Filter size={16} strokeWidth={2.5} />
@@ -213,12 +213,12 @@ export function DiscoveryDesk({
       )}
 
       {/* Result Count Badge */}
-      <div className={`absolute -bottom-14 left-1/2 -translate-x-1/2 pointer-events-auto transition-all duration-500 ${(isSearchActive || activeFilterCount > 0) ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 hidden'}`}>
+      <div className={\`absolute -bottom-14 left-1/2 -translate-x-1/2 pointer-events-auto transition-all duration-500 \${(isSearchActive || activeFilterCount > 0) ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 hidden'}\`}>
         <div className="bg-[var(--archive-paper)]/80 backdrop-blur-md border border-[var(--archive-line)] px-4 py-1.5 rounded-full shadow-sm whitespace-nowrap">
           <p className="text-[11px] font-semibold text-[var(--archive-charcoal)] tracking-wide flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--archive-saffron)] inline-block animate-pulse"></span>
-            {t(`Menemukan ${resultCount} arsip`, `Found ${resultCount} archives`)}
-            {filter.query && <span className="text-[var(--archive-muted)] font-normal"> {t(`untuk "${filter.query}"`, `for "${filter.query}"`)}</span>}
+            {t(\`Menemukan \${resultCount} arsip\`, \`Found \${resultCount} archives\`)}
+            {filter.query && <span className="text-[var(--archive-muted)] font-normal"> {t(\`untuk "\${filter.query}"\`, \`for "\${filter.query}"\`)}</span>}
           </p>
         </div>
       </div>
@@ -230,8 +230,8 @@ export function DiscoveryDesk({
       {/* 1. Inline Search Bar (Visible when NOT scrolled past threshold) */}
       <div ref={containerRef} className="relative z-30 w-full px-4 sm:px-6 flex flex-col items-center pb-12 pt-4">
         {/* We keep it mounted but hide it visually to maintain layout space and avoid layout shifts */}
-        <div className={`w-full max-w-3xl flex justify-center transition-opacity duration-300 ${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-          {renderSearchInterface(false)}
+        <div className={\`w-full max-w-3xl flex justify-center transition-opacity duration-300 \${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}\`}>
+          <SearchInterface isFloatingMode={false} />
         </div>
       </div>
 
@@ -282,7 +282,7 @@ export function DiscoveryDesk({
               transition={{ type: "spring", stiffness: 400, damping: 30 }}
               className="fixed top-[15vh] left-1/2 -translate-x-1/2 w-full px-4 sm:px-6 flex flex-col items-center z-[100]"
             >
-              {renderSearchInterface(true)}
+              <SearchInterface isFloatingMode={true} />
               
               {/* Close Modal Button below */}
               <button 
@@ -301,3 +301,7 @@ export function DiscoveryDesk({
     </>
   );
 }
+`;
+
+fs.writeFileSync(targetPath, content);
+console.log('Added floating animation and FAB mode to DiscoveryDesk.tsx');

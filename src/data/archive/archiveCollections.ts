@@ -90,8 +90,8 @@ export const archiveCollections: readonly ArchiveCollection[] = [
     itemIds: ["sulsel-pinisi", "maluku-baileo", "sumbar-tabuik"],
     provinceIds: ["sulawesi-selatan", "maluku", "sumatera-barat"],
     reasonCodes: ["maritime", "multi-region", "heritage"],
-    heroVisual: "/assets/nusa-archive/provinces/sulawesi-selatan/id-73-sulawesi-selatan-08-kerajinan-perahu-pinisi-bulukumba.webp",
-    heroAlt: "Perahu Pinisi — tradisi maritim Nusantara",
+    heroVisual: "/assets/nusa-archive/provinces/sumatera-barat/id-13-sumatera-barat-05-upacara-tradisi-festival-tabuik-l1-master-v01.webp",
+    heroAlt: "Tradisi Festival Tabuik — tradisi maritim Nusantara",
     editorialPriority: 8,
   },
 ];

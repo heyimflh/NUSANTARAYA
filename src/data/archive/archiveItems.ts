@@ -47,7 +47,9 @@ function makeMedia(
   };
 }
 
-export const archiveItems: ArchiveItem[] = [
+import { generatedArchiveItems } from "./generatedArchiveItems";
+
+const manualArchiveItems: ArchiveItem[] = [
   // ═══════════════════════════════════════════════════════════════════════════
   // DI YOGYAKARTA (id-34) — Flagship, Deep
   // ═══════════════════════════════════════════════════════════════════════════
@@ -1080,6 +1082,16 @@ export const archiveItems: ArchiveItem[] = [
     reviewedAt: "2026-07-10",
   },
 ];
+
+// Combine and Deduplicate (prefer manual items if src is identical)
+const manualSrcSet = new Set(manualArchiveItems.map(item => item.media[0]?.src).filter(Boolean));
+
+const filteredGeneratedItems = generatedArchiveItems.filter(item => {
+  const src = item.media[0]?.src;
+  return src && !manualSrcSet.has(src);
+});
+
+export const archiveItems: ArchiveItem[] = [...manualArchiveItems, ...filteredGeneratedItems];
 
 // ─── Index & Lookup ──────────────────────────────────────────────────────────
 
