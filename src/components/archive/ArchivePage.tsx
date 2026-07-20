@@ -44,7 +44,6 @@ import { RegionalMemoryIndex } from "./RegionalMemoryIndex";
 import { StoryThreads } from "./StoryThreads";
 import { SourceLearningDesk } from "./SourceLearningDesk";
 import { PersonalShelf } from "./PersonalShelf";
-import { FinalHandoff } from "./FinalHandoff";
 import { ItemQuickView } from "./ItemQuickView";
 import { trackEvent } from "@/lib/analytics";
 
@@ -314,9 +313,7 @@ export function ArchivePage() {
         t={t}
       />
 
-      {/* ── Section 13: Final Editorial Handoff ────────────────────────────── */}
-      <FinalHandoff t={t} />
-
+      {/* ── Section 13: Final Editorial Handoff (Removed) ────────────────────────────── */}
       <FinalCtaFooterSection />
 
       {/* ── Quick View Drawer ──────────────────────────────────────────────── */}

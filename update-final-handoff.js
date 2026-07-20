@@ -1,4 +1,9 @@
-import React from "react";
+const fs = require('fs');
+const path = require('path');
+
+const targetPath = path.resolve('src/components/archive/FinalHandoff.tsx');
+
+const content = `import React from "react";
 import { useRouter } from "next/navigation";
 import { MoveRight, Map } from "lucide-react";
 
@@ -48,3 +53,7 @@ export function FinalHandoff({ t }: FinalHandoffProps) {
     </section>
   );
 }
+`;
+
+fs.writeFileSync(targetPath, content);
+console.log('FinalHandoff.tsx redesigned!');

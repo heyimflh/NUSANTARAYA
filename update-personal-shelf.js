@@ -1,4 +1,9 @@
-import React from "react";
+const fs = require('fs');
+const path = require('path');
+
+const targetPath = path.resolve('src/components/archive/PersonalShelf.tsx');
+
+const content = `import React from "react";
 import { Bookmark, Sparkles, FolderOpen } from "lucide-react";
 
 interface PersonalShelfProps {
@@ -57,3 +62,7 @@ export function PersonalShelf({ t }: PersonalShelfProps) {
     </section>
   );
 }
+`;
+
+fs.writeFileSync(targetPath, content);
+console.log('PersonalShelf.tsx redesigned!');

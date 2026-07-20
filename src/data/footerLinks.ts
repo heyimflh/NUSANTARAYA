@@ -13,7 +13,7 @@ export const footerLinkGroups = [
     links: [
       { label: "Nusa Map", href: "/explore", status: "live" },
       { label: "Provinsi", href: "/provinsi", status: "soon" },
-      { label: "Nusa Archive", href: "/archive", status: "soon" },
+      { label: "Nusa Archive", href: "/archive", status: "live" },
       { label: "NusaRasa", href: "/rasa", status: "soon" },
       { label: "Route Planner", href: APP_ROUTES.routes + "?source=home-feature", status: "live" },
       { label: "Nusa Passport", href: APP_ROUTES.passport, status: "live" }

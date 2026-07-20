@@ -7,6 +7,21 @@ import type {
 } from "@/types/atlas";
 import { AtlasCitedParagraphs } from "./AtlasCitedParagraphs";
 import { InlineCitation } from "./InlineCitation";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { getArchiveItemBySlug } from "@/data/archive/archiveItems";
+
+// Helper to slugify title to match archive slug
+const slugify = (text: string) => {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^\w\-]+/g, '')
+    .replace(/\-\-+/g, '-');
+};
+
 
 type AtlasItemCollectionProps = {
   title: string;
@@ -58,7 +73,23 @@ export const AtlasItemCollection = ({
                     {item.category}
                   </p>
                 )}
-                <h4 className="mt-1 font-serif text-2xl font-bold text-nusaNavy">
+                
+                {(() => {
+                  const slug = slugify(displayName);
+                  const archiveItem = getArchiveItemBySlug(slug) || getArchiveItemBySlug(item.id);
+                  if (archiveItem) {
+                    return (
+                      <Link 
+                        href={`/archive/${archiveItem.slug}`}
+                        className="absolute top-4 right-4 z-10 flex items-center gap-2 px-3 py-1.5 bg-[#2A211A] text-[#F3EBDD] rounded-full text-xs font-bold tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 shadow-lg hover:bg-[#B65D43]"
+                      >
+                        Buka Arsip <ArrowUpRight className="w-3 h-3" />
+                      </Link>
+                    );
+                  }
+                  return null;
+                })()}
+                <h4 className="mt-1 font-serif text-2xl font-bold text-nusaNavy group-hover:text-[#B65D43] transition-colors duration-300">
                   {displayName}
                   {item.status && (
                     <span className="ml-2 text-xs font-medium uppercase tracking-wider text-red-600/70">

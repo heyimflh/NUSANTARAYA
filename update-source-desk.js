@@ -1,4 +1,9 @@
-import React from "react";
+const fs = require('fs');
+const path = require('path');
+
+const targetPath = path.resolve('src/components/archive/SourceLearningDesk.tsx');
+
+const content = `import React from "react";
 import { archiveSourceRegistry } from "@/data/archive/archiveSourceRegistry";
 import { Library, Landmark, BookMarked, Users } from "lucide-react";
 
@@ -66,3 +71,7 @@ export function SourceLearningDesk({ t }: SourceLearningDeskProps) {
     </section>
   );
 }
+`;
+
+fs.writeFileSync(targetPath, content);
+console.log('SourceLearningDesk.tsx redesigned!');

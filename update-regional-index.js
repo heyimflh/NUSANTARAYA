@@ -1,4 +1,9 @@
-import React from "react";
+const fs = require('fs');
+const path = require('path');
+
+const targetPath = path.resolve('src/components/archive/RegionalMemoryIndex.tsx');
+
+const content = `import React from "react";
 import { RegionalProfile, RegionId } from "@/types/region";
 import { ArchiveItem } from "@/types/archive";
 import { Map, Compass, Navigation } from "lucide-react";
@@ -47,25 +52,25 @@ export function RegionalMemoryIndex({ regions, allItems, activeRegionId, onRegio
               <button
                 key={r.id}
                 onClick={() => onRegionSelect(isActive ? null : r.id)}
-                className={`group relative overflow-hidden flex flex-col items-start p-6 rounded-2xl text-left transition-all duration-500 border ${
+                className={\`group relative overflow-hidden flex flex-col items-start p-6 rounded-2xl text-left transition-all duration-500 border \${
                   isActive 
                     ? "bg-[var(--archive-ink)] border-[var(--archive-ink)] shadow-2xl scale-[1.02]" 
                     : "bg-[var(--archive-paper)]/80 backdrop-blur-md border-[var(--archive-line)] hover:border-[var(--archive-terracotta)]/50 hover:shadow-xl hover:-translate-y-1"
-                }`}
+                }\`}
               >
                 {/* Hover Glow Effect */}
-                <div className={`absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${isActive ? 'opacity-20' : ''}`}></div>
+                <div className={\`absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 \${isActive ? 'opacity-20' : ''}\`}></div>
                 
-                <div className={`mb-6 p-3 rounded-full transition-colors duration-500 ${isActive ? 'bg-[var(--archive-paper)]/10' : 'bg-[var(--archive-canvas)] group-hover:bg-[var(--archive-saffron-soft)]'}`}>
-                  <Navigation className={`w-6 h-6 ${isActive ? 'text-[var(--archive-canvas)]' : 'text-[var(--archive-muted)] group-hover:text-[var(--archive-terracotta)]'}`} />
+                <div className={\`mb-6 p-3 rounded-full transition-colors duration-500 \${isActive ? 'bg-[var(--archive-paper)]/10' : 'bg-[var(--archive-canvas)] group-hover:bg-[var(--archive-saffron-soft)]'}\`}>
+                  <Navigation className={\`w-6 h-6 \${isActive ? 'text-[var(--archive-canvas)]' : 'text-[var(--archive-muted)] group-hover:text-[var(--archive-terracotta)]'}\`} />
                 </div>
 
                 <div className="mt-auto">
-                  <h3 className={`font-playfair text-xl md:text-2xl font-bold mb-2 transition-colors duration-500 ${isActive ? 'text-[var(--archive-canvas)]' : 'text-[var(--archive-ink)]'}`}>
+                  <h3 className={\`font-playfair text-xl md:text-2xl font-bold mb-2 transition-colors duration-500 \${isActive ? 'text-[var(--archive-canvas)]' : 'text-[var(--archive-ink)]'}\`}>
                     {r.label}
                   </h3>
                   <div className="flex items-center gap-2">
-                    <span className={`text-xs font-medium tracking-wider uppercase ${isActive ? 'text-[var(--archive-paper-deep)]' : 'text-[var(--archive-muted)]'}`}>
+                    <span className={\`text-xs font-medium tracking-wider uppercase \${isActive ? 'text-[var(--archive-paper-deep)]' : 'text-[var(--archive-muted)]'}\`}>
                       {count} Aset
                     </span>
                     {isActive && (
@@ -81,3 +86,7 @@ export function RegionalMemoryIndex({ regions, allItems, activeRegionId, onRegio
     </section>
   );
 }
+`;
+
+fs.writeFileSync(targetPath, content);
+console.log('RegionalMemoryIndex.tsx redesigned!');

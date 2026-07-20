@@ -1,4 +1,9 @@
-import React from "react";
+const fs = require('fs');
+const path = require('path');
+
+const targetPath = path.resolve('src/components/archive/StoryThreads.tsx');
+
+const content = `import React from "react";
 import { ArchiveStoryThread } from "@/types/archive";
 import { ArrowRight, BookOpen } from "lucide-react";
 
@@ -42,8 +47,8 @@ export function StoryThreads({ threads, onOpenThread, t }: StoryThreadsProps) {
             return (
               <div 
                 key={tData.id} 
-                className={`group relative flex flex-col h-full bg-gradient-to-br ${bgTint} border border-[var(--archive-line)] rounded-2xl cursor-pointer overflow-hidden transition-all duration-700 hover:shadow-2xl hover:-translate-y-2 hover:border-[var(--archive-charcoal)]/30`}
-                style={{ animationDelay: `${delay}ms` }}
+                className={\`group relative flex flex-col h-full bg-gradient-to-br \${bgTint} border border-[var(--archive-line)] rounded-2xl cursor-pointer overflow-hidden transition-all duration-700 hover:shadow-2xl hover:-translate-y-2 hover:border-[var(--archive-charcoal)]/30\`}
+                style={{ animationDelay: \`\${delay}ms\` }}
                 onClick={() => onOpenThread(tData.id)}
               >
                 {/* Top Label */}
@@ -83,3 +88,7 @@ export function StoryThreads({ threads, onOpenThread, t }: StoryThreadsProps) {
     </section>
   );
 }
+`;
+
+fs.writeFileSync(targetPath, content);
+console.log('StoryThreads.tsx redesigned!');

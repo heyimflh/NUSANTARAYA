@@ -51,7 +51,7 @@ export const mainFeatures: FeatureData[] = [
     image: "/assets/features/archive-preview.webp",
     color: "#8B2020",
     href: "/archive",
-    status: "soon"
+    status: "live"
   },
   {
     id: "nusarasa",
