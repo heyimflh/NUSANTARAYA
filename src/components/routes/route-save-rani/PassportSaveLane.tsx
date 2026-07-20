@@ -25,8 +25,9 @@ export function PassportSaveLane({ savedRoute, locale }: PassportSaveLaneProps) 
       } else {
         saveRouteWithDetails(savedRoute);
       }
-    } catch (e: any) {
-      if (e.message === "QUOTA_EXCEEDED") {
+    } catch (error: unknown) {
+      const isQuotaError = error instanceof Error && error.message === "QUOTA_EXCEEDED";
+      if (isQuotaError) {
         setErrorMsg(
           locale === "en"
             ? "You have saved 20 routes. Remove an old route from your Passport to save a new one."

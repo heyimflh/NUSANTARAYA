@@ -1,6 +1,9 @@
 "use client";
 import { navigateToRouteSection } from "@/lib/routes/navigateToRouteSection";
 import { ROUTE_SECTION_IDS } from "@/lib/routes/routeSections";
+import type { RouteAdjustmentDraft } from "@/lib/routes/save-rani/types";
+import { isDraftStale } from "@/lib/routes/save-rani/resolveRouteAdjustment";
+import { validateItineraryAgainstRecommendation } from "@/lib/routes/itinerary/resolveRouteItinerary";
 
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
@@ -220,6 +223,43 @@ export function RouteAtelier() {
     });
   }, [values, router, activeSource, activeJourneyId]);
 
+  const handleApplyRaniDraft = useCallback((draft: RouteAdjustmentDraft) => {
+    if (!result || !activeItinerary) {
+      announcer.announce("Rute aktif belum siap untuk disesuaikan.", "assertive");
+      return;
+    }
+
+    if (draft.status !== "valid") {
+      announcer.announce("Draft penyesuaian tidak valid dan tidak dapat diterapkan.", "assertive");
+      return;
+    }
+
+    if (isDraftStale(draft, result.id, result.version, activeItinerary.version)) {
+      announcer.announce("Draft sudah usang. Buat ulang preview RANI.", "assertive");
+      return;
+    }
+
+    const validationErrors = validateItineraryAgainstRecommendation(
+      draft.proposedItinerary,
+      draft.proposedRoute
+    );
+
+    if (validationErrors.length > 0) {
+      announcer.announce("Penyesuaian gagal karena itinerary tidak konsisten.", "assertive");
+      return;
+    }
+
+    setPreviousState({
+      result,
+      itinerary: activeItinerary,
+    });
+    setResult(draft.proposedRoute);
+    setActiveItinerary(draft.proposedItinerary);
+    setStatus("success");
+    setAdjustmentNote(`Rute disesuaikan: ${draft.summary}`);
+    announcer.announce(`Draft diterapkan: ${draft.summary}`, "polite");
+  }, [result, activeItinerary]);
+
   const handleSubmit = useCallback((e?: React.FormEvent) => {
     if (e) e.preventDefault();
     trackRoutePlannerEvent("route_generate_clicked", buildAnalyticsPayload(values));
@@ -406,34 +446,28 @@ export function RouteAtelier() {
           
           {/* Section 4: Route Recommendation Result */}
           <div className="w-full max-w-7xl mx-auto pt-16 mt-8">
-                      <RouteRecommendationResultSection
-            result={result}
-            activeItinerary={activeItinerary}
-            status={status}
-            adjustmentNote={adjustmentNote}
-            values={values}
-            resultSource={resultSource}
-            onEdit={() => setActiveStep(1)}
-            onReset={handleReset}
-            focusOnReveal={focusOnReveal}
-            onApplyDraft={(draft) => {
-              setPreviousState({ result: result as RouteRecommendation, itinerary: activeItinerary });
-              setResult(draft.proposedRoute);
-              setActiveItinerary(draft.proposedItinerary);
-              setStatus("success");
-              setResultSource("preset"); // or form, this dictates if it uses preset logic, maybe keep it as is
-              setAdjustmentNote(`Rute disesuaikan: ${draft.summary}`);
-            }}
-            onUndoDraft={() => {
-              if (previousState) {
-                setResult(previousState.result);
-                setActiveItinerary(previousState.itinerary);
-                setPreviousState(null);
-                setAdjustmentNote("Perubahan rute dibatalkan.");
-              }
-            }}
-            canUndo={!!previousState}
-          />
+            <RouteRecommendationResultSection
+              result={result}
+              activeItinerary={activeItinerary}
+              status={status}
+              adjustmentNote={adjustmentNote}
+              values={values}
+              resultSource={resultSource}
+              onEdit={() => setActiveStep(1)}
+              onReset={handleReset}
+              focusOnReveal={focusOnReveal}
+              onApplyDraft={handleApplyRaniDraft}
+              onUndoDraft={() => {
+                if (previousState) {
+                  setResult(previousState.result);
+                  setActiveItinerary(previousState.itinerary);
+                  setPreviousState(null);
+                  setAdjustmentNote("Perubahan rute dibatalkan.");
+                  announcer.announce("Perubahan rute berhasil dibatalkan.", "polite");
+                }
+              }}
+              canUndo={!!previousState}
+            />
           </div>
         </div>
       </div>

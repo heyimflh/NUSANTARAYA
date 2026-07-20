@@ -1,9 +1,7 @@
-import { scrollElementIntoView } from "@/lib/utils/scroll";
 import { ROUTE_SECTION_IDS } from "@/lib/routes/routeSections";
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import { RouteRecommendation } from "@/types/route-planner";
 import { RouteItinerary } from "@/lib/routes/itinerary/routeItinerarySchema";
-import { resolveRouteItinerary, ItineraryResolution } from "@/lib/routes/itinerary/resolveRouteItinerary";
 import { ItinerarySkeleton } from "./ItinerarySkeleton";
 import { ItinerarySectionHeader } from "./ItinerarySectionHeader";
 import { ItineraryOverviewRail } from "./ItineraryOverviewRail";
@@ -23,29 +21,39 @@ interface DayByDayItinerarySectionProps {
   externalActiveDay?: number | null;
 }
 
-export function DayByDayItinerarySection({
+function DayByDayItinerarySectionContent({
   result,
   status,
   itinerary,
-  activeRouteKey,
   onViewInMap,
   externalActiveDay,
-}: DayByDayItinerarySectionProps) {
-  const [activeDay, setActiveDay] = useState<number>(1);
+}: Omit<DayByDayItinerarySectionProps, "activeRouteKey">) {
+  const [activeDay, setActiveDay] = useState<number>(externalActiveDay && externalActiveDay >= 1 ? externalActiveDay : 1);
 
-  useEffect(() => {
-    setActiveDay(1);
-  }, [activeRouteKey]);
-
-  useEffect(() => {
-    if (externalActiveDay && externalActiveDay >= 1) {
+  // Sync activeDay from external source
+  // This is a valid use case for setState in effect because we're synchronizing with 
+  // an external system (map interaction). The map component triggers day selection 
+  // and we need to respond to it.
+  // eslint-disable-next-line react-hooks/set-state-in-effect, react-hooks/exhaustive-deps
+  React.useEffect(() => {
+    if (externalActiveDay && externalActiveDay >= 1 && externalActiveDay !== activeDay) {
       setActiveDay(externalActiveDay);
-      setTimeout(() => {
+      requestAnimationFrame(() => {
         const dayEl = document.getElementById(`itinerary-day-${externalActiveDay}`);
-        if (dayEl) scrollElementIntoView(dayEl, { block: "start" });
-      }, 100);
+        if (dayEl) {
+          dayEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
     }
-  }, [externalActiveDay]);
+  }, [externalActiveDay]); // Only depend on externalActiveDay
+
+  const handleDayClick = useCallback((dayNumber: number) => {
+    setActiveDay(dayNumber);
+    const el = document.getElementById(`itinerary-day-${dayNumber}`);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
 
   if (status === "resolving") {
     return <ItinerarySkeleton durationDays={result?.durationDays || 5} />;
@@ -58,7 +66,9 @@ export function DayByDayItinerarySection({
   if (status === "partial" && !itinerary) {
     return (
       <section className="w-full mt-12 lg:mt-24 text-center">
-        <h2 className="text-2xl font-bold mb-4" tabIndex={-1} data-route-section-heading>Itinerary sedang dilengkapi</h2>
+        <h2 className="text-2xl font-bold mb-4" tabIndex={-1} data-route-section-heading>
+          Itinerary sedang dilengkapi
+        </h2>
         <p className="text-muted-foreground">Itinerary dinamis untuk rute ini belum tersedia.</p>
       </section>
     );
@@ -67,7 +77,9 @@ export function DayByDayItinerarySection({
   if (status === "error" && !itinerary) {
     return (
       <section className="w-full mt-12 lg:mt-24 text-center">
-        <h2 className="text-2xl font-bold mb-4 text-destructive" tabIndex={-1} data-route-section-heading>Itinerary belum dapat ditampilkan karena data rute tidak konsisten.</h2>
+        <h2 className="text-2xl font-bold mb-4 text-destructive" tabIndex={-1} data-route-section-heading>
+          Itinerary belum dapat ditampilkan karena data rute tidak konsisten.
+        </h2>
       </section>
     );
   }
@@ -87,13 +99,7 @@ export function DayByDayItinerarySection({
           <ItineraryOverviewRail
             days={itinerary.days}
             activeDay={activeDay}
-            onDayClick={(dayNumber) => {
-              setActiveDay(dayNumber);
-              const el = document.getElementById(`itinerary-day-${dayNumber}`);
-              if (el) {
-                scrollElementIntoView(el, { block: "start" });
-              }
-            }}
+            onDayClick={handleDayClick}
           />
         </div>
 
@@ -121,7 +127,12 @@ export function DayByDayItinerarySection({
   );
 }
 
-
-
-
-
+export function DayByDayItinerarySection(props: DayByDayItinerarySectionProps) {
+  // Use key to remount component when route changes, resetting activeDay to 1
+  return (
+    <DayByDayItinerarySectionContent
+      key={props.activeRouteKey ?? "idle"}
+      {...props}
+    />
+  );
+}

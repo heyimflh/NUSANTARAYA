@@ -22,25 +22,19 @@ export function RaniAdjustmentLane({ result, itinerary, values, locale, onApplyD
   const [uiState, setUIState] = useState<AdjustmentUIState>("idle");
   const [activeDraft, setActiveDraft] = useState<RouteAdjustmentDraft | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const requestSequenceRef = useRef(0);
+  const mountedRef = useRef(true);
 
-  // Cleanup timeout on unmount or route change
   useEffect(() => {
+    mountedRef.current = true;
     return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = null;
-      }
+      mountedRef.current = false;
+      requestSequenceRef.current += 1;
     };
-  }, [result.id, result.version, itinerary.version]);
+  }, []);
 
   const handlePromptClick = async (intent: RouteAdjustmentIntent) => {
-    // Clear previous timeout
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
-    }
-
+    const requestSequence = ++requestSequenceRef.current;
     setUIState("resolving");
     setActiveDraft(null);
     setErrorMessage(null);
@@ -48,31 +42,35 @@ export function RaniAdjustmentLane({ result, itinerary, values, locale, onApplyD
     try {
       const draft = await resolveRouteAdjustment(intent, result, itinerary, values, locale);
       
-      // Simulate network/think delay for RANI UX (optional cosmetic delay)
-      timeoutRef.current = setTimeout(() => {
-        setActiveDraft(draft);
-        setUIState(draft.status === "valid" ? "preview" : "error");
-        if (draft.status === "invalid") {
-          setErrorMessage(
-            locale === "en"
-              ? "This adjustment cannot be applied to the current route."
-              : "Penyesuaian ini tidak dapat diterapkan pada rute saat ini."
-          );
-        }
-        timeoutRef.current = null;
-      }, 600);
-    } catch (error) {
-      // Clear timeout on error
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = null;
+      if (!mountedRef.current || requestSequence !== requestSequenceRef.current) {
+        return;
+      }
+
+      if (draft.status !== "valid") {
+        setActiveDraft(null);
+        setUIState("error");
+        setErrorMessage(
+          locale === "en"
+            ? "This adjustment is not safely available for the current route."
+            : "Penyesuaian ini belum tersedia secara aman untuk rute saat ini."
+        );
+        return;
+      }
+
+      setActiveDraft(draft);
+      setUIState("preview");
+    } catch (error: unknown) {
+      if (!mountedRef.current || requestSequence !== requestSequenceRef.current) {
+        return;
       }
       
+      console.error("[RANI_ADJUSTMENT_FAILED]", error);
+      setActiveDraft(null);
       setUIState("error");
       setErrorMessage(
         locale === "en"
-          ? "RANI cannot prepare a safe adjustment. Try another option or keep your current route."
-          : "RANI belum dapat menyiapkan penyesuaian yang aman. Coba opsi lain atau pertahankan rute saat ini."
+          ? "RANI cannot prepare a safe adjustment. Try another option."
+          : "RANI belum dapat menyiapkan penyesuaian yang aman. Coba opsi lain."
       );
     }
   };

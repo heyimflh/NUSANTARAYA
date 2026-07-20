@@ -1,5 +1,6 @@
-import { RouteAdjustmentDraft, RouteAdjustmentChange } from "@/lib/routes/save-rani/types";
+import { RouteAdjustmentDraft } from "@/lib/routes/save-rani/types";
 import { ArrowRight, CheckCircle2, ShieldAlert } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface RouteAdjustmentDiffProps {
   draft: RouteAdjustmentDraft;
@@ -9,6 +10,8 @@ interface RouteAdjustmentDiffProps {
 }
 
 export function RouteAdjustmentDiff({ draft, locale, onApply, onCancel }: RouteAdjustmentDiffProps) {
+  const canApply = draft.status === "valid" && draft.validationErrors.length === 0;
+
   return (
     <div className="bg-white border border-[#D4AF37]/40 rounded-2xl p-5 md:p-6 shadow-sm mt-6">
       <div className="flex items-start justify-between mb-4">
@@ -79,14 +82,23 @@ export function RouteAdjustmentDiff({ draft, locale, onApply, onCancel }: RouteA
 
       <div className="flex items-center gap-3">
         <button
+          type="button"
           onClick={onCancel}
           className="flex-1 py-3 px-4 rounded-xl font-medium text-[#5C6D7E] bg-[#FAF8F5] border border-[#E8E0CE] hover:bg-[#F0EBE1] transition-colors"
         >
           {locale === "en" ? "Keep Original" : "Pertahankan Rute"}
         </button>
         <button
+          type="button"
           onClick={onApply}
-          className="flex-1 py-3 px-4 rounded-xl font-medium text-white bg-[#D4AF37] hover:bg-[#B3932F] shadow-sm transition-colors"
+          disabled={!canApply}
+          aria-disabled={!canApply}
+          className={cn(
+            "flex-1 py-3 px-4 rounded-xl font-medium transition-colors",
+            canApply
+              ? "bg-[#D4AF37] text-white hover:bg-[#B3932F] shadow-sm"
+              : "cursor-not-allowed bg-slate-200 text-slate-500"
+          )}
         >
           {locale === "en" ? "Apply Draft" : "Terapkan Draft Ini"}
         </button>

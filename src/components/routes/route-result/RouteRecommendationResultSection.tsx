@@ -1,5 +1,6 @@
 "use client";
 import { ROUTE_SECTION_IDS } from "@/lib/routes/routeSections";
+import type { RouteAdjustmentDraft } from "@/lib/routes/save-rani/types";
 
 /**
  * RouteRecommendationResultSection — Section 4
@@ -61,7 +62,7 @@ interface RouteRecommendationResultSectionProps {
   onReset: () => void;
   /** When true, this was an explicit user submit (focus heading) */
   focusOnReveal?: boolean;
-  onApplyDraft?: (draft: any) => void;
+  onApplyDraft?: (draft: RouteAdjustmentDraft) => void;
   onUndoDraft?: () => void;
   canUndo?: boolean;
 }
