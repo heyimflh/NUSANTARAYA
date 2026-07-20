@@ -62,7 +62,14 @@ export const yogyakartaCulturalEscape3: RouteItinerary = {
                 isPrimary: true
             }
         ],
-        culinaryMoments: [],
+        culinaryMoments: [
+          {
+            culinaryId: "culinary-default-1",
+            label: "Kuliner Khas Lokal",
+            context: "lunch",
+            note: "Menikmati sajian otentik setempat."
+          }
+        ],
         practicalNoteIds: [],
         etiquetteNoteIds: []
     },
@@ -103,7 +110,14 @@ export const yogyakartaCulturalEscape3: RouteItinerary = {
                 isPrimary: true
             }
         ],
-        culinaryMoments: [],
+        culinaryMoments: [
+          {
+            culinaryId: "culinary-default-1",
+            label: "Kuliner Khas Lokal",
+            context: "lunch",
+            note: "Menikmati sajian otentik setempat."
+          }
+        ],
         practicalNoteIds: [],
         etiquetteNoteIds: []
     },
@@ -155,7 +169,14 @@ export const yogyakartaCulturalEscape3: RouteItinerary = {
                 isPrimary: true
             }
         ],
-        culinaryMoments: [],
+        culinaryMoments: [
+          {
+            culinaryId: "culinary-default-1",
+            label: "Kuliner Khas Lokal",
+            context: "lunch",
+            note: "Menikmati sajian otentik setempat."
+          }
+        ],
         practicalNoteIds: [],
         etiquetteNoteIds: []
     }

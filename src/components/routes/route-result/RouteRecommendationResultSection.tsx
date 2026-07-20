@@ -122,13 +122,12 @@ export function RouteRecommendationResultSection({
     setTimeout(() => setItineraryExternalDay(null), 500);
   }, []);
 
-  // Reset section 6 state when result changes
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+  const [prevRouteKey, setPrevRouteKey] = useState(workspace.activeRouteKey);
+  if (workspace.activeRouteKey !== prevRouteKey) {
+    setPrevRouteKey(workspace.activeRouteKey);
     setMapExternalSelection(null);
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setItineraryExternalDay(null);
-  }, [workspace.activeRouteKey]);
+  }
 
   // ── Focus management: only focus after explicit submit ──
   useEffect(() => {

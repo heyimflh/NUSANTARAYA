@@ -125,7 +125,9 @@ export function RouteMapTransportSection({
   // ─── Reset selection when route key changes ─────────────────────────
 
   useEffect(() => {
-    setSelection(null);
+    setTimeout(() => {
+      setSelection(null);
+    }, 0);
   }, [activeRouteKey]);
 
   // ─── Apply external day selection from itinerary ─────────────────────────
@@ -144,7 +146,9 @@ export function RouteMapTransportSection({
       source: "itinerary",
     };
 
-    setSelection(sel);
+    setTimeout(() => {
+      setSelection(sel);
+    }, 0);
 
     // Scroll to map section
     const mapSection = document.getElementById("route-map-transport-summary");
@@ -285,17 +289,28 @@ export function RouteMapTransportSection({
 
   if (status === "partial" && !mapModel) {
     return (
-      <section className="w-full mt-12 lg:mt-24 text-center">
-        <h2 className="text-2xl font-bold mb-4" tabIndex={-1} data-route-section-heading>Peta belum tersedia</h2>
-        <p className="text-muted-foreground">Peta rute dinamis ini masih dalam proses penyusunan.</p>
+      <section className="w-full mt-12 lg:mt-24">
+        <div className="flex flex-col items-center justify-center p-12 bg-[#F8F4EA] border border-[#E8E0CE] rounded-3xl text-center">
+          <div className="w-16 h-16 bg-[#E8E0CE] rounded-full flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#5C6470]"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+          </div>
+          <h2 className="text-2xl font-playfair font-bold text-[#0D1B2A] mb-3" tabIndex={-1} data-route-section-heading>Peta Belum Tersedia</h2>
+          <p className="text-[#5C6470] max-w-md">Peta rute dinamis ini masih dalam proses penyusunan.</p>
+        </div>
       </section>
     );
   }
 
   if (status === "error" && !mapModel) {
     return (
-      <section className="w-full mt-12 lg:mt-24 text-center">
-        <h2 className="text-2xl font-bold mb-4 text-destructive" tabIndex={-1} data-route-section-heading>Gagal Memuat Peta</h2>
+      <section className="w-full mt-12 lg:mt-24">
+        <div className="flex flex-col items-center justify-center p-12 bg-red-50 border border-red-100 rounded-3xl text-center">
+          <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6 text-red-500">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <h2 className="text-2xl font-playfair font-bold text-red-700 mb-3" tabIndex={-1} data-route-section-heading>Gagal Memuat Peta</h2>
+          <p className="text-red-600/80 max-w-md">Terjadi kendala saat memuat data peta rute. Silakan coba beberapa saat lagi.</p>
+        </div>
       </section>
     );
   }

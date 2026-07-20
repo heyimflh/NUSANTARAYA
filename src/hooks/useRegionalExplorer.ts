@@ -10,77 +10,60 @@ interface UseRegionalExplorerProps {
 }
 
 export function useRegionalExplorer({ selectedProvinceId, activeJourney }: UseRegionalExplorerProps) {
-  const [state, setState] = useState<RegionalExplorerState & { pendingExternalRegion: RegionId | null }>({
-    activeRegionId: "sumatera", // default editorial fallback
-    compareRegionId: null,
-    isCompareOpen: false,
-    hasUserInteracted: false,
-    interactionSource: "initial",
-    pendingExternalRegion: null,
+  const [prevSelectedProvinceId, setPrevSelectedProvinceId] = useState(selectedProvinceId);
+  const [prevActiveJourneyId, setPrevActiveJourneyId] = useState(activeJourney?.id);
+
+  const [state, setState] = useState<RegionalExplorerState & { pendingExternalRegion: RegionId | null }>(() => {
+    let initialRegion: RegionId | null = null;
+    if (selectedProvinceId) {
+      initialRegion = getRegionByProvinceId(selectedProvinceId)?.id || null;
+    } else if (activeJourney && activeJourney.stops.length > 0) {
+      const firstProvinceId = activeJourney.stops.find(s => s.provinceId)?.provinceId;
+      if (firstProvinceId) {
+        initialRegion = getRegionByProvinceId(firstProvinceId)?.id || null;
+      }
+    }
+    return {
+      activeRegionId: (initialRegion as RegionId) || "sumatera",
+      compareRegionId: null,
+      isCompareOpen: false,
+      hasUserInteracted: false,
+      interactionSource: "initial",
+      pendingExternalRegion: null,
+    };
   });
 
-  const prevSelectedProvinceRef = useRef(selectedProvinceId);
-  const prevActiveJourneyRef = useRef(activeJourney?.id);
-  const isInitialMount = useRef(true);
-
-  // Initial active region priority logic
-  useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-      let initialRegion: RegionId | null = null;
-      if (selectedProvinceId) {
-        initialRegion = getRegionByProvinceId(selectedProvinceId)?.id || null;
-      } else if (activeJourney && activeJourney.stops.length > 0) {
-        const firstProvinceId = activeJourney.stops.find(s => s.provinceId)?.provinceId;
-        if (firstProvinceId) {
-          initialRegion = getRegionByProvinceId(firstProvinceId)?.id || null;
-        }
-      }
-      
-      if (initialRegion) {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setState((prev) => ({
-          ...prev,
-          activeRegionId: initialRegion as RegionId,
-          interactionSource: "initial",
-        }));
-      }
-      return;
-    }
-    
-    // Evaluate new region if selected province or active journey changes
+  if (selectedProvinceId !== prevSelectedProvinceId || activeJourney?.id !== prevActiveJourneyId) {
     let newExternalRegion: RegionId | null = null;
     
-    if (selectedProvinceId && selectedProvinceId !== prevSelectedProvinceRef.current) {
+    if (selectedProvinceId && selectedProvinceId !== prevSelectedProvinceId) {
       newExternalRegion = getRegionByProvinceId(selectedProvinceId)?.id || null;
-    } else if (activeJourney?.id !== prevActiveJourneyRef.current && activeJourney && activeJourney.stops.length > 0) {
+    } else if (activeJourney?.id !== prevActiveJourneyId && activeJourney && activeJourney.stops.length > 0) {
       const firstProvinceId = activeJourney.stops.find(s => s.provinceId)?.provinceId;
       if (firstProvinceId) {
         newExternalRegion = getRegionByProvinceId(firstProvinceId)?.id || null;
       }
     }
 
+    setPrevSelectedProvinceId(selectedProvinceId);
+    setPrevActiveJourneyId(activeJourney?.id);
+
     if (newExternalRegion) {
       setState((prev) => {
         if (prev.activeRegionId === newExternalRegion) return prev;
 
         if (prev.hasUserInteracted) {
-          // Non-blocking prompt logic: store as pending
           return { ...prev, pendingExternalRegion: newExternalRegion };
         } else {
-          // Auto sync if user hasn't manually interacted
           return {
             ...prev,
-            activeRegionId: newExternalRegion,
+            activeRegionId: newExternalRegion as RegionId,
             interactionSource: "province-sync",
           };
         }
       });
     }
-
-    prevSelectedProvinceRef.current = selectedProvinceId;
-    prevActiveJourneyRef.current = activeJourney?.id;
-  }, [selectedProvinceId, activeJourney]);
+  }
 
   const acceptPendingRegion = () => {
     setState((prev) => ({

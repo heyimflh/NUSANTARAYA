@@ -62,7 +62,14 @@ export const sulawesiCultureNature7: RouteItinerary = {
                 isPrimary: true
             }
         ],
-        culinaryMoments: [],
+        culinaryMoments: [
+          {
+            culinaryId: "culinary-default-1",
+            label: "Kuliner Khas Lokal",
+            context: "lunch",
+            note: "Menikmati sajian otentik setempat."
+          }
+        ],
         practicalNoteIds: [],
         etiquetteNoteIds: []
     },
@@ -114,7 +121,14 @@ export const sulawesiCultureNature7: RouteItinerary = {
                 isPrimary: true
             }
         ],
-        culinaryMoments: [],
+        culinaryMoments: [
+          {
+            culinaryId: "culinary-default-1",
+            label: "Kuliner Khas Lokal",
+            context: "lunch",
+            note: "Menikmati sajian otentik setempat."
+          }
+        ],
         practicalNoteIds: [],
         etiquetteNoteIds: []
     },
@@ -155,7 +169,14 @@ export const sulawesiCultureNature7: RouteItinerary = {
                 isPrimary: true
             }
         ],
-        culinaryMoments: [],
+        culinaryMoments: [
+          {
+            culinaryId: "culinary-default-1",
+            label: "Kuliner Khas Lokal",
+            context: "lunch",
+            note: "Menikmati sajian otentik setempat."
+          }
+        ],
         practicalNoteIds: [],
         etiquetteNoteIds: []
     },
@@ -196,7 +217,14 @@ export const sulawesiCultureNature7: RouteItinerary = {
                 isPrimary: true
             }
         ],
-        culinaryMoments: [],
+        culinaryMoments: [
+          {
+            culinaryId: "culinary-default-1",
+            label: "Kuliner Khas Lokal",
+            context: "lunch",
+            note: "Menikmati sajian otentik setempat."
+          }
+        ],
         practicalNoteIds: [],
         etiquetteNoteIds: []
     },
@@ -248,7 +276,14 @@ export const sulawesiCultureNature7: RouteItinerary = {
                 isPrimary: true
             }
         ],
-        culinaryMoments: [],
+        culinaryMoments: [
+          {
+            culinaryId: "culinary-default-1",
+            label: "Kuliner Khas Lokal",
+            context: "lunch",
+            note: "Menikmati sajian otentik setempat."
+          }
+        ],
         practicalNoteIds: [],
         etiquetteNoteIds: []
     },
@@ -300,7 +335,14 @@ export const sulawesiCultureNature7: RouteItinerary = {
                 isPrimary: true
             }
         ],
-        culinaryMoments: [],
+        culinaryMoments: [
+          {
+            culinaryId: "culinary-default-1",
+            label: "Kuliner Khas Lokal",
+            context: "lunch",
+            note: "Menikmati sajian otentik setempat."
+          }
+        ],
         practicalNoteIds: [],
         etiquetteNoteIds: []
     },
@@ -352,7 +394,14 @@ export const sulawesiCultureNature7: RouteItinerary = {
                 isPrimary: true
             }
         ],
-        culinaryMoments: [],
+        culinaryMoments: [
+          {
+            culinaryId: "culinary-default-1",
+            label: "Kuliner Khas Lokal",
+            context: "lunch",
+            note: "Menikmati sajian otentik setempat."
+          }
+        ],
         practicalNoteIds: [],
         etiquetteNoteIds: []
     }

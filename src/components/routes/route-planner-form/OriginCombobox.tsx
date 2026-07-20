@@ -32,13 +32,24 @@ export function OriginCombobox({ value, onChange }: OriginComboboxProps) {
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, []);
 
+  const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
+  const [prevSearch, setPrevSearch] = useState(search);
+  const [prevFilteredLength, setPrevFilteredLength] = useState(filtered.length);
+
+  if (isOpen !== prevIsOpen || search !== prevSearch || filtered.length !== prevFilteredLength) {
+    if (isOpen) {
+      setActiveIndex(-1);
+    }
+    setPrevIsOpen(isOpen);
+    setPrevSearch(search);
+    setPrevFilteredLength(filtered.length);
+  }
+
   useEffect(() => {
     if (isOpen) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setActiveIndex(-1);
       announcer.announce(`Menampilkan ${filtered.length} provinsi. Gunakan panah atas dan bawah untuk memilih.`);
     }
-  }, [isOpen, search, filtered.length]);
+  }, [isOpen, search, filtered.length, announcer]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (!isOpen) {

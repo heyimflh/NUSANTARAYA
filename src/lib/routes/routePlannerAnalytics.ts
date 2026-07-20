@@ -1,8 +1,7 @@
 /**
  * NUSANTARAYA — Route Planner Analytics Adapter
- * Typed no-op adapter for analytics events.
- * When an analytics platform is integrated, replace the no-op with real tracking.
- * Never sends personal data — only preference categories.
+ * Typed adapter for analytics events.
+ * Dispatches events to the central analytics abstraction.
  */
 
 import type {

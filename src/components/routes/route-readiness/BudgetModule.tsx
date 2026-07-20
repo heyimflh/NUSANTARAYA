@@ -16,8 +16,14 @@ export function BudgetModule({ budget, locale }: BudgetModuleProps) {
   if (!budget) {
     return (
       <div id="readiness-budget" className="py-8 scroll-mt-24">
-        <h3 className="text-2xl font-playfair font-bold text-[#0D1B2A] mb-4">Estimasi Anggaran</h3>
-        <p className="text-[#5C6470]">Informasi anggaran belum tersedia untuk rute ini.</p>
+        <h3 className="text-2xl font-playfair font-bold text-[#0D1B2A] mb-6">Estimasi Anggaran</h3>
+        <div className="flex flex-col items-center justify-center p-8 bg-[#F8F4EA] border border-[#E8E0CE] rounded-3xl text-center">
+          <div className="w-12 h-12 bg-[#E8E0CE] rounded-full flex items-center justify-center mb-4">
+            <AlertTriangle className="w-6 h-6 text-[#5C6470]" />
+          </div>
+          <h4 className="text-lg font-bold text-[#0D1B2A] mb-2">Anggaran Belum Tersedia</h4>
+          <p className="text-[#5C6470] max-w-sm text-sm">Informasi estimasi anggaran untuk rute dinamis ini masih dalam proses kalkulasi.</p>
+        </div>
       </div>
     );
   }

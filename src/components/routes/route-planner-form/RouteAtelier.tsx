@@ -52,8 +52,6 @@ export function RouteAtelier() {
   const [status, setStatus] = useState<RoutePlannerStatus>("idle");
   const [hasInteracted, setHasInteracted] = useState(false);
   const [hydrated, setHydrated] = useState(false);
-    const [prefillMessage, setPrefillMessage] = useState<string | null>(null);
-  
   // ─── Journey/RANI Context ───
   const [activeJourneyId, setActiveJourneyId] = useState<string | null>(null);
   const [activeSource, setActiveSource] = useState<string>("routes-page");
@@ -78,26 +76,29 @@ export function RouteAtelier() {
     hydratedRef.current = true;
     const { values: urlValues, source, journeyId } = parsePlannerQuery(searchParams);
     const hasUrlParams = Object.keys(urlValues).length > 0;
-    if (source && source !== activeSource) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setActiveSource(source);
-    }
-    if (journeyId && journeyId !== activeJourneyId) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setActiveJourneyId(journeyId);
-    }
+    
+    setTimeout(() => {
+      if (source && source !== activeSource) {
+        setActiveSource(source);
+      }
+      if (journeyId && journeyId !== activeJourneyId) {
+        setActiveJourneyId(journeyId);
+      }
+    }, 0);
 
     if (hasUrlParams) {
       const merged = sanitizeFormValues({ ...DEFAULT_FORM_VALUES, ...urlValues });
-      setValues(merged);
+      setTimeout(() => {
+        setValues(merged);
+        if (merged.destinationRegionId && merged.interests.length > 0) {
+          setActiveStep(3);
+        }
+      }, 0);
       trackRoutePlannerEvent("route_planner_prefilled", {
         source,
         journeyId,
         ...buildAnalyticsPayload(merged),
       });
-      if (merged.destinationRegionId && merged.interests.length > 0) {
-        setActiveStep(3);
-      }
     } else {
       const draft = loadDraft();
       if (draft) setValues(draft);

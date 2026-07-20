@@ -88,8 +88,9 @@ export function useRaniConversation({ context }: UseRaniConversationParams) {
   // Initial load
   useEffect(() => {
     if (conversation.messages.length === 0 && conversation.status === "idle") {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      computeProactiveRecommendation();
+      setTimeout(() => {
+        computeProactiveRecommendation();
+      }, 0);
     }
   }, [conversation.messages.length, conversation.status, computeProactiveRecommendation]);
 
