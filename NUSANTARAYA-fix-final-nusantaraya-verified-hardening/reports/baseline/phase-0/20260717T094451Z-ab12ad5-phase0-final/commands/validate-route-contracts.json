@@ -1,9 +1,0 @@
-{
-  "command": "npm run validate:route-contracts",
-  "startedAt": "2026-07-17T09:47:46.455Z",
-  "finishedAt": "2026-07-17T09:47:48.734Z",
-  "durationMs": 2279,
-  "exitCode": 1,
-  "status": "FAIL",
-  "logFile": "logs/validate-route-contracts.log"
-}

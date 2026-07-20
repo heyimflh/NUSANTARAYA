@@ -1,9 +1,0 @@
-{
-  "command": "npm run test:passport",
-  "startedAt": "2026-07-17T09:47:40.328Z",
-  "finishedAt": "2026-07-17T09:47:41.741Z",
-  "durationMs": 1413,
-  "exitCode": 0,
-  "status": "PASS",
-  "logFile": "logs/test-passport.log"
-}

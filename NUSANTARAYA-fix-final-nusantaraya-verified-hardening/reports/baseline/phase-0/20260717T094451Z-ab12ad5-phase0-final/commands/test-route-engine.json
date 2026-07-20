@@ -1,9 +1,0 @@
-{
-  "command": "npm run test:route-engine",
-  "startedAt": "2026-07-17T09:47:48.736Z",
-  "finishedAt": "2026-07-17T09:47:50.202Z",
-  "durationMs": 1466,
-  "exitCode": 1,
-  "status": "FAIL",
-  "logFile": "logs/test-route-engine.log"
-}

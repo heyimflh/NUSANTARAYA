@@ -1,8 +1,0 @@
-{
-  "command": "npm run validate:regions",
-  "startedAt": "2026-07-17T02:23:42.591Z",
-  "finishedAt": "2026-07-17T02:23:43.060Z",
-  "durationMs": 469,
-  "exitCode": 1,
-  "logFile": "logs/validate-regions.log"
-}

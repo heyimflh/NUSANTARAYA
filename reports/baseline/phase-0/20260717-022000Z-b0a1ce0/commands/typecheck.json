@@ -1,8 +1,0 @@
-{
-  "command": "npm run typecheck",
-  "startedAt": "2026-07-17T02:23:44.541Z",
-  "finishedAt": "2026-07-17T02:23:44.976Z",
-  "durationMs": 435,
-  "exitCode": 1,
-  "logFile": "logs/typecheck.log"
-}

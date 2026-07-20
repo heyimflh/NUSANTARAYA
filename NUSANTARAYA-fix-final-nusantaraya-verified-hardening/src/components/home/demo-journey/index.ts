@@ -1,6 +1,0 @@
-export * from "./DemoJourneySection"
-export * from "./JourneyStepList"
-export * from "./JourneyStepItem"
-export * from "./JourneyPreviewPanel"
-export * from "./JourneyMockup"
-export * from "./JourneyCTA"

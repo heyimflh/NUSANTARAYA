@@ -1,9 +1,0 @@
-{
-  "command": "npm run test:route-integration",
-  "startedAt": "2026-07-17T09:47:50.224Z",
-  "finishedAt": "2026-07-17T09:47:51.232Z",
-  "durationMs": 1008,
-  "exitCode": 1,
-  "status": "FAIL",
-  "logFile": "logs/test-route-integration.log"
-}

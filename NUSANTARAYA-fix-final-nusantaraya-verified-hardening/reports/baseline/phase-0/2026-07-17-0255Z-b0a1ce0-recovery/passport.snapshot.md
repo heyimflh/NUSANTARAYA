@@ -1,4 +1,0 @@
-# Passport Snapshot
-{
-  "schema": "unknown"
-}

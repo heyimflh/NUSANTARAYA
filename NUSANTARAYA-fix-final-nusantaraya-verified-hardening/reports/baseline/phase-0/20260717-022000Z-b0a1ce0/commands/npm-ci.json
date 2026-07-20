@@ -1,8 +1,0 @@
-﻿{
-    "logFile":  "logs/npm-ci.log",
-    "exitCode":  1,
-    "command":  "npm ci",
-    "startedAt":  "2026-07-17T09:22:56.3930763+07:00",
-    "durationMs":  0,
-    "finishedAt":  "2026-07-17T09:22:56.3930763+07:00"
-}
