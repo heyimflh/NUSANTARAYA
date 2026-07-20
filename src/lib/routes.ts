@@ -4,19 +4,21 @@ export const APP_ROUTES = {
   home: "/",
   explore: "/explore",
   passportSection: "/explore#passport-progress",
+  passport: "/passport",
   routes: "/routes",
+  archive: "/archive",
 } as const;
 
 export const ROUTE_AVAILABILITY = {
   "/": true,
   "/explore": true,
   "/routes": true,
-  "/archive": false,
+  "/archive": true,
   "/rasa": false,
   "/nusarasa": false,
   "/rani": false,
   "/future": false,
-  "/passport": false,
+  "/passport": true,
   "/aksara": false,
   "/jalur-rempah": false,
   "/events": false,

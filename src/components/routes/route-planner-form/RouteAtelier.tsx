@@ -58,6 +58,7 @@ export function RouteAtelier() {
   
   // ─── Atelier State (Unified 3 steps) ───
   const [activeStep, setActiveStep] = useState<1 | 2 | 3>(1);
+  const [prefillMessage, setPrefillMessage] = useState<string | null>(null);
   const [result, setResult] = useState<RouteRecommendation | null>(null);
     const [activeItinerary, setActiveItinerary] = useState<import("@/lib/routes/itinerary/routeItinerarySchema").RouteItinerary | null>(null);
     const [previousState, setPreviousState] = useState<{ result: RouteRecommendation, itinerary: import("@/lib/routes/itinerary/routeItinerarySchema").RouteItinerary | null } | null>(null);

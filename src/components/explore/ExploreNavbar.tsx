@@ -41,12 +41,14 @@ export const ExploreNavbar = () => {
         <div className={`hidden lg:flex items-center gap-2 px-2 py-2 rounded-full backdrop-blur-md transition-all duration-300 ${
           isScrolled ? 'bg-[#34291A]/5 border border-[#34291A]/10' : 'bg-white/10 border border-white/20'
         }`}>
-          {['Beranda', 'Eksplorasi', 'Rute', 'Kuliner', 'Tentang'].map((item, idx) => (
+          {['Beranda', 'Eksplorasi', 'Rute', 'Passport', 'Kuliner', 'Tentang'].map((item, idx) => (
             <Link 
               key={item} 
               href={
                 idx === 0 ? "/" :
-                idx === 1 ? "/explore" : "#"
+                idx === 1 ? "/explore" :
+                idx === 2 ? "/routes" :
+                idx === 3 ? "/passport" : "#"
               }
               className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 idx === 1 // Set Eksplorasi as active
@@ -125,7 +127,7 @@ export const ExploreNavbar = () => {
             {/* Menu Links */}
             <div className="flex-1 flex flex-col justify-center px-8 relative z-10">
               <div className="flex flex-col gap-6">
-                {["Beranda", "Eksplorasi", "Rute", "Kuliner", "Tentang"].map(
+                {["Beranda", "Eksplorasi", "Rute", "Passport", "Kuliner", "Tentang"].map(
                   (item, i) => (
                     <motion.div
                       key={item}
@@ -137,7 +139,9 @@ export const ExploreNavbar = () => {
                       <Link
                         href={
                           i === 0 ? "/" :
-                          i === 1 ? "/explore" : "#"
+                          i === 1 ? "/explore" :
+                          i === 2 ? "/routes" :
+                          i === 3 ? "/passport" : "#"
                         }
                         onClick={() => setIsMenuOpen(false)}
                         className="group flex items-center gap-4 text-[#2D2419] hover:text-[#C9A84C] transition-colors"

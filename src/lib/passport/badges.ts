@@ -130,3 +130,8 @@ export function evaluateBadges(passport: PassportData): PassportData {
 
   return p;
 }
+
+export function getBadgeAsset(badgeId: string): string | undefined {
+  const badge = BADGE_REGISTRY.find(b => b.id === badgeId);
+  return badge?.asset;
+}

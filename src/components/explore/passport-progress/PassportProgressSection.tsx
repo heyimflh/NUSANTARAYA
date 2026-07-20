@@ -56,6 +56,11 @@ export const PassportProgressSection: React.FC<PassportProgressSectionProps> = (
       <LivingStampCanvas summary={summary} onOpenAtlas={onOpenAtlas} />
       <RegionalChapterIndex activeRegionId={highlightedRegionId} onExploreMapRegion={onExploreMapRegion} />
       <NextExpeditionTicket summary={summary} onOpenAtlas={onOpenAtlas} />
+      <div className="flex justify-center pb-24 relative z-10 -mt-12">
+        <a href="/passport" className="group relative inline-flex items-center justify-between bg-[#3A281F] text-[#FFF9EE] px-8 py-4 rounded-full text-sm font-bold tracking-widest uppercase overflow-hidden active:scale-95 transition-transform shadow-md">
+          <span className="relative z-10">Buka Passport Lengkap</span>
+        </a>
+      </div>
     </section>
   );
 };

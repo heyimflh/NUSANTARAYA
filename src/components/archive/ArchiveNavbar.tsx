@@ -8,7 +8,7 @@ import { RouteSectionLink } from "@/components/routes/RouteSectionLink";
 import { useLanguage } from "@/context/app-context";
 import Image from "next/image";
 
-export const RoutesNavbar = () => {
+export const ArchiveNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { language, setLanguage } = useLanguage();
   // Force smart color mode from the start for Routes Page
@@ -42,17 +42,14 @@ export const RoutesNavbar = () => {
         <div className={`hidden lg:flex items-center gap-2 px-2 py-2 rounded-full backdrop-blur-md transition-all duration-300 ${
           isScrolled ? 'bg-[#34291A]/5 border border-[#34291A]/10' : 'bg-white/10 border border-white/20'
         }`}>
-          {['Beranda', 'Eksplorasi', 'Rute', 'Passport', 'Kuliner', 'Tentang'].map((item, idx) => (
+          {['Beranda', 'Eksplorasi', 'Rute', 'Passport', 'Arsip'].map((item, idx) => (
             <Link 
               key={item} 
               href={
-                idx === 0 ? "/" :
-                idx === 1 ? "/explore" : 
-                idx === 2 ? "/routes" :
-                idx === 3 ? "/passport" : "#"
+                idx === 0 ? "/" : idx === 1 ? "/explore" : idx === 2 ? "/routes" : idx === 3 ? "/passport" : idx === 4 ? "/archive" : "#"
               }
               className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                idx === 2 // Set Rute as active
+                idx === 4 // Set Arsip as active
                   ? (isScrolled ? 'bg-[#C9A84C] text-white shadow-md' : 'bg-white text-black')
                   : (isScrolled ? 'text-[#5C4A26] hover:bg-[#34291A]/10' : 'text-white hover:bg-white/20')
               }`}
@@ -63,20 +60,20 @@ export const RoutesNavbar = () => {
         </div>
 
         {/* Right Button — Full on desktop */}
-        <RouteSectionLink section="planner" className={`hidden lg:flex group items-center gap-3 backdrop-blur-md transition-all duration-300 px-5 py-2.5 rounded-full text-sm font-medium active:scale-95 ${
+        <Link href="#archive-results" className={`hidden lg:flex group items-center gap-3 backdrop-blur-md transition-all duration-300 px-5 py-2.5 rounded-full text-sm font-medium active:scale-95 ${
             isScrolled 
               ? 'bg-[#34291A]/5 border border-[#34291A]/10 text-[#5C4A26] hover:bg-[#34291A]/10' 
               : 'bg-white/10 border border-white/20 text-white hover:bg-white/30'
           }`}
-          aria-label="Buat Rute"
+          aria-label="Cari Arsip"
         >
-          <span>Buat Rute</span>
+          <span>Cari Arsip</span>
           <div className={`p-1 rounded-full group-hover:rotate-45 transition-transform duration-300 ${
             isScrolled ? 'bg-[#C9A84C] text-white shadow-md' : 'bg-white text-black'
           }`}>
             <ArrowUpRight size={16} strokeWidth={2.5} />
           </div>
-        </RouteSectionLink>
+        </Link>
 
         {/* Hamburger Menu Button — Mobile/Tablet */}
         <button 
@@ -137,10 +134,7 @@ export const RoutesNavbar = () => {
                     >
                       <Link
                         href={
-                          i === 0 ? "/" :
-                          i === 1 ? "/explore" :
-                          i === 2 ? "/routes" :
-                          i === 3 ? "/passport" : "#"
+                          i === 0 ? "/" : i === 1 ? "/explore" : i === 2 ? "/routes" : i === 3 ? "/passport" : i === 4 ? "/archive" : "#"
                         }
                         onClick={() => setIsMenuOpen(false)}
                         className="group flex items-center gap-4 text-[#2D2419] hover:text-[#C9A84C] transition-colors"
@@ -174,13 +168,13 @@ export const RoutesNavbar = () => {
                 transition={{ duration: 0.5, delay: 0.6 }}
                 className="flex flex-col gap-8"
               >
-                <RouteSectionLink section="planner" onNavigate={() => setIsMenuOpen(false)} className="group relative inline-flex items-center justify-between w-full sm:w-max bg-[#1A1A1A] text-white px-6 py-4 rounded-full text-sm font-bold tracking-widest uppercase overflow-hidden active:scale-95 transition-transform shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
-                  <span className="relative z-10">Buat Rute</span>
+                <Link href="#archive-results" onNavigate={() => setIsMenuOpen(false)} className="group relative inline-flex items-center justify-between w-full sm:w-max bg-[#1A1A1A] text-white px-6 py-4 rounded-full text-sm font-bold tracking-widest uppercase overflow-hidden active:scale-95 transition-transform shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                  <span className="relative z-10">Cari Arsip</span>
                   <div className="relative z-10 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-[#C9A84C] group-hover:text-black transition-colors">
                     <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </div>
                   <div className="absolute inset-0 bg-[#2D2419] transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out" />
-                </RouteSectionLink>
+                </Link>
 
                 <div className="flex items-center gap-6 text-[#2D2419]/50 text-xs font-medium tracking-widest uppercase">
                   <button 

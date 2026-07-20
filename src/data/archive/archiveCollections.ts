@@ -1,0 +1,101 @@
+/**
+ * NUSA ARCHIVE — Curator's Selection Collections
+ * 6 featured collections for discovery without search
+ */
+
+import type { ArchiveCollection } from "@/types/archive";
+
+export const archiveCollections: readonly ArchiveCollection[] = [
+  {
+    id: "col-aksara-nusantara",
+    slug: "jejak-aksara-nusantara",
+    title: "Jejak Aksara Nusantara",
+    titleEn: "Trails of Nusantara Scripts",
+    promise: "Telusuri aksara dan bahasa yang menjadi rumah ingatan dan identitas komunitas di berbagai wilayah Indonesia.",
+    promiseEn: "Explore scripts and languages that serve as houses of memory and identity across Indonesia.",
+    itemIds: ["yogya-aksara-jawa", "sulsel-lontara", "sumbar-aksara-melayu", "sumsel-surat-ulu"],
+    provinceIds: ["di-yogyakarta", "jawa-tengah", "jawa-timur", "sulawesi-selatan", "sumatera-barat", "sumatera-selatan"],
+    primaryCategoryId: "bahasa-aksara",
+    reasonCodes: ["multi-region", "identity", "revitalization"],
+    heroVisual: "/assets/nusa-archive/provinces/di-yogyakarta/id-34-di-yogyakarta-09-aksara-aksara-jawa-hanacaraka.webp",
+    heroAlt: "Aksara Jawa Hanacaraka — bagian dari koleksi Jejak Aksara Nusantara",
+    editorialPriority: 10,
+  },
+  {
+    id: "col-rumah-kosmologi",
+    slug: "rumah-yang-menyimpan-kosmologi",
+    title: "Rumah yang Menyimpan Kosmologi",
+    titleEn: "Houses that Hold Cosmology",
+    promise: "Arsitektur tradisional Indonesia bukan hanya tempat tinggal, melainkan perwujudan pandangan dunia dan hubungan dengan alam semesta.",
+    promiseEn: "Traditional Indonesian architecture as embodiments of worldviews and cosmic relationships.",
+    itemIds: ["yogya-rumah-joglo", "sumbar-rumah-gadang", "sulsel-tongkonan", "kaltim-lamin", "papuabardaya-honai", "aceh-rumoh-aceh"],
+    provinceIds: ["di-yogyakarta", "sumatera-barat", "sulawesi-selatan", "kalimantan-timur", "papua-barat-daya", "aceh"],
+    primaryCategoryId: "rumah-adat",
+    reasonCodes: ["multi-region", "cosmology", "architecture"],
+    heroVisual: "/assets/nusa-archive/provinces/sulawesi-selatan/id-73-sulawesi-selatan-01-rumah-adat-tongkonan-toraja.webp",
+    heroAlt: "Tongkonan Toraja — arsitektur yang menyimpan kosmologi",
+    editorialPriority: 10,
+  },
+  {
+    id: "col-bunyi-kepulauan",
+    slug: "bunyi-dari-kepulauan",
+    title: "Bunyi dari Kepulauan",
+    titleEn: "Sounds from the Archipelago",
+    promise: "Dengarkan bagaimana alat musik tradisional menyeberangi laut dan menyatukan komunitas di Nusantara.",
+    promiseEn: "Hear how traditional instruments cross seas and unite communities across the archipelago.",
+    itemIds: ["yogya-gamelan", "sumbar-talempong", "maluku-tifa-maluku", "sulut-kolintang"],
+    provinceIds: ["di-yogyakarta", "sumatera-barat", "maluku", "sulawesi-utara"],
+    primaryCategoryId: "alat-musik",
+    reasonCodes: ["multi-region", "performance", "community"],
+    heroVisual: "/assets/nusa-archive/provinces/di-yogyakarta/id-34-di-yogyakarta-03-alat-musik-gamelan-keraton-yogyakarta.webp",
+    heroAlt: "Gamelan Keraton Yogyakarta — bunyi dari kepulauan",
+    editorialPriority: 9,
+  },
+  {
+    id: "col-kain-identitas",
+    slug: "kain-motif-dan-identitas",
+    title: "Kain, Motif, dan Identitas",
+    titleEn: "Fabric, Pattern, and Identity",
+    promise: "Dari serat menjadi identitas — telusuri bagaimana kain tradisional menceritakan asal, status, dan harapan.",
+    promiseEn: "From fiber to identity — explore how traditional textiles narrate origin, status, and hopes.",
+    itemIds: ["yogya-batik", "ntt-tenun-ikat", "sumbar-tenun-pandai-sikek", "sumbar-pucuak-rebuang", "jateng-batik-pekalongan", "sumsel-songket-palembang"],
+    provinceIds: ["di-yogyakarta", "nusa-tenggara-timur", "sumatera-barat", "jawa-tengah", "sumatera-selatan"],
+    primaryCategoryId: "motif-kain",
+    reasonCodes: ["multi-region", "craft", "identity", "economy"],
+    heroVisual: "/assets/nusa-archive/provinces/nusa-tenggara-timur/id-53-nusa-tenggara-timur-10-motif-kain-ragam-motif-tenun-ikat-sumba.webp",
+    heroAlt: "Tenun Ikat NTT — kain sebagai identitas",
+    editorialPriority: 10,
+  },
+  {
+    id: "col-jalur-rempah",
+    slug: "jalur-rempah-dalam-benda-dan-rasa",
+    title: "Jalur Rempah dalam Benda dan Rasa",
+    titleEn: "Spice Route in Objects and Flavors",
+    promise: "Ikuti jejak rempah yang menghubungkan Nusantara dengan dunia melalui benda, tradisi, dan rasa.",
+    promiseEn: "Follow the spice trail connecting the archipelago to the world through objects, traditions, and flavors.",
+    itemIds: ["maluku-baileo", "maluku-tifa-maluku", "sulsel-pinisi"],
+    provinceIds: ["maluku", "sulawesi-selatan"],
+    reasonCodes: ["spice-route", "maritime", "global-connection"],
+    heroVisual: "/assets/nusa-archive/provinces/sulawesi-selatan/id-73-sulawesi-selatan-08-kerajinan-pembuatan-pinisi-bulukumba.webp",
+    heroAlt: "Perahu Pinisi — jejak jalur rempah",
+    editorialPriority: 9,
+  },
+  {
+    id: "col-tradisi-maritim",
+    slug: "tradisi-maritim-nusantara",
+    title: "Tradisi Maritim Nusantara",
+    titleEn: "Maritime Traditions of the Archipelago",
+    promise: "Nusantara adalah bangsa pelaut. Telusuri perahu, pelabuhan, musik pesisir, dan pengetahuan laut yang membentuk Indonesia.",
+    promiseEn: "The archipelago is a seafaring nation. Explore boats, ports, coastal music, and maritime knowledge.",
+    itemIds: ["sulsel-pinisi", "maluku-baileo", "sumbar-tabuik"],
+    provinceIds: ["sulawesi-selatan", "maluku", "sumatera-barat"],
+    reasonCodes: ["maritime", "multi-region", "heritage"],
+    heroVisual: "/assets/nusa-archive/provinces/sulawesi-selatan/id-73-sulawesi-selatan-08-kerajinan-perahu-pinisi-bulukumba.webp",
+    heroAlt: "Perahu Pinisi — tradisi maritim Nusantara",
+    editorialPriority: 8,
+  },
+];
+
+export const archiveCollectionMap = new Map(
+  archiveCollections.map((c) => [c.id, c])
+);

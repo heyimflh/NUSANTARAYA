@@ -1,0 +1,257 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   NUSA ARCHIVE — "The Living Memory House"
+   Local Design Tokens & Scoped Styles
+   
+   ATURAN: Semua token di-scope ke .archive-page agar TIDAK mengubah
+   halaman lain. Navy (#0D1B2A) DILARANG di sini — gunakan espresso/charcoal.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Archive Semantic Tokens ─────────────────────────────────────────────── */
+.archive-page {
+  /* Surface & Canvas */
+  --archive-canvas: #F3EBDD;
+  --archive-paper: #FFF9F0;
+  --archive-paper-deep: #E7DAC5;
+
+  /* Text — warm palette, NO NAVY */
+  --archive-ink: #2A211A;
+  --archive-charcoal: #3A332D;
+  --archive-muted: #75695D;
+
+  /* Lines & Borders */
+  --archive-line: #CFC0AA;
+
+  /* Accent Colors */
+  --archive-oxblood: #7A342E;
+  --archive-terracotta: #B65D43;
+  --archive-saffron: #D0A331;
+  --archive-sage: #6F7D62;
+  --archive-teal: #34776C;
+  --archive-plum: #75586D;
+
+  /* Soft Tints */
+  --archive-clay-soft: #EAD5C8;
+  --archive-sage-soft: #DDE3D5;
+  --archive-saffron-soft: #F2E5B8;
+
+  /* Status */
+  --archive-error: #9B3E32;
+  --archive-success: #527057;
+
+  /* Category Accents */
+  --archive-cat-rumah-adat: #B65D43;
+  --archive-cat-tarian: #D0A331;
+  --archive-cat-alat-musik: #34776C;
+  --archive-cat-pakaian-adat: #75586D;
+  --archive-cat-upacara-adat: #7A342E;
+  --archive-cat-cerita-rakyat: #6F7D62;
+  --archive-cat-bahasa-aksara: #34776C;
+  --archive-cat-senjata-tradisional: #3A332D;
+  --archive-cat-kerajinan: #B65D43;
+  --archive-cat-motif-kain: #D0A331;
+  --archive-cat-tokoh-daerah: #75586D;
+  --archive-cat-kosmologi: #7A342E;
+
+  /* Override global navy text → espresso */
+  color: var(--archive-ink);
+  background-color: var(--archive-canvas);
+}
+
+/* ─── Typography Overrides ────────────────────────────────────────────────── */
+.archive-page h1,
+.archive-page h2,
+.archive-page h3,
+.archive-page h4,
+.archive-page h5,
+.archive-page h6 {
+  color: var(--archive-ink);
+}
+
+.archive-page .archive-eyebrow {
+  font-family: var(--font-inter), "Inter", system-ui, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--archive-muted);
+}
+
+.archive-page .archive-display {
+  font-family: var(--font-playfair), "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--archive-ink);
+  font-size: clamp(2.375rem, 5vw, 5.5rem);
+}
+
+.archive-page .archive-h2 {
+  font-family: var(--font-playfair), "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--archive-ink);
+  font-size: clamp(1.75rem, 3.5vw, 3.75rem);
+}
+
+.archive-page .archive-h3 {
+  font-family: var(--font-playfair), "Playfair Display", Georgia, serif;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--archive-ink);
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.archive-page .archive-body {
+  font-family: var(--font-inter), "Inter", system-ui, sans-serif;
+  font-size: clamp(0.9375rem, 1.1vw, 1.125rem);
+  line-height: 1.7;
+  color: var(--archive-charcoal);
+  max-width: 65ch;
+}
+
+.archive-page .archive-caption {
+  font-family: var(--font-inter), "Inter", system-ui, sans-serif;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--archive-muted);
+}
+
+.archive-page .archive-catalog-number {
+  font-family: var(--font-inter), "Inter", system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--archive-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Surface Variants ────────────────────────────────────────────────────── */
+.archive-surface-paper {
+  background-color: var(--archive-paper);
+}
+
+.archive-surface-deep {
+  background-color: var(--archive-paper-deep);
+}
+
+.archive-surface-canvas {
+  background-color: var(--archive-canvas);
+}
+
+/* ─── Focus Ring Override — saffron, NO NAVY ──────────────────────────────── */
+.archive-page *:focus-visible {
+  outline: 2px solid var(--archive-saffron);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Selection ───────────────────────────────────────────────────────────── */
+.archive-page ::selection {
+  background-color: rgba(208, 163, 49, 0.2);
+  color: var(--archive-ink);
+}
+
+/* ─── Dividers ────────────────────────────────────────────────────────────── */
+.archive-divider {
+  border: none;
+  height: 1px;
+  background: var(--archive-line);
+  margin: 0;
+}
+
+.archive-divider-accent {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, var(--archive-saffron) 0%, var(--archive-line) 60%, transparent 100%);
+  margin: 0;
+}
+
+/* ─── Archive Container ──────────────────────────────────────────────────── */
+.archive-container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .archive-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .archive-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* ─── Archive Grid (12-column) ───────────────────────────────────────────── */
+.archive-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .archive-grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .archive-grid {
+    gap: 2.5rem;
+  }
+}
+
+/* ─── Skeleton Loading ───────────────────────────────────────────────────── */
+.archive-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--archive-paper-deep) 0%,
+    var(--archive-paper) 40%,
+    var(--archive-paper-deep) 100%
+  );
+  background-size: 200% 100%;
+  animation: archiveShimmer 1.8s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+@keyframes archiveShimmer {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .archive-skeleton {
+    animation: none;
+    background: var(--archive-paper-deep);
+  }
+}
+
+/* ─── Archive Image Fallback ─────────────────────────────────────────────── */
+.archive-image-fallback {
+  background-color: var(--archive-paper-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--archive-muted);
+}
+
+/* ─── Scrollbar for Archive ──────────────────────────────────────────────── */
+.archive-page ::-webkit-scrollbar-thumb {
+  background: var(--archive-line);
+}
+
+.archive-page ::-webkit-scrollbar-thumb:hover {
+  background: var(--archive-saffron);
+}
+
+/* ─── Safe Area for Mobile ───────────────────────────────────────────────── */
+.archive-bottom-safe {
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 5rem);
+}

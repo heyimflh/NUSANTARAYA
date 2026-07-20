@@ -4,21 +4,22 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import { RouteSectionLink } from "@/components/routes/RouteSectionLink";
 import { useLanguage } from "@/context/app-context";
 import Image from "next/image";
 
-export const RoutesNavbar = () => {
+export const PassportNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { language, setLanguage } = useLanguage();
-  // Force smart color mode from the start for Routes Page
+  // Force smart color mode from the start for Passport Page
   const isScrolled = true;
+
+  const navItems = ['Beranda', 'Eksplorasi', 'Rute', 'Passport', 'Kuliner', 'Tentang'];
 
   return (
     <>
       {/* FIXED NAVBAR */}
       <nav 
-        className={`fixed top-0 left-0 w-full z-[99999] flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-16 transition-all duration-300 animate-[navSlideIn_0.8s_ease-out_both] ${ 
+        className={`fixed top-0 left-0 w-full z-[50] flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-16 transition-all duration-300 animate-[navSlideIn_0.8s_ease-out_both] ${ 
           isScrolled 
             ? 'bg-transparent py-3 lg:py-4' 
             : 'bg-transparent py-5 sm:py-6 md:py-8 lg:py-10'
@@ -42,7 +43,7 @@ export const RoutesNavbar = () => {
         <div className={`hidden lg:flex items-center gap-2 px-2 py-2 rounded-full backdrop-blur-md transition-all duration-300 ${
           isScrolled ? 'bg-[#34291A]/5 border border-[#34291A]/10' : 'bg-white/10 border border-white/20'
         }`}>
-          {['Beranda', 'Eksplorasi', 'Rute', 'Passport', 'Kuliner', 'Tentang'].map((item, idx) => (
+          {navItems.map((item, idx) => (
             <Link 
               key={item} 
               href={
@@ -52,7 +53,7 @@ export const RoutesNavbar = () => {
                 idx === 3 ? "/passport" : "#"
               }
               className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                idx === 2 // Set Rute as active
+                idx === 3 // Set Passport as active
                   ? (isScrolled ? 'bg-[#C9A84C] text-white shadow-md' : 'bg-white text-black')
                   : (isScrolled ? 'text-[#5C4A26] hover:bg-[#34291A]/10' : 'text-white hover:bg-white/20')
               }`}
@@ -63,20 +64,22 @@ export const RoutesNavbar = () => {
         </div>
 
         {/* Right Button — Full on desktop */}
-        <RouteSectionLink section="planner" className={`hidden lg:flex group items-center gap-3 backdrop-blur-md transition-all duration-300 px-5 py-2.5 rounded-full text-sm font-medium active:scale-95 ${
+        <Link
+          href="/explore"
+          className={`hidden lg:flex group items-center gap-3 backdrop-blur-md transition-all duration-300 px-5 py-2.5 rounded-full text-sm font-medium active:scale-95 ${
             isScrolled 
               ? 'bg-[#34291A]/5 border border-[#34291A]/10 text-[#5C4A26] hover:bg-[#34291A]/10' 
               : 'bg-white/10 border border-white/20 text-white hover:bg-white/30'
           }`}
-          aria-label="Buat Rute"
+          aria-label="Mulai Jelajah"
         >
-          <span>Buat Rute</span>
+          <span>Mulai Jelajah</span>
           <div className={`p-1 rounded-full group-hover:rotate-45 transition-transform duration-300 ${
             isScrolled ? 'bg-[#C9A84C] text-white shadow-md' : 'bg-white text-black'
           }`}>
             <ArrowUpRight size={16} strokeWidth={2.5} />
           </div>
-        </RouteSectionLink>
+        </Link>
 
         {/* Hamburger Menu Button — Mobile/Tablet */}
         <button 
@@ -126,7 +129,7 @@ export const RoutesNavbar = () => {
             {/* Menu Links */}
             <div className="flex-1 flex flex-col justify-center px-8 relative z-10">
               <div className="flex flex-col gap-6">
-                {["Beranda", "Eksplorasi", "Rute", "Passport", "Kuliner", "Tentang"].map(
+                {navItems.map(
                   (item, i) => (
                     <motion.div
                       key={item}
@@ -139,7 +142,7 @@ export const RoutesNavbar = () => {
                         href={
                           i === 0 ? "/" :
                           i === 1 ? "/explore" :
-                          i === 2 ? "/routes" :
+                          i === 2 ? "/routes" : 
                           i === 3 ? "/passport" : "#"
                         }
                         onClick={() => setIsMenuOpen(false)}
@@ -174,13 +177,13 @@ export const RoutesNavbar = () => {
                 transition={{ duration: 0.5, delay: 0.6 }}
                 className="flex flex-col gap-8"
               >
-                <RouteSectionLink section="planner" onNavigate={() => setIsMenuOpen(false)} className="group relative inline-flex items-center justify-between w-full sm:w-max bg-[#1A1A1A] text-white px-6 py-4 rounded-full text-sm font-bold tracking-widest uppercase overflow-hidden active:scale-95 transition-transform shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
-                  <span className="relative z-10">Buat Rute</span>
+                <Link href="/explore" onClick={() => setIsMenuOpen(false)} className="group relative inline-flex items-center justify-between w-full sm:w-max bg-[#1A1A1A] text-white px-6 py-4 rounded-full text-sm font-bold tracking-widest uppercase overflow-hidden active:scale-95 transition-transform shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                  <span className="relative z-10">Mulai Jelajah</span>
                   <div className="relative z-10 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-[#C9A84C] group-hover:text-black transition-colors">
                     <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </div>
                   <div className="absolute inset-0 bg-[#2D2419] transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out" />
-                </RouteSectionLink>
+                </Link>
 
                 <div className="flex items-center gap-6 text-[#2D2419]/50 text-xs font-medium tracking-widest uppercase">
                   <button 
@@ -205,6 +208,3 @@ export const RoutesNavbar = () => {
     </>
   );
 };
-
-
-
