@@ -431,9 +431,10 @@ export default function Hero() {
                 aria-label={`Lihat ${nextSlide1.title}`}
               >
                 <video
+                  autoPlay
+                  loop
                   muted
                   playsInline
-                  preload="none"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 >
                   <source src={nextSlide1.video} type="video/mp4" />
@@ -452,9 +453,10 @@ export default function Hero() {
                 aria-label={`Lihat ${nextSlide2.title}`}
               >
                 <video
+                  autoPlay
+                  loop
                   muted
                   playsInline
-                  preload="none"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 >
                   <source src={nextSlide2.video} type="video/mp4" />

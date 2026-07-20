@@ -166,16 +166,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // Passport mutations (all auto-persist)
   const updatePassport = useCallback(
     (updater: (prev: PassportData) => PassportData) => {
-      // Execute the updater synchronously on the current state to catch quota errors early
-      const nextPassport = evaluateBadges(updater(passport));
-      
-      // Attempt to persist. This will throw if quota is exceeded
-      safeSetItem(PASSPORT_KEY, nextPassport);
-      
-      // If persistence didn't throw, update the state
-      setPassport(nextPassport);
+      setPassport((prev) => {
+        const nextPassport = evaluateBadges(updater(prev));
+        safeSetItem(PASSPORT_KEY, nextPassport);
+        return nextPassport;
+      });
     },
-    [passport],
+    [],
   );
 
   const completeProvince = useCallback(
