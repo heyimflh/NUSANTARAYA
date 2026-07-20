@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Pin alam Nusantara">
+  <defs>
+    <linearGradient id="pinBody" x1="0.18" y1="0.04" x2="0.82" y2="0.96">
+      <stop offset="0" stop-color="#9BDB45"/>
+      <stop offset="0.38" stop-color="#5FB52B"/>
+      <stop offset="0.72" stop-color="#318A1C"/>
+      <stop offset="1" stop-color="#1B5E12"/>
+    </linearGradient>
+    <linearGradient id="pinRim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#C5ED72"/>
+      <stop offset="1" stop-color="#27761A"/>
+    </linearGradient>
+    <radialGradient id="navy" cx="0.42" cy="0.36" r="0.85">
+      <stop offset="0" stop-color="#21285C"/>
+      <stop offset="0.6" stop-color="#161A47"/>
+      <stop offset="1" stop-color="#0C0E2E"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE9A8"/>
+      <stop offset="1" stop-color="#C9962F"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#FFE7A6"/>
+      <stop offset="0.42" stop-color="#FFC94D"/>
+      <stop offset="0.8" stop-color="#F0A52B"/>
+      <stop offset="1" stop-color="#C97E1A"/>
+    </linearGradient>
+    <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="shadow" x="-40%" y="-25%" width="180%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0E3D08" flood-opacity="0.35"/>
+    </filter>
+    <clipPath id="medali"><circle cx="256" cy="200" r="122"/></clipPath>
+  </defs>
+
+  <g filter="url(#shadow)">
+    <path fill="url(#pinRim)" d="M256 492 C198 360 92 300 92 200 A164 164 0 1 1 420 200 C420 300 314 360 256 492 Z"/>
+    <path fill="url(#pinBody)" d="M256 484 C200 358 100 300 100 200 A156 156 0 1 1 412 200 C412 300 312 358 256 484 Z"/>
+  </g>
+  <path fill="url(#gloss)" d="M168 96 C210 64 302 64 344 96 C300 84 212 84 168 96 Z" opacity="0.8"/>
+  <ellipse cx="206" cy="150" rx="40" ry="86" fill="#FFFFFF" opacity="0.10" transform="rotate(-26 206 150)"/>
+
+  <circle cx="256" cy="200" r="122" fill="url(#navy)"/>
+  <g clip-path="url(#medali)">
+    <g transform="translate(116.5301 62.5301) scale(0.43653)" fill="url(#gold)" fill-rule="evenodd" stroke="#B5791B" stroke-width="0.5">
+      <path d="M 522 398 L 512 396 L 484 395 L 483 396 L 465 396 L 442 399 L 416 405 L 401 410 L 369 425 L 339 447 L 328 458 L 315 474 L 298 502 L 291 518 L 284 541 L 301 544 L 329 544 L 342 521 L 358 499 L 375 480 L 402 456 L 426 440 L 452 427 L 460 426 L 464 430 L 465 433 L 464 437 L 461 440 L 427 457 L 399 478 L 376 501 L 367 512 L 349 539 L 349 542 L 361 541 L 392 532 L 432 512 L 461 490 L 487 462 L 508 430 L 517 412 Z M 117 398 L 123 414 L 142 448 L 157 468 L 175 487 L 197 505 L 219 519 L 250 533 L 267 538 L 270 536 L 272 526 L 279 509 L 279 506 L 270 495 L 249 475 L 225 458 L 200 445 L 180 438 L 175 432 L 176 428 L 180 424 L 187 424 L 206 431 L 226 441 L 258 463 L 286 491 L 288 490 L 300 469 L 316 450 L 316 447 L 295 431 L 271 418 L 254 411 L 227 403 L 201 398 L 167 396 L 166 395 L 143 395 Z M 408 231 L 358 310 L 408 391 L 412 391 L 433 385 L 460 381 L 472 381 L 473 380 L 508 381 L 508 378 L 418 234 L 413 230 Z M 254 183 L 249 188 L 154 341 L 130 378 L 130 381 L 173 380 L 210 384 L 234 389 L 260 397 L 291 411 L 309 422 L 328 437 L 343 424 L 358 414 L 385 400 L 392 398 L 393 395 L 263 187 L 259 183 Z M 460 172 L 456 168 L 448 169 L 411 185 L 408 188 L 408 194 L 411 197 L 415 198 L 457 180 L 460 177 Z M 329 163 L 318 166 L 302 175 L 291 186 L 286 196 L 345 291 L 349 295 L 393 225 L 401 218 L 399 206 L 394 194 L 388 185 L 376 174 L 364 167 L 355 164 L 342 162 Z M 419 120 L 417 119 L 411 120 L 385 153 L 382 159 L 385 165 L 387 166 L 393 165 L 421 128 L 421 123 Z M 292 102 L 288 107 L 289 113 L 305 152 L 309 155 L 312 155 L 317 150 L 316 143 L 300 104 L 297 102 Z M 360 95 L 354 95 L 351 98 L 347 131 L 345 139 L 345 146 L 349 150 L 354 150 L 358 145 L 364 102 L 363 98 Z"/>
+    </g>
+  </g>
+  <circle cx="256" cy="200" r="118" fill="none" stroke="url(#ring)" stroke-width="5"/>
+  <circle cx="256" cy="200" r="109" fill="none" stroke="#FFD879" stroke-width="1.4" opacity="0.5"/>
+</svg>

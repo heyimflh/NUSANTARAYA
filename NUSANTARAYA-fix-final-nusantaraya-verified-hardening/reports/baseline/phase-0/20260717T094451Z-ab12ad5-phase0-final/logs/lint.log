@@ -1,0 +1,199 @@
+
+> nusantaraya@0.1.0 lint
+> eslint
+
+
+E:\Otodidak IT\NUSANTARAYA\scripts\audit-routes-and-anchors.mjs
+  55:9  warning  'expectedDynamic' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  78:9  warning  'outDir' is assigned a value but never used           @typescript-eslint/no-unused-vars
+
+E:\Otodidak IT\NUSANTARAYA\scripts\capture-phase0-baseline.mjs
+    3:21  warning  'execFileSync' is defined but never used  @typescript-eslint/no-unused-vars
+  180:12  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+  189:12  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+  201:12  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+  206:12  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+  211:12  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+  225:12  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+
+E:\Otodidak IT\NUSANTARAYA\scripts\capture-telemetry.cjs
+    1:12  error    A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+    2:14  error    A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+    3:19  error    A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+    4:16  error    A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+    5:19  error    A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+   42:14  warning  'e' is defined but never used            @typescript-eslint/no-unused-vars
+  144:5   error    A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  145:12  warning  'e' is defined but never used            @typescript-eslint/no-unused-vars
+
+E:\Otodidak IT\NUSANTARAYA\scripts\test-route-engine.ts
+   1:25  warning  'presetToRecommendation' is defined but never used  @typescript-eslint/no-unused-vars
+  41:14  warning  'e' is defined but never used                       @typescript-eslint/no-unused-vars
+
+E:\Otodidak IT\NUSANTARAYA\scripts\test-route-integration.ts
+  66:21  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+E:\Otodidak IT\NUSANTARAYA\scripts\validate-route-contracts.ts
+  45:14  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+  51:47  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Otodidak IT\NUSANTARAYA\src\components\routes\day-by-day-itinerary\DayByDayItinerarySection.tsx
+   2:10  warning  'motion' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+   4:26  warning  'ItineraryDay' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-unused-vars
+  41:7   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+E:\Otodidak IT\NUSANTARAYA\src\components\routes\day-by-day-itinerary\DayByDayItinerarySection.tsx:41:7
+  39 |   useEffect(() => {
+  40 |     if (status === "loading") {
+> 41 |       setItinerary(null);
+     |       ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  42 |       onItineraryResolved?.(null);
+  43 |       return;
+  44 |     }                                                                                                                                                                                    react-hooks/set-state-in-effect
+  59:7   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+E:\Otodidak IT\NUSANTARAYA\src\components\routes\day-by-day-itinerary\DayByDayItinerarySection.tsx:59:7
+  57 |   useEffect(() => {
+  58 |     if (externalActiveDay && externalActiveDay >= 1) {
+> 59 |       setActiveDay(externalActiveDay);
+     |       ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  60 |       // Scroll to the specific day card after a brief delay to allow expand animation
+  61 |       setTimeout(() => {
+  62 |         const dayEl = document.getElementById(`itinerary-day-${externalActiveDay}`);  react-hooks/set-state-in-effect
+
+E:\Otodidak IT\NUSANTARAYA\src\components\routes\day-by-day-itinerary\ItineraryDayCard.tsx
+  92:45  warning  'idx' is defined but never used  @typescript-eslint/no-unused-vars
+
+E:\Otodidak IT\NUSANTARAYA\src\components\routes\day-by-day-itinerary\ItinerarySectionHeader.tsx
+  3:42  warning  'durationDays' is defined but never used  @typescript-eslint/no-unused-vars
+
+E:\Otodidak IT\NUSANTARAYA\src\components\routes\route-map-transport\AccessibleRouteList.tsx
+  15:10  warning  'MapPin' is defined but never used  @typescript-eslint/no-unused-vars
+
+E:\Otodidak IT\NUSANTARAYA\src\components\routes\route-map-transport\RouteMapTransportSection.tsx
+   36:10  warning  'useSearchParams' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-unused-vars
+   36:27  warning  'useRouter' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+   44:10  warning  'clsx' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-unused-vars
+   50:3   warning  'RouteMapStop' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @typescript-eslint/no-unused-vars
+   51:3   warning  'RouteMapSegment' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-unused-vars
+   56:27  warning  'getSchematicPosition' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-unused-vars
+   57:10  warning  'validateMapSelection' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-unused-vars
+   58:10  warning  'ROUTE_MAP_STOP_DATA' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+  108:11  warning  'mode' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+  116:10  warning  'hasError' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @typescript-eslint/no-unused-vars
+  127:7   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+E:\Otodidak IT\NUSANTARAYA\src\components\routes\route-map-transport\RouteMapTransportSection.tsx:127:7
+  125 |   useEffect(() => {
+  126 |     if (status === "loading") {
+> 127 |       setMapModel(null);
+      |       ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  128 |       setTransportOptions([]);
+  129 |       setSelection(null);
+  130 |       return;  react-hooks/set-state-in-effect
+  183:5   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+E:\Otodidak IT\NUSANTARAYA\src\components\routes\route-map-transport\RouteMapTransportSection.tsx:183:5
+  181 |     };
+  182 |
+> 183 |     setSelection(sel);
+      |     ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  184 |
+  185 |     // Scroll to map section
+  186 |     const mapSection = document.getElementById("route-map-transport-summary");             react-hooks/set-state-in-effect
+
+E:\Otodidak IT\NUSANTARAYA\src\components\routes\route-map-transport\TransportSummaryPanel.tsx
+  12:10  warning  'motion' is defined but never used  @typescript-eslint/no-unused-vars
+
+E:\Otodidak IT\NUSANTARAYA\src\components\routes\route-readiness\ChecklistModule.tsx
+  23:7  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+E:\Otodidak IT\NUSANTARAYA\src\components\routes\route-readiness\ChecklistModule.tsx:23:7
+  21 |     const saved = loadChecklistProgress(template.routeId);
+  22 |     if (saved && saved.templateVersion === template.version) {
+> 23 |       setCompletedIds(new Set(saved.completedItemIds));
+     |       ^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  24 |     }
+  25 |     setMounted(true);
+  26 |   }, [template.routeId, template.version]);  react-hooks/set-state-in-effect
+  74:6  warning  React Hook useMemo has a missing dependency: 'template'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         react-hooks/exhaustive-deps
+
+E:\Otodidak IT\NUSANTARAYA\src\components\routes\route-result\RouteRecommendationResultSection.tsx
+  107:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+E:\Otodidak IT\NUSANTARAYA\src\components\routes\route-result\RouteRecommendationResultSection.tsx:107:5
+  105 |   // Reset section 6 state when result changes
+  106 |   useEffect(() => {
+> 107 |     setMapExternalSelection(null);
+      |     ^^^^^^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  108 |     setItineraryExternalDay(null);
+  109 |   }, [result?.id]);
+  110 |  react-hooks/set-state-in-effect
+
+E:\Otodidak IT\NUSANTARAYA\src\components\routes\route-save-rani\PassportSaveLane.tsx
+  26:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Otodidak IT\NUSANTARAYA\src\components\routes\route-save-rani\RaniAdjustmentLane.tsx
+  37:14  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+
+E:\Otodidak IT\NUSANTARAYA\src\components\routes\route-save-rani\RouteAdjustmentDiff.tsx
+  1:32  warning  'RouteAdjustmentChange' is defined but never used  @typescript-eslint/no-unused-vars
+
+E:\Otodidak IT\NUSANTARAYA\src\lib\routes\map\mapRouteToViewModel.ts
+   18:3  warning  'MapGeometryConfidence' is defined but never used             @typescript-eslint/no-unused-vars
+  102:9  warning  'validatedTransportCount' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  189:3  warning  'segments' is defined but never used                          @typescript-eslint/no-unused-vars
+  190:3  warning  'locale' is defined but never used                            @typescript-eslint/no-unused-vars
+
+E:\Otodidak IT\NUSANTARAYA\src\lib\routes\map\resolveRouteMap.ts
+  25:10  warning  'deriveGeometryConfidence' is defined but never used  @typescript-eslint/no-unused-vars
+
+E:\Otodidak IT\NUSANTARAYA\src\lib\routes\readiness\resolveRouteCulinary.ts
+  48:3  warning  'itinerary' is defined but never used  @typescript-eslint/no-unused-vars
+
+E:\Otodidak IT\NUSANTARAYA\src\lib\routes\save-rani\buildRouteSaveSnapshot.ts
+  3:10  warning  'RouteItinerary' is defined but never used  @typescript-eslint/no-unused-vars
+
+E:\Otodidak IT\NUSANTARAYA\src\lib\routes\save-rani\resolveRouteAdjustment.ts
+   4:10  warning  'presetItineraries' is defined but never used  @typescript-eslint/no-unused-vars
+  26:3   warning  'locale' is defined but never used             @typescript-eslint/no-unused-vars
+
+✖ 57 problems (15 errors, 42 warnings)
+
+

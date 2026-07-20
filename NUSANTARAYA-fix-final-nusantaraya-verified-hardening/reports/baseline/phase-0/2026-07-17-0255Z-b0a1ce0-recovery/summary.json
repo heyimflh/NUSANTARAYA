@@ -1,0 +1,139 @@
+{
+  "phase": "phase-0-recovery",
+  "runId": "2026-07-17-0255Z-b0a1ce0-recovery",
+  "createdAt": "2026-07-17T03:02:29.975Z",
+  "git": {
+    "branch": "fix/nusantaraya-root-cause-hardening",
+    "commit": "b0a1ce0e307985fce98155ef647858ffc91c995f",
+    "workingTreeDirtyBefore": true,
+    "workingTreeDirtyAfter": true
+  },
+  "environment": {
+    "node": "v24.14.1",
+    "npm": "11.11.0",
+    "next": "16.2.9",
+    "react": "19.2.4",
+    "typescript": "^5"
+  },
+  "commands": [
+    {
+      "command": "npm run validate:foundation",
+      "startedAt": "2026-07-17T02:55:54.688Z",
+      "finishedAt": "2026-07-17T02:56:07.093Z",
+      "durationMs": 12405,
+      "exitCode": 0,
+      "logFile": "logs/validate-foundation.log",
+      "status": "PASS"
+    },
+    {
+      "command": "npm run test:passport",
+      "startedAt": "2026-07-17T02:56:07.102Z",
+      "finishedAt": "2026-07-17T02:56:09.535Z",
+      "durationMs": 2433,
+      "exitCode": 0,
+      "logFile": "logs/test-passport.log",
+      "status": "PASS"
+    },
+    {
+      "command": "npm run validate:regions",
+      "startedAt": "2026-07-17T02:56:09.539Z",
+      "finishedAt": "2026-07-17T02:56:11.212Z",
+      "durationMs": 1673,
+      "exitCode": 0,
+      "logFile": "logs/validate-regions.log",
+      "status": "PASS"
+    },
+    {
+      "command": "npm run validate:atlas",
+      "startedAt": "2026-07-17T02:56:11.224Z",
+      "finishedAt": "2026-07-17T02:56:13.236Z",
+      "durationMs": 2012,
+      "exitCode": 0,
+      "logFile": "logs/validate-atlas.log",
+      "status": "PASS"
+    },
+    {
+      "command": "npm run validate:route-presets",
+      "startedAt": "2026-07-17T02:56:13.238Z",
+      "finishedAt": "2026-07-17T02:56:15.785Z",
+      "durationMs": 2547,
+      "exitCode": 0,
+      "logFile": "logs/validate-route-presets.log",
+      "status": "PASS"
+    },
+    {
+      "command": "npm run validate:route-contracts",
+      "startedAt": "2026-07-17T02:56:15.825Z",
+      "finishedAt": "2026-07-17T02:56:17.300Z",
+      "durationMs": 1475,
+      "exitCode": 0,
+      "logFile": "logs/validate-route-contracts.log",
+      "status": "PASS"
+    },
+    {
+      "command": "npm run test-route-engine",
+      "startedAt": "2026-07-17T02:56:17.304Z",
+      "finishedAt": "2026-07-17T02:56:18.092Z",
+      "durationMs": 788,
+      "exitCode": 1,
+      "logFile": "logs/test-route-engine.log",
+      "status": "FAIL"
+    },
+    {
+      "command": "npm run test-route-integration",
+      "startedAt": "2026-07-17T02:56:18.366Z",
+      "finishedAt": "2026-07-17T02:56:19.215Z",
+      "durationMs": 849,
+      "exitCode": 1,
+      "logFile": "logs/test-route-integration.log",
+      "status": "FAIL"
+    },
+    {
+      "command": "npm run lint",
+      "startedAt": "2026-07-17T02:56:19.390Z",
+      "finishedAt": "2026-07-17T02:58:04.931Z",
+      "durationMs": 105541,
+      "exitCode": 1,
+      "logFile": "logs/lint.log",
+      "status": "FAIL"
+    },
+    {
+      "command": "npm run typecheck",
+      "startedAt": "2026-07-17T02:58:04.937Z",
+      "finishedAt": "2026-07-17T02:58:52.207Z",
+      "durationMs": 47270,
+      "exitCode": 2,
+      "logFile": "logs/typecheck.log",
+      "status": "FAIL"
+    },
+    {
+      "command": "npm run build",
+      "startedAt": "2026-07-17T02:58:52.211Z",
+      "finishedAt": "2026-07-17T03:02:21.028Z",
+      "durationMs": 208817,
+      "exitCode": 1,
+      "logFile": "logs/build.log",
+      "status": "FAIL"
+    }
+  ],
+  "counts": {
+    "typescriptErrors": 13,
+    "typescriptStatus": "FAIL",
+    "eslintErrors": 33,
+    "eslintWarnings": 11,
+    "eslintStatus": "FAIL",
+    "appRoutes": null,
+    "missingRoutes": null,
+    "missingAnchors": null,
+    "routePresets": null,
+    "screenshotsExpected": 8,
+    "screenshotsCaptured": 0
+  },
+  "acceptanceCriteria": {
+    "runtimePinned": true,
+    "baselineDocumented": false,
+    "noFeatureChanges": true
+  },
+  "blockers": [],
+  "changedFiles": []
+}

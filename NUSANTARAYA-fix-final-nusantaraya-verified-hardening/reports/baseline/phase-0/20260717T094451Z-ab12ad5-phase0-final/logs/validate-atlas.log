@@ -1,0 +1,161 @@
+
+> nusantaraya@0.1.0 validate:atlas
+> tsx scripts/validate-atlas.ts
+
+=== NUSANTARAYA Atlas Validator ===
+
+Validating Aceh (aceh)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Bali (bali)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 22 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Banten (banten)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Bengkulu (bengkulu)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating DI Yogyakarta (di-yogyakarta)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 26 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating DKI Jakarta (dki-jakarta)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Gorontalo (gorontalo)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Jambi (jambi)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Jawa Barat (jawa-barat)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Jawa Tengah (jawa-tengah)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Jawa Timur (jawa-timur)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Kalimantan Barat (kalimantan-barat)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Kalimantan Selatan (kalimantan-selatan)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Kalimantan Tengah (kalimantan-tengah)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Kalimantan Timur (kalimantan-timur)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 20 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Kalimantan Utara (kalimantan-utara)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Kep. Bangka Belitung (kepulauan-bangka-belitung)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Kepulauan Riau (kepulauan-riau)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Lampung (lampung)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Maluku Utara (maluku-utara)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Maluku (maluku)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Nusa Tenggara Barat (nusa-tenggara-barat)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Nusa Tenggara Timur (nusa-tenggara-timur)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Papua Barat Daya (papua-barat-daya)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Papua Barat (papua-barat)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Papua Pegunungan (papua-pegunungan)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Papua Selatan (papua-selatan)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Papua Tengah (papua-tengah)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Papua (papua)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Riau (riau)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Sulawesi Barat (sulawesi-barat)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Sulawesi Selatan (sulawesi-selatan)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 22 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Sulawesi Tengah (sulawesi-tengah)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Sulawesi Tenggara (sulawesi-tenggara)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Sulawesi Utara (sulawesi-utara)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Sumatera Barat (sumatera-barat)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 21 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Sumatera Selatan (sumatera-selatan)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+Validating Sumatera Utara (sumatera-utara)...
+  [OK] Chapter dasar terpenuhi.
+  [OK] 16 paragraf yang memiliki sitasi tervalidasi dengan referenceIds.
+
+=== Validasi Selesai ===
+Semua provinsi valid.
+

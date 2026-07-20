@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 80" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <!-- Fading Gradient for lines -->
+    <linearGradient id="fadeLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#D8B56D" stop-opacity="0" />
+      <stop offset="30%" stop-color="#D8B56D" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#D8B56D" stop-opacity="1" />
+      <stop offset="70%" stop-color="#D8B56D" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#D8B56D" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Fading Gradient for secondary lines -->
+    <linearGradient id="fadeLineSec" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F2E6C9" stop-opacity="0" />
+      <stop offset="40%" stop-color="#F2E6C9" stop-opacity="0.6" />
+      <stop offset="50%" stop-color="#F2E6C9" stop-opacity="0.8" />
+      <stop offset="60%" stop-color="#F2E6C9" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#F2E6C9" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Center Ornament (Kawung / Permata fusion) -->
+    <g id="center-ornament">
+      <!-- Outer Diamond (Songket) -->
+      <polygon points="0,-24 36,0 0,24 -36,0" fill="none" stroke="#D8B56D" stroke-width="1.5" />
+      <polygon points="0,-16 24,0 0,16 -24,0" fill="none" stroke="#F2E6C9" stroke-width="1" />
+      
+      <!-- Inner Kawung / Floral Curves (Ukiran) -->
+      <path d="M 0 -12 Q 12 -6 16 0 Q 12 6 0 12 Q -12 6 -16 0 Q -12 -6 0 -12 Z" fill="none" stroke="#D8B56D" stroke-width="1" />
+      
+      <circle cx="0" cy="0" r="3" fill="#4DA7A0" />
+      
+      <!-- Accents on corners -->
+      <circle cx="-36" cy="0" r="2" fill="#D8B56D" />
+      <circle cx="36" cy="0" r="2" fill="#D8B56D" />
+      <circle cx="0" cy="-24" r="2" fill="#D8B56D" />
+      <circle cx="0" cy="24" r="2" fill="#D8B56D" />
+    </g>
+
+    <!-- Flanking Ornaments (Parang/Ukiran Curls) -->
+    <g id="flank-ornament">
+      <!-- Sweeping curve -->
+      <path d="M 0 0 C 15 -10, 30 -15, 45 0 C 60 15, 75 10, 90 0" fill="none" stroke="#D8B56D" stroke-width="1" />
+      <path d="M 0 0 C 15 10, 30 15, 45 0 C 60 -15, 75 -10, 90 0" fill="none" stroke="#F2E6C9" stroke-width="0.75" />
+      
+      <circle cx="45" cy="0" r="1.5" fill="#4DA7A0" opacity="0.6"/>
+      <circle cx="90" cy="0" r="2" fill="#D8B56D" />
+      
+      <!-- Geometric tick marks (Tenun) -->
+      <line x1="20" y1="-5" x2="20" y2="5" stroke="#D8B56D" stroke-width="0.5" />
+      <line x1="70" y1="-5" x2="70" y2="5" stroke="#D8B56D" stroke-width="0.5" />
+    </g>
+  </defs>
+
+  <!-- Main Group -->
+  <g transform="translate(0, 40)">
+    <!-- Base Fading Lines -->
+    <line x1="100" y1="0" x2="1100" y2="0" stroke="url(#fadeLine)" stroke-width="1" />
+    <line x1="200" y1="-8" x2="1000" y2="-8" stroke="url(#fadeLineSec)" stroke-width="0.5" stroke-dasharray="4 6" />
+    <line x1="200" y1="8" x2="1000" y2="8" stroke="url(#fadeLineSec)" stroke-width="0.5" stroke-dasharray="4 6" />
+
+    <!-- Center -->
+    <use href="#center-ornament" x="600" y="0" />
+    
+    <!-- Left Flank -->
+    <!-- The flank starts at 0, goes to 90. We want it extending outward from center -->
+    <use href="#flank-ornament" transform="translate(564, 0) scale(-1, 1)" />
+    
+    <!-- Right Flank -->
+    <use href="#flank-ornament" transform="translate(636, 0)" />
+    
+    <!-- Far Side Accents (Songket/Tenun inspired) -->
+    <polygon points="300,0 310,-4 320,0 310,4" fill="none" stroke="#D8B56D" stroke-width="1" />
+    <polygon points="280,0 286,-3 292,0 286,3" fill="none" stroke="#F2E6C9" stroke-width="0.75" />
+    
+    <polygon points="900,0 890,-4 880,0 890,4" fill="none" stroke="#D8B56D" stroke-width="1" />
+    <polygon points="920,0 914,-3 908,0 914,3" fill="none" stroke="#F2E6C9" stroke-width="0.75" />
+    
+    <!-- Far Parang Flow Left -->
+    <path d="M 420 0 C 390 -15, 360 -15, 330 0" fill="none" stroke="#D8B56D" stroke-width="0.75" opacity="0.6" />
+    <path d="M 420 0 C 390 15, 360 15, 330 0" fill="none" stroke="#F2E6C9" stroke-width="0.5" opacity="0.4" />
+    
+    <!-- Far Parang Flow Right -->
+    <path d="M 780 0 C 810 -15, 840 -15, 870 0" fill="none" stroke="#D8B56D" stroke-width="0.75" opacity="0.6" />
+    <path d="M 780 0 C 810 15, 840 15, 870 0" fill="none" stroke="#F2E6C9" stroke-width="0.5" opacity="0.4" />
+  </g>
+</svg>

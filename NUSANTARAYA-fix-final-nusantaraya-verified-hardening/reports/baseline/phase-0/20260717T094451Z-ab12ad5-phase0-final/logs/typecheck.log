@@ -1,0 +1,29 @@
+
+> nusantaraya@0.1.0 typecheck
+> tsc --noEmit
+
+scripts/test-route-engine.ts(30,7): error TS2322: Type '"bali-nusa"' is not assignable to type 'RoutePlannerRegionId | null'.
+scripts/test-route-engine.ts(46,21): error TS2339: Property 'id' does not exist on type 'MatchResult'.
+scripts/test-route-engine.ts(47,29): error TS2339: Property 'id' does not exist on type 'MatchResult'.
+scripts/test-route-engine.ts(50,21): error TS2339: Property 'id' does not exist on type 'MatchResult'.
+scripts/test-route-engine.ts(50,36): error TS2339: Property 'id' does not exist on type 'MatchResult'.
+scripts/test-route-engine.ts(51,21): error TS2339: Property 'durationDays' does not exist on type 'MatchResult'.
+scripts/test-route-integration.ts(32,44): error TS2307: Cannot find module '../src/lib/routes/itinerary/resolveItinerary' or its corresponding type declarations.
+scripts/test-route-integration.ts(34,44): error TS2307: Cannot find module '../src/lib/routes/readiness/resolveReadiness' or its corresponding type declarations.
+scripts/test-route-integration.ts(43,50): error TS18046: 'e' is of type 'unknown'.
+scripts/validate-route-contracts.ts(29,29): error TS2339: Property 'duration' does not exist on type 'RoutePresetDefinition'.
+scripts/validate-route-contracts.ts(29,55): error TS2339: Property 'duration' does not exist on type 'RoutePresetDefinition'.
+src/components/routes/route-save-rani/FinalRouteSnapshot.tsx(9,30): error TS7015: Element implicitly has an 'any' type because index expression is not of type 'number'.
+src/components/routes/route-save-rani/FinalRouteSnapshot.tsx(9,54): error TS7015: Element implicitly has an 'any' type because index expression is not of type 'number'.
+src/lib/routes/save-rani/buildRouteRaniContext.ts(19,26): error TS2339: Property 'version' does not exist on type 'RouteRecommendation'.
+src/lib/routes/save-rani/buildRouteRaniContext.ts(23,38): error TS2339: Property 'id' does not exist on type 'RouteStop'.
+src/lib/routes/save-rani/buildRouteRaniContext.ts(27,23): error TS2339: Property 'partySize' does not exist on type 'RoutePlannerFormValues'.
+src/lib/routes/save-rani/buildRouteRaniContext.ts(30,26): error TS2339: Property 'travelerMode' does not exist on type 'RoutePlannerFormValues'.
+src/lib/routes/save-rani/buildRouteSaveSnapshot.ts(16,70): error TS2339: Property 'regionId' does not exist on type 'RouteStop'.
+src/lib/routes/save-rani/buildRouteSaveSnapshot.ts(18,38): error TS7015: Element implicitly has an 'any' type because index expression is not of type 'number'.
+src/lib/routes/save-rani/buildRouteSaveSnapshot.ts(18,62): error TS7015: Element implicitly has an 'any' type because index expression is not of type 'number'.
+src/lib/routes/save-rani/buildRouteSaveSnapshot.ts(22,26): error TS2339: Property 'version' does not exist on type 'RouteRecommendation'.
+src/lib/routes/save-rani/buildRouteSaveSnapshot.ts(31,26): error TS2339: Property 'travelerMode' does not exist on type 'RoutePlannerFormValues'.
+src/lib/routes/save-rani/resolveRouteAdjustment.ts(4,10): error TS2305: Module '"@/data/routes/presetItineraries"' has no exported member 'presetItineraries'.
+src/lib/routes/save-rani/resolveRouteAdjustment.ts(39,33): error TS2339: Property 'version' does not exist on type 'RouteRecommendation'.
+

@@ -1,0 +1,18 @@
+[
+  {
+    "route": "/explore",
+    "status": 200
+  },
+  {
+    "route": "/routes",
+    "status": 200
+  },
+  {
+    "route": "/routes",
+    "status": 200
+  },
+  {
+    "route": "/provinsi/bali",
+    "status": 200
+  }
+]

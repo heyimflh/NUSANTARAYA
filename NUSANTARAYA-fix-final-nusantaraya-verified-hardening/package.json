@@ -1,0 +1,54 @@
+{
+  "name": "nusantaraya",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": "24.14.1"
+  },
+  "packageManager": "npm@11.11.0",
+  "scripts": {
+    "dev": "next dev --webpack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "validate:assets": "tsx scripts/validate-assets.ts",
+    "validate:foundation": "tsx scripts/validate-foundation.ts",
+    "validate:regions": "tsx scripts/validate-regions.ts",
+    "validate:atlas": "tsx scripts/validate-atlas.ts",
+    "validate:route-presets": "tsx scripts/validate-route-presets.ts",
+    "test:passport": "tsx scripts/test-passport-logic.ts",
+    "qa:sprint2": "npm run validate:foundation && npm run test:passport && npm run validate:regions && npm run validate:atlas && npm run validate:route-presets && npm run lint && npm run typecheck && npm run build",
+    "test:route-engine": "tsx scripts/test-route-engine.ts",
+    "test:route-integration": "tsx scripts/test-route-integration.ts",
+    "validate:route-contracts": "tsx scripts/validate-route-contracts.ts",
+    "qa:route": "npm run validate:route-presets && npm run validate:route-contracts && npm run test:route-engine && npm run test:route-integration && npm run typecheck && npm run lint && npm run build",
+    "baseline:phase0": "node scripts/capture-phase0-baseline.mjs",
+    "test:e2e:smoke": "playwright test e2e/smoke.spec.ts --project=chromium",
+    "ci:quality": "npm run validate:foundation && npm run validate:regions && npm run validate:atlas && npm run validate:route-presets && npm run validate:route-contracts && npm run validate:assets && npm run test:passport && npm run test:route-engine && npm run test:route-integration && npm run lint && npm run typecheck && npm run build && npm run test:e2e:smoke"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "d3-geo": "^3.1.1",
+    "framer-motion": "^12.40.0",
+    "lucide-react": "^1.24.0",
+    "next": "16.2.9",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "tailwind-merge": "^3.6.0",
+    "topojson-client": "^3.1.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.9",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.0",
+    "typescript": "^5"
+  }
+}

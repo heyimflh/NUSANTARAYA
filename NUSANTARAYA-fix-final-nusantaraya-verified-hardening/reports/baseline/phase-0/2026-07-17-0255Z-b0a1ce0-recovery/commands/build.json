@@ -1,0 +1,9 @@
+{
+  "command": "npm run build",
+  "startedAt": "2026-07-17T02:58:52.211Z",
+  "finishedAt": "2026-07-17T03:02:21.028Z",
+  "durationMs": 208817,
+  "exitCode": 1,
+  "logFile": "logs/build.log",
+  "status": "FAIL"
+}

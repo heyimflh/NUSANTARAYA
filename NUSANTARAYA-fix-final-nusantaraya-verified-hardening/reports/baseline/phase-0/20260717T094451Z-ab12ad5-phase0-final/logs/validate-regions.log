@@ -1,0 +1,9 @@
+
+> nusantaraya@0.1.0 validate:regions
+> tsx scripts/validate-regions.ts
+
+Starting Region Validation...
+✅ [OK] Found exactly 7 regions.
+✅ [OK] Successfully mapped 38/38 provinces.
+🎉 All Region validations passed!
+

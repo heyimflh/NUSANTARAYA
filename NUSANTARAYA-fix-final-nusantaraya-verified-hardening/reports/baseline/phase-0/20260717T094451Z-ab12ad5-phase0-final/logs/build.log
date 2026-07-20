@@ -1,0 +1,23 @@
+
+> nusantaraya@0.1.0 build
+> next build
+
+▲ Next.js 16.2.9 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 22.7s
+  Running TypeScript ...
+
+Failed to type check.
+
+./scripts/test-route-engine.ts:30:7
+Type error: Type '"bali-nusa"' is not assignable to type 'RoutePlannerRegionId | null'.
+
+  [90m28 |[0m       ...[33mDEFAULT_FORM_VALUES[0m,
+  [90m29 |[0m       durationDays: [35m5[0m,
+[31m[1m>[0m [90m30 |[0m       destinationRegionId: [32m"bali-nusa"[0m,
+  [90m   |[0m       [31m[1m^[0m
+  [90m31 |[0m       originProvinceId: [36mnull[0m,
+  [90m32 |[0m       interests: [[32m"alam"[0m, [32m"budaya"[0m],
+  [90m33 |[0m       budgetLevel: [32m"menengah"[0m,
+Next.js build worker exited with code: 1 and signal: null

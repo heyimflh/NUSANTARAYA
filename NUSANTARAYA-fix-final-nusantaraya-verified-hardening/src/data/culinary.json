@@ -1,0 +1,20 @@
+[
+  {
+    "id": "rendang",
+    "nama": "Rendang",
+    "provinsi": "sumatera-barat",
+    "rasa": ["pedas", "gurih", "rempah"],
+    "kategori": "makanan utama",
+    "deskripsi": "Olahan daging sapi yang dimasak perlahan dengan santan dan rempah-rempah hingga bumbu meresap dan kering.",
+    "cerita": "Awalnya dibuat sebagai bekal perjalanan jauh para perantau Minang karena awet berminggu-minggu tanpa dipanaskan."
+  },
+  {
+    "id": "pempek",
+    "nama": "Pempek",
+    "provinsi": "sumatera-selatan",
+    "rasa": ["gurih", "asam", "pedas"],
+    "kategori": "jajanan",
+    "deskripsi": "Olahan ikan dan sagu yang disajikan dengan kuah cuko pekat yang manis, asam, dan pedas.",
+    "cerita": "Lahir dari kreativitas masyarakat pesisir Sungai Musi untuk mengawetkan ikan tangkapan yang melimpah."
+  }
+]

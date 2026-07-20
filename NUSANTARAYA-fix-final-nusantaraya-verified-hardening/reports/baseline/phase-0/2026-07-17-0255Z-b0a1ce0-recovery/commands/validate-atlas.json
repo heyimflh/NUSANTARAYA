@@ -1,0 +1,9 @@
+{
+  "command": "npm run validate:atlas",
+  "startedAt": "2026-07-17T02:56:11.224Z",
+  "finishedAt": "2026-07-17T02:56:13.236Z",
+  "durationMs": 2012,
+  "exitCode": 0,
+  "logFile": "logs/validate-atlas.log",
+  "status": "PASS"
+}

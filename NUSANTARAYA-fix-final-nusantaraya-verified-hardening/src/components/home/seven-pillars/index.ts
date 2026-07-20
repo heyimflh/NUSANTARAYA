@@ -1,0 +1,1 @@
+export { SevenPillarsSection } from "./SevenPillarsSection";
