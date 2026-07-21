@@ -23,7 +23,7 @@ export const mainFeatures: FeatureData[] = [
       "Susun itinerary lintas provinsi berdasarkan durasi, minat, wilayah, budget, dan gaya traveler.",
     chips: ["3/5/7 Hari", "Budget", "Itinerary"],
     icon: "/assets/ui/icons/icon-route.svg",
-    image: "/assets/features/route-planner-preview.webp",
+    image: "/assets/features/route-planner-preview-v2.webp",
     color: "#C9A84C",
     href: "/routes",
     featured: true
@@ -36,7 +36,7 @@ export const mainFeatures: FeatureData[] = [
       "Jelajahi 38 provinsi melalui peta interaktif dengan layer budaya, kuliner, alam, sejarah, dan masa depan.",
     chips: ["38 Provinsi", "Layer", "Flagship"],
     icon: "/assets/ui/icons/icon-map.svg",
-    image: "/assets/features/nusa-map-previe.webp",
+    image: "/assets/features/nusa-map-preview-v2.webp",
     color: "#2D6BE4",
     href: "/explore"
   },
@@ -48,7 +48,7 @@ export const mainFeatures: FeatureData[] = [
       "Temukan rumah adat, tarian, alat musik, pakaian adat, aksara, cerita rakyat, dan sumber budaya terpercaya.",
     chips: ["Budaya", "Search", "Sumber"],
     icon: "/assets/ui/icons/icon-archive.svg",
-    image: "/assets/features/archive-preview.webp",
+    image: "/assets/features/archive-preview-v2.webp",
     color: "#8B2020",
     href: "/archive",
     status: "live"
@@ -61,7 +61,7 @@ export const mainFeatures: FeatureData[] = [
       "Jelajahi kuliner Nusantara, rempah, food story, food battle, dan peta rasa dari berbagai provinsi.",
     chips: ["Kuliner", "Rempah", "Food Battle"],
     icon: "/assets/ui/icons/icon-culinary.svg",
-    image: "/assets/features/nusarasa-preview.webp",
+    image: "/assets/features/nusarasa-preview-v2.webp",
     color: "#D4691E",
     href: "/rasa",
     status: "soon"
@@ -74,7 +74,7 @@ export const mainFeatures: FeatureData[] = [
       "Kumpulkan stempel provinsi, badge wilayah, dan level explorer saat menjelajahi Indonesia secara digital.",
     chips: ["Stempel", "Badge", "Level"],
     icon: "/assets/ui/icons/icon-passport.svg",
-    image: "/assets/features/passport-preview.webp",
+    image: "/assets/features/passport-preview-v2.webp",
     color: "#C9A84C",
     href: "/explore#passport-progress"
   },
@@ -86,7 +86,7 @@ export const mainFeatures: FeatureData[] = [
       "Tanya rekomendasi destinasi, etika budaya, itinerary, kuliner, dan tips perjalanan kepada RANI.",
     chips: ["AI", "Itinerary", "Etika"],
     icon: "/assets/ui/icons/icon-rani.svg",
-    image: "/assets/features/rani-chat-preview.webp",
+    image: "/assets/features/rani-chat-preview-v2.webp",
     color: "#6B3FA0",
     href: "/rani",
     status: "soon"
@@ -99,7 +99,7 @@ export const mainFeatures: FeatureData[] = [
       "Lihat IKN, smart city, UMKM digital, ekonomi kreatif, desa wisata digital, dan green tourism Nusantara.",
     chips: ["IKN", "Smart City", "UMKM"],
     icon: "/assets/ui/icons/icon-future.svg",
-    image: "/assets/features/future-preview.webp",
+    image: "/assets/features/future-preview-v2.webp",
     color: "#1A5C3A",
     href: "/future",
     status: "soon"

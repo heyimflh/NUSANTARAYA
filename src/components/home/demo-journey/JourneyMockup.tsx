@@ -67,7 +67,7 @@ export function JourneyMockup({ type }: JourneyMockupProps) {
       return (
         <MockupWrapper>
           <Image
-            src="/assets/features/nusa-map-previe.webp"
+            src="/assets/features/nusa-map-preview-v2.webp"
             alt="Nusa Map Preview"
             fill
             className="object-cover object-top"
@@ -155,7 +155,7 @@ export function JourneyMockup({ type }: JourneyMockupProps) {
       return (
         <MockupWrapper>
           <Image
-            src="/assets/features/archive-preview.webp"
+            src="/assets/features/archive-preview-v2.webp"
             alt="Culture and Rasa Preview"
             fill
             className="object-cover object-top"
@@ -167,7 +167,7 @@ export function JourneyMockup({ type }: JourneyMockupProps) {
       return (
         <MockupWrapper>
           <Image
-            src="/assets/features/route-planner-preview.webp"
+            src="/assets/features/route-planner-preview-v2.webp"
             alt="Route Planner Preview"
             fill
             className="object-cover object-top"
@@ -179,7 +179,7 @@ export function JourneyMockup({ type }: JourneyMockupProps) {
       return (
         <MockupWrapper>
           <Image
-            src="/assets/features/passport-preview.webp"
+            src="/assets/features/passport-preview-v2.webp"
             alt="Passport Preview"
             fill
             className="object-cover object-top"
@@ -191,7 +191,7 @@ export function JourneyMockup({ type }: JourneyMockupProps) {
       return (
         <MockupWrapper>
           <Image
-            src="/assets/features/rani-chat-preview.webp"
+            src="/assets/features/rani-chat-preview-v2.webp"
             alt="RANI AI Chat Preview"
             fill
             className="object-cover object-top"
