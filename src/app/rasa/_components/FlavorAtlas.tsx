@@ -17,7 +17,7 @@ export default function FlavorAtlas() {
 
   // Filter logic
   const filteredDishes = useMemo(() => {
-    let result = CANONICAL_DISHES;
+    let result = CANONICAL_DISHES.filter(d => d.status === "published");
 
     // Filter by query (title or alias)
     if (query) {

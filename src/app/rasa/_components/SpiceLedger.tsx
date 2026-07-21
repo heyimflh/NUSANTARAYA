@@ -13,7 +13,7 @@ export default function SpiceLedger() {
 
   const relatedDishes = activeSpice.relatedDishIds
     .map(id => CANONICAL_DISHES.find(d => d.id === id))
-    .filter(Boolean);
+    .filter(d => d && d.status === "published");
 
   return (
     <section id="spice-ledger" aria-labelledby="spice-heading" className="w-full pt-24">
@@ -95,12 +95,13 @@ export default function SpiceLedger() {
                 <span>Status Sumber:</span>
                 <span className="font-mono">{activeSpice.sourceStatus}</span>
               </div>
-              <button 
+              <Link 
+                href="/explore?layer=rempah"
                 className="inline-flex justify-center items-center gap-2 w-full py-3 bg-[var(--rasa-cacao)] text-[var(--rasa-paper)] hover:bg-[var(--rasa-ink)] transition-colors text-sm font-medium uppercase tracking-wider"
               >
                 Ikuti Jalur Rempah
                 <ArrowRight size={16} />
-              </button>
+              </Link>
            </div>
         </div>
 

@@ -15,7 +15,7 @@ export default function TastingShelf() {
 
   const savedDishes = shelf.savedDishes
     .map(id => CANONICAL_DISHES.find(d => d.id === id))
-    .filter(Boolean);
+    .filter(d => d && d.status === "published");
 
   return (
     <section id="tasting-shelf" aria-labelledby="shelf-heading" className="w-full pt-24 pb-12">

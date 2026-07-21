@@ -9,7 +9,7 @@ export default async function DishDetailPage({
   params: Promise<{ slug: string }>
 }) {
   const resolvedParams = await params;
-  const dish = CANONICAL_DISHES.find(d => d.slug === resolvedParams.slug);
+  const dish = CANONICAL_DISHES.find(d => d.status === "published" && d.slug === resolvedParams.slug);
 
   if (!dish) {
     // We can render an editorial 404 here instead of the default Next.js notFound if we want,

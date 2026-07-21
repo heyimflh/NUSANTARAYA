@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { Compass, Calendar, Coffee, Sparkles, Map } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { CANONICAL_DISHES } from "@/data/rasa/culinary.data";
 import { FlavorId, TastingTrailDraft } from "@/data/rasa/culinary.types";
 import { useTastingShelf } from "../_hooks/useTastingShelf";
@@ -24,6 +25,7 @@ const FLAVORS: {id: FlavorId, name: string}[] = [
 ];
 
 export default function TastingTrailComposer() {
+  const router = useRouter();
   const { shelf, saveDraftTrail } = useTastingShelf();
   
   const [draft, setDraft] = useState<TastingTrailDraft>({
@@ -44,7 +46,7 @@ export default function TastingTrailComposer() {
 
   // Generate deterministic preview based on inputs
   const trailDishes = useMemo(() => {
-    let pool = CANONICAL_DISHES;
+    let pool = CANONICAL_DISHES.filter(d => d.status === "published");
     if (draft.regionId) {
       pool = pool.filter(d => d.regionIds.includes(draft.regionId!));
     }
@@ -74,8 +76,7 @@ export default function TastingTrailComposer() {
 
   const handleSaveDraft = () => {
     saveDraftTrail(draft);
-    // Ideally this would also jump to Route Planner via router.push(/routes?...)
-    alert("Draft Tasting Trail disimpan. Di aplikasi nyata, ini akan membawa Anda ke Nusa Route.");
+    router.push(`/routes?source=nusarasa&region=${draft.regionId || "sumatera"}&interests=kuliner`);
   };
 
   return (

@@ -8,7 +8,7 @@ import { RasaAssetManifest } from "@/data/rasa/asset-manifest";
 export default function HiddenTable() {
   // Select some "hidden" or less universally popular dishes
   const hiddenDishIds = ["manday", "choipan", "tinutuan", "keladi-tumbuk"];
-  const dishes = hiddenDishIds.map(id => CANONICAL_DISHES.find(d => d.id === id)).filter(Boolean);
+  const dishes = hiddenDishIds.map(id => CANONICAL_DISHES.find(d => d.id === id)).filter(d => d && d.status === "published");
 
   if (dishes.length === 0) return null;
 

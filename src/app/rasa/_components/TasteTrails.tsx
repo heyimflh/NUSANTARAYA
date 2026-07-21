@@ -4,6 +4,8 @@ import { useState } from "react";
 import { ArrowRight, Map } from "lucide-react";
 import { CANONICAL_TRAILS, CANONICAL_DISHES } from "@/data/rasa/culinary.data";
 import { RasaAssetManifest } from "@/data/rasa/asset-manifest";
+import { useRasaState } from "../_hooks/useRasaState";
+import Link from "next/link";
 
 const TRAIL_REGIONS = [
   { id: "sumatera", name: "Sumatera", desc: "Salah satu pintu masuk ke keragaman bumbu Nusantara, memperlihatkan jejak pelabuhan kuno yang mengadopsi dan mengadaptasi rempah dari berbagai benua." },
@@ -16,10 +18,11 @@ const TRAIL_REGIONS = [
 ];
 
 export default function TasteTrails() {
+  const { setRegion } = useRasaState();
   const [activeRegionId, setActiveRegionId] = useState(TRAIL_REGIONS[0].id);
   
   const activeRegion = TRAIL_REGIONS.find(r => r.id === activeRegionId) || TRAIL_REGIONS[0];
-  const regionDishes = CANONICAL_DISHES.filter(d => d.regionIds.includes(activeRegion.id)).slice(0, 4);
+  const regionDishes = CANONICAL_DISHES.filter(d => d.status === "published" && d.regionIds.includes(activeRegion.id)).slice(0, 4);
   
   // Aggregate flavors safely
   const allFlavors = new Set<string>();
@@ -101,17 +104,29 @@ export default function TasteTrails() {
 
            <div className="flex flex-col gap-3 mt-auto">
               <button 
+                onClick={() => {
+                   setRegion(activeRegion.id);
+                   const el = document.getElementById("flavor-atlas");
+                   if(el) el.scrollIntoView({ behavior: "smooth" });
+                }}
                 className="inline-flex justify-center items-center gap-2 w-full py-3 bg-[var(--rasa-cacao)] text-[var(--rasa-paper)] hover:bg-[var(--rasa-ink)] transition-colors text-sm font-medium uppercase tracking-wider"
               >
                 Jelajahi Rasa Wilayah
                 <ArrowRight size={16} />
               </button>
-              <button 
+              <Link 
+                href={`/explore?region=${activeRegion.id}&layer=kuliner`}
                 className="inline-flex justify-center items-center gap-2 w-full py-3 border border-[var(--rasa-line)] text-[var(--rasa-cacao)] hover:bg-[var(--rasa-paper-deep)] transition-colors text-sm font-medium uppercase tracking-wider"
               >
                 <Map size={16} />
                 Lihat di Peta Nusa Map
-              </button>
+              </Link>
+              <Link 
+                href={`/routes?source=nusarasa&region=${activeRegion.id}&interests=kuliner`}
+                className="inline-flex justify-center items-center gap-2 w-full py-3 border border-[var(--rasa-line)] text-[var(--rasa-cacao)] hover:bg-[var(--rasa-paper-deep)] transition-colors text-sm font-medium uppercase tracking-wider"
+              >
+                Buat Perjalanan Kuliner
+              </Link>
            </div>
         </div>
 

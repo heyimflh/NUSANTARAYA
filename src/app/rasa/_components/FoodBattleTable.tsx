@@ -11,8 +11,8 @@ export default function FoodBattleTable() {
   const [activePairId, setActivePairId] = useState(CANONICAL_BATTLE_PAIRS[0]?.id);
   const activePair = CANONICAL_BATTLE_PAIRS.find(p => p.id === activePairId) || CANONICAL_BATTLE_PAIRS[0];
   
-  const dishA = CANONICAL_DISHES.find(d => d.id === activePair.dishAId);
-  const dishB = CANONICAL_DISHES.find(d => d.id === activePair.dishBId);
+  const dishA = CANONICAL_DISHES.find(d => d.status === "published" && d.id === activePair.dishAId);
+  const dishB = CANONICAL_DISHES.find(d => d.status === "published" && d.id === activePair.dishBId);
   
   const { toggleSaveBattlePair, isBattlePairSaved } = useTastingShelf();
 
@@ -42,8 +42,8 @@ export default function FoodBattleTable() {
             aria-label="Pilih pasangan hidangan"
           >
             {CANONICAL_BATTLE_PAIRS.map(pair => {
-              const dA = CANONICAL_DISHES.find(d => d.id === pair.dishAId)?.localeContent.id.title;
-              const dB = CANONICAL_DISHES.find(d => d.id === pair.dishBId)?.localeContent.id.title;
+              const dA = CANONICAL_DISHES.find(d => d.status === "published" && d.id === pair.dishAId)?.localeContent.id.title;
+              const dB = CANONICAL_DISHES.find(d => d.status === "published" && d.id === pair.dishBId)?.localeContent.id.title;
               return (
                 <option key={pair.id} value={pair.id}>
                   {dA} vs {dB}
@@ -125,7 +125,7 @@ export default function FoodBattleTable() {
          ))}
       </div>
 
-      <div className="mt-12 flex justify-center">
+      <div className="mt-12 flex justify-center gap-4 flex-wrap">
          <button 
            onClick={() => toggleSaveBattlePair(activePair.id)}
            className={`px-8 py-4 border transition-colors text-sm font-medium uppercase tracking-wider ${
@@ -136,6 +136,13 @@ export default function FoodBattleTable() {
          >
            {isSaved ? "Tersimpan di Tasting Shelf" : "Simpan Perbandingan Ini"}
          </button>
+         <Link
+           href={`/explore?query=Bandingkan+${dishA.localeContent.id.title}+dan+${dishB.localeContent.id.title}`}
+           className="inline-flex justify-center items-center gap-2 px-8 py-4 bg-[var(--rasa-cacao)] text-[var(--rasa-paper)] hover:bg-[var(--rasa-ink)] transition-colors text-sm font-medium uppercase tracking-wider"
+         >
+           Tanya RANI
+           <ExternalLink size={16} />
+         </Link>
       </div>
 
     </section>

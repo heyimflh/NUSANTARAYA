@@ -12,8 +12,8 @@ export default function DishOfTheMoment() {
   const { toggleSaveDish, isDishSaved } = useTastingShelf();
 
   // Deterministic selection based on active region or fallback
-  let featured = CANONICAL_DISHES.find(d => d.regionIds.includes(region || "sumatera"));
-  if (!featured) featured = CANONICAL_DISHES.find(d => d.id === "papeda") || CANONICAL_DISHES[0];
+  let featured = CANONICAL_DISHES.find(d => d.status === "published" && d.regionIds.includes(region || "sumatera"));
+  if (!featured) featured = CANONICAL_DISHES.find(d => d.status === "published" && d.id === "papeda") || CANONICAL_DISHES.find(d => d.status === "published") || CANONICAL_DISHES[0];
 
   const saved = isDishSaved(featured.id);
 

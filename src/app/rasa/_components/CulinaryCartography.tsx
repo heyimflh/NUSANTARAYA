@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, MapPin, Compass } from "lucide-react";
 import { useRasaState } from "../_hooks/useRasaState";
 import { CANONICAL_DISHES } from "@/data/rasa/culinary.data";
+import Link from "next/link";
 
 // Schematic region data
 const REGIONS = [
@@ -25,7 +26,7 @@ export default function CulinaryCartography() {
   const activeRegion = REGIONS.find(r => r.id === activeRegionId) || REGIONS[0];
   
   // Get dishes for active region
-  const regionDishes = CANONICAL_DISHES.filter(d => d.regionIds.includes(activeRegion.id));
+  const regionDishes = CANONICAL_DISHES.filter(d => d.status === "published" && d.regionIds.includes(activeRegion.id));
   const signatureDishes = regionDishes.slice(0, 3);
   const dishCount = regionDishes.length;
 
@@ -110,10 +111,11 @@ export default function CulinaryCartography() {
                    </ul>
                  </div>
 
-                 <div className="pt-6">
+                 <div className="pt-6 flex flex-col sm:flex-row gap-4">
                    <button 
                      onClick={() => {
-                        const el = document.getElementById("taste-trails");
+                        setRegion(activeRegion.id);
+                        const el = document.getElementById("flavor-atlas");
                         if(el) el.scrollIntoView({ behavior: "smooth" });
                      }}
                      className="inline-flex items-center gap-2 text-sm uppercase tracking-widest text-[var(--rasa-chili)] hover:text-[var(--rasa-cacao)] transition-colors group font-semibold"
@@ -122,6 +124,13 @@ export default function CulinaryCartography() {
                      Jelajahi Wilayah Ini
                      <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                    </button>
+                   <Link 
+                     href={`/explore?region=${activeRegion.id}&layer=kuliner`}
+                     className="inline-flex items-center gap-2 text-sm uppercase tracking-widest text-[var(--rasa-muted)] hover:text-[var(--rasa-cacao)] transition-colors group font-semibold"
+                   >
+                     <Compass size={16} />
+                     Buka di Nusa Map
+                   </Link>
                  </div>
                </motion.div>
             </AnimatePresence>
