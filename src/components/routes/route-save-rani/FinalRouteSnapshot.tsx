@@ -9,7 +9,7 @@ export function FinalRouteSnapshot({ result, locale }: FinalRouteSnapshotProps) 
   const title = result.title;
   
   return (
-    <div className="bg-[#FAF8F5] border border-[#E8E0CE] rounded-2xl p-5 mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div className="bg-[#FAF8F5]/80 backdrop-blur-md border border-[#E8E0CE] rounded-2xl p-5 mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
       <div className="flex flex-col gap-1">
         <h3 className="text-xl font-display font-medium text-[#2C3E50]">
           {title}

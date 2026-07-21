@@ -10,7 +10,7 @@ interface StoryThreadsProps {
 
 export function StoryThreads({ threads, onOpenThread, t }: StoryThreadsProps) {
   return (
-    <section className="archive-surface-paper relative py-32 border-b border-[var(--archive-line)] overflow-hidden">
+    <section className="bg-transparent relative py-32 border-b border-[var(--archive-line)]/60 overflow-hidden">
       {/* Background Texture / Abstract Pattern */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, var(--archive-ink) 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
       

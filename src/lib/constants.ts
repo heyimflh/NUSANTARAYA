@@ -58,24 +58,7 @@ export const BREAKPOINTS = {
 } as const;
 
 // ─── Navigasi ────────────────────────────────────────────────────────────────
-export const NAV_ITEMS = [
-  { label: "Beranda", labelEn: "Home", href: "/", icon: "home" },
-  { label: "Jelajahi", labelEn: "Explore", href: "/explore", icon: "map" },
-  { label: "Rute", labelEn: "Routes", href: "/routes", icon: "route" },
-  { label: "Passport", labelEn: "Passport", href: "/explore#passport-progress", icon: "stamp" },
-  { label: "Menu", labelEn: "Menu", href: "#menu", icon: "menu" },
-] as const;
-
-export const DESKTOP_NAV_ITEMS = [
-  { label: "Beranda", labelEn: "Home", href: "/" },
-  { label: "Jelajahi", labelEn: "Explore", href: "/explore", children: [
-    { label: "Peta Indonesia", labelEn: "Indonesia Map", href: "/explore" },
-  ]},
-  { label: "Budaya", labelEn: "Culture", href: "/archive" },
-  { label: "Kuliner", labelEn: "Culinary", href: "/nusarasa" },
-  { label: "Wisata", labelEn: "Travel", href: "/routes" },
-  { label: "Passport", labelEn: "Passport", href: "/explore#passport-progress" },
-] as const;
+// Silakan gunakan src/config/navigation.ts sebagai satu-satunya sumber navigasi (Single Source of Truth).
 
 // ─── Wilayah Mapping ─────────────────────────────────────────────────────────
 export const REGIONS = [

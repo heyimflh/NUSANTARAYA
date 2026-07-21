@@ -1,7 +1,7 @@
 "use client";
 
 import { usePassportPageViewModel } from "@/hooks/usePassportPageViewModel";
-import { PassportNavbar } from "./PassportNavbar";
+import { NusantarayaNavbar } from "@/components/navigation/NusantarayaNavbar";
 import { PassportHeroSection } from "./PassportHeroSection";
 import { PassportMasthead } from "./PassportMasthead";
 import { SavedRoutesArchive } from "./SavedRoutesArchive";
@@ -19,7 +19,7 @@ export const PassportPageShell = () => {
   if (!vm.hydrated) {
     return (
       <>
-        <PassportNavbar />
+        <NusantarayaNavbar />
         <PassportLoading />
         <FinalCtaFooterSection />
       </>
@@ -27,12 +27,12 @@ export const PassportPageShell = () => {
   }
 
   return (
-    <main className="relative min-h-screen isolate bg-[#F3EBDD] overflow-x-hidden">
+    <main className="relative min-h-screen isolate bg-[#F3EBDD]/90 overflow-x-hidden">
       {/* Background Texture for the entire page */}
       <div className="absolute inset-0 opacity-[0.4] mix-blend-multiply pointer-events-none" style={{ backgroundImage: "url('/assets/noise.webp')" }} />
       
       <div className="relative z-10 overflow-x-clip max-w-full">
-        <PassportNavbar />
+        <NusantarayaNavbar />
         <PassportHeroSection />
         
         <div id="passport-content" className="w-full pt-16 pb-32">

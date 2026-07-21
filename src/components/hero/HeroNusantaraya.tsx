@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { destinations } from "./heroData";
-import HeroNavbar from "./HeroNavbar";
+import { NusantarayaNavbar } from "@/components/navigation/NusantarayaNavbar";
 import HeroDestinationSlider from "./HeroDestinationSlider";
 import HeroRaniButton from "./HeroRaniButton";
 import Link from "next/link";
@@ -89,7 +89,7 @@ export default function HeroNusantaraya() {
       
       {/* 2.1 Top Header - Glassmorphic Navbar */}
       <div className="absolute top-0 inset-x-0 z-30">
-        <HeroNavbar />
+        <NusantarayaNavbar />
       </div>
 
       {/* 2.2 Center Content (Badge & Elegant Title) */}

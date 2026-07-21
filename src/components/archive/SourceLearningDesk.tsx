@@ -19,7 +19,7 @@ export function SourceLearningDesk({ t }: SourceLearningDeskProps) {
   };
 
   return (
-    <section className="archive-surface-canvas relative py-32 border-b border-[var(--archive-line)]">
+    <section className="bg-transparent relative py-32 border-b border-[var(--archive-line)]/60">
       <div className="archive-container">
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
           <div className="w-12 h-1 bg-[var(--archive-terracotta)] mb-8"></div>

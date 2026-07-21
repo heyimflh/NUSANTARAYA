@@ -38,8 +38,8 @@ export function ArchiveMosaic({
   
   if (items.length === 0) {
     return (
-      <section id="archive-results" className="archive-surface-paper py-20 border-b border-[var(--archive-line)] text-center">
-        <div className="archive-container max-w-2xl mx-auto">
+      <section id="archive-results" className="bg-transparent py-20 border-b border-[var(--archive-line)]/60 text-center">
+        <div className="archive-container max-w-2xl mx-auto bg-[var(--archive-paper)]/90 backdrop-blur-md p-8 md:p-12 rounded-3xl border border-[var(--archive-line)]/50 shadow-sm">
           <h3 className="archive-h3 mb-4">
             {t("Tidak ada arsip ditemukan", "No archives found")}
           </h3>
@@ -66,7 +66,7 @@ export function ArchiveMosaic({
   }
 
   return (
-    <section id="archive-results" className="archive-surface-paper py-12 lg:py-16 border-b border-[var(--archive-line)]">
+    <section id="archive-results" className="bg-transparent py-12 lg:py-16 border-b border-[var(--archive-line)]/60">
       <div className="archive-container">
         
         {/* Toolbar */}

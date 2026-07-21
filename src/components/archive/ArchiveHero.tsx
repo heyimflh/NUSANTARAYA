@@ -18,7 +18,7 @@ export function ArchiveHero({
   t,
 }: ArchiveHeroProps) {
   return (
-    <section className="archive-surface-paper border-b border-[var(--archive-line)] relative overflow-hidden pb-12 pt-safe lg:pb-0 lg:min-h-[80vh] flex flex-col justify-center">
+    <section className="bg-transparent border-b border-[var(--archive-line)]/60 relative overflow-hidden pb-12 pt-safe lg:pb-0 lg:min-h-[80vh] flex flex-col justify-center">
       <div className="archive-container relative z-10 py-8 lg:py-16">
         <div className="archive-grid items-center">
           

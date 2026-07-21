@@ -3,6 +3,7 @@ import { Playfair_Display, Inter, Montserrat, Outfit, Philosopher } from "next/f
 import { AppProvider } from "@/context/app-context";
 import { DocumentPreferenceSync } from "@/components/system/DocumentPreferenceSync";
 import { WebVitalsMonitor } from "@/components/system/WebVitalsMonitor";
+import { PageBackground } from "@/components/layout/PageBackground";
 import "./globals.css";
 
 /**
@@ -104,11 +105,11 @@ export default function RootLayout({
         <WebVitalsMonitor />
         <AppProvider>
           <DocumentPreferenceSync />
-          {/* Global Fixed Background for seamless masking and mobile performance */}
-          <div className="fixed inset-0 z-[-50] bg-[url('/assets/background-primary.webp')] max-md:bg-[url('/assets/background-primary-mobile.webp')] bg-cover bg-center bg-no-repeat opacity-100 pointer-events-none w-full h-[100dvh]" />
+          {/* Global Fixed Background dynamically switched based on route */}
+          <PageBackground />
           
           {/* Main Content */}
-          <main className="flex-1 pb-safe max-md:pb-20">
+          <main className="flex-1 pb-safe max-md:pb-20 relative z-10">
             {children}
           </main>
         </AppProvider>

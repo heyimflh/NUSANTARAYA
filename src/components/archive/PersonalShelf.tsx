@@ -1,13 +1,16 @@
 import React from "react";
 import { Bookmark, Sparkles, FolderOpen } from "lucide-react";
+import { ArchiveItem } from "@/types/archive";
 
 interface PersonalShelfProps {
+  allItems: ArchiveItem[];
+  onOpenQuickView: (itemId: string) => void;
   t: (id: string, en: string) => string;
 }
 
-export function PersonalShelf({ t }: PersonalShelfProps) {
+export function PersonalShelf({ allItems, onOpenQuickView, t }: PersonalShelfProps) {
   return (
-    <section className="archive-surface-deep relative py-32 border-b border-[var(--archive-line)] overflow-hidden">
+    <section className="bg-transparent relative py-32 border-b border-[var(--archive-line)]/60 overflow-hidden">
       {/* Background Decor */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[var(--archive-canvas)]/30 pointer-events-none"></div>
       

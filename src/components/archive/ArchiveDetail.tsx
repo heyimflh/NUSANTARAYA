@@ -10,6 +10,8 @@ import { getArchiveCategoryById, getArchiveCategoryName } from "@/data/archive/a
 import { archiveSourceRegistry, getSourceReliability } from "@/data/archive/archiveSourceRegistry";
 import { provinceMapData } from "@/data/provinces/provinces";
 import { trackEvent } from "@/lib/analytics";
+import { NusantarayaNavbar } from "@/components/navigation/NusantarayaNavbar";
+import { PageBackground } from "@/components/layout/PageBackground";
 import "./archive-page.css"; // Ensure tokens are loaded
 
 interface ArchiveDetailProps {
@@ -43,9 +45,11 @@ export function ArchiveDetail({ item }: ArchiveDetailProps) {
   }));
 
   return (
-    <div className="archive-page bg-[var(--archive-canvas)] min-h-screen pb-24">
+    <div className="archive-page bg-transparent min-h-screen pb-24 relative isolate overflow-x-clip">
+      <PageBackground />
+      <NusantarayaNavbar forceScrolled={true} />
       {/* ── Navigation Bar ── */}
-      <div className="sticky top-0 z-40 bg-[var(--archive-canvas)]/90 backdrop-blur-md border-b border-[var(--archive-line)]">
+      <div className="sticky top-16 lg:top-20 z-40 bg-[var(--archive-canvas)]/90 backdrop-blur-md border-b border-[var(--archive-line)]">
         <div className="archive-container h-16 flex items-center justify-between">
           <Link 
             href="/archive"
@@ -166,7 +170,7 @@ export function ArchiveDetail({ item }: ArchiveDetailProps) {
       </header>
 
       {/* ── Extended Context Section ── */}
-      <section className="border-t border-[var(--archive-line)] bg-[var(--archive-surface-deep)] py-16">
+      <section className="border-t border-[var(--archive-line)]/60 bg-transparent py-16">
         <div className="archive-container">
           <div className="max-w-3xl mx-auto space-y-12">
             

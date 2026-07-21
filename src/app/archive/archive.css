@@ -9,7 +9,7 @@
 /* ─── Archive Semantic Tokens ─────────────────────────────────────────────── */
 .archive-page {
   /* Surface & Canvas */
-  --archive-canvas: #F3EBDD;
+  --archive-canvas: rgba(243, 235, 221, 0.9); /* 90% opacity for Explore background visibility */
   --archive-paper: #FFF9F0;
   --archive-paper-deep: #E7DAC5;
 
@@ -54,7 +54,7 @@
 
   /* Override global navy text → espresso */
   color: var(--archive-ink);
-  background-color: var(--archive-canvas);
+  background-color: transparent;
 }
 
 /* ─── Typography Overrides ────────────────────────────────────────────────── */

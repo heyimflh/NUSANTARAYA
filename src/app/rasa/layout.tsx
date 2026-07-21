@@ -15,7 +15,7 @@ export default function RasaLayout({
       className="rasa-layout-root min-h-screen bg-[var(--rasa-canvas)] text-[var(--rasa-ink)] font-sans antialiased selection:bg-[var(--rasa-saffron)] selection:text-[var(--rasa-ink)]"
       style={{
         // Local semantic tokens (No Navy!)
-        "--rasa-canvas": "#F6EBDD",
+        "--rasa-canvas": "rgba(246, 235, 221, 0.9)", // 90% opacity for Explore background visibility
         "--rasa-paper": "#FFF9F0",
         "--rasa-paper-deep": "#E8D7BF",
         "--rasa-ink": "#2A1E17",

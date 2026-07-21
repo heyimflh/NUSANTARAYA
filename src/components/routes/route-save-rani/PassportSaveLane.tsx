@@ -40,7 +40,7 @@ export function PassportSaveLane({ savedRoute, locale }: PassportSaveLaneProps) 
   };
 
   return (
-    <div className="flex flex-col gap-4 border border-[#E8E0CE] rounded-2xl p-6 bg-white">
+    <div className="flex flex-col gap-4 border border-[#E8E0CE] rounded-2xl p-6 bg-white/70 backdrop-blur-md">
       <div className="flex items-start justify-between">
         <div className="flex flex-col gap-2">
           <h4 className="font-display font-medium text-lg text-[#2C3E50]">

@@ -24,8 +24,8 @@ const categoryImages: Record<ArchiveCategoryId, string> = {
   "kerajinan": "/assets/nusa-archive/provinces/sumatera-barat/id-13-sumatera-barat-08-kerajinan-tenun-pandai-sikek-l1-master-v01.webp",
   "bahasa-aksara": "/assets/nusa-archive/provinces/sumatera-barat/id-13-sumatera-barat-09-aksara-arab-melayu-minangkabau-l1-master-v01.webp",
   "motif-kain": "/assets/nusa-archive/provinces/sulawesi-selatan/id-73-sulawesi-selatan-10-motif-kain-ragam-motif-lipa-sabbe-sengkang.webp",
-  "tokoh-sejarah": "/assets/nusa-archive/provinces/sumatera-barat/id-13-sumatera-barat-11-tokoh-daerah-mohammad-hatta-l1-master-v01.webp",
-  "sistem-kepercayaan": "/assets/nusa-archive/provinces/sumatera-barat/id-13-sumatera-barat-12-kepercayaan-surau-lubuk-bauk-l1-master-v01.webp",
+  "tokoh-daerah": "/assets/nusa-archive/provinces/sumatera-barat/id-13-sumatera-barat-11-tokoh-daerah-mohammad-hatta-l1-master-v01.webp",
+  "kosmologi": "/assets/nusa-archive/provinces/sumatera-barat/id-13-sumatera-barat-12-kepercayaan-surau-lubuk-bauk-l1-master-v01.webp",
 };
 
 export function CategoryCabinet({
@@ -65,9 +65,9 @@ export function CategoryCabinet({
   const xTransform = useTransform(scrollYProgress, [0, 1], ["0vw", `-${maxScrollVw}vw`]);
 
   return (
-    <section ref={containerRef} className="relative h-[600vh] bg-[#E3D6C5]" id="category-cabinet">
+    <section ref={containerRef} className="relative h-[600vh] bg-transparent" id="category-cabinet">
       {/* Sticky Inner Container */}
-      <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center bg-[#E3D6C5] pt-16 md:pt-24">
+      <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center bg-transparent pt-16 md:pt-24">
         
         {/* Header / Intro pinned at the top left */}
         <div className="absolute top-20 md:top-24 left-8 md:left-20 z-50 pointer-events-none">
@@ -106,7 +106,7 @@ export function CategoryCabinet({
                   </div>
 
                   {/* Text Side */}
-                  <div className="w-full md:w-1/2 flex flex-col justify-center">
+                  <div className="w-full md:w-1/2 flex flex-col justify-center bg-[var(--archive-canvas)]/68 backdrop-blur-sm border border-[var(--archive-line)]/50 p-6 md:p-10 rounded-3xl">
                     <div className="flex items-center gap-4 mb-6">
                       <span className="text-[#D4B56A] text-sm uppercase tracking-[0.3em] font-semibold">
                         {t("Warisan", "Heritage")} {String(index + 1).padStart(2, '0')}

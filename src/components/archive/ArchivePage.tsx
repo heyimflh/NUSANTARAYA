@@ -34,7 +34,7 @@ import type { RegionId } from "@/types/region";
 
 import { ArchiveHero } from "./ArchiveHero";
 import { ArchiveHeroSection } from "./ArchiveHeroSection";
-import { ArchiveNavbar } from "./ArchiveNavbar";
+import { NusantarayaNavbar } from "@/components/navigation/NusantarayaNavbar";
 import { FinalCtaFooterSection } from "@/components/home/final-cta-footer";
 import { DiscoveryDesk } from "./DiscoveryDesk";
 import { CuratorSelection } from "./CuratorSelection";
@@ -46,6 +46,7 @@ import { SourceLearningDesk } from "./SourceLearningDesk";
 import { PersonalShelf } from "./PersonalShelf";
 import { ItemQuickView } from "./ItemQuickView";
 import { trackEvent } from "@/lib/analytics";
+import { PageBackground } from "@/components/layout/PageBackground";
 
 import "./archive-page.css";
 
@@ -218,7 +219,8 @@ export function ArchivePage() {
 
   return (
     <main className="relative min-h-screen isolate overflow-x-clip max-w-full archive-page">
-      <ArchiveNavbar />
+      <PageBackground />
+      <NusantarayaNavbar />
       
       {/* ── Section 0: Main Video Hero ─────────────────────────────────────── */}
       <ArchiveHeroSection />

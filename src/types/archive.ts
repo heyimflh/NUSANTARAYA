@@ -97,6 +97,7 @@ export type ArchiveSourceRef = {
   title: string;
   organization?: string;
   author?: string;
+  description?: string;
   type: ArchiveSourceType;
   url?: string;
   publishedDate?: string;

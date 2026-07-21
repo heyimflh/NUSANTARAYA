@@ -111,7 +111,7 @@ export function RaniAdjustmentLane({ result, itinerary, values, locale, onApplyD
   ];
 
   return (
-    <div className="flex flex-col border border-[#D4AF37]/30 rounded-2xl p-6 bg-gradient-to-br from-[#FFFDF8] to-[#F9F6F0] relative overflow-hidden">
+    <div className="flex flex-col border border-[#D4AF37]/30 rounded-2xl p-6 bg-gradient-to-br from-[#FFFDF8]/80 to-[#F9F6F0]/80 backdrop-blur-md relative overflow-hidden">
       {/* RANI background decoration */}
       <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37]/5 rounded-full blur-2xl pointer-events-none" />
 

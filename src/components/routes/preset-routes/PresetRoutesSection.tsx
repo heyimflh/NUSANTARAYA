@@ -89,7 +89,7 @@ export function PresetRoutesSection({
     <section 
       id={ROUTE_SECTION_IDS.presets} 
       aria-labelledby="preset-routes-title"
-      className="w-full pt-16 pb-24 border-t border-[#E8E0CE]/50 mt-16 bg-[#FFFDF8]"
+      className="w-full pt-16 pb-24 border-t border-[#E8E0CE]/50 mt-16 bg-transparent"
     >
       <PresetRoutesHeader />
       

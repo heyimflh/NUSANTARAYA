@@ -30,7 +30,7 @@ export function FeaturedPresetRoute({ route, isActive, onViewRoute, onPrefill }:
   return (
     <article 
       aria-current={isActive ? "true" : undefined}
-      className={`group relative w-full h-[500px] md:h-[600px] bg-[#F4EFE6] rounded-[24px] md:rounded-[32px] overflow-hidden border ${isActive ? "border-[#C89A3D] ring-2 ring-[#C89A3D] ring-offset-2 ring-offset-[#F4EFE6]" : "border-[#E8E0CE]"} shadow-[0_8px_32px_rgba(42,36,31,0.06)] flex flex-col justify-end transition-all motion-reduce:transition-none hover:shadow-[0_12px_40px_rgba(42,36,31,0.12)] focus-within:ring-2 focus-within:ring-[#C89A3D]`}
+      className={`group relative w-full h-[500px] md:h-[600px] bg-white/70 backdrop-blur-md rounded-[24px] md:rounded-[32px] overflow-hidden border ${isActive ? "border-[#C89A3D] ring-2 ring-[#C89A3D] ring-offset-2 ring-offset-[#F4EFE6]" : "border-[#E8E0CE]"} shadow-[0_8px_32px_rgba(42,36,31,0.06)] flex flex-col justify-end transition-all motion-reduce:transition-none hover:shadow-[0_12px_40px_rgba(42,36,31,0.12)] focus-within:ring-2 focus-within:ring-[#C89A3D]`}
     >
       {isActive && (
         <div className="absolute top-0 right-0 z-30 bg-[#C89A3D] text-[#2A241F] text-xs font-bold px-4 py-1.5 rounded-bl-xl shadow-sm">

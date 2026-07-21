@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { CANONICAL_DISHES } from "@/data/rasa/culinary.data";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { NusantarayaNavbar } from "@/components/navigation/NusantarayaNavbar";
 
 export default async function DishDetailPage({
   params
@@ -32,8 +33,10 @@ export default async function DishDetailPage({
   }
 
   return (
-    <main className="w-full flex flex-col items-center pb-24">
-      {/* 1. Editorial hero */}
+    <>
+      <NusantarayaNavbar forceScrolled={true} />
+      <main className="w-full flex flex-col items-center pb-24 pt-20 lg:pt-24">
+        {/* 1. Editorial hero */}
       <section className="w-full max-w-[1440px] px-4 md:px-8 lg:px-12 pt-8 pb-16">
         <Link 
           href="/rasa" 
@@ -113,5 +116,6 @@ export default async function DishDetailPage({
          </p>
       </section>
     </main>
+    </>
   );
 }

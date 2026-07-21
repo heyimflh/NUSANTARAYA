@@ -19,7 +19,7 @@ export const AtlasTopBar = ({ provinceName }: { provinceName: string }) => {
   };
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50 bg-[#FFFDF8]/90 backdrop-blur-md border-b border-[#E8E0CE] h-16 flex items-center">
+    <header className="sticky top-16 lg:top-20 inset-x-0 z-40 bg-[#FFFDF8]/90 backdrop-blur-md border-b border-[#E8E0CE] h-16 flex items-center">
       <div className="max-w-7xl mx-auto w-full px-4 md:px-8 flex items-center justify-between">
         <Link href="/explore" className="flex items-center gap-2 text-nusaNavy hover:text-nusaGold transition-colors font-medium text-sm">
           <ArrowLeft size={18} />

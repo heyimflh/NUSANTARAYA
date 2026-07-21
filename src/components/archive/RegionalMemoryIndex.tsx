@@ -13,9 +13,9 @@ interface RegionalMemoryIndexProps {
 
 export function RegionalMemoryIndex({ regions, allItems, activeRegionId, onRegionSelect, t }: RegionalMemoryIndexProps) {
   return (
-    <section className="archive-surface-deep relative py-24 border-b border-[var(--archive-line)] overflow-hidden">
+    <section className="bg-transparent relative py-24 border-b border-[var(--archive-line)]/60 overflow-hidden">
       {/* Decorative Background Elements */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-20">
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-10">
         <div className="absolute -top-32 -right-32 w-96 h-96 bg-[var(--archive-terracotta)] blur-[120px] rounded-full mix-blend-multiply"></div>
         <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-[var(--archive-teal)] blur-[120px] rounded-full mix-blend-multiply"></div>
       </div>

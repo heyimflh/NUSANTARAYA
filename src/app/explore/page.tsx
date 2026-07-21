@@ -3,7 +3,7 @@ import { scrollElementIntoView } from "@/lib/utils/scroll";
 
 import { useState, useMemo, useCallback } from "react";
 import { MapHeroSection } from "@/components/explore/map-hero";
-import { ExploreNavbar } from "@/components/explore/ExploreNavbar";
+import { NusantarayaNavbar } from "@/components/navigation/NusantarayaNavbar";
 import { ExploreControlBar } from "@/components/explore/control-bar";
 import { ExploreLayerId } from "@/data/exploreControls";
 import { provinceMapData } from "@/data/provinces/provinces";
@@ -105,22 +105,8 @@ export default function ExplorePage() {
 
   return (
     <main className="relative min-h-screen isolate">
-      <picture
-        className="pointer-events-none fixed inset-0 z-0 block h-[100dvh] w-full select-none"
-      >
-        <source
-          media="(max-width: 767px)"
-          srcSet="/assets/background/background-explore-mobile.webp"
-        />
-        <img
-          src="/assets/background/background-explore-dekstop.webp"
-          alt=""
-          className="h-full w-full object-cover object-center"
-        />
-      </picture>
-
       <div className="relative z-10">
-        <ExploreNavbar />
+        <NusantarayaNavbar />
       <MapHeroSection />
       
       <ExploreControlBar 

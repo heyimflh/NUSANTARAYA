@@ -14,7 +14,7 @@ export const ROUTE_AVAILABILITY = {
   "/explore": true,
   "/routes": true,
   "/archive": true,
-  "/rasa": false,
+  "/rasa": true,
   "/nusarasa": false,
   "/rani": false,
   "/future": false,

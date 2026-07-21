@@ -194,7 +194,7 @@ export function RouteRecommendationResultSection({
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
         {/* Dossier card — Editorial Style */}
-        <div className="w-full rounded-[36px] bg-[#FFFDF8] border border-[#E8E0CE] p-6 md:p-8 lg:p-12 shadow-[0_8px_32px_rgba(13,27,42,0.04)] relative">
+        <div className="w-full rounded-[36px] bg-[#FFFDF8]/80 backdrop-blur-xl border border-[#E8E0CE] p-6 md:p-8 lg:p-12 shadow-[0_8px_32px_rgba(13,27,42,0.04)] relative">
 
           {/* Status bar */}
           <div className="flex items-center gap-3 mb-8 lg:mb-10">

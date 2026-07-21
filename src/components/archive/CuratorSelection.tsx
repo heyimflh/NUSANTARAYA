@@ -12,7 +12,7 @@ interface CuratorSelectionProps {
 
 export function CuratorSelection({ collections, activeMode, activeCategoryId, onOpenCollection, t }: CuratorSelectionProps) {
   return (
-    <section id="curator-selection" className="archive-surface-canvas py-16 lg:py-24 border-b border-[var(--archive-line)]">
+    <section id="curator-selection" className="bg-transparent py-16 lg:py-24 border-b border-[var(--archive-line)]">
       <div className="archive-container">
         <div className="mb-12 flex flex-col items-center text-center">
           <h2 className="font-playfair text-[32px] md:text-[42px] lg:text-[48px] text-[#29221B] font-medium mb-4">{t("Pilihan Kurator", "Curator's Selection")}</h2>

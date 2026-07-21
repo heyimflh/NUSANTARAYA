@@ -333,8 +333,8 @@ export function RouteAtelier() {
   }, [activeStep, isStep1Valid, isStep2Valid]);
 
   const plannerTokens = {
-    "--planner-canvas": "#F4EFE6",
-    "--planner-paper": "#FFFCF7",
+    "--planner-canvas": "rgba(244, 239, 230, 0.40)",
+    "--planner-paper": "rgba(255, 252, 247, 0.70)",
     "--planner-paper-raised": "#FFF9F1",
     "--planner-sand": "#E7DED1",
     "--planner-warm-border": "#D9CDBC",
@@ -355,7 +355,7 @@ export function RouteAtelier() {
     <section 
       id={ROUTE_SECTION_IDS.planner} 
       style={plannerTokens}
-      className="relative w-full pt-32 pb-16 md:pt-40 md:pb-24 bg-[var(--planner-canvas)] font-inter text-[var(--planner-ink)]"
+      className="relative w-full pt-32 pb-16 md:pt-40 md:pb-24 bg-transparent font-inter text-[var(--planner-ink)]"
     >
 
 
@@ -401,7 +401,7 @@ export function RouteAtelier() {
             <div className="flex flex-col lg:flex-row flex-wrap items-start relative gap-8 xl:gap-10">
               
               {/* Form Content Panel */}
-              <div className="flex-1 w-full flex flex-col bg-[var(--planner-paper)] border border-[var(--planner-warm-border)] rounded-3xl shadow-[0_8px_32px_rgba(58,43,34,0.03)] overflow-hidden min-h-[500px]">
+              <div className="flex-1 w-full flex flex-col bg-[var(--planner-paper)] backdrop-blur-lg border border-[var(--planner-warm-border)] rounded-3xl shadow-[0_8px_32px_rgba(58,43,34,0.03)] overflow-hidden min-h-[500px]">
                 <div className="flex-1 p-6 sm:p-8 lg:p-10">
                   {activeStep === 1 && (
                     <PlannerStep1 values={values} updateField={updateField} />
