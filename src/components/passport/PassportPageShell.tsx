@@ -27,9 +27,7 @@ export const PassportPageShell = () => {
   }
 
   return (
-    <main className="relative min-h-screen isolate bg-[#F3EBDD]/90 overflow-x-hidden">
-      {/* Background Texture for the entire page */}
-      <div className="absolute inset-0 opacity-[0.4] mix-blend-multiply pointer-events-none" style={{ backgroundImage: "url('/assets/noise.webp')" }} />
+    <main className="relative min-h-screen isolate bg-transparent overflow-x-clip">
       
       <div className="relative z-10 overflow-x-clip max-w-full">
         <NusantarayaNavbar />

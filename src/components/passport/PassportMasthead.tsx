@@ -27,13 +27,13 @@ export const PassportMasthead = ({ identity }: { identity: PassportProgressSumma
     >
       {/* Left: Expedition Identity */}
       <div className="flex-1 flex flex-col justify-center">
-        <h2 className="text-[#1A1410] text-[13px] font-bold uppercase tracking-[0.25em] mb-4">
+        <h2 className="text-[#1A1410] text-[13px] font-bold uppercase tracking-[0.25em] mb-4 drop-shadow-[0_2px_12px_rgba(255,255,255,0.8)]">
           Nusa Passport
         </h2>
-        <h1 className="text-4xl md:text-5xl lg:text-[56px] font-serif text-[#1A1410] font-semibold leading-[1.1] mb-6">
+        <h1 className="text-4xl md:text-5xl lg:text-[56px] font-serif text-[#1A1410] font-semibold leading-[1.1] mb-6 drop-shadow-[0_4px_16px_rgba(255,255,255,0.7)]">
           Setiap Jelajah<br />Meninggalkan Jejak.
         </h1>
-        <p className="text-[#5C4A26] text-base md:text-[17px] mb-10 max-w-lg leading-relaxed">
+        <p className="text-[#5C4A26] text-base md:text-[17px] mb-10 max-w-lg leading-relaxed drop-shadow-[0_2px_10px_rgba(255,255,255,0.8)]">
           {isComplete 
             ? "Jejak Nusantara lengkap—koleksi tetap dapat kamu telusuri kembali."
             : isNew

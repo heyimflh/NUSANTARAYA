@@ -1,7 +1,6 @@
 export default function PassportLoading() {
   return (
-    <main className="relative min-h-screen isolate overflow-hidden bg-[#F3EBDD]">
-      <div className="absolute inset-0 opacity-[0.4] mix-blend-multiply pointer-events-none" style={{ backgroundImage: "url('/assets/noise.webp')" }} />
+    <main className="relative min-h-screen isolate overflow-hidden bg-transparent">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24">
         {/* Masthead Skeleton */}
         <div className="animate-pulse flex flex-col md:flex-row gap-8 lg:gap-16 items-start">
