@@ -69,6 +69,18 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
         }
       },
       {
+        id: "future",
+        label: {
+          id: "Nusa Future",
+          en: "Nusa Future"
+        },
+        href: "/future",
+        description: {
+          id: "Observatorium masa depan Nusantara",
+          en: "Observatory of Nusantara's future"
+        }
+      },
+      {
         id: "passport",
         label: {
           id: "Nusa Passport",
@@ -91,6 +103,7 @@ export function getActiveNavigationId(pathname: string): string | null {
   
   if (pathname.startsWith("/archive")) return "ekosistem";
   if (pathname.startsWith("/rasa")) return "ekosistem";
+  if (pathname.startsWith("/future")) return "ekosistem";
   if (pathname.startsWith("/passport")) return "ekosistem";
   if (pathname.startsWith("/provinsi")) return "ekosistem";
   
@@ -100,6 +113,7 @@ export function getActiveNavigationId(pathname: string): string | null {
 export function getActiveChildId(pathname: string): string | null {
   if (pathname.startsWith("/archive")) return "archive";
   if (pathname.startsWith("/rasa")) return "rasa";
+  if (pathname.startsWith("/future")) return "future";
   if (pathname.startsWith("/passport")) return "passport";
   if (pathname.startsWith("/provinsi")) return "atlas";
   

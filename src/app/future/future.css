@@ -1,0 +1,65 @@
+/* Nusa Future Local Design Tokens */
+.future-page-context {
+  --future-canvas: #F3EFE4;
+  --future-paper: #FFFDF6;
+  --future-paper-deep: #E6DDC9;
+  --future-ink: #1C1917;
+  --future-charcoal: #44403C;
+  --future-muted: #78716C;
+  --future-line: #D6D3D1;
+  --future-solar: #D6A62E;
+  --future-solar-soft: #F3E4AE;
+  --future-terracotta: #B75B3E;
+  --future-coral: #D26F56;
+  --future-forest: #3F4E40;
+  --future-moss: #5E6C5A;
+  --future-teal: #2A5D54;
+  --future-teal-soft: #D8E7DF;
+  --future-clay: #8C6246;
+  --future-plum: #5E4655;
+  --future-success: #3E5B42;
+  --future-warning: #9A6D22;
+  --future-error: #983F34;
+
+  background-color: var(--future-canvas);
+  color: var(--future-ink);
+  
+  /* Subtle museum wall texture */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+.future-page-context :focus-visible {
+  outline: 1px solid var(--future-solar);
+  outline-offset: 2px;
+}
+
+.future-glass {
+  background: rgba(255, 253, 246, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(214, 211, 209, 0.5);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+}
+
+.future-glass-dark {
+  background: rgba(28, 25, 23, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  color: var(--future-paper);
+}
+
+.future-frame {
+  padding: 10px;
+  background-color: var(--future-paper);
+  border: 1px solid var(--future-line);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+}
+
+.future-divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--future-line) 20%, var(--future-line) 80%, transparent);
+}
+
