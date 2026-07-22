@@ -6,21 +6,38 @@ import { FUTURE_THEMES } from "@/data/future/themes";
 import { FutureSignalStatus, FutureThemeId } from "@/types/future";
 
 export function FutureSignalDesk({
+  initialQuery = "",
+  initialTheme = null,
+  initialStatus = null,
   onSearch,
 }: {
+  initialQuery?: string;
+  initialTheme?: FutureThemeId | null;
+  initialStatus?: FutureSignalStatus | null;
   onSearch?: (query: string, theme: FutureThemeId | null, status: FutureSignalStatus | null) => void;
 }) {
-  const [query, setQuery] = useState("");
-  const [activeTheme, setActiveTheme] = useState<FutureThemeId | null>(null);
-  const [activeStatus, setActiveStatus] = useState<FutureSignalStatus | null>(null);
+  const [query, setQuery] = useState(initialQuery);
+  const [activeTheme, setActiveTheme] = useState<FutureThemeId | null>(initialTheme);
+  const [activeStatus, setActiveStatus] = useState<FutureSignalStatus | null>(initialStatus);
+
+  // Sync internal state if URL changes externally (e.g. Back button or clear filters)
+  useEffect(() => {
+    setQuery(initialQuery);
+    setActiveTheme(initialTheme);
+    setActiveStatus(initialStatus);
+  }, [initialQuery, initialTheme, initialStatus]);
 
   // Debounce search
   useEffect(() => {
-    const t = setTimeout(() => {
-      onSearch?.(query, activeTheme, activeStatus);
-    }, 250);
-    return () => clearTimeout(t);
-  }, [query, activeTheme, activeStatus, onSearch]);
+    // Only trigger if local state differs from initial props, 
+    // to avoid infinite loops when syncing from URL
+    if (query !== initialQuery || activeTheme !== initialTheme || activeStatus !== initialStatus) {
+      const t = setTimeout(() => {
+        onSearch?.(query, activeTheme, activeStatus);
+      }, 250);
+      return () => clearTimeout(t);
+    }
+  }, [query, activeTheme, activeStatus, onSearch, initialQuery, initialTheme, initialStatus]);
 
   return (
     <section className="relative w-full z-30 -mt-8 pb-12 px-6 pointer-events-none">

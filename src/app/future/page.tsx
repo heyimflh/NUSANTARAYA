@@ -37,7 +37,7 @@ export default function FuturePage() {
       <MobilityNetwork />
       <PeopleStories />
       <ScenarioStudio />
-      <FinalCtaFooterSection />
+      <FinalCtaFooterSection topBgClass="bg-[var(--future-ink)]" />
     </div>
   );
 }

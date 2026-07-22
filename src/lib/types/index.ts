@@ -325,6 +325,8 @@ export interface PassportData {
   savedRoutes: string[];         // route ids (canonical list)
   savedRouteDetails?: Record<string, PassportSavedRoute>; // metadata map
   completedChapters?: Record<string, string[]>; // provinceId -> chapterIds
+  savedFutureSignals?: string[]; // future signal ids
+  savedFutureScenarios?: string[]; // future scenario ids
 }
 
 // ─── App State ───────────────────────────────────────────────────────────────

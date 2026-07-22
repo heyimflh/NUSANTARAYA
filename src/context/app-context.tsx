@@ -71,6 +71,10 @@ interface AppContextType {
   // Audio
   audioEnabled: boolean;
   setAudioEnabled: (enabled: boolean) => void;
+
+  // Future
+  toggleFutureSignal: (signalId: string) => void;
+  toggleFutureScenario: (scenarioId: string) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -264,6 +268,26 @@ export function AppProvider({ children }: { children: ReactNode }) {
     safeSetItem(PASSPORT_KEY, fresh);
   }, []);
 
+  const toggleFutureSignal = useCallback((signalId: string) => {
+    updatePassport((p) => {
+      const saved = p.savedFutureSignals || [];
+      const newSaved = saved.includes(signalId)
+        ? saved.filter((id) => id !== signalId)
+        : [...saved, signalId];
+      return { ...p, savedFutureSignals: newSaved };
+    });
+  }, [updatePassport]);
+
+  const toggleFutureScenario = useCallback((scenarioId: string) => {
+    updatePassport((p) => {
+      const saved = p.savedFutureScenarios || [];
+      const newSaved = saved.includes(scenarioId)
+        ? saved.filter((id) => id !== scenarioId)
+        : [...saved, scenarioId];
+      return { ...p, savedFutureScenarios: newSaved };
+    });
+  }, [updatePassport]);
+
   // Prevent hydration mismatch: render nothing until hydrated
   if (!hydrated) {
     return (
@@ -289,6 +313,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
           resetPassport,
           audioEnabled: false,
           setAudioEnabled,
+          toggleFutureSignal,
+          toggleFutureScenario,
         }}
       >
         {children}
@@ -319,6 +345,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         resetPassport,
         audioEnabled,
         setAudioEnabled,
+        toggleFutureSignal,
+        toggleFutureScenario,
       }}
     >
       {children}
@@ -364,6 +392,8 @@ export function usePassport() {
     saveRouteWithDetails,
     removeRouteWithDetails,
     resetPassport,
+    toggleFutureSignal,
+    toggleFutureScenario,
   } = useAppContext();
   return {
     passport,
@@ -379,6 +409,8 @@ export function usePassport() {
     saveRouteWithDetails,
     removeRouteWithDetails,
     resetPassport,
+    toggleFutureSignal,
+    toggleFutureScenario,
   };
 }
 

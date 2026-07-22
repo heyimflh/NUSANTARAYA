@@ -4,6 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { RegionId } from "@/types/region";
 import { ArrowRight, MapPin, Activity } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { getRegionSignalStats } from "@/lib/future/futureRegionStats";
+import { FUTURE_THEMES } from "@/data/future/themes";
 
 export function ArchipelagoObservatory({
   activeRegion,
@@ -13,13 +16,13 @@ export function ArchipelagoObservatory({
   onRegionSelect: (r: RegionId) => void;
 }) {
   const regions: { id: RegionId; label: string; offsetClass: string; img: string }[] = [
-    { id: "sumatera", label: "Sumatera", offsetClass: "top-10 left-10 md:top-20 md:left-24", img: "/assets/explore/layers/future.webp" },
-    { id: "jawa", label: "Jawa", offsetClass: "bottom-10 left-32 md:bottom-20 md:left-48", img: "/assets/heritage-future/masa-kini.webp" },
+    { id: "sumatera", label: "Sumatera", offsetClass: "top-10 left-10 md:top-20 md:left-24", img: "/assets/province/sumatera-barat/hero.webp" },
+    { id: "jawa", label: "Jawa", offsetClass: "bottom-10 left-32 md:bottom-20 md:left-48", img: "/assets/province/di-yogyakarta/modern.webp" },
     { id: "kalimantan", label: "Kalimantan", offsetClass: "top-20 left-1/2 md:top-24 md:left-1/2 -translate-x-1/2", img: "/assets/province/kalimantan-timur/modern.webp" },
-    { id: "bali-nusa-tenggara", label: "Bali & Nusa Tenggara", offsetClass: "bottom-10 right-1/2 md:bottom-24 md:right-1/2 translate-x-1/2", img: "/assets/heritage-future/warisan.webp" },
-    { id: "sulawesi", label: "Sulawesi", offsetClass: "top-1/3 right-1/4 md:top-1/3 md:right-1/3", img: "/assets/heritage-future/masa-depan.webp" },
-    { id: "maluku", label: "Maluku", offsetClass: "top-1/2 right-20 md:top-1/2 md:right-32", img: "/assets/explore/layers/future.webp" },
-    { id: "papua", label: "Papua", offsetClass: "top-10 right-4 md:top-24 md:right-10", img: "/assets/heritage-future/masa-depan.webp" },
+    { id: "bali-nusa-tenggara", label: "Bali & Nusa Tenggara", offsetClass: "bottom-10 right-1/2 md:bottom-24 md:right-1/2 translate-x-1/2", img: "/assets/province/bali/modern.webp" },
+    { id: "sulawesi", label: "Sulawesi", offsetClass: "top-1/3 right-1/4 md:top-1/3 md:right-1/3", img: "/assets/province/sulawesi-selatan/modern.webp" },
+    { id: "maluku", label: "Maluku", offsetClass: "top-1/2 right-20 md:top-1/2 md:right-32", img: "/assets/province/maluku/modern.webp" },
+    { id: "papua", label: "Papua", offsetClass: "top-10 right-4 md:top-24 md:right-10", img: "/assets/province/papua/hero.webp" },
   ];
 
   const activeRegionData = regions.find(r => r.id === activeRegion);
@@ -118,56 +121,66 @@ export function ArchipelagoObservatory({
                   <div className="flex-1 flex flex-col items-center justify-center text-center opacity-60">
                     <Activity className="w-10 h-10 text-[var(--future-charcoal)] mb-6 opacity-50" />
                     <p className="text-[var(--future-ink)] font-mono text-sm tracking-wider uppercase mb-2">Menunggu Input</p>
-                    <p className="text-sm text-[var(--future-muted)]">Pilih node pada skema jaringan untuk memuat data telemetri wilayah.</p>
+                    <p className="text-sm text-[var(--future-muted)]">Pilih region pada peta untuk memuat data sinyal wilayah.</p>
                   </div>
                 ) : (
-                  <div className="flex flex-col h-full">
-                    <div className="flex items-center justify-between border-b border-[var(--future-line)] pb-4 mb-6">
-                      <span className="text-[10px] font-mono tracking-widest uppercase text-[var(--future-muted)]">
-                        Dossier Wilayah
-                      </span>
-                      <span className="text-[10px] font-mono tracking-widest text-[var(--future-solar)] bg-[var(--future-ink)] px-2 py-1">
-                        LIVE
-                      </span>
-                    </div>
-                    
-                    <h3 className="text-3xl font-playfair text-[var(--future-ink)] mb-6 capitalize">
-                      {activeRegionData.label}
-                    </h3>
-                    
-                    {/* Image inclusion for dossier */}
-                    <div className="w-full aspect-video relative overflow-hidden mb-6 future-frame">
-                      <div className="relative w-full h-full">
-                        <Image 
-                          src={activeRegionData.img}
-                          alt={activeRegionData.label}
-                          fill
-                          className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                        />
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-4 mb-8 flex-1">
-                      <div className="flex justify-between items-center py-2 border-b border-[var(--future-line)]/50 text-sm">
-                        <span className="text-[var(--future-muted)]">Status Integrasi</span>
-                        <span className="font-mono font-medium text-[var(--future-teal)]">Optimal</span>
-                      </div>
-                      <div className="flex justify-between items-center py-2 border-b border-[var(--future-line)]/50 text-sm">
-                        <span className="text-[var(--future-muted)]">Jumlah Sinyal</span>
-                        <span className="font-mono font-medium">12 Node Aktif</span>
-                      </div>
-                      <div className="flex justify-between items-center py-2 border-b border-[var(--future-line)]/50 text-sm">
-                        <span className="text-[var(--future-muted)]">Fokus Utama</span>
-                        <span className="font-mono font-medium text-right">Ekonomi Biru & Hijau</span>
-                      </div>
-                    </div>
+                  (function() {
+                    const stats = getRegionSignalStats(activeRegionData.id);
+                    return (
+                      <div className="flex flex-col h-full">
+                        <div className="flex items-center justify-between border-b border-[var(--future-line)] pb-4 mb-6">
+                          <span className="text-[10px] font-mono tracking-widest uppercase text-[var(--future-muted)]">
+                            Dossier Wilayah
+                          </span>
+                          <span className="text-[10px] font-mono tracking-widest text-[var(--future-solar)] bg-[var(--future-ink)] px-2 py-1">
+                            AKTIF
+                          </span>
+                        </div>
+                        
+                        <h3 className="text-3xl font-playfair text-[var(--future-ink)] mb-6 capitalize">
+                          {activeRegionData.label}
+                        </h3>
+                        
+                        {/* Image inclusion for dossier */}
+                        <div className="w-full aspect-video relative overflow-hidden mb-6 future-frame">
+                          <div className="relative w-full h-full">
+                            <Image 
+                              src={activeRegionData.img}
+                              alt={activeRegionData.label}
+                              fill
+                              className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                            />
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-4 mb-8 flex-1">
+                          <div className="flex justify-between items-center py-2 border-b border-[var(--future-line)]/50 text-sm">
+                            <span className="text-[var(--future-muted)]">Sinyal Dipublikasi</span>
+                            <span className="font-mono font-medium text-[var(--future-teal)]">{stats.publishedSignals} Sinyal</span>
+                          </div>
+                          <div className="flex justify-between items-center py-2 border-b border-[var(--future-line)]/50 text-sm">
+                            <span className="text-[var(--future-muted)]">Sinyal Dalam Proses</span>
+                            <span className="font-mono font-medium">{stats.totalSignals - stats.publishedSignals} Draft/Scenarios</span>
+                          </div>
+                          <div className="flex justify-between items-center py-2 border-b border-[var(--future-line)]/50 text-sm">
+                            <span className="text-[var(--future-muted)]">Tema Teratas</span>
+                            <span className="font-mono font-medium text-right text-xs">
+                              {stats.topThemes.length > 0 ? stats.topThemes.map(t => FUTURE_THEMES.find(th => th.id === t)?.label.id).join(", ") : "-"}
+                            </span>
+                          </div>
+                        </div>
 
-                    <div className="mt-auto">
-                      <button className="w-full py-4 bg-[var(--future-ink)] text-[var(--future-paper)] font-mono text-xs tracking-widest uppercase hover:bg-[var(--future-solar)] hover:text-[var(--future-ink)] transition-colors border border-[var(--future-ink)]">
-                        Muat Data Lengkap
-                      </button>
-                    </div>
-                  </div>
+                        <div className="mt-auto">
+                          <Link 
+                            href={`/future?region=${activeRegionData.id}#explorer`}
+                            className="block w-full py-4 text-center bg-[var(--future-ink)] text-[var(--future-paper)] font-mono text-xs tracking-widest uppercase hover:bg-[var(--future-solar)] hover:text-[var(--future-ink)] transition-colors border border-[var(--future-ink)]"
+                          >
+                            Muat Data Lengkap
+                          </Link>
+                        </div>
+                      </div>
+                    );
+                  })()
                 )}
               </motion.div>
             </AnimatePresence>

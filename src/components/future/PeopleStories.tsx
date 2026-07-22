@@ -44,7 +44,14 @@ export function PeopleStories() {
                      <span className="text-[10px] font-mono font-bold uppercase text-[var(--future-muted)] tracking-widest block mb-2">
                        {story.role.replace("-", " ")}
                      </span>
-                     <h3 className="font-playfair text-2xl text-[var(--future-ink)] leading-none mb-2">{story.name}</h3>
+                     <div className="flex items-center gap-3 mb-2">
+                       <h3 className="font-playfair text-2xl text-[var(--future-ink)] leading-none">{story.name}</h3>
+                       {story.isComposite && (
+                         <span className="text-[8px] font-mono tracking-widest uppercase border border-[var(--future-line)] px-2 py-0.5 text-[var(--future-muted)]">
+                           Composite Persona
+                         </span>
+                       )}
+                     </div>
                      <span className="text-xs font-mono uppercase text-[var(--future-charcoal)] tracking-wider">
                        LOC: {story.location}
                      </span>

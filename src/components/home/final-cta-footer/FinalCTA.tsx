@@ -7,11 +7,11 @@ import { FinalCTAVisual } from "./FinalCTAVisual";
 
 import { isRouteAvailable } from "@/lib/routes";
 
-export function FinalCTA() {
+export function FinalCTA({ topBgClass = "bg-[#f4eee2]" }: { topBgClass?: string }) {
   return (
     <section
       aria-labelledby="final-cta-title"
-      className="relative isolate overflow-hidden px-5 py-32 text-center md:py-48 bg-[#f4eee2]"
+      className={`relative isolate overflow-hidden px-5 py-32 text-center md:py-48 ${topBgClass}`}
     >
       <FinalCTAVisual />
 

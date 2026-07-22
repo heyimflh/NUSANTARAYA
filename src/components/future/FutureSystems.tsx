@@ -1,6 +1,7 @@
 import { FUTURE_THEMES } from "@/data/future/themes";
 import { ArrowRight, Users, Move, Leaf, Palette, Home, Waves, History } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const iconMap: Record<string, React.ElementType> = {
   "users": Users,
@@ -21,7 +22,8 @@ export function FutureSystems() {
     const Icon = iconMap[theme.iconId] || Users;
     
     return (
-      <div 
+      <Link 
+        href={`/future?theme=${theme.id}#explorer`}
         key={theme.id}
         className={`relative flex flex-col bg-[var(--future-paper)] border border-[var(--future-line)] rounded-none p-6 md:p-8 group hover:bg-[var(--future-paper-deep)] transition-all duration-500 overflow-hidden ${featured ? 'lg:col-span-2 lg:flex-row gap-8' : ''}`}
       >
@@ -53,14 +55,14 @@ export function FutureSystems() {
           </p>
           <div className="mt-auto flex items-center justify-between border-t border-[var(--future-line)]/50 pt-4">
             <span className="text-[10px] font-mono font-bold tracking-widest text-[var(--future-muted)] uppercase">
-              Eksplorasi Sistem
+              Tampilkan Sinyal
             </span>
             <div className="w-8 h-8 rounded-full border border-[var(--future-line)] flex items-center justify-center group-hover:bg-[var(--future-ink)] group-hover:text-[var(--future-paper)] group-hover:border-[var(--future-ink)] transition-colors">
               <ArrowRight className="w-3 h-3 transform group-hover:translate-x-0.5 transition-transform" />
             </div>
           </div>
         </div>
-      </div>
+      </Link>
     );
   };
 

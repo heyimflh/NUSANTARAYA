@@ -19,6 +19,7 @@
     "validate:route-presets": "tsx scripts/validate-route-presets.ts",
     "validate:rasa-assets": "tsx scripts/validate-rasa-assets.ts",
     "validate:rasa-content": "tsx scripts/validate-rasa-content.ts",
+    "validate:future-data": "tsx scripts/validate-future-data.ts",
     "test:passport": "tsx scripts/test-passport-logic.ts",
     "qa:sprint2": "npm run validate:foundation && npm run test:passport && npm run validate:regions && npm run validate:atlas && npm run validate:route-presets && npm run validate:rasa-assets && npm run validate:rasa-content && npm run lint && npm run typecheck && npm run build",
     "test:route-engine": "tsx scripts/test-route-engine.ts",
@@ -27,7 +28,7 @@
     "qa:route": "npm run validate:route-presets && npm run validate:route-contracts && npm run test:route-engine && npm run test:route-integration && npm run typecheck && npm run lint && npm run build",
     "baseline:phase0": "node scripts/capture-phase0-baseline.mjs",
     "test:e2e:smoke": "playwright test e2e/smoke.spec.ts --project=chromium",
-    "ci:quality": "npm run validate:foundation && npm run validate:regions && npm run validate:atlas && npm run validate:route-presets && npm run validate:route-contracts && npm run validate:assets && npm run test:passport && npm run test:route-engine && npm run test:route-integration && npm run lint && npm run typecheck && npm run build && npm run test:e2e:smoke"
+    "ci:quality": "npm run validate:foundation && npm run validate:regions && npm run validate:atlas && npm run validate:route-presets && npm run validate:route-contracts && npm run validate:assets && npm run validate:future-data && npm run test:passport && npm run test:route-engine && npm run test:route-integration && npm run lint && npm run typecheck && npm run build && npm run test:e2e:smoke"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

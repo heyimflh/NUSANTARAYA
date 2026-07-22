@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, Info, AlertTriangle, Leaf } from "lucide-react";
 
 export function IknDossier() {
@@ -57,21 +58,21 @@ export function IknDossier() {
               </div>
             </div>
 
-            {/* CTAs */}
+          {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <a 
+              <Link 
                 href="/explore?layer=future&province=kalimantan-timur"
                 className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-[var(--future-ink)] text-[var(--future-paper)] text-xs font-mono tracking-widest uppercase hover:bg-[var(--future-charcoal)] transition-colors border border-[var(--future-ink)]"
               >
                 Buka Atlas Kaltim
                 <ArrowRight className="w-4 h-4" />
-              </a>
-              <a 
+              </Link>
+              <Link 
                 href="/routes"
                 className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-transparent text-[var(--future-ink)] text-xs font-mono tracking-widest uppercase hover:bg-[var(--future-paper-deep)] transition-colors border border-[var(--future-line)]"
               >
                 Rute Warisan–IKN
-              </a>
+              </Link>
             </div>
 
             <div className="mt-8 flex items-start gap-3 text-[10px] text-[var(--future-muted)] leading-tight bg-[var(--future-paper)] p-4 border border-[var(--future-line)]">
@@ -95,7 +96,7 @@ export function IknDossier() {
                 />
               </div>
               <div className="absolute top-6 -left-6 bg-[var(--future-paper)] px-4 py-2 shadow-sm border border-[var(--future-line)] text-[10px] font-mono tracking-widest text-[var(--future-ink)] flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[var(--future-warning)] animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-[var(--future-warning)]" />
                 STATUS: IN-PROGRESS
               </div>
             </div>

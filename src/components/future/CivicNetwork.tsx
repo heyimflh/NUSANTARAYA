@@ -5,7 +5,7 @@ import { FUTURE_SIGNALS } from "@/data/future/signals";
 import { ArrowRight, FileText, CheckCircle2 } from "lucide-react";
 import { FutureSignal } from "@/types/future";
 import Image from "next/image";
-
+import Link from "next/link";
 export function CivicNetwork() {
   const [savedIds, setSavedIds] = useState<Set<string>>(new Set());
 
@@ -76,17 +76,13 @@ export function CivicNetwork() {
               </div>
             </div>
 
-            <div className="flex items-center justify-between pt-4 border-t border-[var(--future-line)]/50">
-              <button className="text-xs font-mono font-bold tracking-widest uppercase text-[var(--future-ink)] hover:text-[var(--future-terracotta)] transition-colors flex items-center gap-2">
-                Quick View <ArrowRight className="w-3 h-3" />
-              </button>
-              <button 
-                onClick={() => toggleSave(signal.id)}
-                className={`text-[10px] font-mono tracking-widest uppercase px-4 py-2 transition-colors border ${isSaved ? 'bg-[var(--future-ink)] text-[var(--future-paper)] border-[var(--future-ink)]' : 'bg-transparent text-[var(--future-ink)] border-[var(--future-line)] hover:bg-[var(--future-paper-deep)] hover:border-[var(--future-charcoal)]'}`}
-                aria-pressed={isSaved}
+        <div className="flex items-center justify-between pt-4 border-t border-[var(--future-line)]/50">
+              <Link 
+                href={`/future?q=${signal.localeContent.id.title}#explorer`}
+                className="text-xs font-mono font-bold tracking-widest uppercase text-[var(--future-ink)] hover:text-[var(--future-terracotta)] transition-colors flex items-center gap-2"
               >
-                {isSaved ? "Disimpan" : "Simpan Sinyal"}
-              </button>
+                Buka di Explorer <ArrowRight className="w-3 h-3" />
+              </Link>
             </div>
           </div>
         </div>
@@ -109,9 +105,12 @@ export function CivicNetwork() {
               Inovasi yang lahir dari bawah ke atas. Bukan sekadar menunggu arahan pusat, melainkan merespons tantangan lokal secara organik.
             </p>
           </div>
-          <button className="shrink-0 text-xs font-mono tracking-widest uppercase text-[var(--future-ink)] border-b border-[var(--future-ink)] pb-1 hover:text-[var(--future-terracotta)] hover:border-[var(--future-terracotta)] transition-colors">
+          <Link 
+            href="/future?theme=civic-life#explorer"
+            className="shrink-0 text-xs font-mono tracking-widest uppercase text-[var(--future-ink)] border-b border-[var(--future-ink)] pb-1 hover:text-[var(--future-terracotta)] hover:border-[var(--future-terracotta)] transition-colors"
+          >
             Semua Inovasi Warga
-          </button>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

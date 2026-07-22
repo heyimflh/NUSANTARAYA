@@ -4,17 +4,24 @@ import { useState } from "react";
 import { Sparkles, ArrowRight, Settings2, Activity, Hexagon } from "lucide-react";
 import { FUTURE_SCENARIO_PRESETS } from "@/data/future/scenarios";
 import { FutureScenario } from "@/types/future";
+import { generateFutureScenario, ScenarioInput } from "@/lib/future/generateFutureScenario";
 
 export function ScenarioStudio() {
   const [activeScenario, setActiveScenario] = useState<FutureScenario | null>(null);
-  const [isGenerating, setIsGenerating] = useState(false);
 
   const handleGenerate = (scenarioId: string) => {
-    setIsGenerating(true);
-    setTimeout(() => {
-      setActiveScenario(FUTURE_SCENARIO_PRESETS.find(s => s.id === scenarioId) || null);
-      setIsGenerating(false);
-    }, 2000);
+    const preset = FUTURE_SCENARIO_PRESETS.find(s => s.id === scenarioId);
+    if (!preset) return;
+    
+    // Convert preset to deterministic generation
+    const scenario = generateFutureScenario({
+      perspective: preset.perspective as ScenarioInput["perspective"],
+      horizon: preset.horizon as ScenarioInput["horizon"],
+      provinceId: preset.provinceId,
+      regionId: preset.regionId,
+    });
+    
+    setActiveScenario(scenario);
   };
 
   return (
@@ -80,7 +87,7 @@ export function ScenarioStudio() {
               <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-[var(--future-solar)]/50" />
               <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-[var(--future-solar)]/50" />
 
-              {!activeScenario && !isGenerating && (
+              {!activeScenario && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center opacity-40 p-6">
                   <Hexagon className="w-16 h-16 text-[var(--future-muted)] mb-6" />
                   <p className="text-[var(--future-line)] font-mono tracking-widest text-sm uppercase">Engine Standby</p>
@@ -88,19 +95,7 @@ export function ScenarioStudio() {
                 </div>
               )}
 
-              {isGenerating && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-[var(--future-charcoal)]/90 backdrop-blur-md z-10">
-                  <div className="relative w-20 h-20 mb-8 flex items-center justify-center">
-                    <div className="absolute inset-0 border-t-2 border-[var(--future-solar)] rounded-full animate-spin" />
-                    <div className="absolute inset-2 border-r-2 border-[var(--future-teal)] rounded-full animate-spin animation-delay-150" />
-                    <div className="absolute inset-4 border-b-2 border-[var(--future-terracotta)] rounded-full animate-spin animation-delay-300" />
-                    <Hexagon className="w-4 h-4 text-[var(--future-solar)] animate-pulse" />
-                  </div>
-                  <p className="text-[var(--future-solar)] font-mono text-[10px] tracking-[0.3em] uppercase animate-pulse">Menyintesis Variabel...</p>
-                </div>
-              )}
-
-              {activeScenario && !isGenerating && (
+              {activeScenario && (
                 <div className="relative z-20 flex flex-col h-full animate-in fade-in slide-in-from-bottom-8 duration-1000">
                   <div className="flex items-end justify-between border-b border-[var(--future-line)]/20 pb-6 mb-8">
                     <div>
