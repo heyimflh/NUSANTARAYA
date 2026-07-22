@@ -99,12 +99,10 @@ export function ArchiveItemCard({
   const titleSize = layoutType === "large" || layoutType === "wide" 
     ? "text-2xl md:text-3xl lg:text-4xl" 
     : "text-xl md:text-2xl";
-    
-  const showSummary = layoutType === "large" || layoutType === "wide" || layoutType === "tall";
 
   return (
     <div 
-      className="group relative w-full h-full min-h-[250px] flex flex-col rounded-[2rem] overflow-hidden cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 bg-[#1A1A1A]"
+      className="group relative w-full h-full min-h-[250px] flex flex-col rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500 bg-[var(--archive-paper-deep)]"
       onClick={onOpenQuickView}
       role="button"
       tabIndex={0}
@@ -121,7 +119,7 @@ export function ArchiveItemCard({
           src={mainMedia.src}
           alt={language === "en" ? mainMedia.altEn || mainMedia.alt : mainMedia.alt}
           fill
-          className="object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
+          className="object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
           sizes={
             layoutType === "large" 
               ? "(max-width: 768px) 100vw, 50vw" 
@@ -132,50 +130,49 @@ export function ArchiveItemCard({
         <div className="absolute inset-0 bg-[#E8E1D3]" />
       )}
       
-      {/* Cinematic Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/95 via-[#111111]/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-500" />
-      <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
+      {/* Cinematic Gradient Overlay - Lighter for better image visibility */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
       
       {/* Top Meta Data (Catalog Number & Province) */}
       <div className="absolute top-0 left-0 right-0 p-5 md:p-6 flex justify-between items-start z-10">
-        <span className="px-3 py-1 bg-black/30 backdrop-blur-md rounded-full text-[10px] font-mono text-white/90 border border-white/10 tracking-widest">
+        <span className="px-3 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-mono text-white border border-white/20 tracking-widest transition-colors duration-300 group-hover:bg-white/20">
           {catalogNumber}
         </span>
-        <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-semibold text-white/90 uppercase border border-white/10 tracking-wider">
+        <span className="px-3 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-semibold text-white uppercase border border-white/20 tracking-wider transition-colors duration-300 group-hover:bg-white/20">
           {provinceName}
         </span>
       </div>
 
       {/* Content Positioned at Bottom */}
       <div className="absolute inset-0 p-5 md:p-6 flex flex-col justify-end z-10">
-        <div className="transform translate-y-3 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+        <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
           
           {/* Category Eyebrow */}
           <span 
-            className="block text-[11px] font-semibold uppercase tracking-widest mb-2"
-            style={{ color: category?.accentColorSoft || "#D4B56A" }}
+            className="block text-[10px] font-bold uppercase tracking-widest mb-1.5"
+            style={{ color: category?.accentColorSoft || "#F3EBDD" }}
           >
             {categoryName}
           </span>
           
           {/* Title */}
-          <h3 className={`font-playfair font-bold !text-[#F3EBDD] drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] leading-tight mb-3 ${titleSize}`}>
+          <h3 className={`font-playfair font-bold !text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] leading-tight ${titleSize}`}>
             {content.title}
           </h3>
           
-          {/* Summary (Hidden on standard size until hovered, or always visible on large sizes) */}
+          {/* Summary strictly hidden until hover to keep it clean like the reference */}
           <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out">
             <div className="overflow-hidden">
-              <p className="!text-[#F3EBDD]/90 text-sm leading-relaxed mb-4 line-clamp-2 md:line-clamp-3">
+              <p className="!text-white/80 text-sm leading-relaxed mt-3 mb-2 line-clamp-2">
                 {content.summary}
               </p>
             </div>
           </div>
           
           {/* Quick View Interactive Button */}
-          <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 mt-1">
-            <div className="h-[1px] w-8 bg-[#D4B56A]" />
-            <span className="text-[#D4B56A] text-[10px] uppercase tracking-[0.2em] font-semibold">
+          <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 mt-2">
+            <div className="h-[1px] w-6 bg-white/60" />
+            <span className="text-white/80 text-[10px] uppercase tracking-[0.2em] font-semibold">
               {t("Lihat Ringkasan", "Quick View")}
             </span>
           </div>

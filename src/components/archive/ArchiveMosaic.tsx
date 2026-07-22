@@ -66,7 +66,7 @@ export function ArchiveMosaic({
   }
 
   return (
-    <section id="archive-results" className="bg-transparent py-12 lg:py-16 border-b border-[var(--archive-line)]/60">
+    <section id="archive-results" className="relative z-10 bg-transparent py-12 lg:py-16 border-b border-[var(--archive-line)]/60">
       <div className="archive-container">
         
         {/* Toolbar */}
@@ -80,10 +80,10 @@ export function ArchiveMosaic({
             </p>
           </div>
 
-          <div className="flex items-center gap-2 bg-[var(--archive-paper-deep)] p-1 rounded-lg border border-[var(--archive-line)]">
+          <div className="flex items-center gap-1 bg-[var(--archive-paper-deep)] p-1 rounded-full border border-[var(--archive-line)]/50">
             <button
               onClick={() => onViewModeChange("editorial")}
-              className={`p-2 rounded-md transition-colors ${
+              className={`p-2 rounded-full transition-all duration-300 ${
                 viewMode === "editorial"
                   ? "bg-[var(--archive-paper)] shadow-sm text-[var(--archive-ink)]"
                   : "text-[var(--archive-muted)] hover:text-[var(--archive-ink)]"
@@ -95,7 +95,7 @@ export function ArchiveMosaic({
             </button>
             <button
               onClick={() => onViewModeChange("compact")}
-              className={`p-2 rounded-md transition-colors ${
+              className={`p-2 rounded-full transition-all duration-300 ${
                 viewMode === "compact"
                   ? "bg-[var(--archive-paper)] shadow-sm text-[var(--archive-ink)]"
                   : "text-[var(--archive-muted)] hover:text-[var(--archive-ink)]"
