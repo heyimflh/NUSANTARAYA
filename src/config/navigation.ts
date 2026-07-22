@@ -93,6 +93,14 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
         }
       }
     ]
+  },
+  {
+    id: "tentang",
+    label: {
+      id: "Tentang",
+      en: "About"
+    },
+    href: "/about"
   }
 ];
 
@@ -100,6 +108,7 @@ export function getActiveNavigationId(pathname: string): string | null {
   if (pathname === "/") return "beranda";
   if (pathname === "/explore") return "jelajahi";
   if (pathname === "/routes") return "rute";
+  if (pathname === "/about") return "tentang";
   
   if (pathname.startsWith("/archive")) return "ekosistem";
   if (pathname.startsWith("/rasa")) return "ekosistem";

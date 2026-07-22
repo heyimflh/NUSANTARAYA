@@ -33,7 +33,7 @@ export const footerLinkGroups = [
   {
     title: "Tentang",
     links: [
-      { label: "Tentang NUSANTARAYA", href: "/about", status: "soon" },
+      { label: "Tentang NUSANTARAYA", href: "/about", status: "live" },
       { label: "Sumber Data", href: "/sources", status: "soon" },
       { label: "Roadmap", href: "/roadmap", status: "soon" },
       { label: "Credits", href: "/credits", status: "soon" },

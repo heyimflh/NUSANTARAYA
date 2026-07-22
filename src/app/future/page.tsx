@@ -11,6 +11,8 @@ import { GreenBlue } from "@/components/future/GreenBlue";
 import { MobilityNetwork } from "@/components/future/MobilityNetwork";
 import { PeopleStories } from "@/components/future/PeopleStories";
 import { ScenarioStudio } from "@/components/future/ScenarioStudio";
+import { NusantarayaNavbar } from '@/components/navigation/NusantarayaNavbar';
+import { FinalCtaFooterSection } from '@/components/home/final-cta-footer';
 import "./future.css";
 
 export const metadata: Metadata = {
@@ -21,6 +23,7 @@ export const metadata: Metadata = {
 export default function FuturePage() {
   return (
     <div className="w-full min-h-screen pb-0 future-page-context font-inter">
+      <NusantarayaNavbar />
       <FutureHero />
       <Suspense fallback={<div className="p-8 text-center">Memuat observatorium...</div>}>
         <FutureClient />
@@ -34,6 +37,7 @@ export default function FuturePage() {
       <MobilityNetwork />
       <PeopleStories />
       <ScenarioStudio />
+      <FinalCtaFooterSection />
     </div>
   );
 }

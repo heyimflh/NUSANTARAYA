@@ -58,7 +58,7 @@ export function ScenarioStudio() {
                         {scenario.perspective}
                       </h4>
                       <span className={`text-[10px] font-mono tracking-widest uppercase ${isActive ? 'text-[var(--future-paper)]' : 'text-[var(--future-muted)]'}`}>
-                        LOC: {scenario.provinceId.replace(/-/g, " ")} // H: {scenario.horizon}
+                        LOC: {scenario.provinceId?.replace(/-/g, " ") || 'UMUM'} // H: {scenario.horizon}
                       </span>
                     </div>
                     <div className={`w-8 h-8 rounded-full border flex items-center justify-center transition-colors ${isActive ? 'border-[var(--future-solar)] bg-[var(--future-solar)]/10 text-[var(--future-solar)]' : 'border-[var(--future-charcoal)] text-[var(--future-charcoal)] group-hover:text-[var(--future-line)] group-hover:border-[var(--future-line)]'}`}>
@@ -114,7 +114,7 @@ export function ScenarioStudio() {
                         Perspektif {activeScenario.perspective}
                       </h3>
                       <p className="text-xs font-mono uppercase text-[var(--future-line)] tracking-widest mt-2">
-                        Lokasi: {activeScenario.provinceId.replace(/-/g, " ")}
+                        Lokasi: {activeScenario.provinceId?.replace(/-/g, " ") || 'UMUM'}
                       </p>
                     </div>
                     <div className="flex flex-col items-end">

@@ -58,6 +58,28 @@
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* About Page Semantic Tokens (No Navy Allowed) */
+  --about-canvas: #F4EEE2;
+  --about-paper: #FFF9EF;
+  --about-paper-deep: #E6D8C2;
+  --about-ink: #292119;
+  --about-charcoal: #38312A;
+  --about-muted: #74695E;
+  --about-line: #CDBDA7;
+  --about-saffron: #D2A12E;
+  --about-saffron-soft: #F1E2AE;
+  --about-terracotta: #B95B40;
+  --about-terracotta-soft: #E9C7B8;
+  --about-oxblood: #7B352F;
+  --about-forest: #586C52;
+  --about-sage: #7B876E;
+  --about-teal: #34766B;
+  --about-clay: #A67555;
+  --about-plum: #76596B;
+  --about-success: #527058;
+  --about-warning: #956B25;
+  --about-error: #973D32;
 }
 
 /* ─── Tailwind v4 @theme: register tokens as Tailwind utilities ─────────── */
@@ -117,6 +139,28 @@
   --radius-lg: var(--radius-lg);
   --radius-xl: var(--radius-xl);
   --radius-full: var(--radius-full);
+
+  /* About Page Semantic Colors */
+  --color-about-canvas: var(--about-canvas);
+  --color-about-paper: var(--about-paper);
+  --color-about-paper-deep: var(--about-paper-deep);
+  --color-about-ink: var(--about-ink);
+  --color-about-charcoal: var(--about-charcoal);
+  --color-about-muted: var(--about-muted);
+  --color-about-line: var(--about-line);
+  --color-about-saffron: var(--about-saffron);
+  --color-about-saffron-soft: var(--about-saffron-soft);
+  --color-about-terracotta: var(--about-terracotta);
+  --color-about-terracotta-soft: var(--about-terracotta-soft);
+  --color-about-oxblood: var(--about-oxblood);
+  --color-about-forest: var(--about-forest);
+  --color-about-sage: var(--about-sage);
+  --color-about-teal: var(--about-teal);
+  --color-about-clay: var(--about-clay);
+  --color-about-plum: var(--about-plum);
+  --color-about-success: var(--about-success);
+  --color-about-warning: var(--about-warning);
+  --color-about-error: var(--about-error);
 }
 
 /* ─── Reduced Motion ─────────────────────────────────────────────────────── */
@@ -155,7 +199,6 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-playfair), "Playfair Display", Georgia, serif;
   font-weight: 700;
   line-height: 1.2;
-  color: var(--color-text);
 }
 
 h1 { font-size: clamp(2rem, 4vw, 3rem); }
