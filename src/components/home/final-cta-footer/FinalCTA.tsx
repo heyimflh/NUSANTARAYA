@@ -11,7 +11,7 @@ export function FinalCTA() {
   return (
     <section
       aria-labelledby="final-cta-title"
-      className="relative isolate overflow-hidden px-5 py-32 text-center md:py-48 bg-[rgba(251,247,239,0.68)]"
+      className="relative isolate overflow-hidden px-5 py-32 text-center md:py-48 bg-[#f4eee2]"
     >
       <FinalCTAVisual />
 

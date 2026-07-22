@@ -53,9 +53,9 @@ export const footerMeta = {
   tagline: "Satu Peta, Ribuan Cerita",
   description:
     "Web app eksplorasi digital Indonesia yang menghubungkan peta, budaya, rasa, rute perjalanan, passport, AI guide, dan masa depan digital Nusantara.",
-  copyright:
-    "© 2026 NUSANTARAYA. Dibuat untuk Nusantara Digital City — Mufalah Code.",
-  version: "v1.0 • Homepage MVP",
+  copyright: "© 2026 NUSANTARAYA. Dikembangkan untuk Nusantara Digital City oleh Mufalah Code.",
+  disclaimer: "Platform ini adalah purwarupa eksplorasi digital. Seluruh data budaya, peta, dan konten digunakan untuk keperluan demonstrasi.",
+  version: "Demo Eksplorasi Digital",
 };
 
 export const finalCta = {

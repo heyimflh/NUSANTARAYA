@@ -9,7 +9,6 @@ import { ExplorationModes } from '@/components/about/ExplorationModes';
 import { PersonaJourneys } from '@/components/about/PersonaJourneys';
 import { HeritageFuturePanorama } from '@/components/about/HeritageFuturePanorama';
 import { TrustStewardshipDesk } from '@/components/about/TrustStewardshipDesk';
-import { BehindTheWork } from '@/components/about/BehindTheWork';
 import { RoadmapHorizons } from '@/components/about/RoadmapHorizons';
 import { EcosystemHandoff } from '@/components/about/EcosystemHandoff';
 import { FinalManifesto } from '@/components/about/FinalManifesto';
@@ -56,7 +55,7 @@ export default function AboutPage() {
         aria-hidden="true" 
       />
 
-      <div className="relative z-10 w-full max-w-[100vw] overflow-hidden">
+      <div className="relative z-10 w-full max-w-[100vw] overflow-visible">
         {/* SECTION 1: The Archipelago Threshold */}
         <NusantarayaNavbar />
         <AboutHero />
@@ -88,8 +87,6 @@ export default function AboutPage() {
         {/* SECTION 10: Trust, Sources, and Cultural Integrity */}
         <TrustStewardshipDesk />
 
-        {/* SECTION 12: Behind the Work */}
-        <BehindTheWork />
 
         {/* SECTION 13: Roadmap as Horizons */}
         <RoadmapHorizons />

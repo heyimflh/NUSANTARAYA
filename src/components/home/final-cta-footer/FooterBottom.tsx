@@ -123,8 +123,7 @@ export function FooterBottom() {
         <div className="max-w-3xl text-center text-[10px] font-medium leading-relaxed text-[#e5f2dc]/48 md:text-left">
           <p>{footerMeta.copyright}</p>
           <p className="mt-1 text-[#e5f2dc]/34">
-            Data budaya, peta, dan konten digunakan untuk demo eksplorasi
-            digital. {footerMeta.version}
+            {footerMeta.disclaimer} {footerMeta.version}
           </p>
         </div>
 
