@@ -88,6 +88,11 @@ export const metadata: Metadata = {
     description: "Platform eksplorasi digital Indonesia — 38 provinsi dalam satu pengalaman interaktif.",
     images: ["/assets/og-image.png"],
   },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
