@@ -66,15 +66,29 @@ export function CategoryCabinet({
 
   return (
     <section ref={containerRef} className="relative h-[600vh] bg-transparent" id="category-cabinet">
-      {/* Sticky Inner Container */}
-      <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center bg-transparent pt-16 md:pt-24">
+      {/* Sticky Inner Container with Premium Background */}
+      <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center pt-16 md:pt-24">
         
+        {/* --- Premium Aesthetic Background --- */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          {/* Base soft gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#FDFBF7] via-[#F6F2E9] to-[#FDFBF7]" />
+          
+          {/* Elegant glowing orbs */}
+          <div className="absolute -top-[20%] -right-[10%] w-[60vw] h-[60vw] bg-[#D4B56A]/[0.08] rounded-full blur-[120px]" />
+          <div className="absolute -bottom-[20%] -left-[10%] w-[50vw] h-[50vw] bg-[#8C7A5B]/[0.05] rounded-full blur-[100px]" />
+          <div className="absolute top-[20%] left-[20%] w-[30vw] h-[30vw] bg-[#E6D5B8]/[0.15] rounded-full blur-[80px] mix-blend-multiply" />
+          
+          {/* Subtle grid pattern for texture */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(212,181,106,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(212,181,106,0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_10%,transparent_100%)]" />
+        </div>
+
         {/* Header / Intro pinned at the top left */}
         <div className="absolute top-20 md:top-24 left-8 md:left-20 z-50 pointer-events-none">
-          <h2 className="font-playfair text-lg md:text-xl text-[#29221B]/40 uppercase tracking-[0.3em] font-bold">
+          <h2 className="font-playfair text-lg md:text-xl text-[#29221B]/60 uppercase tracking-[0.3em] font-bold">
             {t("Kabinet Kategori", "Category Cabinet")}
           </h2>
-          <div className="w-12 h-[1px] bg-[#D4B56A]/50" />
+          <div className="w-12 h-[1px] bg-[#D4B56A]/70 mt-4" />
         </div>
 
         {/* Horizontal Scroll Track */}
