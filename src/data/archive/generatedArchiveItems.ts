@@ -30,7 +30,7 @@ export const generatedArchiveItems: ArchiveItem[] = [
       {
         "id": "media-gen-aceh-01-adat-rumoh-aceh",
         "type": "image",
-        "src": "/assets/nusa-archive/provinces/Aceh/id-11-aceh-01-rumah-adat-rumoh-aceh.webp",
+        "src": "/assets/nusa-archive/provinces/aceh/id-11-aceh-01-rumah-adat-rumoh-aceh.webp",
         "width": 800,
         "height": 600,
         "aspectRatio": "4:3",
@@ -81,7 +81,7 @@ export const generatedArchiveItems: ArchiveItem[] = [
       {
         "id": "media-gen-aceh-02-tari-saman",
         "type": "image",
-        "src": "/assets/nusa-archive/provinces/Aceh/id-11-aceh-02-tarian-tari-saman.webp",
+        "src": "/assets/nusa-archive/provinces/aceh/id-11-aceh-02-tarian-tari-saman.webp",
         "width": 800,
         "height": 600,
         "aspectRatio": "4:3",
@@ -132,7 +132,7 @@ export const generatedArchiveItems: ArchiveItem[] = [
       {
         "id": "media-gen-aceh-03-musik-rapai-pasee",
         "type": "image",
-        "src": "/assets/nusa-archive/provinces/Aceh/id-11-aceh-03-alat-musik-rapai-pasee.webp",
+        "src": "/assets/nusa-archive/provinces/aceh/id-11-aceh-03-alat-musik-rapai-pasee.webp",
         "width": 800,
         "height": 600,
         "aspectRatio": "4:3",
@@ -183,7 +183,7 @@ export const generatedArchiveItems: ArchiveItem[] = [
       {
         "id": "media-gen-aceh-04-adat-busana-adat-aceh",
         "type": "image",
-        "src": "/assets/nusa-archive/provinces/Aceh/id-11-aceh-04-pakaian-adat-busana-adat-aceh.webp",
+        "src": "/assets/nusa-archive/provinces/aceh/id-11-aceh-04-pakaian-adat-busana-adat-aceh.webp",
         "width": 800,
         "height": 600,
         "aspectRatio": "4:3",
@@ -234,7 +234,7 @@ export const generatedArchiveItems: ArchiveItem[] = [
       {
         "id": "media-gen-aceh-05-tradisi-pernikahan-adat-gayo",
         "type": "image",
-        "src": "/assets/nusa-archive/provinces/Aceh/id-11-aceh-05-upacara-tradisi-pernikahan-adat-gayo.webp",
+        "src": "/assets/nusa-archive/provinces/aceh/id-11-aceh-05-upacara-tradisi-pernikahan-adat-gayo.webp",
         "width": 800,
         "height": 600,
         "aspectRatio": "4:3",
@@ -285,7 +285,7 @@ export const generatedArchiveItems: ArchiveItem[] = [
       {
         "id": "media-gen-aceh-06-rakyat-hikayat-aceh",
         "type": "image",
-        "src": "/assets/nusa-archive/provinces/Aceh/id-11-aceh-06-cerita-rakyat-hikayat-aceh.webp",
+        "src": "/assets/nusa-archive/provinces/aceh/id-11-aceh-06-cerita-rakyat-hikayat-aceh.webp",
         "width": 800,
         "height": 600,
         "aspectRatio": "4:3",
@@ -336,7 +336,7 @@ export const generatedArchiveItems: ArchiveItem[] = [
       {
         "id": "media-gen-aceh-07-tradisional-rencong",
         "type": "image",
-        "src": "/assets/nusa-archive/provinces/Aceh/id-11-aceh-07-senjata-tradisional-rencong.webp",
+        "src": "/assets/nusa-archive/provinces/aceh/id-11-aceh-07-senjata-tradisional-rencong.webp",
         "width": 800,
         "height": 600,
         "aspectRatio": "4:3",
@@ -387,7 +387,7 @@ export const generatedArchiveItems: ArchiveItem[] = [
       {
         "id": "media-gen-aceh-08-sulaman-kerawang-gayo",
         "type": "image",
-        "src": "/assets/nusa-archive/provinces/Aceh/id-11-aceh-08-kerajinan-sulaman-kerawang-gayo.webp",
+        "src": "/assets/nusa-archive/provinces/aceh/id-11-aceh-08-kerajinan-sulaman-kerawang-gayo.webp",
         "width": 800,
         "height": 600,
         "aspectRatio": "4:3",
@@ -438,7 +438,7 @@ export const generatedArchiveItems: ArchiveItem[] = [
       {
         "id": "media-gen-aceh-09-jawoe-hikayat-aceh",
         "type": "image",
-        "src": "/assets/nusa-archive/provinces/Aceh/id-11-aceh-09-aksara-jawoe-hikayat-aceh.webp",
+        "src": "/assets/nusa-archive/provinces/aceh/id-11-aceh-09-aksara-jawoe-hikayat-aceh.webp",
         "width": 800,
         "height": 600,
         "aspectRatio": "4:3",
@@ -489,7 +489,7 @@ export const generatedArchiveItems: ArchiveItem[] = [
       {
         "id": "media-gen-aceh-10-kain-bungong-reunek-leuek",
         "type": "image",
-        "src": "/assets/nusa-archive/provinces/Aceh/id-11-aceh-10-motif-kain-bungong-reunek-leuek.webp",
+        "src": "/assets/nusa-archive/provinces/aceh/id-11-aceh-10-motif-kain-bungong-reunek-leuek.webp",
         "width": 800,
         "height": 600,
         "aspectRatio": "4:3",
@@ -540,7 +540,7 @@ export const generatedArchiveItems: ArchiveItem[] = [
       {
         "id": "media-gen-aceh-11-daerah-cut-nyak-dhien",
         "type": "image",
-        "src": "/assets/nusa-archive/provinces/Aceh/id-11-aceh-11-tokoh-daerah-cut-nyak-dhien.webp",
+        "src": "/assets/nusa-archive/provinces/aceh/id-11-aceh-11-tokoh-daerah-cut-nyak-dhien.webp",
         "width": 800,
         "height": 600,
         "aspectRatio": "4:3",
@@ -591,7 +591,7 @@ export const generatedArchiveItems: ArchiveItem[] = [
       {
         "id": "media-gen-aceh-12-masjid-raya-baiturrahman",
         "type": "image",
-        "src": "/assets/nusa-archive/provinces/Aceh/id-11-aceh-12-kepercayaan-masjid-raya-baiturrahman.webp",
+        "src": "/assets/nusa-archive/provinces/aceh/id-11-aceh-12-kepercayaan-masjid-raya-baiturrahman.webp",
         "width": 800,
         "height": 600,
         "aspectRatio": "4:3",
