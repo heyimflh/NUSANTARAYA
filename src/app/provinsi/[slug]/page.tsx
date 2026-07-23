@@ -517,7 +517,7 @@ export default async function ProvinceAtlasPage({ params }: { params: Promise<{ 
           </>
         )}
       </ProvinceAtlasShell>
-      <FinalCtaFooterSection topBgClass="bg-[#f4f0e8]" />
+      <FinalCtaFooterSection topBgClass="bg-[#fffcf6]" />
     </>
   );
 }
