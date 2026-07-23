@@ -694,7 +694,7 @@ const manualArchiveItems: ArchiveItem[] = [
     sourceRefs: ["src-unesco-ich", "src-kemdikbud"],
     relatedItemIds: ["sumbar-tari-piring", "yogya-tari-srimpi"],
     relatedFeatureRefs: [{ target: "province-atlas", targetId: "aceh", label: "Lihat Provinsi Aceh" }],
-    editorialPriority: 10,
+    editorialPriority: -10,
     updatedAt: "2026-07-15",
     reviewedAt: "2026-07-10",
   },
