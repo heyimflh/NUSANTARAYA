@@ -1,141 +1,151 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-import { ArrowRight, Leaf } from "lucide-react";
+import { ArrowRight, ArrowDown, Compass } from "lucide-react";
 
 export function FutureHero() {
   return (
-    <section className="relative w-full min-h-screen flex flex-col items-center pt-24 pb-16 overflow-hidden">
-      
-      {/* Decorative top border */}
-      <div className="absolute top-0 inset-x-0 h-1 bg-[var(--future-solar)]" />
-
-      <div className="max-w-7xl mx-auto px-6 w-full flex flex-col md:flex-row gap-12 lg:gap-24 relative z-10 mt-8">
-        
-        {/* Copy Column */}
-        <div className="w-full md:w-5/12 flex flex-col justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+    <section className="relative w-full h-screen min-h-[750px] flex items-center overflow-hidden [--wave-h:80px] md:[--wave-h:120px] lg:[--wave-h:160px]">
+        {/* Masked Container for Video and Overlays */}
+        <div 
+          className="absolute inset-0 z-0 w-full h-full"
+          style={{
+            maskImage: `linear-gradient(black, black), url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 160' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0 L1440,0 L1440,80 C1100,160 800,0 400,60 C200,90 0,60 0,60 L0,60 Z' fill='black'/%3E%3C/svg%3E")`,
+            WebkitMaskImage: `linear-gradient(black, black), url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 160' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0 L1440,0 L1440,80 C1100,160 800,0 400,60 C200,90 0,60 0,60 L0,60 Z' fill='black'/%3E%3C/svg%3E")`,
+            maskSize: "100% calc(100% - var(--wave-h)), 100% var(--wave-h)",
+            WebkitMaskSize: "100% calc(100% - var(--wave-h)), 100% var(--wave-h)",
+            maskPosition: "top left, bottom left",
+            WebkitMaskPosition: "top left, bottom left",
+            maskRepeat: "no-repeat, no-repeat",
+            WebkitMaskRepeat: "no-repeat, no-repeat",
+          }}
+        >
+          {/* Background Video */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            className="w-full h-full object-cover object-[center_30%]"
           >
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-8 h-[1px] bg-[var(--future-terracotta)]" />
-              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[var(--future-terracotta)]">
-                Nusa Future Observatory
-              </span>
-            </div>
-            
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-playfair font-medium text-[var(--future-ink)] leading-[1.1] mb-6">
-              Masa depan <br />
-              <span className="italic text-[var(--future-muted)]">bukanlah</span> <br />
-              satu tempat.
-            </h1>
-            
-            <p className="text-base md:text-lg text-[var(--future-charcoal)] max-w-md mb-10 leading-relaxed font-light">
+            <source
+              src="/assets/background/background-future.webm"
+              type="video/webm"
+            />
+          </video>
+
+          {/* Reduced Gradient Overlay to show more video */}
+          <div className="absolute inset-0 z-10 bg-gradient-to-r from-background via-background/90 to-transparent w-full md:w-[60%] lg:w-[55%]" />
+          
+          {/* Additional gradient for bottom fade for seamless transition */}
+          <div className="absolute inset-0 z-10 bg-gradient-to-t from-background/50 via-transparent to-transparent h-[30%] mt-auto" />
+        </div>
+
+        {/* Main Content Container */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-20 h-full flex flex-col justify-center">
+          <div className="max-w-[500px] mt-12 lg:mt-16">
+            {/* Eyebrow */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="flex items-center gap-4 text-[#C9A84C] font-inter tracking-[0.25em] text-[13px] font-bold uppercase mb-6"
+            >
+              Nusa Future
+              <div className="flex items-center opacity-80">
+                <div className="h-[1px] w-12 bg-[#C9A84C]"></div>
+                {/* Small cross icon similar to design */}
+                <div className="relative w-3 h-3 ml-1 flex items-center justify-center text-[#C9A84C]">
+                  <div className="w-[1px] h-full bg-current absolute"></div>
+                  <div className="h-[1px] w-full bg-current absolute"></div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Heading */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
+              className="font-playfair text-[48px] md:text-[64px] lg:text-[76px] text-[#0D1B2A] font-semibold leading-[1.05] mb-8"
+            >
+              Masa Depan
+              <br />
+              <span className="italic opacity-80 text-[#0D1B2A]/80">bukanlah</span>
+              <br />
+              Satu Tempat.
+            </motion.h1>
+
+            {/* Gold Divider Line with Diamond */}
+            <motion.div
+              initial={{ opacity: 0, scaleX: 0 }}
+              animate={{ opacity: 1, scaleX: 1 }}
+              transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+              className="flex items-center justify-start mb-8 origin-left"
+            >
+              <div className="h-[1px] w-full max-w-[320px] bg-[#C9A84C]/40 relative">
+                <div className="absolute left-1/3 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rotate-45 bg-[#C9A84C]"></div>
+              </div>
+            </motion.div>
+
+            {/* Subheading */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
+              className="font-inter text-[#0D1B2A]/70 text-[15px] md:text-[17px] leading-[1.7] mb-12 max-w-[480px]"
+            >
               Ia tumbuh dari banyak pulau, komunitas, kota, desa, pengetahuan lokal, dan teknologi yang bekerja selaras untuk kehidupan yang lebih baik.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-5">
-              <a 
+            </motion.p>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-6"
+            >
+              <a
                 href="#observatory"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-[var(--future-ink)] text-[var(--future-paper)] text-sm font-semibold tracking-wider uppercase rounded-none hover:bg-[var(--future-charcoal)] transition-colors border border-[var(--future-ink)]"
+                className="bg-[#D4B56A] text-[#0D1B2A] px-8 py-3.5 rounded-full font-inter font-medium text-[15px] flex items-center gap-3 hover:bg-[#C9A84C] transition-colors shadow-sm"
               >
                 Eksplorasi Data
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-[18px] h-[18px]" />
               </a>
-              <a 
+              <a
                 href="#ikn"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-transparent text-[var(--future-ink)] text-sm font-semibold tracking-wider uppercase rounded-none hover:bg-[var(--future-paper)] transition-colors border border-[var(--future-line)] hover:border-[var(--future-charcoal)]"
+                className="flex items-center gap-3 text-[#0D1B2A] font-inter text-[15px] font-medium group transition-colors"
               >
+                <div className="w-10 h-10 rounded-full border border-[#0D1B2A]/20 flex items-center justify-center group-hover:bg-[#0D1B2A] group-hover:text-white transition-colors">
+                  <Compass className="w-[16px] h-[16px]" />
+                </div>
                 Anchor: IKN
               </a>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
 
-        {/* Gallery Column */}
-        <div className="w-full md:w-7/12 relative min-h-[60vh] md:min-h-[75vh]">
-          <motion.div 
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-2xl"
-            initial={{ opacity: 0, filter: "blur(10px)" }}
-            animate={{ opacity: 1, filter: "blur(0px)" }}
-            transition={{ duration: 1, delay: 0.2 }}
+        {/* Bottom Scroll Indicator */}
+        <div className="absolute bottom-0 left-0 w-full z-20 pointer-events-none h-[80px] md:h-[120px] lg:h-[160px]">
+          {/* Scroll Indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 1 }}
+            className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center pointer-events-auto"
           >
-            {/* Background geometric accent */}
-            <div className="absolute right-0 top-10 w-64 h-64 border border-[var(--future-line)] rounded-full opacity-50" />
-            
-            {/* Main Image */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] aspect-[4/3] future-frame z-20">
-              <div className="relative w-full h-full overflow-hidden bg-[var(--future-paper-deep)]">
-                <Image 
-                  src="/assets/heritage-future/masa-depan.webp"
-                  alt="Masa depan"
-                  fill
-                  className="object-cover transition-transform duration-1000 hover:scale-105"
-                  priority
-                />
-              </div>
-              <div className="absolute -left-6 top-1/2 -translate-y-1/2 bg-[var(--future-paper)] px-2 py-6 border border-[var(--future-line)] flex items-center justify-center shadow-sm">
-                <span className="[writing-mode:vertical-lr] rotate-180 text-[10px] tracking-widest uppercase font-mono text-[var(--future-muted)]">
-                  FIG. 1 — MASA DEPAN
-                </span>
-              </div>
-            </div>
-
-            {/* Context Image 1 */}
-            <motion.div 
-              className="absolute -top-4 -right-4 w-40 md:w-56 aspect-square future-frame z-30"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
+            <span className="font-inter text-[#0D1B2A]/50 text-[11px] md:text-xs tracking-wide mb-2">
+              Scroll untuk jelajah
+            </span>
+            <motion.div
+              animate={{ y: [0, 5, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
-              <div className="relative w-full h-full overflow-hidden bg-[var(--future-paper-deep)]">
-                <Image 
-                  src="/assets/heritage-future/warisan.webp"
-                  alt="Warisan"
-                  fill
-                  className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                />
-              </div>
-              <div className="absolute -bottom-3 right-4 bg-[var(--future-paper)] px-3 py-1 border border-[var(--future-line)] shadow-sm">
-                <span className="text-[10px] tracking-widest uppercase font-mono text-[var(--future-ink)]">
-                  FIG. 2 — WARISAN
-                </span>
-              </div>
-            </motion.div>
-
-            {/* Context Image 2 */}
-            <motion.div 
-              className="absolute -bottom-8 -left-8 w-48 md:w-64 aspect-video future-frame z-30"
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-            >
-              <div className="relative w-full h-full overflow-hidden bg-[var(--future-paper-deep)]">
-                <Image 
-                  src="/assets/heritage-future/masa-kini.webp"
-                  alt="Masa kini"
-                  fill
-                  className="object-cover mix-blend-luminosity hover:mix-blend-normal transition-all duration-700"
-                />
-              </div>
-              <div className="absolute top-2 left-2 bg-black/60 backdrop-blur-sm px-2 py-1 flex items-center gap-1">
-                <Leaf className="w-3 h-3 text-[var(--future-solar)]" />
-                <span className="text-[9px] tracking-widest uppercase font-mono text-white">
-                  TRANSISI
-                </span>
-              </div>
+              <ArrowDown className="w-[14px] h-[14px] md:w-4 md:h-4 text-[#C9A84C]" />
             </motion.div>
           </motion.div>
         </div>
-      </div>
-      
-      {/* Bottom indicator */}
-      <div className="absolute bottom-0 inset-x-0 flex justify-center pb-8 z-20">
-        <div className="w-[1px] h-12 bg-gradient-to-b from-[var(--future-ink)] to-transparent" />
-      </div>
-    </section>
+      </section>
   );
 }
