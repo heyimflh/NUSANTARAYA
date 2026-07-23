@@ -114,7 +114,7 @@ export default function RootLayout({
           <PageBackground />
           
           {/* Main Content */}
-          <main className="flex-1 pb-safe max-md:pb-20 relative z-10">
+          <main className="flex-1 relative z-10">
             {children}
           </main>
         </AppProvider>
