@@ -15,7 +15,7 @@ export default function RoutesPage() {
         <Suspense fallback={<div className="h-screen" />}>
           <RouteAtelier />
         </Suspense>
-        <FinalCtaFooterSection />
+        <FinalCtaFooterSection topBgClass="bg-transparent" />
       </div>
     </main>
   );

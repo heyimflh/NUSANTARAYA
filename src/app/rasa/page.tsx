@@ -48,7 +48,7 @@ export default function RasaPage() {
           </div>
         </div>
 
-        <FinalCtaFooterSection />
+        <FinalCtaFooterSection topBgClass="bg-[#F6EBDD]" />
       </div>
     </main>
   );

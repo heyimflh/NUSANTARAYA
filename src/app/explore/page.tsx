@@ -222,7 +222,7 @@ export default function ExplorePage() {
         onOpenAtlas={handleOpenAtlas}
       />
 
-      <FinalCtaFooterSection />
+      <FinalCtaFooterSection topBgClass="bg-transparent" />
       </div>
     </main>
   );

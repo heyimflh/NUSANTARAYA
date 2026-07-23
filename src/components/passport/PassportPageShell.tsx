@@ -44,7 +44,7 @@ export const PassportPageShell = () => {
             <PassportDepartureDock />
           </div>
         </div>
-        <FinalCtaFooterSection />
+        <FinalCtaFooterSection topBgClass="bg-transparent" />
       </div>
     </main>
   );

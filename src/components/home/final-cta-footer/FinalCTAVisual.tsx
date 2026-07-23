@@ -10,11 +10,11 @@ export function FinalCTAVisual() {
       aria-hidden="true"
       style={{
         WebkitMaskImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 150' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 74L80 82C160 90 320 106 480 90C640 74 800 26 960 18C1120 10 1280 42 1360 58L1440 74V150H0Z' fill='black'/%3E%3C/svg%3E"), linear-gradient(black, black)`,
-        WebkitMaskSize: "100% 120px, 100% calc(100% - 119px)",
+        WebkitMaskSize: "100% 120px, 100% calc(100% - 110px)",
         WebkitMaskPosition: "top left, bottom left",
         WebkitMaskRepeat: "no-repeat, no-repeat",
         maskImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 150' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 74L80 82C160 90 320 106 480 90C640 74 800 26 960 18C1120 10 1280 42 1360 58L1440 74V150H0Z' fill='black'/%3E%3C/svg%3E"), linear-gradient(black, black)`,
-        maskSize: "100% 120px, 100% calc(100% - 119px)",
+        maskSize: "100% 120px, 100% calc(100% - 110px)",
         maskPosition: "top left, bottom left",
         maskRepeat: "no-repeat, no-repeat",
       }}

@@ -29,7 +29,7 @@ export default function HomePage() {
       <FeaturePreviewSection />
       <PastToFutureSection />
       <DemoJourneySection />
-      <FinalCtaFooterSection />
+      <FinalCtaFooterSection topBgClass="bg-transparent" />
     </div>
   );
 }

@@ -316,7 +316,7 @@ export function ArchivePage() {
       />
 
       {/* ── Section 13: Final Editorial Handoff (Removed) ────────────────────────────── */}
-      <FinalCtaFooterSection />
+      <FinalCtaFooterSection topBgClass="bg-transparent" />
 
       {/* ── Quick View Drawer ──────────────────────────────────────────────── */}
       {quickViewItem && (
