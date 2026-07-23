@@ -12,9 +12,9 @@ export const footerLinkGroups = [
     title: "Jelajahi",
     links: [
       { label: "Nusa Map", href: "/explore", status: "live" },
-      { label: "Provinsi", href: "/provinsi", status: "soon" },
+      { label: "Provinsi", href: "/provinsi", status: "live" },
       { label: "Nusa Archive", href: "/archive", status: "live" },
-      { label: "NusaRasa", href: "/rasa", status: "soon" },
+      { label: "NusaRasa", href: "/rasa", status: "live" },
       { label: "Route Planner", href: APP_ROUTES.routes + "?source=home-feature", status: "live" },
       { label: "Nusa Passport", href: APP_ROUTES.passport, status: "live" }
     ] as FooterLink[]

@@ -63,82 +63,96 @@ export default function FoodBattleTable() {
         </p>
       </div>
 
-      {/* Desktop: 5 - 2 - 5. Mobile: Stacked A -> Spine -> B */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
-        
-        {/* Dish A (5 cols) */}
-        <div className="lg:col-span-5 flex flex-col gap-6">
-          <div className="aspect-[4/3] bg-[var(--rasa-paper-deep)] overflow-hidden border border-[var(--rasa-line)]">
+      {/* Aesthetic Side-by-Side Images & Titles */}
+      <div className="grid grid-cols-2 gap-4 md:gap-12 max-w-5xl mx-auto">
+        {/* Dish A */}
+        <div className="flex flex-col gap-4 md:gap-6 text-center group">
+          <div className="aspect-square md:aspect-[4/3] rounded-2xl overflow-hidden shadow-xl border border-[var(--rasa-line)] relative">
              {/* eslint-disable-next-line @next/next/no-img-element */}
              <img 
                src={dishA.media[1]?.src || dishA.media[0]?.src} 
                alt={dishA.localeContent.id.title} 
-               className="w-full h-full object-cover"
+               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                loading="lazy"
              />
+             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-40"></div>
           </div>
-          <div className="text-center lg:text-right px-4">
-            <span className="text-xs uppercase tracking-widest text-[var(--rasa-muted)] block mb-1">{dishA.provinceIds[0].replace("-", " ")}</span>
-            <h3 className="text-3xl font-serif text-[var(--rasa-cacao)] mb-4">{dishA.localeContent.id.title}</h3>
+          <div>
+            <span className="text-[10px] md:text-xs font-bold tracking-widest text-[var(--rasa-chili)] uppercase">{dishA.provinceIds[0].replace("-", " ")}</span>
+            <h3 className="text-2xl md:text-4xl font-serif text-[var(--rasa-cacao)] mt-1 mb-2">{dishA.localeContent.id.title}</h3>
             <Link 
               href={`/rasa/${dishA.slug}`}
-              className="inline-flex items-center gap-1 text-sm text-[var(--rasa-chili)] hover:underline font-medium"
+              className="inline-flex items-center gap-1 text-xs md:text-sm text-[var(--rasa-muted)] hover:text-[var(--rasa-chili)] transition-colors font-medium underline underline-offset-4 decoration-1 decoration-[var(--rasa-line)] hover:decoration-[var(--rasa-chili)]"
             >
               Lihat Detail {dishA.localeContent.id.title}
             </Link>
           </div>
         </div>
 
-        {/* Comparison Spine (2 cols) */}
-        <div className="lg:col-span-2 flex flex-col justify-center relative py-8 lg:py-0 border-y lg:border-y-0 border-[var(--rasa-line)]">
-           <div className="hidden lg:block absolute top-0 bottom-0 left-1/2 w-[1px] bg-[var(--rasa-line)] -translate-x-1/2"></div>
-           
-           <div className="flex flex-col gap-12 relative z-10 w-full px-4 lg:px-0">
-             {activePair.dimensions.map((dim) => (
-               <div key={dim.id} className="bg-[var(--rasa-paper)] border border-[var(--rasa-line)] p-3 text-center shadow-sm w-full lg:w-10/12 mx-auto">
-                 <h4 className="text-xs font-semibold uppercase tracking-widest text-[var(--rasa-muted)]">{dim.label}</h4>
-               </div>
-             ))}
-           </div>
+        {/* Dish B */}
+        <div className="flex flex-col gap-4 md:gap-6 text-center group">
+          <div className="aspect-square md:aspect-[4/3] rounded-2xl overflow-hidden shadow-xl border border-[var(--rasa-line)] relative">
+             {/* eslint-disable-next-line @next/next/no-img-element */}
+             <img 
+               src={dishB.media[1]?.src || dishB.media[0]?.src} 
+               alt={dishB.localeContent.id.title} 
+               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+               loading="lazy"
+             />
+             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-40"></div>
+          </div>
+          <div>
+            <span className="text-[10px] md:text-xs font-bold tracking-widest text-[var(--rasa-chili)] uppercase">{dishB.provinceIds[0].replace("-", " ")}</span>
+            <h3 className="text-2xl md:text-4xl font-serif text-[var(--rasa-cacao)] mt-1 mb-2">{dishB.localeContent.id.title}</h3>
+            <Link 
+              href={`/rasa/${dishB.slug}`}
+              className="inline-flex items-center gap-1 text-xs md:text-sm text-[var(--rasa-muted)] hover:text-[var(--rasa-chili)] transition-colors font-medium underline underline-offset-4 decoration-1 decoration-[var(--rasa-line)] hover:decoration-[var(--rasa-chili)]"
+            >
+              Lihat Detail {dishB.localeContent.id.title}
+            </Link>
+          </div>
         </div>
-
-        {/* Mobile only: Show dimensions values sequentially below spine. On desktop, they are placed left/right of spine visually, but DOM order is tricky. Let's make a grid for the dimensions instead. */}
-        {/* Wait, the 5-2-5 layout needs the dimension values aligned. A better approach for desktop: */}
       </div>
 
-      {/* Dimensions Table / Grid */}
-      <div className="mt-8 flex flex-col gap-6 w-full relative">
+      {/* Premium Comparison Dimensions Table */}
+      <div className="mt-16 md:mt-24 flex flex-col w-full max-w-4xl mx-auto border-t border-[var(--rasa-line)]">
          {activePair.dimensions.map((dim, idx) => (
-           <div key={idx} className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-0 items-center py-4 border-b border-[var(--rasa-line)] border-dashed">
-             <div className="lg:col-span-5 text-center lg:text-right px-4 order-2 lg:order-1 text-[var(--rasa-ink)]">
-               {dim.dishAValue || <span className="text-[var(--rasa-muted)] italic">Informasi belum tersedia</span>}
+           <div key={idx} className="relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-0 py-8 md:py-12 border-b border-[var(--rasa-line)] hover:bg-[var(--rasa-paper-deep)] transition-colors duration-300">
+             
+             {/* Central Label Pill (Absolute center on Desktop, top center on Mobile) */}
+             <div className="md:absolute md:left-1/2 md:-translate-x-1/2 md:top-1/2 md:-translate-y-1/2 flex justify-center z-10 mb-2 md:mb-0">
+               <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-[#FFFDF8] bg-[var(--rasa-cacao)] px-4 py-2 rounded-full shadow-md whitespace-nowrap border border-black/10">
+                 {dim.label}
+               </span>
              </div>
              
-             <div className="lg:col-span-2 text-center order-1 lg:order-2">
-               <span className="text-xs font-semibold uppercase tracking-widest text-[var(--rasa-muted)] bg-[var(--rasa-paper)] px-3 py-1 lg:hidden border border-[var(--rasa-line)] mb-2 inline-block">{dim.label}</span>
+             {/* Dish A Value */}
+             <div className="text-center md:text-right px-6 md:pr-24 lg:pr-32 text-[var(--rasa-ink)] flex items-center justify-center md:justify-end min-h-[40px]">
+               <p className="text-sm md:text-base leading-relaxed">{dim.dishAValue || <span className="text-[var(--rasa-muted)] italic">Informasi belum tersedia</span>}</p>
              </div>
              
-             <div className="lg:col-span-5 text-center lg:text-left px-4 order-3 text-[var(--rasa-ink)]">
-               {dim.dishBValue || <span className="text-[var(--rasa-muted)] italic">Informasi belum tersedia</span>}
+             {/* Dish B Value */}
+             <div className="text-center md:text-left px-6 md:pl-24 lg:pl-32 text-[var(--rasa-ink)] flex items-center justify-center md:justify-start min-h-[40px]">
+               <p className="text-sm md:text-base leading-relaxed">{dim.dishBValue || <span className="text-[var(--rasa-muted)] italic">Informasi belum tersedia</span>}</p>
              </div>
            </div>
          ))}
       </div>
 
-      <div className="mt-12 flex justify-center gap-4 flex-wrap">
+      <div className="mt-16 flex justify-center gap-4 flex-wrap">
          <button 
            onClick={() => toggleSaveBattlePair(activePair.id)}
-           className={`px-8 py-4 border transition-colors text-sm font-medium uppercase tracking-wider ${
+           className={`px-8 py-4 rounded-full transition-all duration-300 text-xs md:text-sm font-bold uppercase tracking-widest shadow-sm hover:shadow-md ${
              isSaved 
-               ? "bg-[var(--rasa-chili)] text-white border-[var(--rasa-chili)]" 
-               : "border-[var(--rasa-cacao)] text-[var(--rasa-cacao)] hover:bg-[var(--rasa-paper-deep)]"
+               ? "bg-[var(--rasa-chili)] text-white" 
+               : "bg-[var(--rasa-paper)] border border-[var(--rasa-line)] text-[var(--rasa-cacao)] hover:bg-[var(--rasa-cacao)] hover:text-white"
            }`}
          >
-           {isSaved ? "Tersimpan di Tasting Shelf" : "Simpan Perbandingan Ini"}
+           {isSaved ? "Tersimpan di Tasting Shelf" : "Simpan Perbandingan"}
          </button>
          <Link
            href={`/explore?query=Bandingkan+${dishA.localeContent.id.title}+dan+${dishB.localeContent.id.title}`}
-           className="inline-flex justify-center items-center gap-2 px-8 py-4 bg-[var(--rasa-cacao)] text-[var(--rasa-paper)] hover:bg-[var(--rasa-ink)] transition-colors text-sm font-medium uppercase tracking-wider"
+           className="inline-flex justify-center items-center gap-2 px-8 py-4 rounded-full bg-[var(--rasa-cacao)] text-[#FFFDF8] hover:bg-[var(--rasa-ink)] transition-all duration-300 text-xs md:text-sm font-bold uppercase tracking-widest shadow-sm hover:shadow-md"
          >
            Tanya RANI
            <ExternalLink size={16} />
