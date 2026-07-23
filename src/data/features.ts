@@ -99,7 +99,7 @@ export const mainFeatures: FeatureData[] = [
       "Lihat IKN, smart city, UMKM digital, ekonomi kreatif, desa wisata digital, dan green tourism Nusantara.",
     chips: ["IKN", "Smart City", "UMKM"],
     icon: "/assets/ui/icons/icon-future.svg",
-    image: "/assets/features/future-preview-v2.webp",
+    image: "/assets/features/future-preview-v3.webp",
     color: "#1A5C3A",
     href: "/future",
     status: "soon"
